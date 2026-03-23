@@ -1645,6 +1645,11 @@
   resolved "https://registry.yarnpkg.com/@medusajs/icons/-/icons-2.12.5.tgz#4b132824e4672269ba996e963300927095f9472e"
   integrity sha512-aOhhT2xcIHVYBMGaNjHBCekP592xyM7N0BM9LVWohc9dk3Z5df6tHBn9D8dW7wqnvaDh0BIrAVanmaiOHJPqBg==
 
+"@medusajs/icons@^2.13.4":
+  version "2.13.4"
+  resolved "https://registry.yarnpkg.com/@medusajs/icons/-/icons-2.13.4.tgz#167c84c5ae44af70d7c670ffc3120a2054fff2e7"
+  integrity sha512-oqNE8aAXnZaQ1+mAL2FzSsZIbrf7uxihW5TRaLGF/G+zYylx7OxG93XGX6wCqztuQJJoUrICYaaBilyFRzriXg==
+
 "@medusajs/js-sdk@^2.12.5":
   version "2.12.5"
   resolved "https://registry.yarnpkg.com/@medusajs/js-sdk/-/js-sdk-2.12.5.tgz#c7cda1cf0bf5201ab16f09ebb8ff085463f60f8b"

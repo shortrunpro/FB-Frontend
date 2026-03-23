@@ -1,26 +1,20 @@
-"use client"
+'use client';
 
-import {
-  Badge,
-  Divider,
-  LogoutButton,
-  NavigationItem,
-} from "@/components/atoms"
-import { Dropdown } from "@/components/molecules"
-import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
-import { ProfileIcon } from "@/icons"
-import { HttpTypes } from "@medusajs/types"
-import { useUnreads } from "@talkjs/react"
-import { useState } from "react"
+import { useState } from 'react';
 
-export const UserDropdown = ({
-  isLoggedIn,
-}: {
-  isLoggedIn: boolean
-}) => {
-  const [open, setOpen] = useState(false)
+import { User } from '@medusajs/icons';
+import { HttpTypes } from '@medusajs/types';
+import { useUnreads } from '@talkjs/react';
 
-  const unreads = useUnreads()
+import { Badge, Divider, LogoutButton, NavigationItem } from '@/components/atoms';
+import { Dropdown } from '@/components/molecules';
+import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
+import { ProfileIcon } from '@/icons';
+
+export const UserDropdown = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
+  const [open, setOpen] = useState(false);
+
+  const unreads = useUnreads();
 
   return (
     <div
@@ -30,27 +24,26 @@ export const UserDropdown = ({
       onFocus={() => setOpen(true)}
     >
       <LocalizedClientLink
-        href={isLoggedIn ? "/user" : "/login"}
+        href={isLoggedIn ? '/user' : '/login'}
         className="relative"
         aria-label="Go to user profile"
       >
-        <ProfileIcon size={20} />
+        <User />
       </LocalizedClientLink>
       <Dropdown show={open}>
         {isLoggedIn ? (
           <div className="p-1">
             <div className="lg:w-[200px]">
-              <h3 className="uppercase heading-xs border-b p-4">
-                Your account
-              </h3>
+              <h3 className="heading-xs border-b p-4 uppercase">Your account</h3>
             </div>
             <NavigationItem href="/user/orders">Orders</NavigationItem>
-            <NavigationItem href="/user/messages" className="relative">
+            <NavigationItem
+              href="/user/messages"
+              className="relative"
+            >
               Messages
               {Boolean(unreads?.length) && (
-                <Badge className="absolute top-3 left-24 w-4 h-4 p-0">
-                  {unreads?.length}
-                </Badge>
+                <Badge className="absolute left-24 top-3 h-4 w-4 p-0">{unreads?.length}</Badge>
               )}
             </NavigationItem>
             <NavigationItem href="/user/returns">Returns</NavigationItem>
@@ -69,5 +62,5 @@ export const UserDropdown = ({
         )}
       </Dropdown>
     </div>
-  )
-}
+  );
+};
