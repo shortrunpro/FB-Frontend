@@ -3,6 +3,7 @@ import { HttpTypes } from '@medusajs/types';
 import { Badge } from '@/components/atoms';
 import { CartDropdown, ContactLinks, MobileNavbar, Navbar, NavLinks } from '@/components/cells';
 import { UserDropdown } from '@/components/cells/UserDropdown/UserDropdown';
+import { NavbarSearch } from '@/components/molecules';
 import CountrySelector from '@/components/molecules/CountrySelector/CountrySelector';
 import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
 import { MessageButton } from '@/components/molecules/MessageButton/MessageButton';
@@ -35,7 +36,7 @@ export const Header = async ({ locale }: { locale: string }) => {
   return (
     <header data-testid="header">
       <div
-        className="bg-brand flex px-4 py-2 text-white md:px-5 lg:px-8"
+        className="bg-brand flex justify-between px-8 py-2 text-white md:px-5 lg:px-8"
         data-testid="header-top"
       >
         <div className="flex items-center lg:w-1/3">
@@ -45,9 +46,9 @@ export const Header = async ({ locale }: { locale: string }) => {
           />
           <ContactLinks />
         </div>
-        <div className="flex items-center pl-4 lg:w-1/3 lg:justify-center lg:pl-0"></div>
+        {/* <div className="flex items-center pl-4 lg:w-1/3 lg:justify-center lg:pl-0"></div> */}
         <div
-          className="flex w-full items-center justify-end gap-2 py-2 lg:w-1/3 lg:gap-4"
+          className="flex w-full items-center justify-end gap-2 py-2 lg:gap-4"
           data-testid="header-actions"
         >
           <NavLinks />
@@ -70,7 +71,7 @@ export const Header = async ({ locale }: { locale: string }) => {
               )}
             </LocalizedClientLink>
           )}
-
+          <NavbarSearch className="flex w-full max-w-[296px] pl-4" />
           <CartDropdown />
         </div>
       </div>
