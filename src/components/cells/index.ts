@@ -7,6 +7,7 @@ import { CartItemsHeader } from './CartItemsHeader/CartItemsHeader';
 import { CartItemsProducts } from './CartItemsProducts/CartItemsProducts';
 import { ColorFilter } from './ColorFilter/ColorFilter';
 import { ConditionFilter } from './ConditionFilter/ConditionFilter';
+import { ContactLinks } from './ContactLinks/ContactLinks';
 import { HeadingCategories } from './HeadingCategories/HeadingCategories';
 import { LabeledInput } from './LabeledInput/LabeledInput';
 import { MobileNavbar } from './MobileNavbar/MobileNavbar';
@@ -32,6 +33,7 @@ import { SizeFilter } from './SizeFilter/SizeFilter';
 import { WishlistItem } from './WishlistItem/WishlistItem';
 
 export {
+  ContactLinks,
   Navbar,
   Carousel,
   Pagination,
