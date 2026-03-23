@@ -74,45 +74,28 @@ export const listProducts = async ({
     }>(`/store/products`, {
       method: 'GET',
       query: {
-        country_code: countryCode,
+        country_code: 'us',
+        region_id: region?.id,
         category_id,
         collection_id,
         limit,
         offset,
-        region_id: region?.id,
-        fields:
-          '*variants.calculated_price,+variants.inventory_quantity,*seller,*variants,*seller.products,' +
-          '*seller.reviews,*seller.reviews.customer,*seller.reviews.seller,*seller.products.variants,*attribute_values,*attribute_values.attribute',
+        fields: '+variants.inventory_quantity,*variants.calculated_price,*variants',
         ...queryParams
       },
-      headers,
-      next: useCached ? { revalidate: 60 } : undefined,
-      cache: useCached ? 'force-cache' : 'no-cache'
+      headers
+      // next: useCached ? { revalidate: 60 } : undefined,
+      // cache: useCached ? 'force-cache' : 'no-cache'
     })
     .then(({ products: productsRaw, count }) => {
+      console.log(productsRaw, 'server products');
       const products = productsRaw.filter(product => product.seller?.store_status !== 'SUSPENDED');
 
       const nextPage = count > offset + limit ? pageParam + 1 : null;
 
-      const response = products.filter(prod => {
-        // @ts-ignore Property 'seller' exists but TypeScript doesn't recognize it
-        const reviews = prod.seller?.reviews.filter(item => !!item) ?? [];
-        return (
-          // @ts-ignore Property 'seller' exists but TypeScript doesn't recognize it
-          prod?.seller && {
-            ...prod,
-            seller: {
-              // @ts-ignore Property 'seller' exists but TypeScript doesn't recognize it
-              ...prod.seller,
-              reviews
-            }
-          }
-        );
-      });
-
       return {
         response: {
-          products: response,
+          products,
           count
         },
         nextPage: nextPage,
@@ -250,12 +233,15 @@ export const searchProducts = async (params: {
 
   let facets = params.facets;
 
-  if(!facets) {
-    facets = ["variants.condition", "variants.color", "variants.size"];
+  if (!facets) {
+    facets = ['variants.condition', 'variants.color', 'variants.size'];
   }
 
   const { countryCode, ...bodyParams } = params;
-
+  const searchParams = new URLSearchParams({
+    currency_code: 'usd',
+    region_id: region_id as string
+  });
   return sdk.client
     .fetch<{
       products: (HttpTypes.StoreProduct & { seller?: SellerProps })[];
@@ -265,19 +251,13 @@ export const searchProducts = async (params: {
       hitsPerPage: number;
       facets: Record<string, any>;
       processingTimeMS: number;
-    }>(`/store/products/search`, {
-      method: 'POST',
-      body: {
-        ...bodyParams,
-        region_id,
-        customer_id,
-        facets,
-        maxValuesPerFacet: 100,
-      },
+    }>(`/store/search?${searchParams.toString()}`, {
+      method: 'GET',
       headers,
       cache: 'no-cache'
     })
-    .then((response) => {
+    .then(response => {
+      // console.log(response);
       return response;
     })
     .catch(() => {
