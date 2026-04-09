@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowArbitraryExtensions": true,
     "target": "ES2017",
     "lib": [
       "dom",
@@ -29,6 +30,7 @@
     }
   },
   "include": [
+    "types.d.ts",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",

@@ -1,4 +1,6 @@
 import { HttpTypes } from '@medusajs/types';
+import Image from 'next/image';
+import Link from 'next/link';
 
 import { Badge } from '@/components/atoms';
 import { CartDropdown, ContactLinks, MobileNavbar, Navbar, NavLinks } from '@/components/cells';
@@ -23,8 +25,6 @@ export const Header = async ({ locale }: { locale: string }) => {
     wishlist = await getUserWishlists({ countryCode: locale });
   }
 
-  const regions = await listRegions();
-
   const wishlistCount = wishlist?.products.length || 0;
 
   const { categories, parentCategories } = (await listCategories({
@@ -34,19 +34,22 @@ export const Header = async ({ locale }: { locale: string }) => {
     parentCategories: HttpTypes.StoreProductCategory[];
   };
   return (
-    <header data-testid="header">
+    <header
+      data-testid="header"
+      className="sticky top-0 z-50"
+    >
       <div
-        className="bg-brand flex justify-between px-8 py-2 text-white md:px-5 lg:px-8"
+        className="flex justify-between bg-brand px-8 py-2 text-white md:px-5 lg:px-8"
         data-testid="header-top"
       >
-        <div className="flex items-center lg:w-1/3">
+        <div className="flex w-full items-center">
           <MobileNavbar
             parentCategories={parentCategories}
             categories={categories}
           />
           <ContactLinks />
         </div>
-        {/* <div className="flex items-center pl-4 lg:w-1/3 lg:justify-center lg:pl-0"></div> */}
+
         <div
           className="flex w-full items-center justify-end gap-2 py-2 lg:gap-4"
           data-testid="header-actions"
@@ -75,10 +78,7 @@ export const Header = async ({ locale }: { locale: string }) => {
           <CartDropdown />
         </div>
       </div>
-      <Navbar
-        categories={categories}
-        parentCategories={parentCategories}
-      />
+      <Navbar />
     </header>
   );
 };

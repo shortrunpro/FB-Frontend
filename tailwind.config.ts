@@ -12,6 +12,7 @@ export default {
     extend: {
       backgroundColor: {
         brand: 'rgba(var(--bg-brand))',
+        brand_grey: 'rgba(var(--bg-brand-grey))',
         primary: 'rgba(var(--bg-primary))',
         secondary: 'rgba(var(--bg-secondary))',
         tertiary: 'rgba(var(--bg-tertiary))',
@@ -140,6 +141,7 @@ export default {
     }
   },
   plugins: [
+    require('daisyui'),
     plugin(function ({ addUtilities }) {
       addUtilities({
         '.scrollbar-hide': {

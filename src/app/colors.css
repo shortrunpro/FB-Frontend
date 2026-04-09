@@ -16,6 +16,7 @@
 
   /* Brand colors are used across all interactive elements such as buttons, links, inputs, etc. This color can define the overall feel and can elicit emotion. */
   --brand-fb: 73, 87, 110;
+  --brand-grey: 237, 238, 240;
   --brand-25: 247, 247, 247;
   --brand-50: 238, 238, 238;
   --brand-100: 226, 226, 226;
@@ -86,6 +87,7 @@
   --bg-secondary: var(--neutral-25);
   --bg-tertiary: var(--neutral-1000);
   --bg-brand: var(--brand-fb);
+  --bg-brand-grey: var(--brand-grey);
   --bg-component-primary: var(--neutral-0);
   --bg-component-primary-hover: var(--neutral-25);
   --bg-component-primary-pressed: var(--neutral-50);

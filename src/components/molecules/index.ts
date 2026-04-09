@@ -10,6 +10,7 @@ import { HeaderCategoryNavbar } from './HeaderCategoryNavbar/HeaderCategoryNavba
 import { LoginForm } from './LoginForm/LoginForm';
 import { Modal } from './Modal/Modal';
 import { NavbarSearch } from './NavbarSearch/NavbarSearch';
+import { NavMenu } from './NavMenu/NavMenu';
 import { ParcelAccordion } from './ParcelAccordion/ParcelAccordion';
 import { ParentCategoryLinks } from './ParentCategoryLinks/ParentCategoryLinks';
 import { PrimeCategoryNavbar } from './PrimeCategoryNavbar/PrimeCategoryNavbar';
@@ -39,6 +40,7 @@ import { TabsList } from './TabsList/TabsList';
 import { UserNavigation } from './UserNavigation/UserNavigation';
 
 export {
+  NavMenu,
   PrimeCategoryNavbar,
   CategoryNavbar,
   ParentCategoryLinks,

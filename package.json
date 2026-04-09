@@ -53,6 +53,8 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.27",
+    "daisyui": "v4",
     "eslint": "^9",
     "eslint-config-next": "15.5.7",
     "eslint-plugin-storybook": "^0.11.2",

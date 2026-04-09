@@ -1,31 +1,51 @@
-import { HttpTypes } from '@medusajs/types';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { CategoryNavbar, NavbarSearch } from '@/components/molecules';
+import { NavMenu } from '@/components/molecules';
 
-export const Navbar = ({
-  categories,
-  parentCategories
-}: {
-  categories: HttpTypes.StoreProductCategory[];
-  parentCategories: HttpTypes.StoreProductCategory[];
-}) => {
+export const Navbar = () => {
   return (
-    <div
-      className="flex flex-col justify-between gap-4 border px-4 py-4 md:gap-0 md:px-5 lg:flex-row"
-      data-testid="navbar"
-    >
-      <div className="hidden w-full items-center justify-between lg:flex">
-        <CategoryNavbar
-          categories={categories}
-          parentCategories={parentCategories}
-        />
-        {/* <div className="ml-auto max-w-[296px] w-full pl-4" data-testid="navbar-search-desktop">
-          <NavbarSearch />
-        </div> */}
+    <div className="w-full bg-white">
+      <div className="navbar mx-auto w-full max-w-[1250px] bg-white">
+        <div className="navbar-start">
+          <Link
+            className="bg-white"
+            href={'/'}
+          >
+            <Image
+              src={'/federal-brace-logo.jpg'}
+              alt="Federal Brace Logo"
+              width={316}
+              height={43}
+            />
+          </Link>
+        </div>
+        <div className="navbar-center hidden lg:flex">
+          <NavMenu />
+        </div>
+
+        <div className="collapse-content z-1 lg:hidden">
+          <ul className="menu">
+            <li>
+              <button>Item 1</button>
+            </li>
+            <li>
+              <button>Parent</button>
+              <ul>
+                <li>
+                  <button>Submenu 1</button>
+                </li>
+                <li>
+                  <button>Submenu 2</button>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <button>Item 3</button>
+            </li>
+          </ul>
+        </div>
       </div>
-      {/* <div className="lg:hidden max-w-[296px] w-full" data-testid="navbar-search-mobile">
-        <NavbarSearch className="max-w-[296px]" />
-      </div> */}
     </div>
   );
 };
