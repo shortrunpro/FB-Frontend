@@ -1,71 +1,56 @@
-import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
-import footerLinks from "@/data/footerLinks"
+import Image from 'next/image';
+
+import { FacebookLink, LinkedinLink, TwitterLink, YoutubeLink } from '@/components/atoms';
 
 export function Footer() {
   return (
-    <footer className="bg-primary container" data-testid="footer">
-      <div className="grid grid-cols-1 lg:grid-cols-3">
-        {/* Customer Services Column */}
-        <div className="p-6 border rounded-sm" data-testid="footer-customer-services">
-          <h2 className="heading-sm text-primary mb-3 uppercase">
-            Customer services
-          </h2>
-          <nav className="space-y-3" aria-label="Customer services navigation">
-            {footerLinks.customerServices.map(({ label, path }) => (
-              <LocalizedClientLink
-                key={label}
-                href={path}
-                className="block label-md"
-                data-testid={`footer-link-${label.toLowerCase().replace(/\s+/g, '-')}`}
-              >
-                {label}
-              </LocalizedClientLink>
-            ))}
-          </nav>
-        </div>
+    <footer className="bg-base-200 px-10 pb-4 pt-10 text-base-content">
+      <div className="footer">
+        <aside>
+          <Image
+            src={'/fb-anvil.svg'}
+            width={150}
+            height={150}
+            alt="Federal Brace Anvil"
+          />
+          <div className="flex w-full flex-row justify-center gap-2">
+            <TwitterLink />
+            <YoutubeLink />
+            <FacebookLink />
+            <LinkedinLink />
+          </div>
 
-        {/* About Column */}
-        <div className="p-6 border rounded-sm" data-testid="footer-about">
-          <h2 className="heading-sm text-primary mb-3 uppercase">About</h2>
-          <nav className="space-y-3" aria-label="About navigation">
-            {footerLinks.about.map(({ label, path }) => (
-              <LocalizedClientLink
-                key={label}
-                href={path}
-                className="block label-md"
-                data-testid={`footer-link-${label.toLowerCase().replace(/\s+/g, '-')}`}
-              >
-                {label}
-              </LocalizedClientLink>
-            ))}
-          </nav>
-        </div>
-
-        {/* Connect Column */}
-        <div className="p-6 border rounded-sm" data-testid="footer-connect">
-          <h2 className="heading-sm text-primary mb-3 uppercase">connect</h2>
-          <nav className="space-y-3" aria-label="Social media navigation">
-            {footerLinks.connect.map(({ label, path }) => (
-              <a
-                aria-label={`Go to ${label} page`}
-                title={`Go to ${label} page`}
-                key={label}
-                href={path}
-                className="block label-md"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-testid={`footer-link-${label.toLowerCase().replace(/\s+/g, '-')}`}
-              >
-                {label}
-              </a>
-            ))}
-          </nav>
-        </div>
+          {/* <p>
+            Federal Brace
+            <br />
+            Providing reliable brackets since 2010
+          </p> */}
+        </aside>
+        <nav>
+          <h6 className="footer-title">Services</h6>
+          <a className="link-hover link">Branding</a>
+          <a className="link-hover link">Design</a>
+          <a className="link-hover link">Marketing</a>
+          <a className="link-hover link">Advertisement</a>
+        </nav>
+        <nav>
+          <h6 className="footer-title">Company</h6>
+          <a className="link-hover link">About us</a>
+          <a className="link-hover link">Contact</a>
+          <a className="link-hover link">Jobs</a>
+          <a className="link-hover link">Press kit</a>
+        </nav>
+        <nav>
+          <h6 className="footer-title">Legal</h6>
+          <a className="link-hover link">Terms of use</a>
+          <a className="link-hover link">Privacy policy</a>
+          <a className="link-hover link">Cookie policy</a>
+        </nav>
       </div>
 
-      <div className="py-6 border rounded-sm " data-testid="footer-copyright">
-        <p className="text-md text-secondary text-center ">© 2024 Fleek</p>
-      </div>
+      <aside className="mt-4 py-4 text-center">
+        <p>Copyright © {new Date().getFullYear()} - Short Run Pro, LLC. All rights reserved.</p>
+      </aside>
     </footer>
-  )
+  );
 }
