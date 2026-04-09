@@ -2,6 +2,8 @@
 
 import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 
+import { StoreCart } from '@medusajs/types';
+
 import {
   addToCart as apiAddToCart,
   deleteLineItem as apiDeleteLineItem,
@@ -13,7 +15,7 @@ import { Cart, StoreCartLineItemOptimisticUpdate } from '@/types/cart';
 import { CartContext } from './context';
 
 interface CartProviderProps extends PropsWithChildren {
-  cart: Cart | null;
+  cart: Cart | StoreCart | null;
 }
 
 export function CartProvider({ cart, children }: CartProviderProps) {

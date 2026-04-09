@@ -88,7 +88,6 @@ export const listProducts = async ({
       // cache: useCached ? 'force-cache' : 'no-cache'
     })
     .then(({ products: productsRaw, count }) => {
-      console.log(productsRaw, 'server products');
       const products = productsRaw.filter(product => product.seller?.store_status !== 'SUSPENDED');
 
       const nextPage = count > offset + limit ? pageParam + 1 : null;
@@ -257,7 +256,6 @@ export const searchProducts = async (params: {
       cache: 'no-cache'
     })
     .then(response => {
-      // console.log(response);
       return response;
     })
     .catch(() => {
