@@ -5,8 +5,8 @@ import Script from 'next/script';
 import {
   BannerSection,
   BlogSection,
-  Hero,
   HomeCategories,
+  HomeImageCarousel,
   HomeProductSection,
   ShopByStyleSection
 } from '@/components/sections';
@@ -148,19 +148,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           })
         }}
       />
+      <HomeImageCarousel />
 
-      <Hero
-        image="/images/hero/Image.jpg"
-        heading="Snag your style in a flash"
-        paragraph="Buy, sell, and discover pre-loved gems from the trendiest brands."
-        buttons={[
-          { label: 'Buy now', path: '/categories' },
-          {
-            label: 'Sell now',
-            path: process.env.NEXT_PUBLIC_VENDOR_URL || 'https://vendor.mercurjs.com'
-          }
-        ]}
-      />
       <div className="w-full px-4 lg:px-8">
         <HomeProductSection
           heading="trending listings"
