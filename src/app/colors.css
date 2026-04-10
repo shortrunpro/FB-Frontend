@@ -15,6 +15,7 @@
   --neutral-1000: 9, 9, 9;
 
   /* Brand colors are used across all interactive elements such as buttons, links, inputs, etc. This color can define the overall feel and can elicit emotion. */
+  --america-blue: 10, 49, 97;
   --brand-fb: 73, 87, 110;
   --brand-grey: 237, 238, 240;
   --brand-25: 247, 247, 247;
@@ -84,7 +85,7 @@
 
 :root {
   --brand-blue: var(--brand-fb);
-
+  --bg-america-blue: var(--america-blue);
   --bg-primary: var(--neutral-0);
   --bg-secondary: var(--neutral-25);
   --bg-tertiary: var(--neutral-1000);

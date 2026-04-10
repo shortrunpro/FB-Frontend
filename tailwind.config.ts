@@ -11,6 +11,7 @@ export default {
   theme: {
     extend: {
       backgroundColor: {
+        'america-blue': 'rgba(var(--bg-america-blue))',
         brand: 'rgba(var(--bg-brand))',
         brand_grey: 'rgba(var(--bg-brand-grey))',
         primary: 'rgba(var(--bg-primary))',

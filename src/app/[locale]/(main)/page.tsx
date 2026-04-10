@@ -8,6 +8,7 @@ import {
   HomeCategories,
   HomeImageCarousel,
   HomeProductSection,
+  HomeSignUp,
   ShopByStyleSection
 } from '@/components/sections';
 import { listRegions } from '@/lib/data/regions';
@@ -151,6 +152,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <HomeImageCarousel />
       <div className="w-full px-12 lg:px-12">
         <HomeCategories heading="POPULAR CATEGORIES" />
+        <HomeSignUp />
       </div>
       <div className="w-full px-4 lg:px-8">
         <HomeProductSection
