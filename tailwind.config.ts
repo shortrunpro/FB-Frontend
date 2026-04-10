@@ -72,6 +72,7 @@ export default {
         }
       },
       colors: {
+        brand: 'rgba(var(--brand-blue))',
         primary: 'rgba(var(--content-primary))',
         secondary: 'rgba(var(--content-secondary))',
         tertiary: 'rgba(var(--content-tertiary))',

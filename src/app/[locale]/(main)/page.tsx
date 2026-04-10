@@ -149,7 +149,9 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         }}
       />
       <HomeImageCarousel />
-
+      <div className="w-full px-12 lg:px-12">
+        <HomeCategories heading="POPULAR CATEGORIES" />
+      </div>
       <div className="w-full px-4 lg:px-8">
         <HomeProductSection
           heading="trending listings"
@@ -157,9 +159,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           home
         />
       </div>
-      <div className="w-full px-4 lg:px-8">
-        <HomeCategories heading="SHOP BY CATEGORY" />
-      </div>
+
       <BannerSection />
       <ShopByStyleSection />
       <BlogSection />

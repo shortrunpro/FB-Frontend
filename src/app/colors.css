@@ -83,6 +83,8 @@
 }
 
 :root {
+  --brand-blue: var(--brand-fb);
+
   --bg-primary: var(--neutral-0);
   --bg-secondary: var(--neutral-25);
   --bg-tertiary: var(--neutral-1000);
