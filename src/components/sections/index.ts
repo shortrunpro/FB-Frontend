@@ -5,6 +5,7 @@ import { Cart } from './Cart/Cart';
 import { Hero } from './Hero/Hero';
 import { HomeCategories } from './HomeCategories/HomeCategories';
 import { HomeImageCarousel } from './HomeImageCarousel/HomeImageCarousel';
+import { HomeParagraphSection1 } from './HomeParagraphSections/HomeParagraphSection1';
 import { HomeProductSection } from './HomeProductSection/HomeProductSection';
 import { HomeSignUp } from './HomeSignUp/HomeSignUp';
 import { ProductDetailsPage } from './ProductDetailsPage/ProductDetailsPage';
@@ -15,6 +16,7 @@ import { ShopByStyleSection } from './ShopByStyle/ShopByStyleSection';
 import { WishlistPage } from './WishlistPage/WishlistPage';
 
 export {
+  HomeParagraphSection1,
   HomeSignUp,
   HomeImageCarousel,
   Hero,

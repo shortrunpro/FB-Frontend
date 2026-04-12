@@ -7,6 +7,7 @@ import {
   BlogSection,
   HomeCategories,
   HomeImageCarousel,
+  HomeParagraphSection1,
   HomeProductSection,
   HomeSignUp,
   ShopByStyleSection
@@ -153,6 +154,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <div className="w-full px-12 lg:px-12">
         <HomeCategories heading="POPULAR CATEGORIES" />
         <HomeSignUp />
+        <HomeParagraphSection1 />
       </div>
       <div className="w-full px-4 lg:px-8">
         <HomeProductSection
