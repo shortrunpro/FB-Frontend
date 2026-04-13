@@ -1,46 +1,62 @@
-import { Carousel } from "@/components/cells"
-import { ProductCard } from "../ProductCard/ProductCard"
-import { listProducts } from "@/lib/data/products"
-import { Product } from "@/types/product"
+'use client';
 
-export const HomeProductsCarousel = async ({
+import Image from 'next/image';
+import {
+  A11y,
+  Autoplay,
+  Mousewheel,
+  Navigation,
+  Pagination,
+  Scrollbar,
+  Virtual
+} from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// @ts-ignore
+import 'swiper/css';
+// @ts-ignore
+import 'swiper/css/navigation';
+// @ts-ignore
+import 'swiper/css/pagination';
+// @ts-ignore
+import 'swiper/css/scrollbar';
+// @ts-ignore
+import 'swiper/css/mousewheel';
+
+import { Product } from '@/types/product';
+
+import { ProductCard } from '../ProductCard/ProductCard';
+
+export const HomeProductsCarousel = ({
   locale,
   sellerProducts,
-  home,
+  home
 }: {
-  locale: string
-  sellerProducts: Product[]
-  home: boolean
+  locale: string;
+  sellerProducts: Product[] | any;
+  home: boolean;
 }) => {
-  const {
-    response: { products },
-  } = await listProducts({
-    countryCode: locale,
-    queryParams: {
-      limit: home ? 4 : undefined,
-      order: "created_at",
-      handle: home
-        ? undefined
-        : sellerProducts.map((product) => product.handle),
-    },
-    forceCache: !home,
-  })
-
-  if (!products.length && !sellerProducts.length) return null
-
   return (
-    <div className="flex justify-center w-full">
-      <Carousel
-        align="start"
-        items={(sellerProducts.length ? sellerProducts : products).map(
-          (product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-            />
-          )
-        )}
-      />
-    </div>
-  )
-}
+    // <div className="">
+    <Swiper
+      modules={[Navigation, Pagination, Virtual, A11y, Autoplay]}
+      navigation
+      pagination={{ clickable: false }}
+      virtual
+      slidesPerView={4}
+      spaceBetween={10}
+      autoplay={{ delay: 3000, pauseOnMouseEnter: true }}
+    >
+      {sellerProducts.map((product: any, index: any) => (
+        <SwiperSlide
+          key={product.id}
+          virtualIndex={index}
+        >
+          <ProductCard product={product} />
+        </SwiperSlide>
+      ))}
+    </Swiper>
+
+    // </div>
+  );
+};

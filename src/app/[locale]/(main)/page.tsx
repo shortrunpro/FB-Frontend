@@ -156,14 +156,13 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <HomeCategories heading="POPULAR CATEGORIES" />
         <HomeSignUp />
         <HomeParagraphSection1 />
-      </div>
-      <div className="w-full px-4 lg:px-8">
         <HomeProductSection
-          heading="trending listings"
+          heading="popular products"
           locale={locale}
           home
         />
       </div>
+
       <HomeParagraphSection2 />
       {/* <BannerSection />
       <ShopByStyleSection />
