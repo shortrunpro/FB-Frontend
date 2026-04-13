@@ -8,6 +8,7 @@ import {
   HomeCategories,
   HomeImageCarousel,
   HomeParagraphSection1,
+  HomeParagraphSection2,
   HomeProductSection,
   HomeSignUp,
   ShopByStyleSection
@@ -163,7 +164,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           home
         />
       </div>
-
+      <HomeParagraphSection2 />
       <BannerSection />
       <ShopByStyleSection />
       <BlogSection />

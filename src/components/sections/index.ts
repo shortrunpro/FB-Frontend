@@ -6,6 +6,7 @@ import { Hero } from './Hero/Hero';
 import { HomeCategories } from './HomeCategories/HomeCategories';
 import { HomeImageCarousel } from './HomeImageCarousel/HomeImageCarousel';
 import { HomeParagraphSection1 } from './HomeParagraphSections/HomeParagraphSection1';
+import { HomeParagraphSection2 } from './HomeParagraphSections/HomeParagraphSection2';
 import { HomeProductSection } from './HomeProductSection/HomeProductSection';
 import { HomeSignUp } from './HomeSignUp/HomeSignUp';
 import { ProductDetailsPage } from './ProductDetailsPage/ProductDetailsPage';
@@ -16,6 +17,7 @@ import { ShopByStyleSection } from './ShopByStyle/ShopByStyleSection';
 import { WishlistPage } from './WishlistPage/WishlistPage';
 
 export {
+  HomeParagraphSection2,
   HomeParagraphSection1,
   HomeSignUp,
   HomeImageCarousel,
