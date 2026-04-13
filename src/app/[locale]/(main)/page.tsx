@@ -165,9 +165,9 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         />
       </div>
       <HomeParagraphSection2 />
-      <BannerSection />
+      {/* <BannerSection />
       <ShopByStyleSection />
-      <BlogSection />
+      <BlogSection /> */}
     </main>
   );
 }
