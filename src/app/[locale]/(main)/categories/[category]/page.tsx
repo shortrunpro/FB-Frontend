@@ -87,7 +87,6 @@ async function Category({
   const { category: categoryHandle, locale } = await params;
 
   const category = await getCategoryByHandle(categoryHandle);
-  console.log(category);
   if (!category) {
     return notFound();
   }

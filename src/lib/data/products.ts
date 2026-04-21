@@ -55,6 +55,7 @@ export const listProducts = async ({
   }
 
   if (!region) {
+    console.log('no region');
     return {
       response: { products: [], count: 0 },
       nextPage: null
@@ -66,7 +67,7 @@ export const listProducts = async ({
   };
 
   const useCached = forceCache || (limit <= 8 && !category_id && !collection_id);
-
+  const x = await sdk.store.product.list({ collection_id }).then(({ products }) => products);
   return sdk.client
     .fetch<{
       products: (HttpTypes.StoreProduct & { seller?: SellerProps })[];
@@ -76,8 +77,8 @@ export const listProducts = async ({
       query: {
         country_code: 'us',
         region_id: region?.id,
-        category_id,
-        collection_id,
+        // category_id,
+        // collection_id,
         limit,
         offset,
         fields: '+variants.inventory_quantity,*variants.calculated_price,*variants',
@@ -88,7 +89,7 @@ export const listProducts = async ({
       // cache: useCached ? 'force-cache' : 'no-cache'
     })
     .then(({ products: productsRaw, count }) => {
-      const products = productsRaw.filter(product => product.seller?.store_status !== 'SUSPENDED');
+      const products = productsRaw;
 
       const nextPage = count > offset + limit ? pageParam + 1 : null;
 
@@ -186,79 +187,48 @@ export const searchProducts = async (params: {
   query?: string;
   page?: number;
   hitsPerPage?: number;
-  filters?: string;
+  filter?: string;
   facets?: string[];
   maxValuesPerFacet?: number;
-  currency_code?: string;
-  countryCode?: string;
-  region_id?: string;
   customer_id?: string;
   customer_group_id?: string[];
 }): Promise<{
-  products: (HttpTypes.StoreProduct & { seller?: SellerProps })[];
-  nbHits: number;
+  hits: HttpTypes.StoreProduct[];
+  estimatedTotalHits: number;
   page: number;
   nbPages: number;
   hitsPerPage: number;
-  facets: Record<string, any>;
+  facetDistribution: Record<string, any>;
   processingTimeMS: number;
 }> => {
-  if (!params.countryCode && !params.region_id) {
-    throw new Error('Country code or region ID is required');
-  }
-
-  let region_id = params.region_id;
-
-  if (!region_id && params.countryCode) {
-    const region = await getRegion(params.countryCode);
-    if (!region) {
-      throw new Error(`Region not found for country code: ${params.countryCode}`);
-    }
-    region_id = region.id;
-  }
-
   const headers = {
     ...(await getAuthHeaders())
   };
 
-  let customer_id = params.customer_id;
-
-  if (!customer_id) {
-    const customer = await retrieveCustomer();
-    if (customer) {
-      customer_id = customer.id;
-    }
-  }
-
   let facets = params.facets;
 
-  if (!facets) {
-    facets = ['variants.condition', 'variants.color', 'variants.size'];
-  }
-
-  const { countryCode, ...bodyParams } = params;
-  const searchParams = new URLSearchParams({
-    currency_code: 'usd',
-    region_id: region_id as string
-  });
+  facets = ['variants.finish', 'variants.size', 'variants.price'];
+  // @ts-ignore
   return sdk.client
     .fetch<{
-      products: (HttpTypes.StoreProduct & { seller?: SellerProps })[];
-      nbHits: number;
+      hits: HttpTypes.StoreProduct[];
+      estimatedTotalHits: number;
       page: number;
       nbPages: number;
       hitsPerPage: number;
-      facets: Record<string, any>;
+      facetDistribution: Record<string, any>;
       processingTimeMS: number;
-    }>(`/store/search?${searchParams.toString()}`, {
-      method: 'GET',
+    }>(`/store/products/search`, {
+      method: 'POST',
       headers,
-      cache: 'no-cache'
+      cache: 'no-cache',
+      body: { ...params }
     })
     .then(response => {
       return response;
     })
-    .catch(() => {
+    .catch(err => {
+      console.log(err, 'ERROR');
       return {
         products: [],
         nbHits: 0,

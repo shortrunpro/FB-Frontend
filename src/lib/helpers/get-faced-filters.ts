@@ -1,73 +1,71 @@
-import { ReadonlyURLSearchParams } from "next/navigation"
+import { ReadonlyURLSearchParams } from 'next/navigation';
 
 const getOption = (label: string) => {
   switch (label) {
-    case "size":
-      return "variants.size"
-    case "color":
-      return "variants.color"
-    case "condition":
-      return "variants.condition"
-    case "rating":
-      return "average_rating"
+    case 'size':
+      return 'variants.size';
+    case 'variants.finish':
+      return 'variants.finish';
+    case 'condition':
+      return 'variants.condition';
+    case 'rating':
+      return 'average_rating';
     default:
-      return ""
+      return '';
   }
-}
+};
 
 export const getFacedFilters = (filters: ReadonlyURLSearchParams): string => {
-  let facet = ""
+  let facet = '';
 
-  let minPrice = null
-  let maxPrice = null
+  let minPrice = null;
+  let maxPrice = null;
 
-  let query = ""
-  let rating = ""
+  let query = '';
+  let rating = '';
 
   for (const [key, value] of filters.entries()) {
     if (
-      key !== "min_price" &&
-      key !== "max_price" &&
-      key !== "sale" &&
-      key !== "query" &&
-      key !== "page" &&
-      key !== "products[page]" &&
-      key !== "sortBy" &&
-      key !== "rating"
+      key !== 'min_price' &&
+      key !== 'max_price' &&
+      key !== 'sale' &&
+      key !== 'query' &&
+      key !== 'page' &&
+      key !== 'products[page]' &&
+      key !== 'sortBy' &&
+      key !== 'rating'
     ) {
-      let values = ""
-      const splittedSize = value.split(",")
+      let values = '';
+      const splittedSize = value.split(',');
       if (splittedSize.length > 1) {
         splittedSize.map(
           (value, index) =>
-            (values += `${getOption(key)}:"${value}" ${
-              index + 1 < splittedSize.length ? "OR " : ""
+            (values += `${getOption(key)}="${value}" ${
+              index + 1 < splittedSize.length ? 'OR ' : ''
             }`)
-        )
+        );
       } else {
-        values += `${getOption(key)}:"${splittedSize[0]}"`
+        values += `${getOption(key)}="${splittedSize[0]}"`;
       }
-      facet += ` AND ${values}`
+      facet += `${values}`;
     } else {
-      if (key === "min_price") minPrice = value
-      if (key === "max_price") maxPrice = value
+      if (key === 'min_price') minPrice = value;
+      if (key === 'max_price') maxPrice = value;
 
-      if (key === "query") query = ` AND products.title:"${value}"`
+      if (key === 'query') query = ` AND products.title:"${value}"`;
 
-      if (key === "rating") {
-        let values = ""
-        const splited = value.split(",")
+      if (key === 'rating') {
+        let values = '';
+        const splited = value.split(',');
         if (splited.length > 1) {
           splited.map(
             (value, index) =>
-              (values += `${getOption(key)} >= ${value} ${
-                index + 1 < splited.length ? "OR " : ""
-              }`)
-          )
+              (values += `${getOption(key)} >= ${value} ${index + 1 < splited.length ? 'OR ' : ''}`)
+          );
         } else {
-          values += `${getOption(key)} >=${splited[0]}`
+          values += `${getOption(key)} >=${splited[0]}`;
         }
-        rating += ` AND ${values}`
+        rating += ` AND ${values}`;
       }
     }
   }
@@ -76,10 +74,10 @@ export const getFacedFilters = (filters: ReadonlyURLSearchParams): string => {
     minPrice && maxPrice
       ? ` AND variants.prices.amount:${minPrice} TO ${maxPrice}`
       : minPrice
-      ? ` AND variants.prices.amount >= ${minPrice}`
-      : maxPrice
-      ? ` AND variants.prices.amount <= ${maxPrice}`
-      : ""
+        ? ` AND variants.prices.amount >= ${minPrice}`
+        : maxPrice
+          ? ` AND variants.prices.amount <= ${maxPrice}`
+          : '';
 
-  return facet + priceFilter + rating
-}
+  return facet + priceFilter + rating;
+};

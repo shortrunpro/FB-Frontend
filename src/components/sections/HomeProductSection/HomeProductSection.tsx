@@ -21,7 +21,6 @@ export const HomeProductSection = async ({
     },
     forceCache: !home
   });
-
   return (
     <section className="w-full py-8">
       <h2 className="heading-lg mb-6 font-bold uppercase tracking-tight text-brand">{heading}</h2>
