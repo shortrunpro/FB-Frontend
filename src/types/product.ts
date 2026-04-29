@@ -100,6 +100,10 @@ export type ProductFile = {
   type: string;
   url: string;
 };
+export type ProductBulletPoint = {
+  icon: any;
+  text: string;
+};
 export interface ProductWithFiles extends HttpTypes.StoreProduct {
   files?: ProductFile[];
 }

@@ -9,6 +9,7 @@ import { Footer } from './Footer/Footer';
 import { GalleryCarousel } from './GalleryCarousel/GalleryCarousel';
 import { Header } from './Header/Header';
 import { HomeProductsCarousel } from './HomeProductsCarousel/HomeProductsCarousel';
+import { ProductBulletPoints } from './ProductBulletPoints/ProductBulletPoints';
 import { ProductCard } from './ProductCard/ProductCard';
 import { ProductDetails } from './ProductDetails/ProductDetails';
 import { ProductFiles } from './ProductFiles/ProductFiles';
@@ -27,6 +28,7 @@ import { SellerTabs } from './SellerTabs/SellerTabs';
 import { WishlistTabs } from './WishlistTabs/WishlistTabs';
 
 export {
+  ProductBulletPoints,
   ProductFiles,
   ProductCard,
   BrandCard,

@@ -6,7 +6,7 @@ import { HttpTypes } from '@medusajs/types';
 
 import { Button, Input } from '@/components/atoms';
 import { ProductVariants } from '@/components/molecules';
-import { ProductFiles } from '@/components/organisms';
+import { ProductBulletPoints, ProductFiles } from '@/components/organisms';
 import { useCartContext } from '@/components/providers';
 import useGetAllSearchParams from '@/hooks/useGetAllSearchParams';
 import { getProductPrice } from '@/lib/helpers/get-product-price';
@@ -185,7 +185,10 @@ export const ProductDetailsHeader = ({ product }: { product: ProductWithFiles })
           />
         </div>
       </div>
-      <ProductFiles files={product.files} />
+      <div className="flex flex-col gap-y-8">
+        <ProductBulletPoints />
+        <ProductFiles files={product.files} />
+      </div>
     </div>
   );
 };
