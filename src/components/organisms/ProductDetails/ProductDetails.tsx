@@ -1,43 +1,17 @@
-import { HttpTypes } from '@medusajs/types';
-
 import {
-  ProductAdditionalAttributes,
   ProductDetailsFooter,
   ProductDetailsHeader,
-  ProductDetailsSeller,
   ProductDetailsShipping,
   ProductPageDetails
 } from '@/components/cells';
-import { retrieveCustomer } from '@/lib/data/customer';
-import { getUserWishlists } from '@/lib/data/wishlist';
-import { AdditionalAttributeProps } from '@/types/product';
-import { SellerProps } from '@/types/seller';
-import { Wishlist } from '@/types/wishlist';
+import { ProductWithFiles } from '@/types/product';
 
-export const ProductDetails = async ({
-  product,
-  locale
-}: {
-  product: HttpTypes.StoreProduct & {
-    seller?: SellerProps;
-    attribute_values?: AdditionalAttributeProps[];
-  };
-  locale: string;
-}) => {
-  const user = await retrieveCustomer();
-
-  let wishlist: Wishlist = { products: [] };
-  if (user) {
-    wishlist = await getUserWishlists({ countryCode: locale });
-  }
-
+export const ProductDetails = async ({ product }: { product: ProductWithFiles }) => {
   return (
     <div>
       <ProductDetailsHeader product={product} />
       <ProductPageDetails details={product?.description || ''} />
-      <ProductAdditionalAttributes attributes={product?.attribute_values || []} />
       <ProductDetailsShipping />
-      <ProductDetailsSeller seller={product?.seller} />
       <ProductDetailsFooter
         tags={product?.tags || []}
         posted={product?.created_at}

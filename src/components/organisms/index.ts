@@ -1,31 +1,33 @@
-import { ProductCard } from "./ProductCard/ProductCard"
-import { BrandCard } from "./BrandCard/BrandCard"
-import { CategoryCard } from "./CategoryCard/CategoryCard"
-import { BlogCard } from "./BlogCard/BlogCard"
-import { ProductListingHeader } from "./ProductListingHeader/ProductListingHeader"
-import { ProductsList } from "./ProductsList/ProductsList"
-import { ProductsPagination } from "./ProductsPagination/ProductsPagination"
-import { ProductSidebar } from "./ProductSidebar/ProductSidebar"
-import { ProductListingActiveFilters } from "./ProductListingActiveFilters/ProductListingActiveFilters"
-import { Header } from "./Header/Header"
-import { Footer } from "./Footer/Footer"
-import { GalleryCarousel } from "./GalleryCarousel/GalleryCarousel"
-import { SellerHeading } from "./SellerHeading/SellerHeading"
-import { SellerFooter } from "./SellerFooter/SellerFooter"
-import { SellerTabs } from "./SellerTabs/SellerTabs"
-import { CartSummary } from "./CartSummary/CartSummary"
-import { CartItems } from "./CartItems/CartItems"
-import { WishlistTabs } from "./WishlistTabs/WishlistTabs"
-import { HomeProductsCarousel } from "./HomeProductsCarousel/HomeProductsCarousel"
-import { ProductGallery } from "./ProductGallery/ProductGallery"
-import { ProductDetails } from "./ProductDetails/ProductDetails"
-import { AlgoliaProductSidebar } from "./ProductSidebar/AlgoliaProductSidebar"
-import { Addresses } from "./Addressess/Addresses"
-import { ReviewsToWrite } from "./Reviews/ReviewsToWrite"
-import { ReviewsWritten } from "./Reviews/ReviewsWritten"
-import { CartEmpty } from "./CartEmpty/CartEmpty"
+import { Addresses } from './Addressess/Addresses';
+import { BlogCard } from './BlogCard/BlogCard';
+import { BrandCard } from './BrandCard/BrandCard';
+import { CartEmpty } from './CartEmpty/CartEmpty';
+import { CartItems } from './CartItems/CartItems';
+import { CartSummary } from './CartSummary/CartSummary';
+import { CategoryCard } from './CategoryCard/CategoryCard';
+import { Footer } from './Footer/Footer';
+import { GalleryCarousel } from './GalleryCarousel/GalleryCarousel';
+import { Header } from './Header/Header';
+import { HomeProductsCarousel } from './HomeProductsCarousel/HomeProductsCarousel';
+import { ProductCard } from './ProductCard/ProductCard';
+import { ProductDetails } from './ProductDetails/ProductDetails';
+import { ProductFiles } from './ProductFiles/ProductFiles';
+import { ProductGallery } from './ProductGallery/ProductGallery';
+import { ProductListingActiveFilters } from './ProductListingActiveFilters/ProductListingActiveFilters';
+import { ProductListingHeader } from './ProductListingHeader/ProductListingHeader';
+import { AlgoliaProductSidebar } from './ProductSidebar/AlgoliaProductSidebar';
+import { ProductSidebar } from './ProductSidebar/ProductSidebar';
+import { ProductsList } from './ProductsList/ProductsList';
+import { ProductsPagination } from './ProductsPagination/ProductsPagination';
+import { ReviewsToWrite } from './Reviews/ReviewsToWrite';
+import { ReviewsWritten } from './Reviews/ReviewsWritten';
+import { SellerFooter } from './SellerFooter/SellerFooter';
+import { SellerHeading } from './SellerHeading/SellerHeading';
+import { SellerTabs } from './SellerTabs/SellerTabs';
+import { WishlistTabs } from './WishlistTabs/WishlistTabs';
 
 export {
+  ProductFiles,
   ProductCard,
   BrandCard,
   CategoryCard,
@@ -51,5 +53,5 @@ export {
   Addresses,
   ReviewsToWrite,
   ReviewsWritten,
-  CartEmpty,
-}
+  CartEmpty
+};

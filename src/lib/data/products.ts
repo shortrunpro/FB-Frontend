@@ -3,12 +3,10 @@
 import { HttpTypes } from '@medusajs/types';
 
 import { sortProducts } from '@/lib/helpers/sort-products';
-import { SortOptions } from '@/types/product';
-import { SellerProps } from '@/types/seller';
+import { ProductWithFiles, SortOptions } from '@/types/product';
 
 import { sdk } from '../config';
 import { getAuthHeaders } from './cookies';
-import { retrieveCustomer } from './customer';
 import { getRegion, retrieveRegion } from './regions';
 
 export const listProducts = async ({
@@ -32,7 +30,7 @@ export const listProducts = async ({
   forceCache?: boolean;
 }): Promise<{
   response: {
-    products: (HttpTypes.StoreProduct & { seller?: SellerProps })[];
+    products: ProductWithFiles[];
     count: number;
   };
   nextPage: number | null;
@@ -67,10 +65,10 @@ export const listProducts = async ({
   };
 
   const useCached = forceCache || (limit <= 8 && !category_id && !collection_id);
-  const x = await sdk.store.product.list({ collection_id }).then(({ products }) => products);
+
   return sdk.client
     .fetch<{
-      products: (HttpTypes.StoreProduct & { seller?: SellerProps })[];
+      products: ProductWithFiles[];
       count: number;
     }>(`/store/products`, {
       method: 'GET',
@@ -81,7 +79,8 @@ export const listProducts = async ({
         // collection_id,
         limit,
         offset,
-        fields: '+variants.inventory_quantity,*variants.calculated_price,*variants',
+        fields:
+          '+variants.inventory_quantity,*variants.calculated_price,*variants,+files.id,+files.product_id,+files.type,+files.url',
         ...queryParams
       },
       headers
@@ -157,11 +156,7 @@ export const listProductsWithSort = async ({
     countryCode
   });
 
-  const filteredProducts = seller_id
-    ? products.filter(product => product.seller?.id === seller_id)
-    : products;
-
-  const pricedProducts = filteredProducts.filter(prod =>
+  const pricedProducts = products.filter(prod =>
     prod.variants?.some(variant => variant.calculated_price !== null)
   );
 

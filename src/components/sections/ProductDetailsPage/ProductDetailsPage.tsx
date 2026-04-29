@@ -1,5 +1,5 @@
 import NotFound from '@/app/not-found';
-import { ProductDetails, ProductGallery } from '@/components/organisms';
+import { ProductDetails, ProductFiles, ProductGallery } from '@/components/organisms';
 import { listProducts } from '@/lib/data/products';
 
 import { HomeProductSection } from '../HomeProductSection/HomeProductSection';
@@ -16,12 +16,7 @@ export const ProductDetailsPage = async ({
     queryParams: { handle: [handle], limit: 1 },
     forceCache: true
   }).then(({ response }) => response.products[0]);
-
   if (!prod) return null;
-
-  if (prod.seller?.store_status === 'SUSPENDED') {
-    return NotFound();
-  }
 
   return (
     <>
@@ -39,10 +34,7 @@ export const ProductDetailsPage = async ({
           className="md:w-1/2 md:px-2"
           data-testid="product-details-container"
         >
-          <ProductDetails
-            product={prod}
-            locale={locale}
-          />
+          <ProductDetails product={prod} />
         </div>
       </div>
       <div className="my-8">

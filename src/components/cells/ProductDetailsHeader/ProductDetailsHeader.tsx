@@ -6,10 +6,12 @@ import { HttpTypes } from '@medusajs/types';
 
 import { Button, Input } from '@/components/atoms';
 import { ProductVariants } from '@/components/molecules';
+import { ProductFiles } from '@/components/organisms';
 import { useCartContext } from '@/components/providers';
 import useGetAllSearchParams from '@/hooks/useGetAllSearchParams';
 import { getProductPrice } from '@/lib/helpers/get-product-price';
 import { toast } from '@/lib/helpers/toast';
+import { ProductWithFiles } from '@/types/product';
 
 const optionsAsKeymap = (variantOptions: HttpTypes.StoreProductVariant['options']) => {
   return variantOptions?.reduce(
@@ -22,7 +24,7 @@ const optionsAsKeymap = (variantOptions: HttpTypes.StoreProductVariant['options'
   );
 };
 
-export const ProductDetailsHeader = ({ product }: { product: HttpTypes.StoreProduct }) => {
+export const ProductDetailsHeader = ({ product }: { product: ProductWithFiles }) => {
   const { addToCart, onAddToCart, cart, isAddingItem } = useCartContext();
   const { allSearchParams } = useGetAllSearchParams();
   const [quantity, setQuantity] = useState(1);
@@ -183,6 +185,7 @@ export const ProductDetailsHeader = ({ product }: { product: HttpTypes.StoreProd
           />
         </div>
       </div>
+      <ProductFiles files={product.files} />
     </div>
   );
 };
