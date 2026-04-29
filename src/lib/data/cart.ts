@@ -40,7 +40,7 @@ export async function retrieveCart(cartId?: string) {
       query: {
         fields:
           '*items,*region, *items.product, *items.variant, *items.variant.options, items.variant.options.option.title,' +
-          '*items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name, *items.product.seller' +
+          '*items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name' +
           ''
       },
       headers,
@@ -264,7 +264,7 @@ export async function applyPromotions(codes: string[]) {
   const cartId = await getCartId();
 
   if (!cartId) {
-    return { success: false, error: "No existing cart found" }
+    return { success: false, error: 'No existing cart found' };
   }
 
   const headers = {
@@ -272,25 +272,16 @@ export async function applyPromotions(codes: string[]) {
   };
 
   try {
-    const { cart } = await sdk.store.cart.update(
-      cartId,
-      { promo_codes: codes },
-      {},
-      headers
-    )
-    const cartCacheTag = await getCacheTag("carts")
-    revalidateTag(cartCacheTag)
+    const { cart } = await sdk.store.cart.update(cartId, { promo_codes: codes }, {}, headers);
+    const cartCacheTag = await getCacheTag('carts');
+    revalidateTag(cartCacheTag);
     // @ts-ignore
-    const applied = cart.promotions?.some((promotion: any) =>
-      codes.includes(promotion.code)
-    )
-    return { success: true, applied }
+    const applied = cart.promotions?.some((promotion: any) => codes.includes(promotion.code));
+    return { success: true, applied };
   } catch (error: any) {
     const errorMessage =
-      error?.response?.data?.message ||
-      error?.message ||
-      "Failed to apply promotion code"
-    return { success: false, error: errorMessage }
+      error?.response?.data?.message || error?.message || 'Failed to apply promotion code';
+    return { success: false, error: errorMessage };
   }
 }
 

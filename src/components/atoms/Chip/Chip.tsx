@@ -7,7 +7,7 @@ interface ChipProps {
   color?: boolean;
   onSelect?: () => void;
   className?: string;
-  "data-testid"?: string;
+  'data-testid'?: string;
 }
 
 export function Chip({
@@ -17,18 +17,15 @@ export function Chip({
   color,
   onSelect,
   className,
-  "data-testid": dataTestId,
+  'data-testid': dataTestId
 }: ChipProps) {
   const baseClasses = 'chip-wrapper';
-  const selectedClasses = selected ? 'border-primary' : '';
-  const hoverClasses =
-    !disabled && !selected ? 'hover:bg-gray-200' : '';
+  const selectedClasses = selected ? 'bg-brand text-white hover:text-brand' : '';
+  const hoverClasses = !disabled && !selected ? 'hover:bg-gray-200' : '';
   const disabledClasses = disabled
     ? 'bg-component border-disabled/50 hover:bg-component cursor-not-allowed text-disabled'
     : 'cursor-pointer';
-  const colorClasses = color
-    ? 'w-[40px] h-[40px] border'
-    : '';
+  const colorClasses = color ? 'w-[40px] h-[40px] border' : '';
 
   return (
     <div
@@ -42,18 +39,18 @@ export function Chip({
         className
       )}
       onClick={!disabled ? onSelect : undefined}
-      role='button'
+      role="button"
       tabIndex={disabled ? -1 : 0}
       data-testid={dataTestId ?? 'chip'}
     >
       {color ? (
         <span
           className={cn(
-            'w-[32px] h-[32px] bg-action absolute top-[3px] left-[3px] rounded-xs',
+            'absolute left-[3px] top-[3px] h-[32px] w-[32px] rounded-xs bg-action',
             disabled && 'bg-disabled'
           )}
           style={{
-            backgroundColor: (value || '').toString(),
+            backgroundColor: (value || '').toString()
           }}
         />
       ) : (

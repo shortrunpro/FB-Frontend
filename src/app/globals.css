@@ -1,5 +1,5 @@
 /* Defined colors variables */
-@import "colors.css";
+@import 'colors.css';
 
 @tailwind base;
 @tailwind components;
@@ -13,49 +13,49 @@
   @apply text-base font-light tracking-normal;
 }
 .text-md {
-  @apply text-[14px] leading-[22px] font-light tracking-normal;
+  @apply text-[14px] font-light leading-[22px] tracking-normal;
 }
 .text-sm {
   @apply text-[12px] font-light tracking-normal;
 }
 
 .label-sm {
-  @apply text-[12px] leading-[20px] font-normal tracking-normal;
+  @apply text-[12px] font-normal leading-[20px] tracking-normal;
 }
 .label-md {
-  @apply text-[14px] leading-[22px] font-normal tracking-normal;
+  @apply text-[14px] font-normal leading-[22px] tracking-normal;
 }
 .label-lg {
-  @apply text-[16px] leading-[24px] font-semibold tracking-normal;
+  @apply text-[16px] font-semibold leading-[24px] tracking-normal;
 }
 .label-xl {
-  @apply text-[20px] leading-[28px] font-semibold tracking-normal;
+  @apply text-[20px] font-semibold leading-[28px] tracking-normal;
 }
 
 .heading-xs {
-  @apply text-[14px] leading-[22px] font-medium tracking-normal;
+  @apply text-[14px] font-medium leading-[22px] tracking-normal;
 }
 .heading-sm {
-  @apply text-[16px] leading-[24px] font-medium tracking-normal;
+  @apply text-[16px] font-medium leading-[24px] tracking-normal;
 }
 .heading-md {
-  @apply text-[24px] leading-[32px] font-medium tracking-normal max-md:text-[20px] max-md:leading-[28px];
+  @apply text-[24px] font-medium leading-[32px] tracking-normal max-md:text-[20px] max-md:leading-[28px];
 }
 .heading-lg {
-  @apply text-[32px] leading-[40px] font-medium tracking-normal max-md:text-[24px] max-md:leading-[32px];
+  @apply text-[32px] font-medium leading-[40px] tracking-normal max-md:text-[24px] max-md:leading-[32px];
 }
 .heading-xl {
-  @apply text-[40px] leading-[48px] font-medium tracking-normal max-md:text-[32px] max-md:leading-[40px];
+  @apply text-[40px] font-medium leading-[48px] tracking-normal max-md:text-[32px] max-md:leading-[40px];
 }
 
 .display-sm {
-  @apply text-[56px] leading-[64px] font-medium tracking-normal max-md:text-[32px] max-md:leading-[40px];
+  @apply text-[56px] font-medium leading-[64px] tracking-normal max-md:text-[32px] max-md:leading-[40px];
 }
 .display-md {
-  @apply text-[64px] leading-[72px] font-medium tracking-normal max-md:text-[40px] max-md:leading-[48px];
+  @apply text-[64px] font-medium leading-[72px] tracking-normal max-md:text-[40px] max-md:leading-[48px];
 }
 .container {
-  @apply px-4 md:px-5 max-w-full w-full lg:py-8 py-4 lg:px-8;
+  @apply w-full max-w-full px-4 py-4 md:px-5 lg:px-8 lg:py-8;
 }
 
 /* Atoms components */
@@ -90,7 +90,7 @@ button:disabled svg path {
 }
 
 .checkbox-wrapper {
-  @apply rounded-xs bg-component-secondary w-[20px] h-[20px] border border-secondary bg-component-secondary cursor-pointer;
+  @apply h-[20px] w-[20px] cursor-pointer rounded-xs border border-secondary bg-component-secondary;
 }
 .checkbox-wrapper svg {
   @apply pointer-events-none;
@@ -100,12 +100,12 @@ button:disabled svg path {
 }
 
 .chip-wrapper {
-  @apply bg-component inline-flex items-center px-3 py-1 rounded-sm label-sm border hover:bg-component-hover relative;
+  @apply label-sm relative inline-flex items-center rounded-sm border px-3 py-1 hover:bg-component-hover;
 }
 .chip-wrapper svg path {
   @apply fill-secondary;
 }
-.chip-wrapper[data-disabled="true"] svg path {
+.chip-wrapper[data-disabled='true'] svg path {
   @apply fill-primary;
 }
 
@@ -132,7 +132,7 @@ button:disabled svg path {
   @apply text-md;
 }
 .product-details ul {
-  @apply list-disc text-md pl-5;
+  @apply text-md list-disc pl-5;
 }
 .embla__container {
   touch-action: pan-y pinch-zoom;

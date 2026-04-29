@@ -1,193 +1,188 @@
-"use client"
+'use client';
 
-import { Button } from "@/components/atoms"
-import { HttpTypes } from "@medusajs/types"
-import { ProductVariants } from "@/components/molecules"
-import useGetAllSearchParams from "@/hooks/useGetAllSearchParams"
-import { getProductPrice } from "@/lib/helpers/get-product-price"
-import { Chat } from "@/components/organisms/Chat/Chat"
-import { SellerProps } from "@/types/seller"
-import { WishlistButton } from "../WishlistButton/WishlistButton"
-import { Wishlist } from "@/types/wishlist"
-import { toast } from "@/lib/helpers/toast"
-import { useCartContext } from "@/components/providers"
+import { useState } from 'react';
 
-const optionsAsKeymap = (
-  variantOptions: HttpTypes.StoreProductVariant["options"]
-) => {
+import { HttpTypes } from '@medusajs/types';
+
+import { Button, Input } from '@/components/atoms';
+import { ProductVariants } from '@/components/molecules';
+import { useCartContext } from '@/components/providers';
+import useGetAllSearchParams from '@/hooks/useGetAllSearchParams';
+import { getProductPrice } from '@/lib/helpers/get-product-price';
+import { toast } from '@/lib/helpers/toast';
+
+const optionsAsKeymap = (variantOptions: HttpTypes.StoreProductVariant['options']) => {
   return variantOptions?.reduce(
-    (
-      acc: Record<string, string>,
-      varopt: HttpTypes.StoreProductOptionValue
-    ) => {
-      acc[varopt.option?.title.toLowerCase() || ""] = varopt.value
+    (acc: Record<string, string>, varopt: HttpTypes.StoreProductOptionValue) => {
+      acc[varopt.option?.title.toLowerCase() || ''] = varopt.value;
 
-      return acc
+      return acc;
     },
     {}
-  )
-}
+  );
+};
 
-export const ProductDetailsHeader = ({
-  product,
-  locale,
-  user,
-  wishlist,
-}: {
-  product: HttpTypes.StoreProduct & { seller?: SellerProps }
-  locale: string
-  user: HttpTypes.StoreCustomer | null
-  wishlist?: Wishlist
-}) => {
-  const { addToCart, onAddToCart, cart, isAddingItem } = useCartContext()
-  const { allSearchParams } = useGetAllSearchParams()
-
+export const ProductDetailsHeader = ({ product }: { product: HttpTypes.StoreProduct }) => {
+  const { addToCart, onAddToCart, cart, isAddingItem } = useCartContext();
+  const { allSearchParams } = useGetAllSearchParams();
+  const [quantity, setQuantity] = useState(1);
   const { cheapestVariant, cheapestPrice } = getProductPrice({
-    product,
-  })
+    product
+  });
 
   // Check if product has any valid prices in current region
-  const hasAnyPrice = cheapestPrice !== null && cheapestVariant !== null
+  const hasAnyPrice = cheapestPrice !== null && cheapestVariant !== null;
 
   // set default variant
   const selectedVariant = hasAnyPrice
     ? {
         ...optionsAsKeymap(cheapestVariant.options ?? null),
-        ...allSearchParams,
+        ...allSearchParams
       }
-    : allSearchParams
+    : allSearchParams;
 
   // get selected variant id
   const variantId =
     product.variants?.find(({ options }: { options: any }) =>
       options?.every((option: any) =>
-        selectedVariant[option.option?.title.toLowerCase() || ""]?.includes(
-          option.value
-        )
+        selectedVariant[option.option?.title.toLowerCase() || '']?.includes(option.value)
       )
-    )?.id || ""
+    )?.id || '';
 
   // get variant price
   const { variantPrice } = getProductPrice({
     product,
-    variantId,
-  })
+    variantId
+  });
 
   const variantStock =
-    product.variants?.find(({ id }) => id === variantId)?.inventory_quantity ||
-    0
+    product.variants?.find(({ id }) => id === variantId)?.inventory_quantity || 0;
 
-  const variantHasPrice = !!product.variants?.find(({ id }) => id === variantId)
-    ?.calculated_price
+  const variantHasPrice = !!product.variants?.find(({ id }) => id === variantId)?.calculated_price;
 
   const isVariantStockMaxLimitReached =
-    (cart?.items?.find((item) => item.variant_id === variantId)?.quantity ??
-      0) >= variantStock
+    (cart?.items?.find(item => item.variant_id === variantId)?.quantity ?? 0) >= variantStock;
 
   // add the selected variant to the cart
   const handleAddToCart = async () => {
-    if (!variantId || !hasAnyPrice || isVariantStockMaxLimitReached) return
+    if (!variantId || !hasAnyPrice || isVariantStockMaxLimitReached) return;
 
-    const subtotal = +(variantPrice?.calculated_price_without_tax_number || 0)
-    const total = +(variantPrice?.calculated_price_number || 0)
+    const subtotal = +(variantPrice?.calculated_price_without_tax_number || 0);
+    const total = +(variantPrice?.calculated_price_number || 0);
 
     const storeCartLineItem = {
-      thumbnail: product.thumbnail || "",
+      thumbnail: product.thumbnail || '',
       product_title: product.title,
-      quantity: 1,
+      quantity,
       subtotal,
       total,
       tax_total: total - subtotal,
       variant_id: variantId,
       product_id: product.id,
-      variant: product.variants?.find(({ id }) => id === variantId),
-    }
+      variant: product.variants?.find(({ id }) => id === variantId)
+    };
 
     // Optimistic update
-    onAddToCart(storeCartLineItem, variantPrice?.currency_code || "eur")
+    onAddToCart(storeCartLineItem, 'usd');
 
     try {
       await addToCart({
         variantId: variantId,
-        quantity: 1,
-        countryCode: locale,
-      })
+        quantity,
+        countryCode: 'us'
+      });
     } catch (error) {
       toast.error({
-        title: "Error adding to cart",
-        description: "Some variant does not have the required inventory",
-      })
+        title: 'Error adding to cart',
+        description: 'Some variant does not have the required inventory'
+      });
     }
-  }
+  };
 
-  const isAddToCartDisabled = !variantStock || !variantHasPrice || !hasAnyPrice || isVariantStockMaxLimitReached
+  const isAddToCartDisabled =
+    !variantStock || !variantHasPrice || !hasAnyPrice || isVariantStockMaxLimitReached;
 
+  const updateQuantity = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setQuantity(Number(e.target.value));
+  };
   return (
-    <div className="border rounded-sm p-5" data-testid="product-details-header">
+    <div
+      className="rounded-sm border p-5"
+      data-testid="product-details-header"
+    >
       <div className="flex justify-between">
         <div>
-          <h2 className="label-md text-secondary">
-            {/* {product?.brand || "No brand"} */}
-          </h2>
-          <h1 className="heading-lg text-primary" data-testid="product-title">{product.title}</h1>
-          <div className="mt-2 flex gap-2 items-center" data-testid="product-price-container">
-            {hasAnyPrice && variantPrice ? (
-              <>
-                <span className="heading-md text-primary" data-testid="product-price-current">
-                  {variantPrice.calculated_price}
-                </span>
-                {variantPrice.calculated_price_number !==
-                  variantPrice.original_price_number && (
-                  <span className="label-md text-secondary line-through" data-testid="product-price-original">
-                    {variantPrice.original_price}
-                  </span>
-                )}
-              </>
-            ) : (
-              <span className="label-md text-secondary pt-2 pb-4" data-testid="product-price-unavailable">
-                Not available in your region
-              </span>
-            )}
-          </div>
-        </div>
-        <div>
-          {/* Add to Wishlist */}
-          <WishlistButton
-            productId={product.id}
-            wishlist={wishlist}
-            user={user}
-          />
+          <h1
+            className="heading-lg text-primary"
+            data-testid="product-title"
+          >
+            {product.title}
+          </h1>
         </div>
       </div>
       {/* Product Variants */}
       {hasAnyPrice && (
-        <ProductVariants product={product} selectedVariant={selectedVariant} />
+        <ProductVariants
+          product={product}
+          selectedVariant={selectedVariant}
+        />
       )}
       {/* Add to Cart */}
       <Button
         onClick={handleAddToCart}
         disabled={isAddToCartDisabled}
         loading={isAddingItem}
-        className="w-full uppercase mb-4 py-3 flex justify-center"
-        size="large"
+        className="mb-4 flex w-full justify-center bg-yellow-500 font-extrabold uppercase text-brand"
+        size="small"
         data-testid="product-add-to-cart-button"
       >
         {!hasAnyPrice
-          ? "NOT AVAILABLE IN YOUR REGION"
+          ? 'NOT AVAILABLE IN YOUR REGION'
           : variantStock && variantHasPrice
-          ? "ADD TO CART"
-          : "OUT OF STOCK"}
+            ? 'ADD TO CART'
+            : 'OUT OF STOCK'}
       </Button>
-      {/* Seller message */}
+      <div
+        className="mt-2 flex items-center gap-2"
+        data-testid="product-price-container"
+      >
+        {hasAnyPrice && variantPrice ? (
+          <>
+            <span
+              className="heading-md text-primary"
+              data-testid="product-price-current"
+            >
+              {variantPrice.calculated_price}
+            </span>
+            {variantPrice.calculated_price_number !== variantPrice.original_price_number && (
+              <span
+                className="label-md text-secondary line-through"
+                data-testid="product-price-original"
+              >
+                {variantPrice.original_price}
+              </span>
+            )}
+          </>
+        ) : (
+          <span
+            className="label-md pb-4 pt-2 text-secondary"
+            data-testid="product-price-unavailable"
+          >
+            Not available in your region
+          </span>
+        )}
+        <div className="flex items-center gap-x-2 p-3">
+          <span className="font-semibold text-brand">Quantity</span>
 
-      {user && product.seller && (
-        <Chat
-          user={user}
-          seller={product.seller}
-          buttonClassNames="w-full uppercase"
-          product={product}
-        />
-      )}
+          <Input
+            value={quantity}
+            onChange={updateQuantity}
+            className="m-0 w-1/4 bg-transparent p-0 py-2 text-center"
+          />
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
