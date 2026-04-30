@@ -22,11 +22,11 @@ export const ProductDetailsPage = async ({
   return (
     <>
       <div
-        className="flex h-screen flex-col md:flex-row lg:gap-12"
+        className="flex h-screen flex-col justify-center md:flex-row"
         data-testid="product-details-page"
       >
         <div
-          className="md:w-1/2 md:px-10"
+          className="md:w-2/5 md:px-10"
           data-testid="product-gallery-container"
         >
           <ProductGallery images={prod?.images || []} />

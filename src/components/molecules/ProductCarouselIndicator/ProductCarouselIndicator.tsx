@@ -64,7 +64,7 @@ export const ProductCarouselIndicator = ({
           className="embla__viewport overflow-hidden rounded-xs"
           ref={emblaRef}
         >
-          <div className="embla__container grid h-fit grid-cols-5">
+          <div className="embla__container grid h-fit w-5/6 grid-cols-5">
             {(slides || []).map((slide, index) => (
               <div
                 key={slide.id}
@@ -74,8 +74,8 @@ export const ProductCarouselIndicator = ({
                 <Image
                   src={decodeURIComponent(slide.url)}
                   alt="Product carousel Indicator"
-                  width={500}
-                  height={500}
+                  width={350}
+                  height={350}
                   className={cn(
                     'transition-color aspect-square h-full w-full rounded-sm border-2 object-fill duration-300',
                     selectedIndex === index ? 'border-primary' : 'border-tertiary'

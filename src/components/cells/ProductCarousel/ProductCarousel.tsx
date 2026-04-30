@@ -27,7 +27,7 @@ export const ProductCarousel = ({ slides = [] }: { slides: HttpTypes.StoreProduc
           data-testid="product-carousel-viewport"
         >
           <div
-            className="embla__container flex h-[350px] max-h-[498px] lg:block lg:h-fit"
+            className="embla__container flex h-[350px] max-h-[598px] max-w-[600px] lg:block lg:h-fit"
             data-testid="product-carousel-container"
           >
             {(slides || []).map((slide, idx) => (
@@ -41,11 +41,11 @@ export const ProductCarousel = ({ slides = [] }: { slides: HttpTypes.StoreProduc
                   fetchPriority={idx === 0 ? 'high' : 'auto'}
                   src={decodeURIComponent(slide.url)}
                   alt="Product image"
-                  width={300}
-                  height={300}
+                  width={600}
+                  height={600}
                   quality={idx === 0 ? 85 : 70}
                   sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="aspect-square h-auto max-h-[500px] w-full object-fill object-center"
+                  className="aspect-square h-auto max-h-[600px] w-full object-fill object-center"
                   data-testid={`product-carousel-image-${idx}`}
                 />
               </div>
