@@ -143,6 +143,7 @@ export default {
     }
   },
   plugins: [
+    require('@tailwindcss/typography'),
     require('daisyui'),
     plugin(function ({ addUtilities }) {
       addUtilities({

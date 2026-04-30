@@ -1,4 +1,5 @@
 import NotFound from '@/app/not-found';
+import { ProductDetailsShipping, ProductPageDetails } from '@/components/cells';
 import { ProductDetails, ProductFiles, ProductGallery } from '@/components/organisms';
 import { listProducts } from '@/lib/data/products';
 
@@ -38,6 +39,8 @@ export const ProductDetailsPage = async ({
         </div>
       </div>
       <div className="my-8">
+        <ProductPageDetails details={prod} />
+        <ProductDetailsShipping />
         {/* <HomeProductSection
           heading="More from this seller"
           products={prod.seller?.products}
