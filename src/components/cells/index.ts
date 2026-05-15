@@ -1,6 +1,7 @@
 import { ActiveFilterElement } from './ActiveFilterElement/ActiveFilterElement';
 import { BrandFilter } from './BrandFilter/BrandFilter';
 import { CustomCarousel as Carousel } from './Carousel/Carousel';
+import { CartDrawer } from './CartDrawer/CartDrawer';
 import { CartDropdown } from './CartDropdown/CartDropdown';
 import { CartItemsFooter } from './CartItemsFooter/CartItemsFooter';
 import { CartItemsHeader } from './CartItemsHeader/CartItemsHeader';
@@ -34,6 +35,7 @@ import { SizeFilter } from './SizeFilter/SizeFilter';
 import { WishlistItem } from './WishlistItem/WishlistItem';
 
 export {
+  CartDrawer,
   NavLinks,
   ContactLinks,
   Navbar,

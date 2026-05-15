@@ -1,18 +1,14 @@
 import { HttpTypes } from '@medusajs/types';
-import Image from 'next/image';
-import Link from 'next/link';
 
 import { Badge } from '@/components/atoms';
-import { CartDropdown, ContactLinks, MobileNavbar, Navbar, NavLinks } from '@/components/cells';
+import { CartDrawer, ContactLinks, MobileNavbar, Navbar, NavLinks } from '@/components/cells';
 import { UserDropdown } from '@/components/cells/UserDropdown/UserDropdown';
 import { NavbarSearch } from '@/components/molecules';
-import CountrySelector from '@/components/molecules/CountrySelector/CountrySelector';
 import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
 import { MessageButton } from '@/components/molecules/MessageButton/MessageButton';
 import { HeartIcon } from '@/icons';
 import { listCategories } from '@/lib/data/categories';
 import { retrieveCustomer } from '@/lib/data/customer';
-import { listRegions } from '@/lib/data/regions';
 import { getUserWishlists } from '@/lib/data/wishlist';
 import { Wishlist } from '@/types/wishlist';
 
@@ -75,7 +71,7 @@ export const Header = async ({ locale }: { locale: string }) => {
             </LocalizedClientLink>
           )}
           <NavbarSearch className="flex w-full max-w-[296px] pl-4" />
-          <CartDropdown />
+          <CartDrawer />
         </div>
       </div>
       <Navbar />
