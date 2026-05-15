@@ -1,24 +1,22 @@
 import { HttpTypes } from '@medusajs/types';
 
-import { CartItemsFooter, CartItemsHeader, CartItemsProducts } from '@/components/cells';
+import { CartItemsFooter, CartItemsProducts } from '@/components/cells';
+import { Cart } from '@/types/cart';
 
 import { EmptyCart } from './EmptyCart';
 
-export const CartItems = ({ cart }: { cart: HttpTypes.StoreCart | null }) => {
+export const CartItems = ({ cart }: { cart: HttpTypes.StoreCart | Cart | null }) => {
   if (!cart) return null;
 
-  const groupedItems: any = groupItemsBySeller(cart);
+  if (!cart?.items || !cart?.items.length) return <EmptyCart />;
 
-  if (!Object.keys(groupedItems).length) return <EmptyCart />;
-
-  return Object.keys(groupedItems).map(key => (
+  return (
     <div
-      key={key}
       className="mb-4"
       data-testid={`cart-items-seller`}
     >
       <CartItemsProducts
-        products={groupedItems[key].items || []}
+        products={cart.items || []}
         currency_code={cart.currency_code}
       />
       <CartItemsFooter
@@ -26,37 +24,5 @@ export const CartItems = ({ cart }: { cart: HttpTypes.StoreCart | null }) => {
         price={cart.shipping_subtotal}
       />
     </div>
-  ));
+  );
 };
-
-function groupItemsBySeller(cart: HttpTypes.StoreCart) {
-  const groupedBySeller: any = {};
-
-  cart.items?.forEach((item: any) => {
-    const seller = item.product?.seller;
-    if (seller) {
-      if (!groupedBySeller[seller.id]) {
-        groupedBySeller[seller.id] = {
-          seller: seller,
-          items: []
-        };
-      }
-      groupedBySeller[seller.id].items.push(item);
-    } else {
-      if (!groupedBySeller['fleek']) {
-        groupedBySeller['fleek'] = {
-          seller: {
-            name: 'Fleek',
-            id: 'fleek',
-            photo: '/Logo.svg',
-            created_at: new Date()
-          },
-          items: []
-        };
-      }
-      groupedBySeller['fleek'].items.push(item);
-    }
-  });
-
-  return groupedBySeller;
-}

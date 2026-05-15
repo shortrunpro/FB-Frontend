@@ -107,7 +107,7 @@ export const CartDrawer = () => {
                   className="w-full"
                 >
                   <Button
-                    className="w-full"
+                    className="w-full bg-brand"
                     size="large"
                   >
                     View Cart
@@ -118,7 +118,7 @@ export const CartDrawer = () => {
                   className="w-full"
                 >
                   <Button
-                    className="flex w-full items-center justify-center gap-x-2 bg-brand"
+                    className="flex w-full items-center justify-center gap-x-2 bg-yellow-500"
                     size="large"
                   >
                     <LockClosedSolidMini />
