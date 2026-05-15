@@ -102,7 +102,35 @@ export async function updateCart(data: HttpTypes.StoreUpdateCart) {
     })
     .catch(medusaError);
 }
+export async function addToCartBulk(lineItems: HttpTypes.StoreAddCartLineItem[]) {
+  const cart = await getOrSetCart('us');
 
+  if (!cart) {
+    throw new Error('Error retrieving or creating cart');
+  }
+
+  const headers = {
+    ...(await getAuthHeaders()),
+    'Content-Type': 'application/json'
+  } as Record<string, any>;
+  if (process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY) {
+    headers['x-publishable-api-key'] = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY;
+  }
+  await fetch(`${process.env.MEDUSA_BACKEND_URL}/store/carts/${cart.id}/line-items/bulk`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({ line_items: lineItems })
+  })
+    .then(async () => {
+      const cartCacheTag = await getCacheTag('carts');
+      revalidateTag(cartCacheTag);
+    })
+    .catch(medusaError)
+    .finally(async () => {
+      const cartCacheTag = await getCacheTag('carts');
+      revalidateTag(cartCacheTag);
+    });
+}
 export async function addToCart({
   variantId,
   quantity,

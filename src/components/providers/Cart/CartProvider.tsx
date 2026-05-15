@@ -5,6 +5,7 @@ import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { StoreCart } from '@medusajs/types';
 
 import {
+  addToCartBulk,
   addToCart as apiAddToCart,
   deleteLineItem as apiDeleteLineItem,
   updateLineItem as apiUpdateLineItem,
@@ -144,6 +145,33 @@ export function CartProvider({ cart, children }: CartProviderProps) {
     }
   };
 
+  type BulkAddParams = {
+    [key: string]: number;
+  };
+  const handleBulkAddToCart = async (variantQuantities: BulkAddParams) => {
+    setIsAddingItem(true);
+    setIsUpdating(true);
+
+    try {
+      const lineItems = Object.keys(variantQuantities)
+        .map(key => ({ variant_id: key, quantity: variantQuantities[key] }))
+        .filter(item => item.quantity > 0)
+        .flat();
+      if (!lineItems.length) {
+        return;
+      }
+      await addToCartBulk(lineItems);
+      await refreshCart();
+    } catch (error) {
+      console.error('Error adding bulk products to cart:', error);
+      await refreshCart();
+      throw error;
+    } finally {
+      setIsAddingItem(false);
+      setIsUpdating(false);
+    }
+  };
+
   const removeCartItem = async (lineId: string) => {
     if (!cartState?.items) return;
 
@@ -186,6 +214,7 @@ export function CartProvider({ cart, children }: CartProviderProps) {
         cart: cartState,
         onAddToCart: handleAddToCart,
         addToCart,
+        handleBulkAddToCart,
         removeCartItem,
         updateCartItem,
         refreshCart,

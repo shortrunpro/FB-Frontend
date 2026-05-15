@@ -6,6 +6,9 @@ import { StoreCart } from '@medusajs/types';
 
 import { Cart, StoreCartLineItemOptimisticUpdate } from '@/types/cart';
 
+type BulkAddParams = {
+  [key: string]: number;
+};
 interface CartContextInterface {
   cart: Cart | StoreCart | null;
   onAddToCart: (item: StoreCartLineItemOptimisticUpdate, currency_code: string) => void;
@@ -14,6 +17,7 @@ interface CartContextInterface {
     quantity: number;
     countryCode: string;
   }) => Promise<void>;
+  handleBulkAddToCart: (variantQuantities: BulkAddParams) => Promise<void>;
   removeCartItem: (lineId: string) => Promise<void>;
   updateCartItem: (lineId: string, quantity: number) => Promise<void>;
   refreshCart: () => Promise<Cart | StoreCart | null>;
