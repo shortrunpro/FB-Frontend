@@ -1,55 +1,54 @@
-import { HttpTypes } from "@medusajs/types"
-import { Container } from "@medusajs/ui"
-import { mapKeys } from "lodash"
-import React, { useEffect, useMemo, useState } from "react"
-import { Input } from "@/components/atoms"
-import AddressSelect from "@/components/cells/AddressSelect/AddressSelect"
-import CountrySelect from "@/components/cells/CountrySelect/CountrySelect"
-import { usePathname } from "next/navigation"
+import React, { useEffect, useMemo, useState } from 'react';
+
+import { HttpTypes } from '@medusajs/types';
+import { Container } from '@medusajs/ui';
+import { mapKeys } from 'lodash';
+import { usePathname } from 'next/navigation';
+
+import { Input } from '@/components/atoms';
+import { StateSelect } from '@/components/cells';
+import AddressSelect from '@/components/cells/AddressSelect/AddressSelect';
+import CountrySelect from '@/components/cells/CountrySelect/CountrySelect';
 
 const ShippingAddress = ({
   customer,
   cart,
   checked,
-  onChange,
+  onChange
 }: {
-  customer: HttpTypes.StoreCustomer | null
-  cart: HttpTypes.StoreCart | null
-  checked: boolean
-  onChange: () => void
+  customer: HttpTypes.StoreCustomer | null;
+  cart: HttpTypes.StoreCart | null;
+  checked: boolean;
+  onChange: () => void;
 }) => {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
-  const locale = pathname.split("/")[1]
+  const locale = pathname.split('/')[1];
   const [formData, setFormData] = useState<Record<string, any>>({
-    "shipping_address.first_name": cart?.shipping_address?.first_name || "",
-    "shipping_address.last_name": cart?.shipping_address?.last_name || "",
-    "shipping_address.address_1": cart?.shipping_address?.address_1 || "",
-    "shipping_address.company": cart?.shipping_address?.company || "",
-    "shipping_address.postal_code": cart?.shipping_address?.postal_code || "",
-    "shipping_address.city": cart?.shipping_address?.city || "",
-    "shipping_address.country_code":
-      cart?.shipping_address?.country_code || locale,
-    "shipping_address.province": cart?.shipping_address?.province || "",
-    "shipping_address.phone": cart?.shipping_address?.phone || "",
-    email: cart?.email || "",
-  })
+    'shipping_address.first_name': cart?.shipping_address?.first_name || '',
+    'shipping_address.last_name': cart?.shipping_address?.last_name || '',
+    'shipping_address.address_1': cart?.shipping_address?.address_1 || '',
+    'shipping_address.company': cart?.shipping_address?.company || '',
+    'shipping_address.postal_code': cart?.shipping_address?.postal_code || '',
+    'shipping_address.city': cart?.shipping_address?.city || '',
+    'shipping_address.country_code': cart?.shipping_address?.country_code || locale,
+    'shipping_address.province': cart?.shipping_address?.province || '',
+    'shipping_address.phone': cart?.shipping_address?.phone || '',
+    email: cart?.email || ''
+  });
 
   // check if customer has saved addresses that are in the current region
   const addressesInRegion = useMemo(
-    () =>
-      customer?.addresses.filter(
-        (a) => a.country_code && a.country_code === locale
-      ),
+    () => customer?.addresses.filter(a => a.country_code && a.country_code === locale),
     [customer?.addresses]
-  )
+  );
 
   // Create a stable reference that only changes when address data actually changes
   const addressSnapshot = useMemo(
     () =>
       JSON.stringify({
         shipping_address: cart?.shipping_address,
-        email: cart?.email || customer?.email,
+        email: cart?.email || customer?.email
       }),
     [
       cart?.shipping_address?.first_name,
@@ -62,55 +61,50 @@ const ShippingAddress = ({
       cart?.shipping_address?.province,
       cart?.shipping_address?.phone,
       cart?.email,
-      customer?.email,
+      customer?.email
     ]
-  )
+  );
 
-  const setFormAddress = (
-    address?: HttpTypes.StoreCartAddress,
-    email?: string
-  ) => {
+  const setFormAddress = (address?: HttpTypes.StoreCartAddress, email?: string) => {
     address &&
       setFormData((prevState: Record<string, any>) => ({
         ...prevState,
-        "shipping_address.first_name": address?.first_name || "",
-        "shipping_address.last_name": address?.last_name || "",
-        "shipping_address.address_1": address?.address_1 || "",
-        "shipping_address.company": address?.company || "",
-        "shipping_address.postal_code": address?.postal_code || "",
-        "shipping_address.city": address?.city || "",
-        "shipping_address.country_code": address?.country_code || locale,
-        "shipping_address.province": address?.province || "",
-        "shipping_address.phone": address?.phone || "",
-      }))
+        'shipping_address.first_name': address?.first_name || '',
+        'shipping_address.last_name': address?.last_name || '',
+        'shipping_address.address_1': address?.address_1 || '',
+        'shipping_address.company': address?.company || '',
+        'shipping_address.postal_code': address?.postal_code || '',
+        'shipping_address.city': address?.city || '',
+        'shipping_address.country_code': address?.country_code || locale,
+        'shipping_address.province': address?.province || '',
+        'shipping_address.phone': address?.phone || ''
+      }));
 
     email &&
       setFormData((prevState: Record<string, any>) => ({
         ...prevState,
-        email: email,
-      }))
-  }
+        email: email
+      }));
+  };
 
   useEffect(() => {
     if (cart?.shipping_address) {
-      setFormAddress(cart.shipping_address, cart.email)
+      setFormAddress(cart.shipping_address, cart.email);
     }
 
     if (cart && !cart.email && customer?.email) {
-      setFormAddress(undefined, customer.email)
+      setFormAddress(undefined, customer.email);
     }
-  }, [addressSnapshot])
+  }, [addressSnapshot]);
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLInputElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLInputElement | HTMLSelectElement>
   ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
-    })
-  }
+      [e.target.name]: e.target.value
+    });
+  };
 
   return (
     <>
@@ -119,12 +113,12 @@ const ShippingAddress = ({
           <p className="text-small-regular">
             {`Hi ${customer.first_name}, do you want to use one of your saved addresses?`}
           </p>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
+          <div className="grid grid-cols-1 gap-x-4 lg:grid-cols-2">
             <AddressSelect
               addresses={addressesInRegion || []}
               addressInput={
                 mapKeys(formData, (_, key) =>
-                  key.replace("shipping_address.", "")
+                  key.replace('shipping_address.', '')
                 ) as HttpTypes.StoreCartAddress
               }
               onSelect={setFormAddress}
@@ -132,12 +126,12 @@ const ShippingAddress = ({
           </div>
         </Container>
       )}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Input
           label="First name"
           name="shipping_address.first_name"
           autoComplete="given-name"
-          value={formData["shipping_address.first_name"]}
+          value={formData['shipping_address.first_name']}
           onChange={handleChange}
           required
           data-testid="shipping-first-name-input"
@@ -146,7 +140,7 @@ const ShippingAddress = ({
           label="Last name"
           name="shipping_address.last_name"
           autoComplete="family-name"
-          value={formData["shipping_address.last_name"]}
+          value={formData['shipping_address.last_name']}
           onChange={handleChange}
           required
           data-testid="shipping-last-name-input"
@@ -155,7 +149,7 @@ const ShippingAddress = ({
           label="Address"
           name="shipping_address.address_1"
           autoComplete="address-line1"
-          value={formData["shipping_address.address_1"]}
+          value={formData['shipping_address.address_1']}
           onChange={handleChange}
           required
           data-testid="shipping-address-input"
@@ -163,7 +157,7 @@ const ShippingAddress = ({
         <Input
           label="Company"
           name="shipping_address.company"
-          value={formData["shipping_address.company"]}
+          value={formData['shipping_address.company']}
           onChange={handleChange}
           autoComplete="organization"
           data-testid="shipping-company-input"
@@ -172,7 +166,7 @@ const ShippingAddress = ({
           label="Postal code"
           name="shipping_address.postal_code"
           autoComplete="postal-code"
-          value={formData["shipping_address.postal_code"]}
+          value={formData['shipping_address.postal_code']}
           onChange={handleChange}
           required
           data-testid="shipping-postal-code-input"
@@ -181,7 +175,7 @@ const ShippingAddress = ({
           label="City"
           name="shipping_address.city"
           autoComplete="address-level2"
-          value={formData["shipping_address.city"]}
+          value={formData['shipping_address.city']}
           onChange={handleChange}
           required
           data-testid="shipping-city-input"
@@ -190,21 +184,22 @@ const ShippingAddress = ({
           name="shipping_address.country_code"
           autoComplete="country"
           region={cart?.region}
-          value={formData["shipping_address.country_code"]}
+          value={formData['shipping_address.country_code']}
           onChange={handleChange}
           required
           data-testid="shipping-country-select"
         />
-        <Input
+        <StateSelect
+          country={formData['shipping_address.country_code']}
           label="State / Province"
           name="shipping_address.province"
-          autoComplete="address-level1"
-          value={formData["shipping_address.province"]}
+          autoComplete="state"
+          value={formData['shipping_address.province']}
           onChange={handleChange}
-          data-testid="shipping-province-input"
+          data-testid="shipping-province-select"
         />
       </div>
-      <div className="grid grid-cols-2 gap-4 my-4">
+      <div className="my-4 grid grid-cols-2 gap-4">
         <Input
           label="Email"
           name="email"
@@ -220,13 +215,13 @@ const ShippingAddress = ({
           label="Phone"
           name="shipping_address.phone"
           autoComplete="tel"
-          value={formData["shipping_address.phone"]}
+          value={formData['shipping_address.phone']}
           onChange={handleChange}
           data-testid="shipping-phone-input"
         />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ShippingAddress
+export default ShippingAddress;

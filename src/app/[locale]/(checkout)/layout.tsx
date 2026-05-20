@@ -1,31 +1,38 @@
-import { Button } from "@/components/atoms"
-import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
-import { CollapseIcon } from "@/icons"
-import Image from "next/image"
+import Image from 'next/image';
+
+import { Button } from '@/components/atoms';
+import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
+import { CollapseIcon } from '@/icons';
 
 export default async function RootLayout({
-  children,
+  children
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <>
       <header>
-        <div className="relative w-full py-2 lg:px-8 px-4">
+        <div className="relative w-full px-4 py-4 lg:px-8">
           <div className="absolute top-3">
             <LocalizedClientLink href="/cart">
-              <Button variant="tonal" className="flex items-center gap-2">
+              <Button
+                variant="tonal"
+                className="flex items-center gap-2"
+              >
                 <CollapseIcon className="rotate-90" />
                 <span className="hidden lg:block">Back to cart</span>
               </Button>
             </LocalizedClientLink>
           </div>
-          <div className="flex items-center justify-center pl-4 lg:pl-0 w-full">
-            <LocalizedClientLink href="/" className="text-2xl font-bold">
+          <div className="flex w-full items-center justify-center pl-4 lg:pl-0">
+            <LocalizedClientLink
+              href="/"
+              className="text-2xl font-bold"
+            >
               <Image
-                src="/Logo.svg"
-                width={126}
-                height={40}
+                src="/federal-brace-logo.jpg"
+                width={316}
+                height={43}
                 alt="Logo"
                 priority
               />
@@ -35,5 +42,5 @@ export default async function RootLayout({
       </header>
       {children}
     </>
-  )
+  );
 }
