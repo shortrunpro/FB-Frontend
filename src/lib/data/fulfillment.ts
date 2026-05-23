@@ -15,18 +15,17 @@ export const listCartShippingMethods = async (cartId: string, is_return: boolean
   const next = {
     ...(await getCacheOptions('fulfillment'))
   };
-
+  // TODO Optimize caching flow
   return sdk.client
-    .fetch<{ shipping_options: StoreCardShippingMethod[] | null }>(`/store/shipping-options`, {
-      method: 'GET',
-      query: {
-        cart_id: cartId,
-        fields: '+service_zone.fulfllment_set.type,*service_zone.fulfillment_set.location.address'
-      },
-      headers,
-      next,
-      cache: 'no-cache'
-    })
+    .fetch<{ shipping_options: StoreCardShippingMethod[] | null }>(
+      `/store/carts/${cartId}/shipping-options`,
+      {
+        method: 'GET',
+        headers,
+        next,
+        cache: 'no-cache'
+      }
+    )
     .then(({ shipping_options }) => shipping_options)
     .catch(() => {
       return null;
