@@ -3,7 +3,6 @@ import { HttpTypes } from '@medusajs/types';
 import { CartDrawer, ContactLinks, MobileNavbar, Navbar, NavLinks } from '@/components/cells';
 import { UserDropdown } from '@/components/cells/UserDropdown/UserDropdown';
 import { NavbarSearch } from '@/components/molecules';
-import { MessageButton } from '@/components/molecules/MessageButton/MessageButton';
 import { listCategories } from '@/lib/data/categories';
 import { retrieveCustomer } from '@/lib/data/customer';
 
@@ -39,7 +38,6 @@ export const Header = async ({ locale }: { locale: string }) => {
           data-testid="header-actions"
         >
           <NavLinks />
-          {isLoggedIn && <MessageButton />}
           <UserDropdown isLoggedIn={isLoggedIn} />
           <NavbarSearch className="flex w-full max-w-[296px] pl-4" />
           <CartDrawer />
