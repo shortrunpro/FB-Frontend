@@ -6,7 +6,7 @@ import { NavbarSearch } from '@/components/molecules';
 import { listCategories } from '@/lib/data/categories';
 import { retrieveCustomer } from '@/lib/data/customer';
 
-export const Header = async ({ locale }: { locale: string }) => {
+export const Header = async () => {
   const user = await retrieveCustomer().catch(() => null);
   const isLoggedIn = Boolean(user);
 
@@ -26,6 +26,7 @@ export const Header = async ({ locale }: { locale: string }) => {
         data-testid="header-top"
       >
         <div className="flex w-full items-center">
+          {/* TODO identify why we are passing categories to the mobile navbar */}
           <MobileNavbar
             parentCategories={parentCategories}
             categories={categories}

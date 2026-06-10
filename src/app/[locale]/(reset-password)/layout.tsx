@@ -7,10 +7,9 @@ export default async function ResetPasswordLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }>) {
-  const { locale } = await params;
   return (
     <>
-      <Header locale={locale} />
+      <Header />
       {children}
       <Footer />
     </>

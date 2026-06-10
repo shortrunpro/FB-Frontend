@@ -28,7 +28,7 @@ export async function generateMetadata({
   const protocol = headersList.get('x-forwarded-proto') || 'https';
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `${protocol}://${host}`;
 
-  // Build alternates based on available regions (locales)
+  // TODO Replace functionality with static data
   let languages: Record<string, string> = {};
   try {
     const regions = await listRegions();
