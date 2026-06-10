@@ -32,7 +32,6 @@ Ready to go:
 - Shopping Cart
 - Seller Page
 - Selling Hub - Moved to external <a href="https://github.com/mercurjs/vendor-panel">VendorPanel</a>
-- Wishlist
 
 # Part of Mercur
 

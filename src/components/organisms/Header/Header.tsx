@@ -1,27 +1,15 @@
 import { HttpTypes } from '@medusajs/types';
 
-import { Badge } from '@/components/atoms';
 import { CartDrawer, ContactLinks, MobileNavbar, Navbar, NavLinks } from '@/components/cells';
 import { UserDropdown } from '@/components/cells/UserDropdown/UserDropdown';
 import { NavbarSearch } from '@/components/molecules';
-import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
 import { MessageButton } from '@/components/molecules/MessageButton/MessageButton';
-import { HeartIcon } from '@/icons';
 import { listCategories } from '@/lib/data/categories';
 import { retrieveCustomer } from '@/lib/data/customer';
-import { getUserWishlists } from '@/lib/data/wishlist';
-import { Wishlist } from '@/types/wishlist';
 
 export const Header = async ({ locale }: { locale: string }) => {
   const user = await retrieveCustomer().catch(() => null);
   const isLoggedIn = Boolean(user);
-
-  let wishlist: Wishlist = { products: [] };
-  if (user) {
-    wishlist = await getUserWishlists({ countryCode: locale });
-  }
-
-  const wishlistCount = wishlist?.products.length || 0;
 
   const { categories, parentCategories } = (await listCategories({
     query: { include_ancestors_tree: true }
@@ -53,23 +41,6 @@ export const Header = async ({ locale }: { locale: string }) => {
           <NavLinks />
           {isLoggedIn && <MessageButton />}
           <UserDropdown isLoggedIn={isLoggedIn} />
-          {isLoggedIn && (
-            <LocalizedClientLink
-              href="/user/wishlist"
-              className="relative"
-              data-testid="header-wishlist-link"
-            >
-              <HeartIcon size={20} />
-              {Boolean(wishlistCount) && (
-                <Badge
-                  className="absolute -right-2 -top-2 h-4 w-4 p-0"
-                  data-testid="wishlist-count-badge"
-                >
-                  {wishlistCount}
-                </Badge>
-              )}
-            </LocalizedClientLink>
-          )}
           <NavbarSearch className="flex w-full max-w-[296px] pl-4" />
           <CartDrawer />
         </div>

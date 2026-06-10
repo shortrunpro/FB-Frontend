@@ -22,7 +22,6 @@ import { ReviewsWritten } from './Reviews/ReviewsWritten';
 import { SellerFooter } from './SellerFooter/SellerFooter';
 import { SellerHeading } from './SellerHeading/SellerHeading';
 import { SellerTabs } from './SellerTabs/SellerTabs';
-import { WishlistTabs } from './WishlistTabs/WishlistTabs';
 
 export {
   ProductBulletPoints,
@@ -42,7 +41,6 @@ export {
   SellerHeading,
   SellerFooter,
   SellerTabs,
-  WishlistTabs,
   HomeProductsCarousel,
   ProductGallery,
   ProductDetails,

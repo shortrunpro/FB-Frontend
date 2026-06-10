@@ -33,7 +33,6 @@ import { SellerRatingFilter } from './SellerRatingFilter/SellerRatingFilter';
 import { SellerReviewTab } from './SellerReviewTab/SellerReviewTab';
 import { SizeFilter } from './SizeFilter/SizeFilter';
 import { StateSelect } from './StateSelect/StateSelect';
-import { WishlistItem } from './WishlistItem/WishlistItem';
 
 export {
   StateSelect,
@@ -70,6 +69,5 @@ export {
   OrderAddresses,
   OrderProductListItem,
   OrderTimeline,
-  WishlistItem,
   ProductAdditionalAttributes
 };

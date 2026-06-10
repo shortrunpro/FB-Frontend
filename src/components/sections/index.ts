@@ -14,7 +14,6 @@ import { AlgoliaProductsListing } from './ProductListing/AlgoliaProductsListing'
 import { ProductListing } from './ProductListing/ProductListing';
 import { SellerPageHeader } from './SellerPageHeader/SellerPageHeader';
 import { ShopByStyleSection } from './ShopByStyle/ShopByStyleSection';
-import { WishlistPage } from './WishlistPage/WishlistPage';
 
 export {
   HomeParagraphSection2,
@@ -30,7 +29,6 @@ export {
   ProductListing,
   SellerPageHeader,
   Cart,
-  WishlistPage,
   ProductDetailsPage,
   AlgoliaProductsListing,
   OrdersPagination

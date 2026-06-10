@@ -49,7 +49,6 @@ export const UserDropdown = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
             <NavigationItem href="/user/returns">Returns</NavigationItem>
             <NavigationItem href="/user/addresses">Addresses</NavigationItem>
             <NavigationItem href="/user/reviews">Reviews</NavigationItem>
-            <NavigationItem href="/user/wishlist">Wishlist</NavigationItem>
             <Divider />
             <NavigationItem href="/user/settings">Settings</NavigationItem>
             <LogoutButton />
