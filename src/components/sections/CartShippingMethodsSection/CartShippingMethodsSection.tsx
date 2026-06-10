@@ -147,7 +147,7 @@ const CartShippingMethodsSection: FC<ShippingProps> = ({ cart, availableShipping
                           <div className="text-sm/6">
                             <p className="font-semibold">{method.service}</p>
                             <div className="flex gap-2">
-                              <div>${method.calculated_amount}</div>
+                              <div>${method.calculated_amount.toFixed(2)}</div>
                             </div>
                           </div>
                           <CheckCircleSolid
