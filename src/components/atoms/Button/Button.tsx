@@ -1,5 +1,6 @@
-import Spinner from '@/icons/spinner';
+// TODO Update references to point to @/modules/common/components
 import { cn } from '@/lib/utils';
+import { Spinner } from '@/modules/common/components';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'filled' | 'tonal' | 'text' | 'destructive';

@@ -3,13 +3,13 @@ import { Suspense } from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { Spinner } from '@/components/atoms/Spinner/Spinner';
 import PaymentWrapper from '@/components/organisms/PaymentContainer/PaymentWrapper';
 import { retrieveCart } from '@/lib/data/cart';
 import { retrieveCustomer } from '@/lib/data/customer';
 import { listCartShippingMethods } from '@/lib/data/fulfillment';
 import { listCartPaymentMethods } from '@/lib/data/payment';
 import { CheckoutForm, CheckoutSummary } from '@/modules/checkout/templates';
+import { Spinner } from '@/modules/common/components';
 
 export const metadata: Metadata = {
   title: 'Checkout',

@@ -1,4 +1,4 @@
-import { EmailLink, PhoneLink } from '@/components/atoms';
+import { EmailLink, PhoneLink } from '@/modules/common/components';
 
 export const ContactLinks = () => {
   return (

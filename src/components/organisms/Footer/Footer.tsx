@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { FacebookLink, LinkedinLink, TwitterLink, YoutubeLink } from '@/components/atoms';
+import { FacebookLink, LinkedinLink, TwitterLink, YoutubeLink } from '@/modules/common/components';
 
 export function Footer() {
   return (
