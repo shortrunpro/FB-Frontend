@@ -43,6 +43,7 @@ const ShippingAddress = ({
     [customer?.addresses]
   );
 
+  // TODO Identify if this reference and the assosciated useEffect are needed
   // Create a stable reference that only changes when address data actually changes
   const addressSnapshot = useMemo(
     () =>
@@ -87,15 +88,15 @@ const ShippingAddress = ({
       }));
   };
 
-  useEffect(() => {
-    if (cart?.shipping_address) {
-      setFormAddress(cart.shipping_address, cart.email);
-    }
+  // useEffect(() => {
+  //   if (cart?.shipping_address) {
+  //     setFormAddress(cart.shipping_address, cart.email);
+  //   }
 
-    if (cart && !cart.email && customer?.email) {
-      setFormAddress(undefined, customer.email);
-    }
-  }, [addressSnapshot]);
+  //   if (cart && !cart.email && customer?.email) {
+  //     setFormAddress(undefined, customer.email);
+  //   }
+  // }, [addressSnapshot]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLInputElement | HTMLSelectElement>

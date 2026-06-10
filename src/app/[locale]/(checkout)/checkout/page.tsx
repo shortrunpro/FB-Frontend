@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+import { Spinner } from '@/components/atoms/Spinner/Spinner';
 import PaymentWrapper from '@/components/organisms/PaymentContainer/PaymentWrapper';
 import { CartAddressSection } from '@/components/sections/CartAddressSection/CartAddressSection';
 import CartPaymentSection from '@/components/sections/CartPaymentSection/CartPaymentSection';
@@ -23,10 +24,10 @@ export default async function CheckoutPage({}) {
     <Suspense
       fallback={
         <div
-          className="container flex items-center justify-center"
+          className="container flex min-h-lvh items-center justify-center"
           data-testid="checkout-page-loading"
         >
-          Loading...
+          <Spinner />
         </div>
       }
     >
@@ -41,9 +42,7 @@ async function CheckoutPageContent({}) {
   if (!cart) {
     return notFound();
   }
-  const shippingMethods = cart?.shipping_address
-    ? await listCartShippingMethods(cart.id, false)
-    : null;
+  const shippingMethods = await listCartShippingMethods(cart.id, false);
   const paymentMethods = await listCartPaymentMethods(cart.region?.id ?? '');
   const customer = await retrieveCustomer();
   return (

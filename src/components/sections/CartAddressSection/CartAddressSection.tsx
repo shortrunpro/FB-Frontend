@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useEffect } from 'react';
+import { startTransition, useActionState, useEffect } from 'react';
 
 import { CheckCircleSolid } from '@medusajs/icons';
 import { HttpTypes } from '@medusajs/types';
@@ -26,16 +26,8 @@ export const CartAddressSection = ({
   const router = useRouter();
   const pathname = usePathname();
 
-  const isAddress = Boolean(
-    cart?.shipping_address &&
-    cart?.shipping_address.first_name &&
-    cart?.shipping_address.last_name &&
-    cart?.shipping_address.address_1 &&
-    cart?.shipping_address.city &&
-    cart?.shipping_address.postal_code &&
-    cart?.shipping_address.country_code
-  );
-  const isOpen = searchParams.get('step') === 'address' || !isAddress;
+  const isOpen = searchParams.get('step') === 'address';
+  // || !isAddress;
 
   const { state: sameAsBilling, toggle: toggleSameAsBilling } = useToggleState(
     cart?.shipping_address && cart?.billing_address
@@ -43,18 +35,37 @@ export const CartAddressSection = ({
       : true
   );
 
-  const [message, formAction] = useActionState(setAddresses, sameAsBilling);
+  const [state, formAction, isPending] = useActionState(setAddresses, {
+    success: false,
+    message: null
+  });
 
-  useEffect(() => {
-    if (!isAddress) {
-      router.replace(pathname + '?step=address');
-    }
-  }, [isAddress]);
+  // TODO Move this logic somewhere more global
+  // const isAddress = Boolean(
+  //   cart?.shipping_address &&
+  //   cart?.shipping_address.first_name &&
+  //   cart?.shipping_address.last_name &&
+  //   cart?.shipping_address.address_1 &&
+  //   cart?.shipping_address.city &&
+  //   cart?.shipping_address.postal_code &&
+  //   cart?.shipping_address.country_code
+  // );
+  // useEffect(() => {
+  //   if (!isAddress) {
+  //     router.replace(pathname + '?step=address');
+  //   }
+  // }, [isAddress]);
 
   const handleEdit = () => {
     router.replace(pathname + '?step=address');
   };
-
+  const handleSubmit = (data: FormData) => {
+    startTransition(() => {
+      formAction(data);
+    });
+    router.replace(`${pathname}?step=delivery`);
+    router.refresh();
+  };
   return (
     <div
       className="bg-ui-bg-interactive rounded-sm border p-4"
@@ -67,7 +78,7 @@ export const CartAddressSection = ({
         >
           {!isOpen && <CheckCircleSolid />} Shipping Address
         </Heading>
-        {!isOpen && isAddress && (
+        {!isOpen && (
           <Text>
             <Button
               onClick={handleEdit}
@@ -79,13 +90,7 @@ export const CartAddressSection = ({
           </Text>
         )}
       </div>
-      <form
-        action={async data => {
-          await formAction(data);
-          router.replace(`${pathname}?step=delivery`);
-          router.refresh();
-        }}
-      >
+      <form action={data => handleSubmit(data)}>
         {isOpen ? (
           <div className="pb-8">
             <ShippingAddress
@@ -95,14 +100,16 @@ export const CartAddressSection = ({
               cart={cart}
             />
             <Button
-              className="float-right mt-6 bg-brand text-white hover:bg-brand_grey hover:text-black"
+              className={`float-right mt-6 bg-brand text-white hover:bg-brand_grey hover:text-black ${isPending && 'flex min-w-[185px] justify-center py-3'}`}
+              loading={isPending}
+              disabled={isPending}
               data-testid="submit-address-button"
               variant="tonal"
             >
               Continue to Delivery
             </Button>
             <ErrorMessage
-              error={message !== 'success' && message}
+              error={!state.success && state.message && state.message}
               data-testid="address-error-message"
             />
           </div>
@@ -135,7 +142,7 @@ export const CartAddressSection = ({
             </div>
           </div>
         )}
-        {isAddress && !searchParams.get('step') && (
+        {!searchParams.get('step') && (
           <LocalizedClientLink href="/checkout?step=delivery">
             <Button
               className="mt-6"

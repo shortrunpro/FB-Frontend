@@ -97,8 +97,7 @@ export async function updateCart(data: HttpTypes.StoreUpdateCart) {
     .update(cartId, data, {}, headers)
     .then(async ({ cart }) => {
       const cartCacheTag = await getCacheTag('carts');
-      await revalidateTag(cartCacheTag);
-      return cart;
+      revalidateTag(cartCacheTag);
     })
     .catch(medusaError);
 }
@@ -181,6 +180,7 @@ export async function addToCart({
         {},
         headers
       )
+      // TODO are two revalidations really needed?
       .then(async () => {
         const cartCacheTag = await getCacheTag('carts');
         revalidateTag(cartCacheTag);
@@ -408,9 +408,10 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
     //   }
 
     await updateCart(data);
-    await revalidatePath('/cart');
+    // await revalidatePath('/cart');
+    return { success: true, message: null };
   } catch (e: any) {
-    return e.message;
+    return { success: false, message: e.message };
   }
 }
 

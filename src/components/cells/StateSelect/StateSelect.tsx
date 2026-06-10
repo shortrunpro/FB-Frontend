@@ -88,42 +88,43 @@ export const StateSelect = forwardRef<HTMLSelectElement, NativeSelectProps | any
             </Transition>
           </div>
         </Listbox>
+
+        <div className="hidden">
+          <NativeSelect
+            ref={innerRef}
+            placeholder={placeholder}
+            defaultValue={defaultValue}
+            value={props?.value}
+            {...props}
+          >
+            {states
+              .filter(state => state.country == country)
+              .map(({ iso_code, name }, index) => {
+                return (
+                  <option
+                    key={index}
+                    value={iso_code}
+                  >
+                    {name}
+                  </option>
+                );
+              })}
+          </NativeSelect>
+          {/* {errors?.[name] && (
+          <ErrorMessage
+            errors={errors}
+            name={name}
+            render={({ message }) => {
+              return (
+                <div className="pt-1 pl-2 text-rose-500 text-xsmall-regular">
+                  <span>{message}</span>
+                </div>
+              )
+            }}
+          />
+        )} */}
+        </div>
       </label>
-      // <div>
-      //   <NativeSelect
-      //     ref={innerRef}
-      //     placeholder={placeholder}
-      //     defaultValue={defaultValue}
-      //     {...props}
-      //     {...register}
-      //   >
-      //     {states.states
-      //       .filter(state => state.country == country)
-      //       .map((state, index) => {
-      //         return (
-      //           <option
-      //             key={index}
-      //             value={state.iso_code}
-      //           >
-      //             {state.name}
-      //           </option>
-      //         );
-      //       })}
-      //   </NativeSelect>
-      //   {/* {errors?.[name] && (
-      //     <ErrorMessage
-      //       errors={errors}
-      //       name={name}
-      //       render={({ message }) => {
-      //         return (
-      //           <div className="pt-1 pl-2 text-rose-500 text-xsmall-regular">
-      //             <span>{message}</span>
-      //           </div>
-      //         )
-      //       }}
-      //     />
-      //   )} */}
-      // </div>
     );
   }
 );
