@@ -7,15 +7,14 @@ import { HttpTypes } from '@medusajs/types';
 import { Heading, Text, useToggleState } from '@medusajs/ui';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { Button } from '@/components/atoms';
-import ErrorMessage from '@/components/molecules/ErrorMessage/ErrorMessage';
 import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
-import ShippingAddress from '@/components/organisms/ShippingAddress/ShippingAddress';
-import Spinner from '@/icons/spinner';
 import { setAddresses } from '@/lib/data/cart';
 import compareAddresses from '@/lib/helpers/compare-addresses';
+import { Button, ErrorMessage, Spinner } from '@/modules/common/components';
 
-export const CartAddressSection = ({
+import ShippingAddressForm from './ShippingAddressForm';
+
+export const AddressSection = ({
   cart,
   customer
 }: {
@@ -93,14 +92,14 @@ export const CartAddressSection = ({
       <form action={data => handleSubmit(data)}>
         {isOpen ? (
           <div className="pb-8">
-            <ShippingAddress
+            <ShippingAddressForm
               customer={customer}
               checked={sameAsBilling}
               onChange={toggleSameAsBilling}
               cart={cart}
             />
             <Button
-              className={`float-right mt-6 bg-brand text-white hover:bg-brand_grey hover:text-black ${isPending && 'flex min-w-[185px] justify-center py-3'}`}
+              className={`float-right mt-6 bg-brand text-white hover:bg-brand_grey hover:text-black ${isPending && 'flex min-w-[185px] justify-center'}`}
               loading={isPending}
               disabled={isPending}
               data-testid="submit-address-button"

@@ -1,12 +1,11 @@
 'use client';
 
-import { CartSummary } from '@/components/organisms';
-import { PromoCode } from '@/components/organisms/PromoCode/PromoCode';
+import { CartItems, CartSummary } from '@/modules/cart/components';
+import { PromoCode } from '@/modules/common/components';
 
-import { CartItems } from './CartItems';
-import PaymentButton from './PaymentButton';
+import { PaymentButton } from '../../sections';
 
-const Review = ({ cart }: { cart: any }) => {
+const CheckoutSummary = ({ cart }: { cart: any }) => {
   const paidByGiftcard = cart?.gift_cards && cart?.gift_cards?.length > 0 && cart?.total === 0;
 
   const previousStepsCompleted =
@@ -45,4 +44,4 @@ const Review = ({ cart }: { cart: any }) => {
   );
 };
 
-export default Review;
+export default CheckoutSummary;

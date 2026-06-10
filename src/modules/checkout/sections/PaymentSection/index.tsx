@@ -7,22 +7,14 @@ import { CheckCircleSolid, CreditCard } from '@medusajs/icons';
 import { Container, Heading, Text } from '@medusajs/ui';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { Button } from '@/components/atoms';
-import ErrorMessage from '@/components/molecules/ErrorMessage/ErrorMessage';
+import { paymentInfoMap } from '@/lib/constants';
 import { initiatePaymentSession } from '@/lib/data/cart';
+import { StoreCardPaymentMethod } from '@/modules/checkout/types';
+import { Button, ErrorMessage } from '@/modules/common/components';
 
-import { paymentInfoMap } from '../../../lib/constants';
-import PaymentContainer from '../../organisms/PaymentContainer/PaymentContainer';
+import PaymentContainer from './PaymentContainer';
 
-type StoreCardPaymentMethod = any & {
-  service_zone?: {
-    fulfillment_set: {
-      type: string;
-    };
-  };
-};
-
-const CartPaymentSection = ({
+const PaymentSection = ({
   cart,
   availablePaymentMethods
 }: {
@@ -197,4 +189,4 @@ const CartPaymentSection = ({
   );
 };
 
-export default CartPaymentSection;
+export default PaymentSection;

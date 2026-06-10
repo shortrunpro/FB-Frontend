@@ -2,10 +2,10 @@
 
 import { LockClosedSolidMini } from '@medusajs/icons';
 
-import { Button } from '@/components/atoms';
 import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
-import { CartEmpty, CartItems, CartSummary } from '@/components/organisms';
-import { useCartContext } from '@/components/providers';
+import { CartEmpty, CartItems, CartSummary } from '@/modules/cart/components';
+import { useCartContext } from '@/modules/cart/provider/context';
+import { Button } from '@/modules/common/components';
 
 export const Cart = () => {
   const { cart } = useCartContext();

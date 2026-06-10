@@ -9,10 +9,10 @@ import { usePathname } from 'next/navigation';
 import { Badge, Button } from '@/components/atoms';
 import { CartDropdownItem, Dropdown } from '@/components/molecules';
 import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
-import { useCartContext } from '@/components/providers';
 import { usePrevious } from '@/hooks/usePrevious';
 import { filterValidCartItems } from '@/lib/helpers/filter-valid-cart-items';
 import { convertToLocale } from '@/lib/helpers/money';
+import { useCartContext } from '@/modules/cart/provider/context';
 
 const getItemCount = (cart: HttpTypes.StoreCart | null) => {
   return cart?.items?.reduce((acc, item) => acc + item.quantity, 0) || 0;

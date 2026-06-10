@@ -8,11 +8,11 @@ import { usePathname } from 'next/navigation';
 
 import { Button } from '@/components/atoms';
 import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
-import { useCartContext } from '@/components/providers';
 import { usePrevious } from '@/hooks/usePrevious';
 import { filterValidCartItems } from '@/lib/helpers/filter-valid-cart-items';
 import { getItemCount } from '@/lib/helpers/get-item-count';
 import { convertToLocale } from '@/lib/helpers/money';
+import { useCartContext } from '@/modules/cart/provider/context';
 
 import { CartItemsProducts } from '../CartItemsProducts/CartItemsProducts';
 

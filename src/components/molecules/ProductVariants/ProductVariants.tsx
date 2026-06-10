@@ -14,7 +14,7 @@ import {
 } from '@medusajs/ui';
 
 import { Button, Chip, Input } from '@/components/atoms';
-import { useCartContext } from '@/components/providers';
+import { useCartContext } from '@/modules/cart/provider/context';
 
 export const ProductVariants = ({ product }: { product: HttpTypes.StoreProduct }) => {
   const { handleBulkAddToCart, isAddingItem } = useCartContext();

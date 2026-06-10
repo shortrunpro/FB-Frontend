@@ -1,8 +1,8 @@
-import { Button } from '@/components/atoms';
 import { Carousel } from '@/components/cells';
 import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
 import { CategoryCard } from '@/components/organisms';
 import { listCategories } from '@/lib/data/categories';
+import { Button } from '@/modules/common/components';
 
 export const EmptyCart = async () => {
   const { categories } = await listCategories();
@@ -22,14 +22,15 @@ export const EmptyCart = async () => {
           <Button className="w-full py-3 uppercase md:px-24">Explore</Button>
         </LocalizedClientLink>
       </div>
-      <Carousel
+      {/* TODO Check current design for plan */}
+      {/* <Carousel
         items={categories?.map(category => (
           <CategoryCard
             key={category.id}
             category={category}
           />
         ))}
-      />
+      /> */}
     </div>
   );
 };

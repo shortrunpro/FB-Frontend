@@ -1,9 +1,6 @@
 import { Addresses } from './Addressess/Addresses';
 import { BlogCard } from './BlogCard/BlogCard';
 import { BrandCard } from './BrandCard/BrandCard';
-import { CartEmpty } from './CartEmpty/CartEmpty';
-import { CartItems } from './CartItems/CartItems';
-import { CartSummary } from './CartSummary/CartSummary';
 import { CategoryCard } from './CategoryCard/CategoryCard';
 import { Footer } from './Footer/Footer';
 import { GalleryCarousel } from './GalleryCarousel/GalleryCarousel';
@@ -45,8 +42,6 @@ export {
   SellerHeading,
   SellerFooter,
   SellerTabs,
-  CartSummary,
-  CartItems,
   WishlistTabs,
   HomeProductsCarousel,
   ProductGallery,
@@ -54,6 +49,5 @@ export {
   AlgoliaProductSidebar,
   Addresses,
   ReviewsToWrite,
-  ReviewsWritten,
-  CartEmpty
+  ReviewsWritten
 };

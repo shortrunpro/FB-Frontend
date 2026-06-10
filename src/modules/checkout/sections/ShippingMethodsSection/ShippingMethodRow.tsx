@@ -1,13 +1,14 @@
 'use client';
 
+// TODO Decide whether or not to keep this component
 import { HttpTypes } from '@medusajs/types';
 import { Text } from '@medusajs/ui';
 
-import { Button } from '@/components/atoms';
 import { BinIcon } from '@/icons';
 import { convertToLocale } from '@/lib/helpers/money';
+import { Button } from '@/modules/common/components';
 
-export const CartShippingMethodRow = ({
+export const ShippingMethodRow = ({
   method,
   currency_code,
   onRemoveShippingMethod

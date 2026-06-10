@@ -2,8 +2,8 @@
 
 import { HttpTypes } from '@medusajs/types';
 
-import { StoreCardShippingMethod } from '@/components/sections/CartShippingMethodsSection/CartShippingMethodsSection';
 import { sdk } from '@/lib/config';
+import { StoreCardShippingMethod } from '@/modules/checkout/types';
 
 import { getAuthHeaders, getCacheOptions } from './cookies';
 

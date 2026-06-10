@@ -5,14 +5,11 @@ import { notFound } from 'next/navigation';
 
 import { Spinner } from '@/components/atoms/Spinner/Spinner';
 import PaymentWrapper from '@/components/organisms/PaymentContainer/PaymentWrapper';
-import { CartAddressSection } from '@/components/sections/CartAddressSection/CartAddressSection';
-import CartPaymentSection from '@/components/sections/CartPaymentSection/CartPaymentSection';
-import CartReview from '@/components/sections/CartReview/CartReview';
-import CartShippingMethodsSection from '@/components/sections/CartShippingMethodsSection/CartShippingMethodsSection';
 import { retrieveCart } from '@/lib/data/cart';
 import { retrieveCustomer } from '@/lib/data/customer';
 import { listCartShippingMethods } from '@/lib/data/fulfillment';
 import { listCartPaymentMethods } from '@/lib/data/payment';
+import { CheckoutForm, CheckoutSummary } from '@/modules/checkout/templates';
 
 export const metadata: Metadata = {
   title: 'Checkout',
@@ -53,28 +50,21 @@ async function CheckoutPageContent({}) {
       >
         <div className="grid gap-8 lg:grid-cols-11">
           <div
-            className="flex flex-col gap-4 lg:col-span-6"
+            className="lg:col-span-6"
             data-testid="checkout-steps-container"
           >
-            <CartAddressSection
+            <CheckoutForm
               cart={cart}
               customer={customer}
-            />
-            <CartShippingMethodsSection
-              cart={cart}
               availableShippingMethods={shippingMethods as any}
-            />
-            <CartPaymentSection
-              cart={cart}
               availablePaymentMethods={paymentMethods}
             />
           </div>
-
           <div
             className="lg:col-span-5"
             data-testid="checkout-review-container"
           >
-            <CartReview cart={cart} />
+            <CheckoutSummary cart={cart} />
           </div>
         </div>
       </main>

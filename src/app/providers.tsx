@@ -5,7 +5,7 @@ import { PropsWithChildren } from 'react';
 
 import { StoreCart } from '@medusajs/types';
 
-import { CartProvider } from '@/components/providers';
+import { CartProvider } from '@/modules/cart/provider';
 import { Cart } from '@/types/cart';
 
 interface ProvidersProps extends PropsWithChildren {

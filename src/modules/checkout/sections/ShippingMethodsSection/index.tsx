@@ -4,50 +4,18 @@ import { useEffect, useState, useTransition, type FC } from 'react';
 
 import { Radio, RadioGroup } from '@headlessui/react';
 import { CheckCircleSolid } from '@medusajs/icons';
-import type { HttpTypes } from '@medusajs/types';
 import { Heading, Text } from '@medusajs/ui';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { Button } from '@/components/atoms';
-import ErrorMessage from '@/components/molecules/ErrorMessage/ErrorMessage';
 import { setShippingMethod } from '@/lib/data/cart';
 import { convertToLocale } from '@/lib/helpers/money';
+import { ShippingMethodsSectionProps } from '@/modules/checkout/types';
+import { Button, ErrorMessage } from '@/modules/common/components';
 
-// Extended cart item product type to include seller
-type ExtendedStoreProduct = HttpTypes.StoreProduct & {
-  seller?: {
-    id: string;
-    name: string;
-  };
-};
-
-// Cart item type definition
-type CartItem = {
-  product?: ExtendedStoreProduct;
-  // Include other cart item properties as needed
-};
-
-export type StoreCardShippingMethod = HttpTypes.StoreCartShippingOption & {
-  seller_id?: string;
-  service_zone?: {
-    fulfillment_set: {
-      type: string;
-    };
-  };
-};
-type ShippingMethods = {
-  id: string;
-  service: string;
-  calculated_amount: number;
-};
-type ShippingProps = {
-  cart: Omit<HttpTypes.StoreCart, 'items'> & {
-    items?: CartItem[];
-  };
-  availableShippingMethods: ShippingMethods[] | null;
-};
-
-const CartShippingMethodsSection: FC<ShippingProps> = ({ cart, availableShippingMethods }) => {
+const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
+  cart,
+  availableShippingMethods
+}) => {
   const [isLoadingPrices, setIsLoadingPrices] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isPendingDeleteRow, startTransitionDeleteRow] = useTransition();
@@ -207,4 +175,4 @@ const CartShippingMethodsSection: FC<ShippingProps> = ({ cart, availableShipping
   );
 };
 
-export default CartShippingMethodsSection;
+export default ShippingMethodsSection;

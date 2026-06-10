@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/atoms';
-import { useCartContext } from '@/components/providers';
 import { toast } from '@/lib/helpers/toast';
+import { useCartContext } from '@/modules/cart/provider/context';
 
 export const UpdateCartItemButton = ({
   quantity,
