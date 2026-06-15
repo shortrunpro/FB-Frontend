@@ -12,7 +12,7 @@ import { getRegion, retrieveRegion } from './regions';
 export const listProducts = async ({
   pageParam = 1,
   queryParams,
-  countryCode,
+  countryCode = 'us',
   regionId,
   category_id,
   collection_id,
@@ -121,7 +121,7 @@ export const listProductsWithSort = async ({
   page = 1,
   queryParams,
   sortBy = 'created_at',
-  countryCode,
+  countryCode = 'us',
   category_id,
   seller_id,
   collection_id
