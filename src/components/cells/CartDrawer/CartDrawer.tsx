@@ -49,10 +49,8 @@ export const CartDrawer = () => {
     ) {
       open();
     }
-  }, [cartItemsCount, previousItemCount]);
-  useEffect(() => {
-    close();
-  }, [pathname]);
+  }, [cartItemsCount, previousItemCount, pathname]);
+
   return (
     <>
       {isOpen && <div className="fixed inset-[-2rem] z-10 p-0 backdrop-blur-sm" />}

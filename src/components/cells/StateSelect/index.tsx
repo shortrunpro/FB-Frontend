@@ -15,9 +15,9 @@ import clsx from 'clsx';
 
 import NativeSelect, { NativeSelectProps } from '@/components/molecules/NativeSelect/NativeSelect';
 
-import { states } from './states.json';
+import states from './states.json';
 
-export const StateSelect = forwardRef<HTMLSelectElement, NativeSelectProps | any>(
+const StateSelect = forwardRef<HTMLSelectElement, NativeSelectProps | any>(
   ({ errors, country, register, placeholder = 'State/Province', defaultValue, ...props }, ref) => {
     const innerRef = useRef<HTMLSelectElement>(null);
 
@@ -34,6 +34,7 @@ export const StateSelect = forwardRef<HTMLSelectElement, NativeSelectProps | any
         }
       });
     };
+    const data = states.states;
     return (
       <label className="label-md">
         <p className="">State/Province</p>
@@ -51,8 +52,7 @@ export const StateSelect = forwardRef<HTMLSelectElement, NativeSelectProps | any
               {({ open }) => (
                 <>
                   <span className="block truncate">
-                    {states?.find(state => state.iso_code === props.value)?.name ||
-                      'Choose a State'}
+                    {data.find(state => state.iso_code === props.value)?.name || 'Choose a State'}
                   </span>
                   <ChevronUpDown
                     className={clx('transition-rotate duration-200', {
@@ -72,8 +72,8 @@ export const StateSelect = forwardRef<HTMLSelectElement, NativeSelectProps | any
                 className="text-small-regular border-top-0 absolute z-20 max-h-60 w-full overflow-auto rounded-lg border bg-white focus:outline-none sm:text-sm"
                 data-testid="shipping-address-state-options"
               >
-                {states
-                  ?.filter(state => state.country === country)
+                {data
+                  .filter(state => state.country === country)
                   .map(({ iso_code, name }, index) => (
                     <ListboxOption
                       key={index}
@@ -97,7 +97,7 @@ export const StateSelect = forwardRef<HTMLSelectElement, NativeSelectProps | any
             value={props?.value}
             {...props}
           >
-            {states
+            {data
               .filter(state => state.country == country)
               .map(({ iso_code, name }, index) => {
                 return (
@@ -128,3 +128,7 @@ export const StateSelect = forwardRef<HTMLSelectElement, NativeSelectProps | any
     );
   }
 );
+
+StateSelect.displayName = 'StateSelect';
+
+export default StateSelect;

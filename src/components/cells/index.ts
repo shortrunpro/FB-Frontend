@@ -27,7 +27,7 @@ import { ProductDetailsShipping } from './ProductDetailsShipping/ProductDetailsS
 import { ProductFilter } from './ProductFilter/ProductFilter';
 import { ProductPageDetails } from './ProductPageDetails/ProductPageDetails';
 import { SizeFilter } from './SizeFilter/SizeFilter';
-import { StateSelect } from './StateSelect/StateSelect';
+import StateSelect from './StateSelect';
 
 export {
   StateSelect,

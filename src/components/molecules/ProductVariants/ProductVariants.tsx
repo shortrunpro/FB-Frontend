@@ -19,17 +19,20 @@ import { useCartContext } from '@/modules/cart/provider/context';
 export const ProductVariants = ({ product }: { product: HttpTypes.StoreProduct }) => {
   const { handleBulkAddToCart, isAddingItem } = useCartContext();
   const PAGE_SIZE = 10;
-  const variants = product?.variants
-    ? product?.variants.map(variant => {
-        let finish = variant.options?.find(option => option.option?.title === 'finish');
-        let size = variant.options?.find(option => option.option?.title === 'size');
-        return {
-          ...variant,
-          finish: finish?.value,
-          size: size?.value
-        };
-      })
-    : [];
+  const variants = useMemo(() => {
+    return product?.variants
+      ? product?.variants.map(variant => {
+          let finish = variant.options?.find(option => option.option?.title === 'finish');
+          let size = variant.options?.find(option => option.option?.title === 'size');
+          return {
+            ...variant,
+            finish: finish?.value,
+            size: size?.value
+          };
+        })
+      : [];
+  }, [product?.variants]);
+
   const [pagination, setPagination] = useState<DataTablePaginationState>({
     pageSize: PAGE_SIZE,
     pageIndex: 0
@@ -62,13 +65,13 @@ export const ProductVariants = ({ product }: { product: HttpTypes.StoreProduct }
       }
       return 0;
     });
-  }, [sorting]);
+  }, [sorting, variants]);
   const shownProducts = useMemo(() => {
     return sortedProducts.slice(
       pagination.pageIndex * pagination.pageSize,
       (pagination.pageIndex + 1) * pagination.pageSize
     );
-  }, [pagination]);
+  }, [pagination, sortedProducts]);
 
   const plusHandler = (id: string) => {
     setCartQuantity({ ...cartQuantity, [id]: (cartQuantity[id] += 1) });
@@ -134,25 +137,23 @@ export const ProductVariants = ({ product }: { product: HttpTypes.StoreProduct }
       }
     })
   ];
-  const table =
-    variants &&
-    useDataTable({
-      columns,
-      data: shownProducts,
-      getRowId: variant => variant.id,
-      rowCount: variants.length,
-      pagination: {
-        // Pass the pagination state and updater to the table instance
-        state: pagination,
-        onPaginationChange: setPagination
-      },
-      sorting: {
-        // Pass the pagination state and updater to the table instance
-        state: sorting,
-        onSortingChange: setSorting
-      },
-      isLoading: false
-    });
+  const table = useDataTable({
+    columns,
+    data: shownProducts,
+    getRowId: variant => variant.id,
+    rowCount: variants.length,
+    pagination: {
+      // Pass the pagination state and updater to the table instance
+      state: pagination,
+      onPaginationChange: setPagination
+    },
+    sorting: {
+      // Pass the pagination state and updater to the table instance
+      state: sorting,
+      onSortingChange: setSorting
+    },
+    isLoading: false
+  });
   const handleAddToCart = async () => {
     try {
       await handleBulkAddToCart(cartQuantity).then(() => setCartQuantity(initialState));

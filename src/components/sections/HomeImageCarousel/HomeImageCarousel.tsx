@@ -23,7 +23,7 @@ export const HomeImageCarousel = () => {
       >
         {images.map(image => {
           return (
-            <SwiperSlide>
+            <SwiperSlide key={image.src}>
               <Image
                 src={image.src}
                 width={image.width}

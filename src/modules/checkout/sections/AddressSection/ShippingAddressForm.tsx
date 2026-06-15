@@ -37,12 +37,6 @@ const ShippingAddressForm = ({
     email: cart?.email || ''
   });
 
-  // check if customer has saved addresses that are in the current region
-  const addressesInRegion = useMemo(
-    () => customer?.addresses.filter(a => a.country_code && a.country_code === locale),
-    [customer?.addresses]
-  );
-
   // TODO Identify if this reference and the assosciated useEffect are needed
   // Create a stable reference that only changes when address data actually changes
   const addressSnapshot = useMemo(
@@ -51,19 +45,7 @@ const ShippingAddressForm = ({
         shipping_address: cart?.shipping_address,
         email: cart?.email || customer?.email
       }),
-    [
-      cart?.shipping_address?.first_name,
-      cart?.shipping_address?.last_name,
-      cart?.shipping_address?.address_1,
-      cart?.shipping_address?.company,
-      cart?.shipping_address?.postal_code,
-      cart?.shipping_address?.city,
-      cart?.shipping_address?.country_code,
-      cart?.shipping_address?.province,
-      cart?.shipping_address?.phone,
-      cart?.email,
-      customer?.email
-    ]
+    [cart?.shipping_address, cart?.email, customer?.email]
   );
 
   const setFormAddress = (address?: HttpTypes.StoreCartAddress, email?: string) => {
@@ -109,14 +91,14 @@ const ShippingAddressForm = ({
 
   return (
     <>
-      {customer && (addressesInRegion?.length || 0) > 0 && (
+      {customer && (customer?.addresses?.length || 0) > 0 && (
         <Container className="mb-6 flex flex-col gap-y-4 p-0">
           <p className="text-small-regular">
             {`Hi ${customer.first_name}, do you want to use one of your saved addresses?`}
           </p>
           <div className="grid grid-cols-1 gap-x-4 lg:grid-cols-2">
             <AddressSelect
-              addresses={addressesInRegion || []}
+              addresses={customer?.addresses || []}
               addressInput={
                 mapKeys(formData, (_, key) =>
                   key.replace('shipping_address.', '')

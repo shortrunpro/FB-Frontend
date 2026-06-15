@@ -57,7 +57,7 @@ export const PasswordValidator = ({
       digit: validation.errors.noDigit,
       symbol: validation.errors.noSymbol
     });
-  }, [password]);
+  }, [password, setError]);
   return (
     <Card className="p-4">
       <p
