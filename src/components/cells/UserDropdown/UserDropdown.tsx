@@ -3,8 +3,6 @@
 import { useState } from 'react';
 
 import { User } from '@medusajs/icons';
-import { HttpTypes } from '@medusajs/types';
-import { useUnreads } from '@talkjs/react';
 
 import { Badge, Divider, LogoutButton, NavigationItem } from '@/components/atoms';
 import { Dropdown } from '@/components/molecules';
@@ -13,8 +11,6 @@ import { ProfileIcon } from '@/icons';
 
 export const UserDropdown = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const [open, setOpen] = useState(false);
-
-  const unreads = useUnreads();
 
   return (
     <div
@@ -37,15 +33,6 @@ export const UserDropdown = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
               <h3 className="heading-xs border-b p-4 uppercase">Your account</h3>
             </div>
             <NavigationItem href="/user/orders">Orders</NavigationItem>
-            <NavigationItem
-              href="/user/messages"
-              className="relative"
-            >
-              Messages
-              {Boolean(unreads?.length) && (
-                <Badge className="absolute left-24 top-3 h-4 w-4 p-0">{unreads?.length}</Badge>
-              )}
-            </NavigationItem>
             <NavigationItem href="/user/returns">Returns</NavigationItem>
             <NavigationItem href="/user/addresses">Addresses</NavigationItem>
             <NavigationItem href="/user/reviews">Reviews</NavigationItem>
