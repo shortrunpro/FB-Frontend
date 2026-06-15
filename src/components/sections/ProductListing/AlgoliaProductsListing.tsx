@@ -22,16 +22,10 @@ import { searchProducts } from '@/lib/data/products';
 import { getFacedFilters } from '@/lib/helpers/get-faced-filters';
 
 export const AlgoliaProductsListing = ({
-  category_id,
-  collection_id,
-  seller_handle,
   locale = process.env.NEXT_PUBLIC_DEFAULT_REGION,
   currency_code
 }: {
-  category_id?: string;
-  collection_id?: string;
   locale?: string;
-  seller_handle?: string;
   currency_code: string;
 }) => {
   const searchParams = useSearchParams();
@@ -64,7 +58,7 @@ const ProductsListing = ({
   query: string;
   page: number;
 }) => {
-  const [products, setProducts] = useState<(HttpTypes.StoreProduct & { seller?: any })[]>([]);
+  const [products, setProducts] = useState<HttpTypes.StoreProduct[]>([]);
   const [facets, setFacets] = useState<Record<string, FacetModel[]>>({});
   const [isLoading, setIsLoading] = useState(true);
   const [count, setCount] = useState(0);

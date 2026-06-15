@@ -12,7 +12,6 @@ import { HomeSignUp } from './HomeSignUp/HomeSignUp';
 import { ProductDetailsPage } from './ProductDetailsPage/ProductDetailsPage';
 import { AlgoliaProductsListing } from './ProductListing/AlgoliaProductsListing';
 import { ProductListing } from './ProductListing/ProductListing';
-import { SellerPageHeader } from './SellerPageHeader/SellerPageHeader';
 import { ShopByStyleSection } from './ShopByStyle/ShopByStyleSection';
 
 export {
@@ -27,7 +26,6 @@ export {
   ShopByStyleSection,
   BlogSection,
   ProductListing,
-  SellerPageHeader,
   Cart,
   ProductDetailsPage,
   AlgoliaProductsListing,

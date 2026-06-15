@@ -4,7 +4,6 @@ import { CustomCarousel as Carousel } from './Carousel/Carousel';
 import { CartDrawer } from './CartDrawer/CartDrawer';
 import { CartDropdown } from './CartDropdown/CartDropdown';
 import { CartItemsFooter } from './CartItemsFooter/CartItemsFooter';
-import { CartItemsHeader } from './CartItemsHeader/CartItemsHeader';
 import { CartItemsProducts } from './CartItemsProducts/CartItemsProducts';
 import { ColorFilter } from './ColorFilter/ColorFilter';
 import { ConditionFilter } from './ConditionFilter/ConditionFilter';
@@ -24,13 +23,9 @@ import { ProductCarousel } from './ProductCarousel/ProductCarousel';
 import { ProductDetailsFooter } from './ProductDetailsFooter/ProductDetailsFooter';
 import { ProductDetailsHeader } from './ProductDetailsHeader/ProductDetailsHeader';
 import { ProductDetailsMeasurements } from './ProductDetailsMeasurements/ProductDetailsMeasurements';
-import { ProductDetailsSeller } from './ProductDetailsSeller/ProductDetailsSeller';
-import { ProductDetailsSellerReviews } from './ProductDetailsSellerReviews/ProductDetailsSellerReviews';
 import { ProductDetailsShipping } from './ProductDetailsShipping/ProductDetailsShipping';
 import { ProductFilter } from './ProductFilter/ProductFilter';
 import { ProductPageDetails } from './ProductPageDetails/ProductPageDetails';
-import { SellerRatingFilter } from './SellerRatingFilter/SellerRatingFilter';
-import { SellerReviewTab } from './SellerReviewTab/SellerReviewTab';
 import { SizeFilter } from './SizeFilter/SizeFilter';
 import { StateSelect } from './StateSelect/StateSelect';
 
@@ -48,19 +43,14 @@ export {
   SizeFilter,
   ConditionFilter,
   ColorFilter,
-  SellerRatingFilter,
   ActiveFilterElement,
   MobileNavbar,
   ProductDetailsHeader,
   ProductPageDetails,
   ProductDetailsMeasurements,
   ProductDetailsShipping,
-  ProductDetailsSeller,
-  ProductDetailsSellerReviews,
   ProductDetailsFooter,
   ProductCarousel,
-  SellerReviewTab,
-  CartItemsHeader,
   CartItemsFooter,
   CartItemsProducts,
   HeadingCategories,

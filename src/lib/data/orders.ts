@@ -2,8 +2,6 @@
 
 import { HttpTypes } from '@medusajs/types';
 
-import { SellerProps } from '@/types/seller';
-
 import { sdk } from '../config';
 import medusaError from '../helpers/medusa-error';
 import { getAuthHeaders, getCacheOptions } from './cookies';
@@ -33,11 +31,11 @@ export const retrieveOrder = async (id: string) => {
   };
 
   return sdk.client
-    .fetch<HttpTypes.StoreOrderResponse & { seller: SellerProps }>(`/store/orders/${id}`, {
+    .fetch<HttpTypes.StoreOrderResponse>(`/store/orders/${id}`, {
       method: 'GET',
       query: {
         fields:
-          '*payment_collections.payments,*items,*items.metadata,*items.variant,*items.product,*seller,*order_set'
+          '*payment_collections.payments,*items,*items.metadata,*items.variant,*items.product,*order_set'
       },
       headers,
       next,
@@ -111,13 +109,7 @@ export const listOrders = async (
 
   return sdk.client
     .fetch<{
-      orders: Array<
-        HttpTypes.StoreOrder & {
-          seller: { id: string; name: string; reviews?: any[] };
-          reviews: any[];
-          order_set: { id: string };
-        }
-      >;
+      orders: Array<HttpTypes.StoreOrder>;
     }>(`/store/orders`, {
       method: 'GET',
       query: {
@@ -125,14 +117,14 @@ export const listOrders = async (
         offset,
         order: '-created_at',
         fields:
-          '*items,+items.metadata,*items.variant,*items.product,*seller,*reviews,*order_set,shipping_total,total,created_at',
+          '*items,+items.metadata,*items.variant,*items.product,shipping_total,total,created_at',
         ...filters
       },
       headers,
       next,
       cache: 'no-cache'
     })
-    .then(({ orders }) => orders.filter(order => order.order_set))
+    .then(({ orders }) => orders.filter(order => order))
     .catch(err => medusaError(err));
 };
 

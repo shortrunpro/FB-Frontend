@@ -13,7 +13,7 @@ export const CartItems = ({ cart }: { cart: HttpTypes.StoreCart | Cart | null })
   return (
     <div
       className="mb-4"
-      data-testid={`cart-items-seller`}
+      data-testid={`cart-items`}
     >
       <CartItemsProducts
         products={cart.items || []}

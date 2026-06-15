@@ -53,9 +53,6 @@ export const ParcelAccordionItems = ({
           Order #{order.display_id}:{' '}
           <span className="font-semibold uppercase text-primary">{steps[status]}</span>
         </p>
-        <p className="label-md col-span-2 px-2">
-          Seller: <span className="font-semibold text-primary">{order.seller.name}</span>
-        </p>
         <p className="label-md col-span-2 px-2 text-center">
           Shipping:{' '}
           <span

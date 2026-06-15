@@ -19,9 +19,6 @@ import { ProductsList } from './ProductsList/ProductsList';
 import { ProductsPagination } from './ProductsPagination/ProductsPagination';
 import { ReviewsToWrite } from './Reviews/ReviewsToWrite';
 import { ReviewsWritten } from './Reviews/ReviewsWritten';
-import { SellerFooter } from './SellerFooter/SellerFooter';
-import { SellerHeading } from './SellerHeading/SellerHeading';
-import { SellerTabs } from './SellerTabs/SellerTabs';
 
 export {
   ProductBulletPoints,
@@ -38,9 +35,6 @@ export {
   Header,
   Footer,
   GalleryCarousel,
-  SellerHeading,
-  SellerFooter,
-  SellerTabs,
   HomeProductsCarousel,
   ProductGallery,
   ProductDetails,

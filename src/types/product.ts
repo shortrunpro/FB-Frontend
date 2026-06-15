@@ -1,7 +1,5 @@
 import { HttpTypes } from '@medusajs/types';
 
-import { SellerProps } from './seller';
-
 export interface AdditionalAttributeProps {
   id: string;
   attribute_id: string;
@@ -41,26 +39,7 @@ export interface SingleProductReview {
   customer: { first_name: string; last_name: string };
   customer_note: string;
   image: string;
-  seller_note?: string;
   updated_at: string;
-  seller: SellerProps;
-}
-
-export interface SingleProductSeller {
-  id: string;
-  name: string;
-  photo: string;
-  rating: number;
-  reviewCount: number;
-  verified: boolean;
-  handle: string;
-  joinDate: string;
-  sold: number;
-  description: string;
-  reviews?: SingleProductReview[];
-  parcel?: string;
-  date?: string;
-  created_at?: string;
 }
 
 export interface SingleProductMeasurement {
@@ -88,7 +67,6 @@ export interface SingleProduct {
   details: string;
   measurements: SingleProductMeasurement[];
   shippingReturns: string;
-  seller: SingleProductSeller;
   reviews: SingleProductReview[];
   tags: string[];
   postedDate: string;
