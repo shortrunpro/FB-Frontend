@@ -165,3 +165,16 @@ select:-webkit-autofill:focus {
   -webkit-text-fill-color: #525252 !important;
   transition: background-color 9999s ease-in-out 0s;
 }
+
+.home-gradient {
+  background: #c9e1ee;
+  background: linear-gradient(180deg, rgba(201, 225, 238, 1) 0%, rgba(237, 237, 241, 1) 50%);
+}
+.home-swiper .swiper {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.home-swiper .swiper-pagination-bullet {
+  background-color: #f7f7f7;
+  opacity: inherit;
+}
