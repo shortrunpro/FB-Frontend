@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function CartPage({}) {
   return (
-    <main className="container flex gap-x-4">
+    <main className="container flex flex-grow justify-center gap-x-4">
       <Suspense fallback={<>Loading...</>}>
         <Cart />
       </Suspense>

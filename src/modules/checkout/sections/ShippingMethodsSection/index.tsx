@@ -27,7 +27,9 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
   const isOpen = searchParams.get('step') === 'delivery';
 
   const handleSubmit = () => {
+    setIsLoadingPrices(true);
     router.push(pathname + '?step=payment', { scroll: false });
+    router.refresh();
   };
 
   const handleSetShippingMethod = async (id: string | null) => {
@@ -55,12 +57,12 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
       );
     } finally {
       setIsLoadingPrices(false);
-      // router.refresh();
     }
   };
 
   useEffect(() => {
     setError(null);
+    setIsLoadingPrices(false);
   }, [isOpen]);
 
   const handleEdit = () => {
@@ -100,7 +102,7 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
                   ></Heading>
                   <RadioGroup
                     // by="name"
-                    value={selectedMethod?.shipping_option_id}
+                    value={selectedMethod?.shipping_option_id ?? null}
                     onChange={value => handleSetShippingMethod(value)}
                     aria-label="Shipping Options"
                     className="space-y-2"
@@ -131,12 +133,13 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
               </div>
             </div>
           </div>
-          <div>
+          <div className="flex justify-end">
             <ErrorMessage
               error={error}
               data-testid="delivery-option-error-message"
             />
             <Button
+              className={`bg-brand text-white hover:bg-brand_grey hover:text-black ${isLoadingPrices && 'flex min-w-[192px] justify-center'}`}
               onClick={handleSubmit}
               variant="tonal"
               disabled={!cart.shipping_methods?.[0] || isPendingDeleteRow}

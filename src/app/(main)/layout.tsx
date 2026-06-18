@@ -8,10 +8,10 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <Header />
       {children}
       <Footer />
-    </>
+    </div>
   );
 }

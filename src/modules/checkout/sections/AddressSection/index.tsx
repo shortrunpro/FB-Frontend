@@ -1,13 +1,12 @@
 'use client';
 
-import { startTransition, useActionState, useEffect } from 'react';
+import { startTransition, useActionState } from 'react';
 
 import { CheckCircleSolid } from '@medusajs/icons';
 import { HttpTypes } from '@medusajs/types';
 import { Heading, Text, useToggleState } from '@medusajs/ui';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
 import { setAddresses } from '@/lib/data/cart';
 import compareAddresses from '@/lib/helpers/compare-addresses';
 import { Button, ErrorMessage, Spinner } from '@/modules/common/components';
@@ -24,9 +23,17 @@ export const AddressSection = ({
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-
-  const isOpen = searchParams.get('step') === 'address';
-  // || !isAddress;
+  const isAddress = Boolean(
+    cart?.shipping_address &&
+    cart?.shipping_address.first_name &&
+    cart?.shipping_address.last_name &&
+    cart?.shipping_address.address_1 &&
+    cart?.shipping_address.city &&
+    cart?.shipping_address.postal_code &&
+    cart?.shipping_address.country_code
+  );
+  const isOpen =
+    searchParams.get('step') === 'address' || (!searchParams.get('step') && !isAddress);
 
   const { state: sameAsBilling, toggle: toggleSameAsBilling } = useToggleState(
     cart?.shipping_address && cart?.billing_address
@@ -39,22 +46,6 @@ export const AddressSection = ({
     message: null
   });
 
-  // TODO Move this logic somewhere more global
-  // const isAddress = Boolean(
-  //   cart?.shipping_address &&
-  //   cart?.shipping_address.first_name &&
-  //   cart?.shipping_address.last_name &&
-  //   cart?.shipping_address.address_1 &&
-  //   cart?.shipping_address.city &&
-  //   cart?.shipping_address.postal_code &&
-  //   cart?.shipping_address.country_code
-  // );
-  // useEffect(() => {
-  //   if (!isAddress) {
-  //     router.replace(pathname + '?step=address');
-  //   }
-  // }, [isAddress]);
-
   const handleEdit = () => {
     router.replace(pathname + '?step=address');
   };
@@ -62,7 +53,7 @@ export const AddressSection = ({
     startTransition(() => {
       formAction(data);
     });
-    router.replace(`${pathname}?step=delivery`);
+    router.push(`${pathname}?step=delivery`, { scroll: false });
     router.refresh();
   };
   return (
@@ -140,16 +131,6 @@ export const AddressSection = ({
               )}
             </div>
           </div>
-        )}
-        {!searchParams.get('step') && (
-          <LocalizedClientLink href="/checkout?step=delivery">
-            <Button
-              className="mt-6"
-              variant="tonal"
-            >
-              Continue to Delivery
-            </Button>
-          </LocalizedClientLink>
         )}
       </form>
     </div>
