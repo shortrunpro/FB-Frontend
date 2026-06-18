@@ -3,7 +3,7 @@
   "version": "1.5.4",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 8000 --turbopack",
+    "dev": "next dev --experimental-https -p 8000 --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -28,6 +28,7 @@
     "next": "15.5.9",
     "next-intl": "^3.26.3",
     "react": "^19.2.1",
+    "react-acceptjs": "^0.5.1",
     "react-country-flag": "^3.1.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",

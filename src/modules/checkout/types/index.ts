@@ -1,5 +1,5 @@
 import { CheckoutFormProps } from './CheckoutForm';
-import { StoreCardPaymentMethod } from './PaymentSection';
+import { BasicCardInfo, PaymentSectionProps, StoreCardPaymentMethod } from './PaymentSection';
 import {
   ShippingMethods,
   ShippingMethodsSectionProps,
@@ -11,5 +11,7 @@ export type {
   ShippingMethods,
   StoreCardShippingMethod,
   StoreCardPaymentMethod,
-  CheckoutFormProps
+  CheckoutFormProps,
+  PaymentSectionProps,
+  BasicCardInfo
 };

@@ -2,25 +2,19 @@
 
 import { useCallback, useEffect, useState } from 'react';
 
-import { RadioGroup } from '@headlessui/react';
 import { CheckCircleSolid, CreditCard } from '@medusajs/icons';
 import { Container, Heading, Text } from '@medusajs/ui';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { paymentInfoMap } from '@/lib/constants';
 import { initiatePaymentSession } from '@/lib/data/cart';
-import { StoreCardPaymentMethod } from '@/modules/checkout/types';
 import { Button, ErrorMessage } from '@/modules/common/components';
 
+import { PaymentSectionProps } from '../../types';
+import AuthnetForm from './AuthnetForm';
 import PaymentContainer from './PaymentContainer';
 
-const PaymentSection = ({
-  cart,
-  availablePaymentMethods
-}: {
-  cart: any;
-  availablePaymentMethods: StoreCardPaymentMethod[] | null;
-}) => {
+const PaymentSection = ({ cart, clientKey, apiLoginID }: PaymentSectionProps) => {
   const activeSession = cart.payment_collection?.payment_sessions?.find(
     (paymentSession: any) => paymentSession.status === 'pending'
   );
@@ -44,7 +38,8 @@ const PaymentSection = ({
     setSelectedPaymentMethod(method);
   };
 
-  const paymentReady = activeSession && cart?.shipping_methods.length !== 0;
+  const paymentReady =
+    activeSession && cart?.shipping_methods && cart?.shipping_methods.length !== 0;
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -120,38 +115,16 @@ const PaymentSection = ({
       </div>
       <div>
         <div className={isOpen ? 'block' : 'hidden'}>
-          {availablePaymentMethods?.length && (
-            <>
-              <RadioGroup
-                value={selectedPaymentMethod}
-                onChange={(value: string) => setPaymentMethod(value)}
-              >
-                {availablePaymentMethods.map(paymentMethod => (
-                  <div key={paymentMethod.id}>
-                    <PaymentContainer
-                      paymentInfoMap={paymentInfoMap}
-                      paymentProviderId={paymentMethod.id}
-                      selectedPaymentOptionId={selectedPaymentMethod}
-                    />
-                  </div>
-                ))}
-              </RadioGroup>
-            </>
-          )}
+          <AuthnetForm
+            cart={cart}
+            apiLoginID={apiLoginID}
+            clientKey={clientKey}
+          />
 
           <ErrorMessage
             error={error}
             data-testid="payment-method-error-message"
           />
-
-          <Button
-            onClick={handleSubmit}
-            variant="tonal"
-            loading={isLoading}
-            disabled={!cardComplete || !selectedPaymentMethod}
-          >
-            {!activeSession ? ' Enter card details' : 'Continue to review'}
-          </Button>
         </div>
 
         <div className={isOpen ? 'hidden' : 'block'}>

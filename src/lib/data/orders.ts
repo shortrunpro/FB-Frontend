@@ -34,8 +34,7 @@ export const retrieveOrder = async (id: string) => {
     .fetch<HttpTypes.StoreOrderResponse>(`/store/orders/${id}`, {
       method: 'GET',
       query: {
-        fields:
-          '*payment_collections.payments,*items,*items.metadata,*items.variant,*items.product,*order_set'
+        fields: '*payment_collections.payments,*items,*items.metadata,*items.variant,*items.product'
       },
       headers,
       next,

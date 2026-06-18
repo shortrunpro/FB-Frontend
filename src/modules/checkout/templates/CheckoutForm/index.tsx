@@ -5,12 +5,7 @@ import {
 } from '@/modules/checkout/sections';
 import { CheckoutFormProps } from '@/modules/checkout/types';
 
-const CheckoutForm = ({
-  cart,
-  customer,
-  availableShippingMethods,
-  availablePaymentMethods
-}: CheckoutFormProps) => {
+const CheckoutForm = ({ cart, customer, availableShippingMethods }: CheckoutFormProps) => {
   return (
     <div className="flex flex-col gap-4">
       <AddressSection
@@ -23,7 +18,8 @@ const CheckoutForm = ({
       />
       <PaymentSection
         cart={cart}
-        availablePaymentMethods={availablePaymentMethods}
+        clientKey={process.env.AUTHORIZENET_PUBLIC_CLIENT_KEY ?? ''}
+        apiLoginID={process.env.AUTHORIZENET_PUBLIC_API_LOGIN_ID ?? ''}
       />
     </div>
   );

@@ -41,7 +41,7 @@ export async function retrieveCart(cartId?: string) {
         fields:
           '*items,*region, *items.product, *items.variant, *items.variant.options, items.variant.options.option.title,' +
           '*items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name' +
-          ''
+          '*customer, customer.metadata'
       },
       headers,
       cache: 'no-cache'
@@ -272,6 +272,7 @@ export async function initiatePaymentSession(
   data: {
     provider_id: string;
     context?: Record<string, unknown>;
+    data?: Record<string, unknown>;
   }
 ) {
   const headers = {
@@ -408,7 +409,8 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
     //   }
 
     await updateCart(data);
-    // await revalidatePath('/cart');
+    await revalidatePath('/cart');
+    await revalidatePath('/checkout');
     return { success: true, message: null };
   } catch (e: any) {
     return { success: false, message: e.message };
@@ -439,11 +441,11 @@ export async function placeOrder(cartId?: string) {
   const cartCacheTag = await getCacheTag('carts');
   revalidateTag(cartCacheTag);
 
-  if (res?.data?.order_set) {
+  if (res?.ok && res?.data?.order) {
     revalidatePath('/user/reviews');
     revalidatePath('/user/orders');
     removeCartId();
-    redirect(`/order/${res?.data?.order_set.orders[0].id}/confirmed`);
+    redirect(`/order/${res?.data?.order?.id}/confirmed`);
   }
 
   return res;
