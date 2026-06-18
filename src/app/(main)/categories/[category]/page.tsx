@@ -8,66 +8,41 @@ import Script from 'next/script';
 import { Breadcrumbs } from '@/components/atoms';
 import { ProductListingSkeleton } from '@/components/organisms/ProductListingSkeleton/ProductListingSkeleton';
 import { AlgoliaProductsListing, ProductListing } from '@/components/sections';
+import { BASE_URL, SITE_NAME } from '@/lib/config';
 import { getCategoryByHandle } from '@/lib/data/categories';
 import { listProducts } from '@/lib/data/products';
-import { getRegion, listRegions } from '@/lib/data/regions';
-import { toHreflang } from '@/lib/helpers/hreflang';
 import isBot from '@/lib/helpers/isBot';
+import { CategoryCard } from '@/modules/categories/components';
 
 export const revalidate = 60;
 
 export async function generateMetadata({
   params
 }: {
-  params: Promise<{ category: string; locale: string }>;
+  params: Promise<{ category: string }>;
 }): Promise<Metadata> {
-  const { category: categoryHandle, locale } = await params;
-  const headersList = await headers();
-  const host = headersList.get('host');
-  const protocol = headersList.get('x-forwarded-proto') || 'https';
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `${protocol}://${host}`;
+  const { category: categoryHandle } = await params;
 
   const cat = await getCategoryByHandle(categoryHandle);
   if (!cat) {
     return {};
   }
-
-  let languages: Record<string, string> = {};
-  try {
-    const regions = await listRegions();
-    const locales = Array.from(
-      new Set((regions || []).flatMap(r => r.countries?.map(c => c.iso_2) || []))
-    ) as string[];
-    languages = locales.reduce<Record<string, string>>((acc, code) => {
-      acc[toHreflang(code)] = `${baseUrl}/${code}/categories/${categoryHandle}`;
-      return acc;
-    }, {});
-  } catch {
-    languages = {
-      [toHreflang(locale)]: `${baseUrl}/${locale}/categories/${categoryHandle}`
-    };
-  }
-
-  const title = `${cat.name} Category`;
-  const description = `${cat.name} Category - ${process.env.NEXT_PUBLIC_SITE_NAME || 'Storefront'}`;
-  const canonical = `${baseUrl}/${locale}/categories/${categoryHandle}`;
+  const title = `${cat.name}`;
+  const description = `${cat.name} Category - ${SITE_NAME || 'Storefront'}`;
+  const canonical = `${BASE_URL}/categories/${categoryHandle}`;
 
   return {
     title,
     description,
     alternates: {
-      canonical,
-      languages: {
-        ...languages,
-        'x-default': `${baseUrl}/categories/${categoryHandle}`
-      }
+      canonical
     },
     robots: { index: true, follow: true },
     openGraph: {
-      title: `${title} | ${process.env.NEXT_PUBLIC_SITE_NAME || 'Storefront'}`,
+      title: `${title} | ${SITE_NAME || 'Storefront'}`,
       description,
       url: canonical,
-      siteName: process.env.NEXT_PUBLIC_SITE_NAME || 'Storefront',
+      siteName: SITE_NAME || 'Storefront',
       type: 'website'
     }
   };
@@ -81,35 +56,41 @@ async function Category({
 }: {
   params: Promise<{
     category: string;
-    locale: string;
   }>;
 }) {
-  const { category: categoryHandle, locale } = await params;
+  const { category: categoryHandle } = await params;
 
   const category = await getCategoryByHandle(categoryHandle);
   if (!category) {
     return notFound();
   }
-  const currency_code = (await getRegion(locale))?.currency_code || 'usd';
   const ua = (await headers()).get('user-agent') || '';
   const bot = isBot(ua);
 
   const breadcrumbsItems = [
     {
-      path: categoryHandle,
+      path: '/categories',
+      label: 'Categories'
+    },
+    ...(category.parent_category?.handle && category.parent_category?.name
+      ? [
+          {
+            path: `/categories/${category.parent_category?.handle}`,
+            label: category.parent_category.name
+          }
+        ]
+      : []),
+    {
+      path: `/categories/${categoryHandle}`,
       label: category.name
     }
   ];
 
-  // Small cached list for JSON-LD itemList
-  const headersList = await headers();
-  const host = headersList.get('host');
-  const protocol = headersList.get('x-forwarded-proto') || 'https';
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `${protocol}://${host}`;
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
   const {
     response: { products: jsonLdProducts }
   } = await listProducts({
-    countryCode: locale,
+    countryCode: 'us',
     queryParams: { limit: 8, order: 'created_at', fields: 'id,title,handle' },
     category_id: category.id
   });
@@ -117,12 +98,12 @@ async function Category({
   const itemList = jsonLdProducts.slice(0, 8).map((p, idx) => ({
     '@type': 'ListItem',
     position: idx + 1,
-    url: `${baseUrl}/${locale}/products/${p.handle}`,
+    url: `${BASE_URL}/products/${p.handle}`,
     name: p.title
   }));
 
   return (
-    <main className="container">
+    <main className="container flex-grow">
       <Script
         id="ld-breadcrumbs-category"
         type="application/ld+json"
@@ -134,8 +115,14 @@ async function Category({
               {
                 '@type': 'ListItem',
                 position: 1,
+                name: 'Categories',
+                item: `${BASE_URL}/categories`
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
                 name: category.name,
-                item: `${baseUrl}/${locale}/categories/${categoryHandle}`
+                item: `${BASE_URL}/categories/${categoryHandle}`
               }
             ]
           })
@@ -157,7 +144,7 @@ async function Category({
       </div>
 
       <h1 className="heading-xl uppercase">{category.name}</h1>
-
+      <div dangerouslySetInnerHTML={{ __html: category?.description }} />
       <Suspense
         fallback={
           <div data-testid="category-page-loading">
@@ -165,17 +152,27 @@ async function Category({
           </div>
         }
       >
-        {bot || !ALGOLIA_ID || !ALGOLIA_SEARCH_KEY ? (
+        {category?.category_children?.length > 0 ? (
+          <div className="grid grid-cols-6 gap-x-2 gap-y-4">
+            {category.category_children.map(cat => (
+              <CategoryCard
+                key={cat.id}
+                category={cat}
+                nested={true}
+              />
+            ))}
+          </div>
+        ) : bot || !ALGOLIA_ID || !ALGOLIA_SEARCH_KEY ? (
           <ProductListing
             category_id={category.id}
             showSidebar
-            locale={locale}
+            locale={'us'}
           />
         ) : (
           <AlgoliaProductsListing
             category_id={category.id}
-            locale={locale}
-            currency_code={currency_code}
+            locale={'us'}
+            currency_code={'usd'}
           />
         )}
       </Suspense>

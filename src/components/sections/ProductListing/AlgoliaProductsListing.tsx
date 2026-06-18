@@ -23,10 +23,12 @@ import { getFacedFilters } from '@/lib/helpers/get-faced-filters';
 
 export const AlgoliaProductsListing = ({
   locale = process.env.NEXT_PUBLIC_DEFAULT_REGION,
-  currency_code
+  currency_code,
+  category_id
 }: {
   locale?: string;
   currency_code: string;
+  category_id?: string;
 }) => {
   const searchParams = useSearchParams();
 
@@ -38,6 +40,7 @@ export const AlgoliaProductsListing = ({
     <ProductsListing
       locale={locale}
       currency_code={currency_code}
+      category_id={category_id}
       filter={facetFilters}
       query={query}
       page={page}
@@ -48,12 +51,14 @@ export const AlgoliaProductsListing = ({
 const ProductsListing = ({
   locale,
   currency_code,
+  category_id,
   filter,
   query,
   page
 }: {
   locale?: string;
   currency_code: string;
+  category_id?: string;
   filter: string;
   query: string;
   page: number;

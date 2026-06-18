@@ -1,20 +1,24 @@
 import { HttpTypes } from '@medusajs/types';
 
 import { sdk } from '@/lib/config';
+import { CategoryListObject, ListCategoriesResponse } from '@/types/categories';
 
 interface CategoriesProps {
   query?: Record<string, unknown>;
 }
 
-export const listCategories = async ({ query }: Partial<CategoriesProps> = {}) => {
+export const listCategories = async ({
+  query
+}: Partial<CategoriesProps> = {}): Promise<ListCategoriesResponse> => {
   const limit = query?.limit || 100;
 
   const allCategories = await sdk.client
     .fetch<{
-      product_categories: HttpTypes.StoreProductCategory[];
+      product_categories: CategoryListObject[];
     }>('/store/product-categories', {
       query: {
-        fields: 'id,handle,name,rank,metadata,parent_category_id,description,*category_children',
+        fields:
+          'id,handle,name,rank,metadata,parent_category_id,description,*category_children,*product_category_image',
         include_descendants_tree: true,
         include_ancestors_tree: true,
         limit,
@@ -48,15 +52,16 @@ export const listCategories = async ({ query }: Partial<CategoriesProps> = {}) =
   };
 };
 
-export const getCategoryByHandle = async (categoryHandle: string) => {
+export const getCategoryByHandle = async (categoryHandle: string): Promise<CategoryListObject> => {
   return sdk.client
     .fetch<HttpTypes.StoreProductCategoryListResponse>(`/store/product-categories`, {
       query: {
-        fields: '*category_children',
+        fields:
+          '*category_children,*category_children.product_category_image,*product_category_image',
         handle: categoryHandle
-      },
-      cache: 'force-cache',
-      next: { revalidate: 300 }
+      }
+      // cache: 'force-cache',
+      // next: { revalidate: 300 }
     })
-    .then(({ product_categories }) => product_categories[0]);
+    .then(({ product_categories }) => product_categories[0]) as Promise<CategoryListObject>;
 };
