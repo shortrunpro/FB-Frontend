@@ -169,11 +169,7 @@ async function Category({
             locale={'us'}
           />
         ) : (
-          <AlgoliaProductsListing
-            category_id={category.id}
-            locale={'us'}
-            currency_code={'usd'}
-          />
+          <AlgoliaProductsListing category_name={category.name} />
         )}
       </Suspense>
     </main>

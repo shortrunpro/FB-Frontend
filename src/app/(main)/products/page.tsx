@@ -120,10 +120,7 @@ async function AllProducts({ params }: { params: Promise<{ locale: string }> }) 
             locale={'us'}
           />
         ) : (
-          <AlgoliaProductsListing
-            locale={'us'}
-            currency_code={'usd'}
-          />
+          <AlgoliaProductsListing />
         )}
       </Suspense>
     </main>

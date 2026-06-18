@@ -21,15 +21,7 @@ import { PRODUCT_LIMIT } from '@/const';
 import { searchProducts } from '@/lib/data/products';
 import { getFacedFilters } from '@/lib/helpers/get-faced-filters';
 
-export const AlgoliaProductsListing = ({
-  locale = process.env.NEXT_PUBLIC_DEFAULT_REGION,
-  currency_code,
-  category_id
-}: {
-  locale?: string;
-  currency_code: string;
-  category_id?: string;
-}) => {
+export const AlgoliaProductsListing = ({ category_name }: { category_name?: string }) => {
   const searchParams = useSearchParams();
 
   const facetFilters: string = getFacedFilters(searchParams);
@@ -38,9 +30,7 @@ export const AlgoliaProductsListing = ({
 
   return (
     <ProductsListing
-      locale={locale}
-      currency_code={currency_code}
-      category_id={category_id}
+      category_name={category_name}
       filter={facetFilters}
       query={query}
       page={page}
@@ -49,16 +39,12 @@ export const AlgoliaProductsListing = ({
 };
 
 const ProductsListing = ({
-  locale,
-  currency_code,
-  category_id,
+  category_name,
   filter,
   query,
   page
 }: {
-  locale?: string;
-  currency_code: string;
-  category_id?: string;
+  category_name?: string;
   filter: string;
   query: string;
   page: number;
@@ -68,11 +54,12 @@ const ProductsListing = ({
   const [isLoading, setIsLoading] = useState(true);
   const [count, setCount] = useState(0);
   const [pages, setPages] = useState(1);
-
+  filter = filter.length && category_name ? `(${filter})` : filter;
+  filter += category_name
+    ? `${filter.length ? ' AND ' : ''}categories.name="${category_name}"`
+    : '';
   useEffect(() => {
     async function fetchProducts() {
-      if (!locale) return;
-
       try {
         setIsLoading(true);
         const result = await searchProducts({
@@ -97,7 +84,7 @@ const ProductsListing = ({
     }
 
     fetchProducts();
-  }, [locale, filter, query, page, currency_code]);
+  }, [filter, query, page]);
 
   if (isLoading && products.length === 0) return <ProductListingSkeleton />;
 

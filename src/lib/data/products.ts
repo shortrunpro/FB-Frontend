@@ -223,7 +223,7 @@ export const searchProducts = async (params: {
       return response;
     })
     .catch(err => {
-      console.log(err, 'ERROR');
+      console.error(err, 'ERROR IN SEARCH PRODUCTS');
       return {
         products: [],
         nbHits: 0,
