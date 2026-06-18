@@ -17,9 +17,9 @@ import { Button } from '@/modules/common/components';
 
 export const HomeImageCarousel = () => {
   return (
-    <div className="home-gradient w-full p-12">
-      <div className="flex w-full">
-        <div className="flex w-1/2 justify-center">
+    <div className="home-gradient w-full py-6">
+      <div className="mx-auto flex w-full max-w-[1400px]">
+        <div className="flex w-1/2">
           <div className="flex flex-col justify-center gap-y-4">
             <div className="flex items-center gap-x-3">
               <div className="flex gap-x-2">
@@ -31,7 +31,7 @@ export const HomeImageCarousel = () => {
               </div>
               <p className="text-sm/3 font-bold">13k+ PROJECTS SERVED</p>
             </div>
-            <h2 className="flex flex-col text-7xl font-bold">
+            <h2 className="flex flex-col text-6xl font-bold">
               <span>Heavy-Duty Metal</span>
               <span>Support Brackets</span>
             </h2>
