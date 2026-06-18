@@ -6,7 +6,7 @@ import { NavMenu } from '@/components/molecules';
 export const Navbar = () => {
   return (
     <div className="w-full bg-white">
-      <div className="navbar mx-auto w-full max-w-[1250px] bg-white">
+      <div className="navbar mx-auto w-full max-w-[1400px] bg-white p-0">
         <div className="navbar-start">
           <Link
             className="bg-white"
@@ -24,7 +24,7 @@ export const Navbar = () => {
           <NavMenu />
         </div>
 
-        <div className="collapse-content z-1 lg:hidden">
+        <div className="z-1 collapse-content lg:hidden">
           <ul className="menu">
             <li>
               <button>Item 1</button>

@@ -84,7 +84,7 @@ export default async function Home() {
         }}
       />
       <HomeImageCarousel />
-      <div className="mx-auto w-full max-w-[1700px] px-12 lg:px-12">
+      <div className="mx-auto w-full max-w-[1400px]">
         <HomeCategories heading="POPULAR CATEGORIES" />
         <HomeParagraphSection1 />
         <HomeProductSection

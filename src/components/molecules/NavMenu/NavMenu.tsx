@@ -22,14 +22,14 @@ const MenuItem = ({ item }: { item: any }) => {
       <div
         tabIndex={0}
         role="button"
-        className="btn btn-ghost rounded-field"
+        className="rounded-field btn btn-ghost text-[16px]"
       >
         {item.title}
       </div>
       {item.children.length > 0 && (
         <ul
           tabIndex={-1}
-          className="dropdown-content menu rounded-box z-1 bg-brand_grey w-52 p-2 shadow-sm"
+          className="z-1 menu dropdown-content w-52 rounded-box bg-brand_grey p-2 shadow-sm"
         >
           {item.children.map((child: any) => {
             return (
