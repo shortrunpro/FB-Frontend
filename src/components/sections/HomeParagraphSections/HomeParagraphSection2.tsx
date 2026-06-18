@@ -13,22 +13,22 @@ export const HomeParagraphSection2 = () => {
       </p>
       <ul className="grid w-1/3 list-inside list-disc grid-cols-2 gap-y-4 py-4 font-semibold text-brand underline">
         <li>
-          <Link href={'#'}>Countertop Brackets</Link>
+          <Link href={'/categories/countertop-supports'}>Countertop Brackets</Link>
         </li>
         <li>
-          <Link href={'#'}>Floating Shelves</Link>
+          <Link href={'/categories/floating-shelves'}>Floating Shelves</Link>
         </li>
         <li>
-          <Link href={'#'}>Bench Brackets</Link>
+          <Link href={'/categories/bench-brackets'}>Bench Brackets</Link>
         </li>
         <li>
-          <Link href={'#'}>Floating Vanity Supports</Link>
+          <Link href={'/categories/floating-vanity-brackets'}>Floating Vanity Supports</Link>
         </li>
         <li>
-          <Link href={'#'}>Wood Corbel Systems</Link>
+          <Link href={'/categories/wood-corbels'}>Wood Corbel Systems</Link>
         </li>
         <li>
-          <Link href={'#'}>Mantel Brackets</Link>
+          <Link href={'/categories/mantel-brackets'}>Mantel Brackets</Link>
         </li>
       </ul>
       <div className="flex items-center justify-center gap-x-6">

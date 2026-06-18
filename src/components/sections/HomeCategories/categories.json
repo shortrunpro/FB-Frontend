@@ -2,37 +2,37 @@
   {
     "id": 1,
     "name": "Counter Brackets",
-    "handle": "",
+    "handle": "countertop-supports",
     "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/countertop-supports-category-img.webp"
   },
   {
     "id": 2,
     "name": "Vanity Supports",
-    "handle": "",
+    "handle": "floating-vanity-brackets",
     "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/floating-vanity-brackets-category-img.webp"
   },
   {
     "id": 3,
     "name": "Bench Brackets",
-    "handle": "",
+    "handle": "bench-brackets",
     "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/bench-brackets-category-img.webp"
   },
   {
     "id": 4,
     "name": "Floating Shelves",
-    "handle": "",
+    "handle": "floating-shelves",
     "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/floating-shelves-category-img.webp"
   },
   {
     "id": 5,
     "name": "Wood Corbels",
-    "handle": "",
+    "handle": "wood-corbels",
     "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/wood-corbels-category-img.webp"
   },
   {
     "id": 6,
     "name": "Mantel Brackets",
-    "handle": "",
+    "handle": "mantel-brackets",
     "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/mantel-brackets-category-img.webp"
   },
   {
@@ -44,31 +44,31 @@
   {
     "id": 8,
     "name": "Shelf Brackets",
-    "handle": "",
+    "handle": "shelf-brackets",
     "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/shelf-brackets-category-img.webp"
   },
   {
     "id": 9,
     "name": "Floating Shelf Brackets",
-    "handle": "",
+    "handle": "floating-shelf-brackets",
     "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/floating-shelf-brackets-category-img.webp"
   },
   {
     "id": 10,
     "name": "Wall Shelves",
-    "handle": "",
+    "handle": "wall-shelves",
     "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/wall-shelves-category-img.webp"
   },
   {
     "id": 11,
     "name": "Cube Cabinets",
-    "handle": "",
+    "handle": "cube-cabinets",
     "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/cube-cabinets-category-img.webp"
   },
   {
     "id": 12,
     "name": "Clearance",
-    "handle": "",
+    "handle": "clearance",
     "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/clearance-category-img.webp"
   }
 ]

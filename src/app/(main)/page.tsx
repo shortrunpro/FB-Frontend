@@ -3,15 +3,11 @@ import { headers } from 'next/headers';
 import Script from 'next/script';
 
 import {
-  BannerSection,
-  BlogSection,
   HomeCategories,
   HomeImageCarousel,
   HomeParagraphSection1,
   HomeParagraphSection2,
-  HomeProductSection,
-  HomeSignUp,
-  ShopByStyleSection
+  HomeProductSection
 } from '@/components/sections';
 import { listRegions } from '@/lib/data/regions';
 import { toHreflang } from '@/lib/helpers/hreflang';
@@ -154,7 +150,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <HomeImageCarousel />
       <div className="w-full px-12 lg:px-12">
         <HomeCategories heading="POPULAR CATEGORIES" />
-        <HomeSignUp />
         <HomeParagraphSection1 />
         <HomeProductSection
           heading="popular products"
@@ -164,9 +159,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       </div>
 
       <HomeParagraphSection2 />
-      {/* <BannerSection />
-      <ShopByStyleSection />
-      <BlogSection /> */}
     </main>
   );
 }
