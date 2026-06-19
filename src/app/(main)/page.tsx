@@ -1,14 +1,8 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 
-import {
-  HomeCategories,
-  HomeParagraphSection1,
-  HomeParagraphSection2,
-  HomeProductSection
-} from '@/components/sections';
 import { BASE_URL, SITE_NAME } from '@/lib/config';
-import { HomeImageCarousel } from '@/modules/home/sections';
+import { Homepage } from '@/modules/home/templates';
 
 export const metadata: Metadata = {
   title: 'Support Brackets for Counters, Shelves & Mounting',
@@ -83,18 +77,7 @@ export default async function Home() {
           })
         }}
       />
-      <HomeImageCarousel />
-      <div className="mx-auto w-full max-w-[1400px]">
-        <HomeCategories heading="POPULAR CATEGORIES" />
-        <HomeParagraphSection1 />
-        <HomeProductSection
-          heading="popular products"
-          locale={'us'}
-          home
-        />
-      </div>
-
-      <HomeParagraphSection2 />
+      <Homepage />
     </main>
   );
 }

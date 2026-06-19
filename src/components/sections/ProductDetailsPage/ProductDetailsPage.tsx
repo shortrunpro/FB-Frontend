@@ -3,7 +3,7 @@ import { ProductDetailsShipping, ProductPageDetails } from '@/components/cells';
 import { ProductDetails, ProductFiles, ProductGallery } from '@/components/organisms';
 import { listProducts } from '@/lib/data/products';
 
-import { HomeProductSection } from '../HomeProductSection/HomeProductSection';
+import { HomeProductSection } from '../../../modules/home/sections/HomeProductSection/HomeProductSection';
 
 export const ProductDetailsPage = async ({
   handle,
