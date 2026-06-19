@@ -57,7 +57,9 @@ export default async function RootLayout({
           crossOrigin="anonymous"
         />
       </Head>
-      <body className={`${funnelDisplay.className} relative bg-primary text-secondary antialiased`}>
+      <body
+        className={`${funnelDisplay.className} relative m-0 w-full overflow-x-hidden bg-primary p-0 text-secondary antialiased`}
+      >
         <Providers cart={cart}>{children}</Providers>
         <Toaster position="top-right" />
       </body>

@@ -2,7 +2,7 @@ import { Button } from '@/modules/common/components';
 
 export const ImageOverlay = () => {
   return (
-    <div className="flex min-h-[450px] w-full flex-col justify-center gap-y-8 bg-[url(/home-paragraph-section/Floating-shelf-Kitchen-Image-darkened.jpg)] py-4 text-white">
+    <div className="flex min-h-[450px] w-full flex-col justify-center gap-y-8 bg-[url(/home-paragraph-section/Floating-shelf-Kitchen-Image-darkened.jpg)] bg-cover py-4 text-white">
       <h4 className="text-4xl font-bold">Heavy-Duty, American-Made Support Brackets</h4>
       <div className="mx-auto flex w-1/2 flex-col gap-y-4 px-4 leading-tight">
         <p className="">

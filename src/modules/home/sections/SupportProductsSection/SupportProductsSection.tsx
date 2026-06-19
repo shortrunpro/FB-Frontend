@@ -17,7 +17,7 @@ export const SupportProductsSection = () => {
             Support Products Designed to Meet Customer Needs
           </h4>
           <div className="flex w-full justify-center">
-            <p className="w-1/2 leading-tight text-gray-500">
+            <p className="leading-tight text-gray-500 2xl:w-1/2">
               Don’t settle for the cheap, flimsy floating shelf or counter support brackets that are
               common in today’s marketplace. All of our products are manufactured in America to
               ISO-certified quality standards.
