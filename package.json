@@ -1,6 +1,6 @@
 {
-  "name": "b2c-storefront",
-  "version": "1.5.4",
+  "name": "fb-storefront",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev --experimental-https -p 8000 --turbopack",
