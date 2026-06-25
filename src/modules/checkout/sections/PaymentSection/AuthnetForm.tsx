@@ -37,7 +37,6 @@ const AuthnetForm = ({ apiLoginID, clientKey, cart }: PaymentSectionProps) => {
       const response = await dispatchData({
         cardData: { ...card, cardNumber: card.cardNumber.replace(/\s/g, '') }
       });
-      console.log(response);
       const { billing_address, shipping_address, email, customer_id } = cart;
       // if (!checkActiveSession && response?.messages?.resultCode === 'Ok') {
       await initiatePaymentSession(cart, {
