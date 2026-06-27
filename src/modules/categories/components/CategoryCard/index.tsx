@@ -18,7 +18,7 @@ const CategoryCard = ({ category, nested = false }: Props) => {
       <div className="relative flex aspect-square overflow-hidden">
         <Image
           loading="lazy"
-          src={category?.product_category_image[0].url}
+          src={category?.product_category_image[0]?.url}
           alt={`category - ${category.name}`}
           width={300}
           height={300}
