@@ -2,9 +2,7 @@ import { Addresses } from './Addressess/Addresses';
 import { BlogCard } from './BlogCard/BlogCard';
 import { BrandCard } from './BrandCard/BrandCard';
 import { CategoryCard } from './CategoryCard/CategoryCard';
-import { Footer } from './Footer/Footer';
 import { GalleryCarousel } from './GalleryCarousel/GalleryCarousel';
-import { Header } from './Header/Header';
 import { HomeProductsCarousel } from './HomeProductsCarousel/HomeProductsCarousel';
 import { ProductBulletPoints } from './ProductBulletPoints/ProductBulletPoints';
 import { ProductCard } from './ProductCard/ProductCard';
@@ -32,8 +30,6 @@ export {
   ProductsPagination,
   ProductSidebar,
   ProductListingActiveFilters,
-  Header,
-  Footer,
   GalleryCarousel,
   HomeProductsCarousel,
   ProductGallery,
