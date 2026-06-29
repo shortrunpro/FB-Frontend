@@ -11,6 +11,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-montserrat)', 'sans-serif']
+      },
       backgroundColor: {
         'america-blue': 'rgba(var(--bg-america-blue))',
         brand: 'rgba(var(--bg-brand))',
