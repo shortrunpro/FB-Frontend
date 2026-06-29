@@ -14,7 +14,7 @@ export const Homepage = () => {
         <HomeCategories heading="POPULAR CATEGORIES" />
       </div>
       <HomeParagraphSection />
-      <div className="mx-auto w-full lg:max-w-4xl xl:max-w-6xl 2xl:max-w-[1400px]">
+      <div className="container-columns w-full">
         <SupportProductsSection />
         <HomeProductSection
           heading="popular products"
