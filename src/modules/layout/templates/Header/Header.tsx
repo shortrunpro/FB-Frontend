@@ -1,21 +1,21 @@
-import { HttpTypes } from '@medusajs/types';
+// import { HttpTypes } from '@medusajs/types';
 
-import { CartDrawer, ContactLinks, MobileNavbar, Navbar, NavLinks } from '@/components/cells';
+import { CartDrawer, ContactLinks, MobileNavbar } from '@/components/cells';
 import { UserDropdown } from '@/components/cells/UserDropdown/UserDropdown';
-import { NavbarSearch } from '@/components/molecules';
-import { listCategories } from '@/lib/data/categories';
+// import { listCategories } from '@/lib/data/categories';
 import { retrieveCustomer } from '@/lib/data/customer';
+import { Navbar, NavbarSearch, NavLinks } from '@/modules/layout/components';
 
 export const Header = async () => {
   const user = await retrieveCustomer().catch(() => null);
   const isLoggedIn = Boolean(user);
 
-  const { categories, parentCategories } = (await listCategories({
-    query: { include_ancestors_tree: true }
-  })) as {
-    categories: HttpTypes.StoreProductCategory[];
-    parentCategories: HttpTypes.StoreProductCategory[];
-  };
+  // const { categories, parentCategories } = (await listCategories({
+  //   query: { include_ancestors_tree: true }
+  // })) as {
+  //   categories: HttpTypes.StoreProductCategory[];
+  //   parentCategories: HttpTypes.StoreProductCategory[];
+  // };
   return (
     <header
       data-testid="header"
@@ -27,10 +27,10 @@ export const Header = async () => {
       >
         <div className="flex w-full items-center">
           {/* TODO identify why we are passing categories to the mobile navbar */}
-          <MobileNavbar
+          {/* <MobileNavbar
             parentCategories={parentCategories}
             categories={categories}
-          />
+          /> */}
           <ContactLinks />
         </div>
 

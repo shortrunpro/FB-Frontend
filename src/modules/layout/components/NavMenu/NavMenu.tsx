@@ -1,10 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-
 import Link from 'next/link';
 
-import { Dropdown } from '../Dropdown/Dropdown';
 import menu from './menu.json';
 
 export const NavMenu = () => {
@@ -22,7 +19,7 @@ const MenuItem = ({ item }: { item: any }) => {
       <div
         tabIndex={0}
         role="button"
-        className="rounded-field btn btn-ghost text-[16px]"
+        className="rounded-field 3xl:px-2.5 btn btn-ghost font-bold uppercase lg:px-1 xl:px-1.5"
       >
         {item.title}
       </div>

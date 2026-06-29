@@ -11,8 +11,6 @@ import { ContactLinks } from './ContactLinks/ContactLinks';
 import { HeadingCategories } from './HeadingCategories/HeadingCategories';
 import { LabeledInput } from './LabeledInput/LabeledInput';
 import { MobileNavbar } from './MobileNavbar/MobileNavbar';
-import { Navbar } from './Navbar/Navbar';
-import { NavLinks } from './NavLinks/NavLinks';
 import { OrderAddresses } from './OrderAddresses/OrderAddresses';
 import { OrderProductListItem } from './OrderProductListItem/OrderProductListItem';
 import { OrderTimeline } from './OrderTimeline/OrderTimeline';
@@ -32,9 +30,7 @@ import StateSelect from './StateSelect';
 export {
   StateSelect,
   CartDrawer,
-  NavLinks,
   ContactLinks,
-  Navbar,
   Carousel,
   Pagination,
   ProductFilter,
