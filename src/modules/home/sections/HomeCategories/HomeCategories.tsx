@@ -1,4 +1,4 @@
-import { CategoryCard } from '@/components/organisms';
+import { CategoryCard } from '@/modules/categories/components';
 
 import categories from './categories.json';
 

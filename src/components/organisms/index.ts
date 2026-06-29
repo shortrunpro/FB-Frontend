@@ -1,7 +1,6 @@
 import { Addresses } from './Addressess/Addresses';
 import { BlogCard } from './BlogCard/BlogCard';
 import { BrandCard } from './BrandCard/BrandCard';
-import { CategoryCard } from './CategoryCard/CategoryCard';
 import { GalleryCarousel } from './GalleryCarousel/GalleryCarousel';
 import { HomeProductsCarousel } from './HomeProductsCarousel/HomeProductsCarousel';
 import { ProductBulletPoints } from './ProductBulletPoints/ProductBulletPoints';
@@ -23,7 +22,6 @@ export {
   ProductFiles,
   ProductCard,
   BrandCard,
-  CategoryCard,
   BlogCard,
   ProductListingHeader,
   ProductsList,

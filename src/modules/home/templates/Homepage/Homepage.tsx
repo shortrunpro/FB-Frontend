@@ -10,7 +10,7 @@ export const Homepage = () => {
   return (
     <>
       <HomeImageCarousel />
-      <div className="mx-auto w-full lg:max-w-4xl xl:max-w-6xl 2xl:max-w-[1400px]">
+      <div className="container-columns">
         <HomeCategories heading="POPULAR CATEGORIES" />
       </div>
       <HomeParagraphSection />

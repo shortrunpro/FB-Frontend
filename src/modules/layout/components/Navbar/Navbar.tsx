@@ -22,7 +22,7 @@ export const Navbar = () => {
             />
           </Link>
         </div>
-        <div className="navbar-center hidden px-4 lg:flex">
+        <div className="navbar-center hidden lg:flex">
           <NavMenu />
         </div>
 

@@ -158,7 +158,6 @@ async function Category({
               <CategoryCard
                 key={cat.id}
                 category={cat}
-                nested={true}
               />
             ))}
           </div>

@@ -1,3 +1,3 @@
-import CategoryCard from './CategoryCard';
+import { CategoryCard } from './CategoryCard/CategoryCard';
 
 export { CategoryCard };
