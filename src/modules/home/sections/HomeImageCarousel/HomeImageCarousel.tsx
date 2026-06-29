@@ -37,7 +37,7 @@ export const HomeImageCarousel = () => {
             </h2>
             <p className="text-sm/10">100% USA-MADE EVERYTIME</p>
             <div>
-              <Button className="flex items-center gap-x-2">
+              <Button className="flex items-center gap-x-2 rounded-full font-bold hover:bg-gray-600">
                 SHOP NOW{' '}
                 <ArrowRight
                   color="#ffffff"

@@ -19,7 +19,9 @@ export const ImageOverlay = () => {
         </p>
       </div>
       <div>
-        <Button className="px-6 py-4 hover:bg-gray-600">SHOP ALL HARDWARE</Button>
+        <Button className="rounded-full bg-white px-6 py-4 font-semibold text-brand hover:bg-brand hover:text-white">
+          SHOP ALL HARDWARE
+        </Button>
       </div>
     </div>
   );
