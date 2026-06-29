@@ -16,8 +16,6 @@ export const Navbar = () => {
               src={'/federal-brace-logo.jpg'}
               alt="Federal Brace Logo"
               className="object-cover"
-              // width={316}
-              // height={43}
               fill
             />
           </Link>

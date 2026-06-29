@@ -19,7 +19,7 @@ const MenuItem = ({ item }: { item: any }) => {
       <div
         tabIndex={0}
         role="button"
-        className="rounded-field 3xl:px-2.5 btn btn-ghost font-bold uppercase lg:px-1 xl:px-1.5"
+        className="rounded-field 3xl:px-3 btn btn-ghost font-bold uppercase text-brand lg:px-1 lg:text-xs/3 xl:text-sm/3 2xl:px-1 2xl:text-base/3"
       >
         {item.title}
       </div>
