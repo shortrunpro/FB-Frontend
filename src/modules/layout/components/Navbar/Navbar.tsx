@@ -1,22 +1,24 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { NavMenu } from '@/components/molecules';
+import { NavMenu } from '../NavMenu/NavMenu';
 
 export const Navbar = () => {
   return (
-    <div className="w-full bg-white">
-      <div className="navbar mx-auto w-full max-w-[1400px] bg-white p-0">
-        <div className="navbar-start">
+    <div className="w-full bg-white py-4">
+      <div className="container-columns navbar justify-between bg-white">
+        <div className="navbar-start max-w-[316px]">
           <Link
-            className="bg-white"
+            className="3xl:w-full relative aspect-[316/43] w-3/4 bg-white lg:w-11/12"
             href={'/'}
           >
             <Image
               src={'/federal-brace-logo.jpg'}
               alt="Federal Brace Logo"
-              width={316}
-              height={43}
+              className="object-cover"
+              // width={316}
+              // height={43}
+              fill
             />
           </Link>
         </div>

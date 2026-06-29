@@ -1,4 +1,4 @@
-import { Footer, Header } from '@/components/organisms';
+import { Footer, Header } from '@/modules/layout/templates';
 
 export default async function AuthLayout({
   children,

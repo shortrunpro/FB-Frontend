@@ -11,6 +11,12 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        '3xl': '1800px'
+      },
+      fontFamily: {
+        sans: ['var(--font-montserrat)', 'sans-serif']
+      },
       backgroundColor: {
         'america-blue': 'rgba(var(--bg-america-blue))',
         brand: 'rgba(var(--bg-brand))',

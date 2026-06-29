@@ -1,15 +1,6 @@
 'use client';
 
-import Image from 'next/image';
-import {
-  A11y,
-  Autoplay,
-  Mousewheel,
-  Navigation,
-  Pagination,
-  Scrollbar,
-  Virtual
-} from 'swiper/modules';
+import { A11y, Autoplay, Navigation, Virtual } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // @ts-ignore
@@ -23,31 +14,26 @@ import 'swiper/css/scrollbar';
 // @ts-ignore
 import 'swiper/css/mousewheel';
 
+import { ProductCard } from '@/components/organisms';
 import { Product } from '@/types/product';
 
-import { ProductCard } from '../ProductCard/ProductCard';
-
 export const HomeProductsCarousel = ({
-  locale,
-  sellerProducts,
-  home
+  products,
+  slidesPerView = 4
 }: {
-  locale: string;
-  sellerProducts: Product[] | any;
-  home: boolean;
+  products: Product[] | any;
+  slidesPerView?: number;
 }) => {
   return (
-    // <div className="">
     <Swiper
-      modules={[Navigation, Pagination, Virtual, A11y, Autoplay]}
+      modules={[Navigation, Virtual, A11y, Autoplay]}
       navigation
-      pagination={{ clickable: false }}
       virtual
-      slidesPerView={4}
+      slidesPerView={slidesPerView}
       spaceBetween={10}
       autoplay={{ delay: 3000, pauseOnMouseEnter: true }}
     >
-      {sellerProducts.map((product: any, index: any) => (
+      {products.map((product: any, index: any) => (
         <SwiperSlide
           key={product.id}
           virtualIndex={index}
@@ -56,7 +42,5 @@ export const HomeProductsCarousel = ({
         </SwiperSlide>
       ))}
     </Swiper>
-
-    // </div>
   );
 };

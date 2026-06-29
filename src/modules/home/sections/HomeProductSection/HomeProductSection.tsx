@@ -1,5 +1,5 @@
-import { HomeProductsCarousel } from '@/components/organisms';
 import { listProducts } from '@/lib/data/products';
+import { HomeProductsCarousel } from '@/modules/products/templates';
 import { Product } from '@/types/product';
 
 export const HomeProductSection = async ({
@@ -24,11 +24,9 @@ export const HomeProductSection = async ({
   return (
     <section className="w-full py-8">
       <h2 className="heading-lg mb-6 font-bold uppercase tracking-tight text-brand">{heading}</h2>
-
       <HomeProductsCarousel
-        locale={locale}
-        sellerProducts={response.products}
-        home={home}
+        products={response.products}
+        slidesPerView={4}
       />
     </section>
   );

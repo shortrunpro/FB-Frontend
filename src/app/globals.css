@@ -143,6 +143,10 @@ button:disabled svg path {
   min-width: 0;
 }
 
+.container-columns {
+  @apply lg:px-10 xl:px-28 2xl:px-40;
+}
+
 .no-arrows-number-input::-webkit-inner-spin-button,
 .no-arrows-number-input::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -150,6 +154,7 @@ button:disabled svg path {
 }
 .no-arrows-number-input {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 /* Removes weird autfill background */
 input:-webkit-autofill,
@@ -178,6 +183,7 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type='number'] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 .home-gradient {
   background: #c9e1ee;
