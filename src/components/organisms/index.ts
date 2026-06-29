@@ -2,7 +2,6 @@ import { Addresses } from './Addressess/Addresses';
 import { BlogCard } from './BlogCard/BlogCard';
 import { BrandCard } from './BrandCard/BrandCard';
 import { GalleryCarousel } from './GalleryCarousel/GalleryCarousel';
-import { HomeProductsCarousel } from './HomeProductsCarousel/HomeProductsCarousel';
 import { ProductBulletPoints } from './ProductBulletPoints/ProductBulletPoints';
 import { ProductCard } from './ProductCard/ProductCard';
 import { ProductDetails } from './ProductDetails/ProductDetails';
@@ -29,7 +28,6 @@ export {
   ProductSidebar,
   ProductListingActiveFilters,
   GalleryCarousel,
-  HomeProductsCarousel,
   ProductGallery,
   ProductDetails,
   AlgoliaProductSidebar,

@@ -6,7 +6,6 @@ export function CategoryCard({
 }: {
   category: { name: string; handle: string; image?: string };
 }) {
-  console.log(category);
   return (
     <Link
       href={`/categories/${category.handle}`}
