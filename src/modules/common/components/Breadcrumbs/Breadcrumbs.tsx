@@ -1,11 +1,10 @@
 'use client';
 
-import { BuildingStorefront, House } from '@medusajs/icons';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaHome } from 'react-icons/fa';
 
-import { ForwardIcon, HomeIcon } from '@/icons';
+import { ForwardIcon } from '@/icons';
 import { cn } from '@/lib/utils';
 
 interface BreadcrumbsProps {
@@ -18,7 +17,7 @@ export function Breadcrumbs({ items, className, 'data-testid': dataTestId }: Bre
   const pathname = usePathname();
   return (
     <nav
-      className={cn('flex', className)}
+      className={cn('my-4 flex', className)}
       aria-label="Breadcrumb"
       data-testid="breadcrumbs"
     >

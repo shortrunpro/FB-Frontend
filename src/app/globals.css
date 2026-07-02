@@ -197,3 +197,9 @@ input[type='number'] {
   background-color: #f7f7f7;
   opacity: inherit;
 }
+h1.tiptap-heading {
+  @apply text-[40px] font-medium leading-[48px] tracking-normal text-brand max-md:text-[32px] max-md:leading-[40px];
+}
+h2.tiptap-heading {
+  @apply text-[24px] font-medium leading-[32px] tracking-normal text-brand max-md:text-[20px] max-md:leading-[28px];
+}

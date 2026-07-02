@@ -20,3 +20,18 @@ export interface BlogList {
   limit: number;
   offset: number;
 }
+
+export interface Blog {
+  author: string | null;
+  meta_title: string;
+  meta_description: string;
+  handle: string;
+  title: string;
+  content: Record<string, unknown>;
+  main_image: string;
+}
+
+export interface BlogResponse {
+  data: Blog | null;
+  ok: boolean;
+}
