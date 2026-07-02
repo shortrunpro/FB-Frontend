@@ -19,7 +19,7 @@ export const NavLinks = () => {
       </Link>
       <Link
         prefetch={false}
-        href="/media"
+        href="/blog"
         className="hover:text-neutral-800"
       >
         Blog

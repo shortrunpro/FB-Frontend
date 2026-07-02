@@ -1,3 +1,4 @@
+import { Breadcrumbs } from './Breadcrumbs/Breadcrumbs';
 import { Button } from './Button';
 import { EmailLink } from './EmailLink';
 import ErrorMessage from './ErrorMessage';
@@ -13,6 +14,7 @@ import { TwitterLink } from './TwitterLink';
 import { YoutubeLink } from './YoutubeLink';
 
 export {
+  Breadcrumbs,
   FileUpload,
   Textarea,
   Input,
