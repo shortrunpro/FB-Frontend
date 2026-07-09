@@ -24,20 +24,19 @@ export const NavLinks = () => {
       >
         Blog
       </Link>
-      {/* TODO Figure out sitemap plan for resources */}
       <Link
         prefetch={false}
-        href="/company"
+        href="/content/category/company"
         className="hover:text-neutral-800"
       >
         Company
       </Link>
       <Link
         prefetch={false}
-        href="/content/category/3-resources"
+        href="/content/category/resources"
         className="hover:text-neutral-800"
       >
-        Blog
+        Resources
       </Link>
     </div>
   );
