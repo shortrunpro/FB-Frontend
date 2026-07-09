@@ -1,5 +1,6 @@
 import { Breadcrumbs } from './Breadcrumbs/Breadcrumbs';
 import { Button } from './Button';
+import ContentParser from './ContentParser/ContentParser';
 import { EmailLink } from './EmailLink';
 import ErrorMessage from './ErrorMessage';
 import { FacebookLink } from './FacebookLink';
@@ -14,6 +15,7 @@ import { TwitterLink } from './TwitterLink';
 import { YoutubeLink } from './YoutubeLink';
 
 export {
+  ContentParser,
   Breadcrumbs,
   FileUpload,
   Textarea,

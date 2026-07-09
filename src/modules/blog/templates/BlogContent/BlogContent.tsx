@@ -1,6 +1,5 @@
+import { ContentParser } from '@/modules/common/components';
 import { Blog } from '@/types/blog';
-
-import { ContentParser } from '../../components';
 
 const BlogContent = ({ data }: { data: Blog }) => {
   return (
