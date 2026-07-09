@@ -14,16 +14,17 @@ export interface StoreGetResourcesResponse {
   offset: number;
 }
 export interface Resource {
-  title: string | undefined;
+  title: string;
   subtitle?: string | undefined;
-  content: Record<string, unknown> | undefined;
+  content: Record<string, unknown>;
   handle: string | undefined;
   main_image?: string | null | undefined;
-  metadata?: Record<string, unknown> | null | undefined;
+  metadata?: Metadata;
   resource_category: {
     id: string;
     title: string;
-  } | null;
+    handle: string;
+  };
 }
 
 export interface ResourceCategory {
@@ -36,6 +37,10 @@ export interface ResourceCategory {
 }
 export interface StoreGetResourceCategoryResponse {
   data: ResourceCategory;
+  ok: boolean;
+}
+export interface StoreFetchResourceResponse {
+  data: Resource;
   ok: boolean;
 }
 export interface ResourceCategoryItems {

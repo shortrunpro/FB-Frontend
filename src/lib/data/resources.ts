@@ -1,5 +1,6 @@
 import {
   Resource,
+  StoreFetchResourceResponse,
   StoreGetResourceCategoryResponse,
   StoreGetResourcesResponse
 } from '@/types/resources';
@@ -13,7 +14,7 @@ export const fetchResources = async ({ page }: { page: any }) => {
 };
 
 export const fetchResourceByHandle = async ({ handle }: { handle: string }) => {
-  return sdk.client.fetch<Resource>(`/store/resources/${handle}`);
+  return sdk.client.fetch<StoreFetchResourceResponse>(`/store/resources/${handle}`);
 };
 
 export const fetchResourceCategories = async ({ page }: { page: any }) => {
