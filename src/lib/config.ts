@@ -35,7 +35,7 @@ export async function fetchQuery(
   const res = await fetch(`${MEDUSA_BACKEND_URL}${url}${params && `?${params}`}`, {
     method,
     headers: {
-      // 'Content-Type': 'application/json',
+      ...(body && !formData ? { 'Content-Type': 'application/json' } : {}),
       'x-publishable-api-key': process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
       ...headers
     },
