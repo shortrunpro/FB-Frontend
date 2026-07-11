@@ -16,7 +16,6 @@ export const newQuote = async ({ formData }: { formData: RequestQuoteSchema }) =
   });
   return fetchQuery('/store/quotes', {
     method: 'POST',
-    body: payload,
-    formData: true
+    body: payload
   });
 };

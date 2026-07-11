@@ -13,14 +13,11 @@ export const sdk = new Medusa({
 type FetchQueryOptions = Omit<RequestInit, 'headers' | 'body'> & {
   headers?: Record<string, string | null | { tags: string[] }>;
   query?: Record<string, string | number>;
-  body?: Record<string, any>;
-  formData?: boolean;
+  body?: Record<string, any> | any;
+  contentType?: string;
 };
 
-export async function fetchQuery(
-  url: string,
-  { method, query, headers, body, formData = false }: FetchQueryOptions
-) {
+export async function fetchQuery(url: string, { method, query, headers, body }: FetchQueryOptions) {
   const params = Object.entries(query || {}).reduce((acc, [key, value], index) => {
     if (value && value !== undefined) {
       const queryLength = Object.values(query || {}).filter(i => !!i).length;
@@ -28,18 +25,13 @@ export async function fetchQuery(
     }
     return acc;
   }, '');
-  let payload: any = body ?? null;
-  if (body && !formData) {
-    payload = JSON.stringify(body);
-  }
   const res = await fetch(`${MEDUSA_BACKEND_URL}${url}${params && `?${params}`}`, {
     method,
     headers: {
-      // 'Content-Type': 'application/json',
       'x-publishable-api-key': process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string,
       ...headers
     },
-    body: payload
+    body: headers && headers['Content-Type'] === 'application/json' ? JSON.stringify(body) : body
   });
 
   let data;

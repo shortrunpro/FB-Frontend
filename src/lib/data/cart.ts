@@ -208,19 +208,19 @@ export async function updateLineItem({ lineId, quantity }: { lineId: string; qua
   }
 
   const headers = {
-    ...(await getAuthHeaders())
+    ...(await getAuthHeaders()),
+    'Content-Type': 'application/json'
   };
 
-  const res = await fetchQuery(`/store/carts/${cartId}/line-items/${lineId}`, {
+  return fetchQuery(`/store/carts/${cartId}/line-items/${lineId}`, {
     body: { quantity },
     method: 'POST',
     headers
+  }).then(async resp => {
+    const cartCacheTag = await getCacheTag('carts');
+    revalidateTag(cartCacheTag);
+    return resp;
   });
-
-  const cartCacheTag = await getCacheTag('carts');
-  await revalidateTag(cartCacheTag);
-
-  return res;
 }
 
 export async function deleteLineItem(lineId: string) {
@@ -255,19 +255,19 @@ export async function setShippingMethod({
   shippingMethodId: string;
 }) {
   const headers = {
-    ...(await getAuthHeaders())
+    ...(await getAuthHeaders()),
+    'Content-Type': 'application/json'
   };
 
-  const res = await fetchQuery(`/store/carts/${cartId}/shipping-methods`, {
+  return fetchQuery(`/store/carts/${cartId}/shipping-methods`, {
     body: { option_id: shippingMethodId },
     method: 'POST',
     headers
+  }).then(async resp => {
+    const cartCacheTag = await getCacheTag('carts');
+    revalidateTag(cartCacheTag);
+    return resp;
   });
-
-  const cartCacheTag = await getCacheTag('carts');
-  revalidateTag(cartCacheTag);
-
-  return res;
 }
 
 export async function initiatePaymentSession(
