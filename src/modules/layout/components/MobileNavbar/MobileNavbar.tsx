@@ -2,21 +2,16 @@
 
 import { useEffect, useState } from 'react';
 
+import { BarsThree } from '@medusajs/icons';
 import { HttpTypes } from '@medusajs/types';
 
 import { IconButton } from '@/components/atoms';
 import { HeaderCategoryNavbar } from '@/components/molecules';
 import { CloseIcon, HamburgerMenuIcon } from '@/icons';
 
-import { MobileCategoryNavbar } from './components';
+import { MobileNestedMenu } from './components';
 
-export const MobileNavbar = ({
-  categories,
-  parentCategories
-}: {
-  categories: HttpTypes.StoreProductCategory[];
-  parentCategories: HttpTypes.StoreProductCategory[];
-}) => {
+export const MobileNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeMenuHandler = () => {
@@ -44,7 +39,10 @@ export const MobileNavbar = ({
         onClick={() => setIsOpen(true)}
         data-testid="mobile-menu-toggle"
       >
-        <HamburgerMenuIcon />
+        <BarsThree
+          width={30}
+          height={30}
+        />
       </div>
       {isOpen && (
         <div
@@ -65,17 +63,18 @@ export const MobileNavbar = ({
             />
           </div>
           <div className="">
-            <HeaderCategoryNavbar
+            <MobileNestedMenu onClose={closeMenuHandler} />
+            {/* <HeaderCategoryNavbar
               onClose={closeMenuHandler}
               categories={categories}
               parentCategories={parentCategories}
-            />
+            /> */}
             <div className="p-4">
-              <MobileCategoryNavbar
+              {/* <MobileCategoryNavbar
                 onClose={closeMenuHandler}
                 categories={categories}
                 parentCategories={parentCategories}
-              />
+              /> */}
             </div>
           </div>
         </div>

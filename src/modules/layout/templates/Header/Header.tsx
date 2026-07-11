@@ -1,41 +1,27 @@
-// import { HttpTypes } from '@medusajs/types';
-
-import { CartDrawer, ContactLinks, MobileNavbar } from '@/components/cells';
+import { CartDrawer } from '@/components/cells';
 import { UserDropdown } from '@/components/cells/UserDropdown/UserDropdown';
-// import { listCategories } from '@/lib/data/categories';
 import { retrieveCustomer } from '@/lib/data/customer';
-import { Navbar, NavbarSearch, NavLinks } from '@/modules/layout/components';
+import { ContactLinks, Navbar, NavbarSearch, NavLinks } from '@/modules/layout/components';
 
 export const Header = async () => {
   const user = await retrieveCustomer().catch(() => null);
   const isLoggedIn = Boolean(user);
 
-  // const { categories, parentCategories } = (await listCategories({
-  //   query: { include_ancestors_tree: true }
-  // })) as {
-  //   categories: HttpTypes.StoreProductCategory[];
-  //   parentCategories: HttpTypes.StoreProductCategory[];
-  // };
   return (
     <header
       data-testid="header"
-      className="sticky top-0 z-50"
+      className="sticky top-0 z-50 overflow-hidden"
     >
       <div
-        className="flex justify-between bg-brand px-8 py-2 text-white md:px-5 lg:px-8"
+        className="hidden justify-between bg-brand px-8 py-2 text-white md:px-5 lg:flex lg:px-8"
         data-testid="header-top"
       >
-        <div className="flex w-full items-center">
-          {/* TODO identify why we are passing categories to the mobile navbar */}
-          {/* <MobileNavbar
-            parentCategories={parentCategories}
-            categories={categories}
-          /> */}
+        <div className="flex items-center">
           <ContactLinks />
         </div>
 
         <div
-          className="flex w-full items-center justify-end gap-2 py-2 lg:gap-4"
+          className="flex items-center justify-end gap-2 py-2 lg:gap-4"
           data-testid="header-actions"
         >
           <NavLinks />
