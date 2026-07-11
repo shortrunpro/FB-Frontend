@@ -17,11 +17,11 @@ import { Button } from '@/modules/common/components';
 
 export const HomeImageCarousel = () => {
   return (
-    <div className="home-gradient w-full py-12">
+    <div className="home-gradient w-full py-8 lg:py-12">
       <div className="container-columns flex w-full">
-        <div className="flex w-7/12">
+        <div className="flex w-full text-center lg:w-7/12 lg:text-start">
           <div className="flex w-full flex-col justify-center gap-y-4">
-            <div className="flex items-center gap-x-3">
+            <div className="flex items-center justify-center gap-x-3 lg:justify-normal">
               <div className="flex gap-x-2">
                 <StarSolid />
                 <StarSolid />
@@ -29,15 +29,15 @@ export const HomeImageCarousel = () => {
                 <StarSolid />
                 <StarSolid />
               </div>
-              <p className="text-sm/3 font-bold">13k+ PROJECTS SERVED</p>
+              <p className="heading-sm font-bold lg:text-sm/3">13k+ PROJECTS SERVED</p>
             </div>
-            <h2 className="3xl:text-7xl flex flex-col font-bold leading-none lg:text-5xl xl:text-6xl">
+            <h2 className="heading-2xl lg:heading-2xl flex flex-col gap-x-1 font-bold leading-none xl:text-6xl 3xl:text-7xl">
               <span>Heavy-Duty Metal</span>
               <span>Support Brackets</span>
             </h2>
-            <p className="text-sm/10">100% USA-MADE EVERYTIME</p>
+            <p className="heading-sm lg:text-sm/10">100% USA-MADE EVERYTIME</p>
             <div>
-              <Button className="flex items-center gap-x-2 rounded-full font-bold hover:bg-brand">
+              <Button className="hidden items-center gap-x-2 rounded-full font-bold hover:bg-brand lg:flex">
                 SHOP NOW{' '}
                 <ArrowRight
                   color="#ffffff"
@@ -47,7 +47,7 @@ export const HomeImageCarousel = () => {
             </div>
           </div>
         </div>
-        <div className="home-swiper flex w-5/12 justify-end">
+        <div className="home-swiper hidden w-5/12 justify-end lg:flex">
           <Swiper
             className="ml-0 mr-0 max-w-[580px] rounded-md"
             modules={[Navigation, Pagination, Autoplay]}
