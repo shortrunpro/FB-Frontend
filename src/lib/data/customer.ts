@@ -245,14 +245,17 @@ export const updateCustomerAddress = async (formData: FormData): Promise<any> =>
 };
 
 export const updateCustomerPassword = async (password: string, token: string): Promise<any> => {
-  const res = await fetch(`${process.env.MEDUSA_BACKEND_URL}/auth/customer/emailpass/update`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify({ password })
-  })
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/auth/customer/emailpass/update`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ password })
+    }
+  )
     .then(async () => {
       await removeAuthToken();
       const customerCacheTag = await getCacheTag('customers');

@@ -115,11 +115,14 @@ export async function addToCartBulk(lineItems: HttpTypes.StoreAddCartLineItem[])
   if (process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY) {
     headers['x-publishable-api-key'] = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY;
   }
-  await fetch(`${process.env.MEDUSA_BACKEND_URL}/store/carts/${cart.id}/line-items/bulk`, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify({ line_items: lineItems })
-  })
+  await fetch(
+    `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${cart.id}/line-items/bulk`,
+    {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ line_items: lineItems })
+    }
+  )
     .then(async () => {
       const cartCacheTag = await getCacheTag('carts');
       revalidateTag(cartCacheTag);
@@ -327,11 +330,14 @@ export async function removeShippingMethod(shippingMethodId: string) {
     'x-publishable-api-key': process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string
   };
 
-  return fetch(`${process.env.MEDUSA_BACKEND_URL}/store/carts/${cartId}/shipping-methods`, {
-    method: 'DELETE',
-    body: JSON.stringify({ shipping_method_ids: [shippingMethodId] }),
-    headers
-  })
+  return fetch(
+    `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${cartId}/shipping-methods`,
+    {
+      method: 'DELETE',
+      body: JSON.stringify({ shipping_method_ids: [shippingMethodId] }),
+      headers
+    }
+  )
     .then(async () => {
       const cartCacheTag = await getCacheTag('carts');
       revalidateTag(cartCacheTag);
@@ -351,7 +357,7 @@ export async function deletePromotionCode(promoId: string) {
     'x-publishable-api-key': process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string
   };
 
-  return fetch(`${process.env.MEDUSA_BACKEND_URL}/store/carts/${cartId}/promotions`, {
+  return fetch(`${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${cartId}/promotions`, {
     method: 'DELETE',
     body: JSON.stringify({ promo_codes: [promoId] }),
     headers
