@@ -3,72 +3,156 @@
     "id": 1,
     "name": "Counter Brackets",
     "handle": "countertop-supports",
-    "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/countertop-supports-category-img.webp"
+
+    "product_category_image": [
+      {
+        "file_id": "countertop-supports-category-img.webp",
+        "type": "thumbnail",
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/countertop-supports-category-img.webp"
+      }
+    ]
   },
   {
     "id": 2,
     "name": "Vanity Supports",
     "handle": "floating-vanity-brackets",
-    "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/floating-vanity-brackets-category-img.webp"
+
+    "product_category_image": [
+      {
+        "file_id": "floating-vanity-brackets-category-img.webp",
+        "type": "thumbnail",
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/floating-vanity-brackets-category-img.webp"
+      }
+    ]
   },
   {
     "id": 3,
     "name": "Bench Brackets",
     "handle": "bench-brackets",
-    "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/bench-brackets-category-img.webp"
+
+    "product_category_image": [
+      {
+        "file_id": "bench-brackets-category-img.webp",
+        "type": "thumbnail",
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/bench-brackets-category-img.webp"
+      }
+    ]
   },
   {
     "id": 4,
     "name": "Floating Shelves",
     "handle": "floating-shelves",
-    "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/floating-shelves-category-img.webp"
+
+    "product_category_image": [
+      {
+        "file_id": "floating-shelves-category-img.webp",
+        "type": "thumbnail",
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/floating-shelves-category-img.webp"
+      }
+    ]
   },
   {
     "id": 5,
     "name": "Wood Corbels",
     "handle": "wood-corbels",
-    "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/wood-corbels-category-img.webp"
+
+    "product_category_image": [
+      {
+        "file_id": "wood-corbels-category-img.webp",
+        "type": "thumbnail",
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/wood-corbels-category-img.webp"
+      }
+    ]
   },
   {
     "id": 6,
     "name": "Mantel Brackets",
     "handle": "mantel-brackets",
-    "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/mantel-brackets-category-img.webp"
+
+    "product_category_image": [
+      {
+        "file_id": "mantel-brackets-category-img.webp",
+        "type": "thumbnail",
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/mantel-brackets-category-img.webp"
+      }
+    ]
   },
   {
     "id": 7,
     "name": "Teak Products",
     "handle": "",
-    "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/teak-shower-mats-category-img.webp"
+
+    "product_category_image": [
+      {
+        "file_id": "teak-shower-mats-category-img.webp",
+        "type": "thumbnail",
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/teak-shower-mats-category-img.webp"
+      }
+    ]
   },
   {
     "id": 8,
     "name": "Shelf Brackets",
     "handle": "shelf-brackets",
-    "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/shelf-brackets-category-img.webp"
+
+    "product_category_image": [
+      {
+        "file_id": "shelf-brackets-category-img.webp",
+        "type": "thumbnail",
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/shelf-brackets-category-img.webp"
+      }
+    ]
   },
   {
     "id": 9,
     "name": "Floating Shelf Brackets",
     "handle": "floating-shelf-brackets",
-    "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/floating-shelf-brackets-category-img.webp"
+
+    "product_category_image": [
+      {
+        "file_id": "floating-shelf-brackets-category-img.webp",
+        "type": "thumbnail",
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/floating-shelf-brackets-category-img.webp"
+      }
+    ]
   },
   {
     "id": 10,
     "name": "Wall Shelves",
     "handle": "wall-shelves",
-    "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/wall-shelves-category-img.webp"
+
+    "product_category_image": [
+      {
+        "file_id": "wall-shelves-category-img.webp",
+        "type": "thumbnail",
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/wall-shelves-category-img.webp"
+      }
+    ]
   },
   {
     "id": 11,
     "name": "Cube Cabinets",
     "handle": "cube-cabinets",
-    "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/cube-cabinets-category-img.webp"
+
+    "product_category_image": [
+      {
+        "file_id": "cube-cabinets-category-img.webp",
+        "type": "thumbnail",
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/cube-cabinets-category-img.webp"
+      }
+    ]
   },
   {
     "id": 12,
     "name": "Clearance",
     "handle": "clearance",
-    "image": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/clearance-category-img.webp"
+
+    "product_category_image": [
+      {
+        "file_id": "clearance-category-img.webp",
+        "type": "thumbnail",
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/clearance-category-img.webp"
+      }
+    ]
   }
 ]
