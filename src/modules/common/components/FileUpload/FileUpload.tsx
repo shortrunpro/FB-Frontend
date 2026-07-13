@@ -4,7 +4,6 @@ import { ChangeEvent, DragEvent, useRef, useState } from 'react';
 
 import { ArrowDownTray } from '@medusajs/icons';
 import { clx, Text } from '@medusajs/ui';
-import Link from 'next/link';
 
 export interface FileType {
   id: string;
@@ -156,7 +155,7 @@ export const FileUpload = ({
         {files &&
           files.length > 0 &&
           files.map(file => (
-            <Link
+            <a
               href={file.url}
               key={file.id}
               className="flex items-center gap-x-2"
@@ -164,7 +163,7 @@ export const FileUpload = ({
             >
               <FileThumbnail />
               <span className="text-brand underline">{file.file.name}</span>
-            </Link>
+            </a>
           ))}
       </div>
     </div>
