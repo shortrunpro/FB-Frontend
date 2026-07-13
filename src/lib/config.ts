@@ -4,6 +4,7 @@ import Medusa from '@medusajs/js-sdk';
 const MEDUSA_BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL ?? '';
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 export const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME;
+export const BRAND_PHONE_NUMBER = process.env.NEXT_PUBLIC_PHONE_NUMBER;
 export const sdk = new Medusa({
   baseUrl: MEDUSA_BACKEND_URL,
   debug: process.env.NODE_ENV === 'development',
