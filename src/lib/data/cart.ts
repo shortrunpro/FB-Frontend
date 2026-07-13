@@ -115,11 +115,14 @@ export async function addToCartBulk(lineItems: HttpTypes.StoreAddCartLineItem[])
   if (process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY) {
     headers['x-publishable-api-key'] = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY;
   }
-  await fetch(`${process.env.MEDUSA_BACKEND_URL}/store/carts/${cart.id}/line-items/bulk`, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify({ line_items: lineItems })
-  })
+  await fetch(
+    `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${cart.id}/line-items/bulk`,
+    {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ line_items: lineItems })
+    }
+  )
     .then(async () => {
       const cartCacheTag = await getCacheTag('carts');
       revalidateTag(cartCacheTag);
@@ -205,19 +208,19 @@ export async function updateLineItem({ lineId, quantity }: { lineId: string; qua
   }
 
   const headers = {
-    ...(await getAuthHeaders())
+    ...(await getAuthHeaders()),
+    'Content-Type': 'application/json'
   };
 
-  const res = await fetchQuery(`/store/carts/${cartId}/line-items/${lineId}`, {
+  return fetchQuery(`/store/carts/${cartId}/line-items/${lineId}`, {
     body: { quantity },
     method: 'POST',
     headers
+  }).then(async resp => {
+    const cartCacheTag = await getCacheTag('carts');
+    revalidateTag(cartCacheTag);
+    return resp;
   });
-
-  const cartCacheTag = await getCacheTag('carts');
-  await revalidateTag(cartCacheTag);
-
-  return res;
 }
 
 export async function deleteLineItem(lineId: string) {
@@ -252,19 +255,19 @@ export async function setShippingMethod({
   shippingMethodId: string;
 }) {
   const headers = {
-    ...(await getAuthHeaders())
+    ...(await getAuthHeaders()),
+    'Content-Type': 'application/json'
   };
 
-  const res = await fetchQuery(`/store/carts/${cartId}/shipping-methods`, {
+  return fetchQuery(`/store/carts/${cartId}/shipping-methods`, {
     body: { option_id: shippingMethodId },
     method: 'POST',
     headers
+  }).then(async resp => {
+    const cartCacheTag = await getCacheTag('carts');
+    revalidateTag(cartCacheTag);
+    return resp;
   });
-
-  const cartCacheTag = await getCacheTag('carts');
-  revalidateTag(cartCacheTag);
-
-  return res;
 }
 
 export async function initiatePaymentSession(
@@ -327,11 +330,14 @@ export async function removeShippingMethod(shippingMethodId: string) {
     'x-publishable-api-key': process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string
   };
 
-  return fetch(`${process.env.MEDUSA_BACKEND_URL}/store/carts/${cartId}/shipping-methods`, {
-    method: 'DELETE',
-    body: JSON.stringify({ shipping_method_ids: [shippingMethodId] }),
-    headers
-  })
+  return fetch(
+    `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${cartId}/shipping-methods`,
+    {
+      method: 'DELETE',
+      body: JSON.stringify({ shipping_method_ids: [shippingMethodId] }),
+      headers
+    }
+  )
     .then(async () => {
       const cartCacheTag = await getCacheTag('carts');
       revalidateTag(cartCacheTag);
@@ -351,7 +357,7 @@ export async function deletePromotionCode(promoId: string) {
     'x-publishable-api-key': process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string
   };
 
-  return fetch(`${process.env.MEDUSA_BACKEND_URL}/store/carts/${cartId}/promotions`, {
+  return fetch(`${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${cartId}/promotions`, {
     method: 'DELETE',
     body: JSON.stringify({ promo_codes: [promoId] }),
     headers

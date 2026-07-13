@@ -7,10 +7,8 @@ import { CartItemsFooter } from './CartItemsFooter/CartItemsFooter';
 import { CartItemsProducts } from './CartItemsProducts/CartItemsProducts';
 import { ColorFilter } from './ColorFilter/ColorFilter';
 import { ConditionFilter } from './ConditionFilter/ConditionFilter';
-import { ContactLinks } from './ContactLinks/ContactLinks';
 import { HeadingCategories } from './HeadingCategories/HeadingCategories';
 import { LabeledInput } from './LabeledInput/LabeledInput';
-import { MobileNavbar } from './MobileNavbar/MobileNavbar';
 import { OrderAddresses } from './OrderAddresses/OrderAddresses';
 import { OrderProductListItem } from './OrderProductListItem/OrderProductListItem';
 import { OrderTimeline } from './OrderTimeline/OrderTimeline';
@@ -30,7 +28,6 @@ import StateSelect from './StateSelect';
 export {
   StateSelect,
   CartDrawer,
-  ContactLinks,
   Carousel,
   Pagination,
   ProductFilter,
@@ -40,7 +37,6 @@ export {
   ConditionFilter,
   ColorFilter,
   ActiveFilterElement,
-  MobileNavbar,
   ProductDetailsHeader,
   ProductPageDetails,
   ProductDetailsMeasurements,

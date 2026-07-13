@@ -51,11 +51,14 @@ export const createReturnRequest = async (data: any) => {
     'x-publishable-api-key': process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string
   };
 
-  const response = await fetch(`${process.env.MEDUSA_BACKEND_URL}/store/return-request`, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(data)
-  })
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/return-request`,
+    {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(data)
+    }
+  )
     .then(async res => await res.json())
     .catch(err => medusaError(err));
 

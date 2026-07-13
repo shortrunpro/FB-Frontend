@@ -26,8 +26,7 @@ export const HomeProductsCarousel = ({
 }) => {
   return (
     <Swiper
-      modules={[Navigation, Virtual, A11y, Autoplay]}
-      navigation
+      modules={[Virtual, A11y, Autoplay]}
       virtual
       slidesPerView={slidesPerView}
       spaceBetween={10}

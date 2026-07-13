@@ -45,7 +45,7 @@ const createReview = async (review: any) => {
     'x-publishable-api-key': process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string
   };
 
-  const response = await fetch(`${process.env.MEDUSA_BACKEND_URL}/store/reviews`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/reviews`, {
     headers,
     method: 'POST',
     body: JSON.stringify(review)

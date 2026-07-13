@@ -4,18 +4,27 @@ import Link from 'next/link';
 export function CategoryCard({
   category
 }: {
-  category: { name: string; handle: string; image?: string };
+  category: {
+    name: string;
+    handle: string;
+    product_category_image?: {
+      file_id: string;
+      type: string;
+      url: string;
+    }[];
+  };
 }) {
+  const thumbnail = category?.product_category_image?.find(f => f.type === 'thumbnail');
   return (
     <Link
       href={`/categories/${category.handle}`}
       className="relative flex aspect-square flex-col items-center justify-between rounded-sm border"
     >
       <div className="relative flex aspect-square overflow-hidden">
-        {category?.image ? (
+        {thumbnail ? (
           <Image
             loading="lazy"
-            src={category.image}
+            src={thumbnail.url}
             alt={`category - ${category.name}`}
             width={300}
             height={300}

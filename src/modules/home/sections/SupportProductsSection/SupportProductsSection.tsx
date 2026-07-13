@@ -4,7 +4,7 @@ export const SupportProductsSection = () => {
   return (
     <section className="flex w-full flex-col items-center gap-y-4 py-8 text-center">
       <div className="flex items-center justify-center gap-x-6">
-        <div className="relative aspect-[133/86] w-full max-w-[266px]">
+        <div className="relative hidden aspect-[133/86] w-full max-w-[266px] lg:block">
           <Image
             src={'/proudly-american-flag.png'}
             alt="Proudly American Made"
@@ -24,7 +24,7 @@ export const SupportProductsSection = () => {
             </p>
           </div>
         </div>
-        <div className="relative aspect-[1760/1173] w-full max-w-[325px]">
+        <div className="relative hidden aspect-[1760/1173] w-full max-w-[325px] lg:block">
           <Image
             src={'/fb-anvil.svg'}
             alt="Federal Brace Anvil"
