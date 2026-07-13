@@ -11,7 +11,7 @@ export const HomeCategories = async ({ heading }: { heading: string }) => {
       <div className="mb-6">
         <h2 className="heading-lg uppercase text-brand">{heading}</h2>
       </div>
-      <div className="grid grid-cols-2 gap-x-2 gap-y-4 lg:grid-cols-4 xl:grid-cols-6">
+      <div className="grid grid-cols-2 gap-x-2 gap-y-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
         {categories?.map(category => (
           <CategoryCard
             key={category.id}

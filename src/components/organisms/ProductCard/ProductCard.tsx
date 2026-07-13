@@ -2,9 +2,9 @@
 
 import { HttpTypes } from '@medusajs/types';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { Button } from '@/components/atoms';
-import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
 import { getProductPrice } from '@/lib/helpers/get-product-price';
 import { cn } from '@/lib/utils';
 import { Product } from '@/types/product';
@@ -36,7 +36,7 @@ export const ProductCard = ({
         className="relative aspect-square h-full w-full bg-primary"
         data-testid="product-card-image-container"
       >
-        <LocalizedClientLink
+        <Link
           href={`/products/${product.handle}`}
           aria-label={`View ${productName}`}
           title={`View ${productName}`}
@@ -68,8 +68,8 @@ export const ProductCard = ({
               />
             )}
           </div>
-        </LocalizedClientLink>
-        <LocalizedClientLink
+        </Link>
+        <Link
           href={`/products/${product.handle}`}
           aria-label={`See more about ${productName}`}
           title={`See more about ${productName}`}
@@ -80,9 +80,9 @@ export const ProductCard = ({
           >
             See More
           </Button>
-        </LocalizedClientLink>
+        </Link>
       </div>
-      <LocalizedClientLink
+      <Link
         href={`/products/${product.handle}`}
         aria-label={`Go to ${productName} page`}
         title={`Go to ${productName} page`}
@@ -119,7 +119,7 @@ export const ProductCard = ({
             </div>
           </div>
         </div>
-      </LocalizedClientLink>
+      </Link>
     </div>
   );
 };

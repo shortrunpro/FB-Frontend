@@ -1,54 +1,40 @@
 import Image from 'next/image';
 
+import { BRAND_PHONE_NUMBER } from '@/lib/config';
 import { FacebookLink, LinkedinLink, TwitterLink, YoutubeLink } from '@/modules/common/components';
 
 export function Footer() {
   return (
-    <footer className="bg-base-200 px-10 pb-4 pt-10 text-base-content">
-      <div className="footer">
-        <aside>
-          <Image
-            src={'/fb-anvil.svg'}
-            width={150}
-            height={150}
-            alt="Federal Brace Anvil"
-          />
-          <div className="flex w-full flex-row justify-center gap-2">
-            <TwitterLink />
-            <YoutubeLink />
-            <FacebookLink />
-            <LinkedinLink />
-          </div>
-
-          {/* <p>
-            Federal Brace
-            <br />
-            Providing reliable brackets since 2010
-          </p> */}
-        </aside>
-        <nav>
-          <h6 className="footer-title">Services</h6>
-          <a className="link-hover link">Branding</a>
-          <a className="link-hover link">Design</a>
-          <a className="link-hover link">Marketing</a>
-          <a className="link-hover link">Advertisement</a>
-        </nav>
-        <nav>
-          <h6 className="footer-title">Company</h6>
-          <a className="link-hover link">About us</a>
-          <a className="link-hover link">Contact</a>
-          <a className="link-hover link">Jobs</a>
-          <a className="link-hover link">Press kit</a>
-        </nav>
-        <nav>
-          <h6 className="footer-title">Legal</h6>
-          <a className="link-hover link">Terms of use</a>
-          <a className="link-hover link">Privacy policy</a>
-          <a className="link-hover link">Cookie policy</a>
-        </nav>
+    <footer className="container-columns grid grid-cols-2 gap-y-4 bg-[#333333] px-4 pb-4 pt-10 text-white sm:grid-cols-3">
+      <nav className="flex flex-col gap-y-4 text-sm/4">
+        <a className="link-hover link">Home</a>
+        <a className="link-hover link">Products</a>
+        <a className="link-hover link">About Us</a>
+        <a className="link-hover link">Contact Us</a>
+        <a className="link-hover link">Blog</a>
+        <a className="link-hover link">Company Awards</a>
+        <a className="link-hover link">Distributors / Partners</a>
+        <a className="link-hover link">Reviews</a>
+        <a className="link-hover link">Company Policies</a>
+      </nav>
+      <div className="flex w-full flex-col items-center max-sm:order-first max-sm:col-span-2">
+        <span>Call Us: {BRAND_PHONE_NUMBER}</span>
       </div>
-
-      <aside className="mt-4 py-4 text-center">
+      <div className="flex w-full flex-col gap-2">
+        <Image
+          src={'/fb-anvil.svg'}
+          width={300}
+          height={300}
+          alt="Federal Brace Anvil"
+        />
+        <div className="flex justify-center gap-2">
+          <TwitterLink />
+          <YoutubeLink />
+          <FacebookLink />
+          <LinkedinLink />
+        </div>
+      </div>
+      <aside className="col-span-full mt-8 py-4 text-center text-xs/4 font-bold">
         <p>Copyright © {new Date().getFullYear()} - Short Run Pro, LLC. All rights reserved.</p>
       </aside>
     </footer>

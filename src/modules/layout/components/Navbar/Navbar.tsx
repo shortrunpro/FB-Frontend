@@ -13,7 +13,7 @@ export const Navbar = () => {
         </div>
         <div className="navbar-center w-full justify-center lg:navbar-start lg:max-w-[316px]">
           <Link
-            className="relative aspect-[316/43] w-3/4 bg-white lg:w-11/12 3xl:w-full"
+            className="relative aspect-[316/43] w-3/4 max-w-[316px] bg-white lg:w-11/12 3xl:w-full"
             href={'/'}
           >
             <Image
