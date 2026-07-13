@@ -39,6 +39,21 @@ export interface StoreGetResourceCategoryResponse {
   data: ResourceCategory;
   ok: boolean;
 }
+export interface StoreFetchResourceCategories {
+  resource_categories: {
+    id: string;
+    title: string;
+    handle: string;
+    metadata: {
+      meta_title?: string;
+      meta_description?: string;
+    };
+  }[];
+  ok: boolean;
+  count: number;
+  limit: number;
+  offset: number;
+}
 export interface StoreFetchResourceResponse {
   data: Resource;
   ok: boolean;

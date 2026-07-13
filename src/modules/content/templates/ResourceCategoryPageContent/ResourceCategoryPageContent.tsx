@@ -1,10 +1,14 @@
+import { notFound } from 'next/navigation';
+
 import { fetchResourceCategoryByHandle } from '@/lib/data/resources';
 
 import { ResourceCategoryItemsList } from '../../components';
 
 const ResourceCategoryPageContent = async ({ handle }: { handle: string }) => {
   const { data, ok } = await fetchResourceCategoryByHandle({ handle });
-
+  if (!data || !ok) {
+    notFound();
+  }
   return (
     <section className="flex w-full flex-col gap-4">
       <div className="mb-4 flex items-center justify-center align-middle">
