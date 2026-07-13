@@ -16,13 +16,10 @@ const getOption = (label: string) => {
 };
 
 export const getFacedFilters = (filters: ReadonlyURLSearchParams): string => {
-  let facet = '';
+  const parts: string[] = [];
 
   let minPrice = null;
   let maxPrice = null;
-
-  let query = '';
-  let rating = '';
 
   for (const [key, value] of filters.entries()) {
     if (
@@ -35,49 +32,48 @@ export const getFacedFilters = (filters: ReadonlyURLSearchParams): string => {
       key !== 'sortBy' &&
       key !== 'rating'
     ) {
-      let values = '';
-      const splittedSize = value.split(',');
-      if (splittedSize.length > 1) {
-        splittedSize.map(
-          (value, index) =>
-            (values += `${getOption(key)}="${value}" ${
-              index + 1 < splittedSize.length ? 'OR ' : ''
-            }`)
-        );
-      } else {
-        values += `${getOption(key)}="${splittedSize[0]}"`;
+      const optionKey = getOption(key);
+      if (optionKey && value) {
+        const splitted = value.split(',');
+        if (splitted.length > 1) {
+          const joinedValues = splitted
+            .map((val) => `${optionKey} = "${val}"`)
+            .join(' OR ');
+          parts.push(`(${joinedValues})`);
+        } else {
+          parts.push(`${optionKey} = "${splitted[0]}"`);
+        }
       }
-      facet += `${values}`;
     } else {
       if (key === 'min_price') minPrice = value;
       if (key === 'max_price') maxPrice = value;
 
-      if (key === 'query') query = ` AND products.title:"${value}"`;
-
-      if (key === 'rating') {
-        let values = '';
-        const splited = value.split(',');
-        if (splited.length > 1) {
-          splited.map(
-            (value, index) =>
-              (values += `${getOption(key)} >= ${value} ${index + 1 < splited.length ? 'OR ' : ''}`)
-          );
-        } else {
-          values += `${getOption(key)} >=${splited[0]}`;
+      if (key === 'rating' && value) {
+        const optionKey = getOption(key);
+        if (optionKey) {
+          const splited = value.split(',');
+          if (splited.length > 1) {
+            const joinedValues = splited
+              .map((val) => `${optionKey} >= ${val}`)
+              .join(' OR ');
+            parts.push(`(${joinedValues})`);
+          } else {
+            parts.push(`${optionKey} >= ${splited[0]}`);
+          }
         }
-        rating += ` AND ${values}`;
       }
     }
   }
 
-  const priceFilter =
-    minPrice && maxPrice
-      ? ` AND variants.prices.amount:${minPrice} TO ${maxPrice}`
-      : minPrice
-        ? ` AND variants.prices.amount >= ${minPrice}`
-        : maxPrice
-          ? ` AND variants.prices.amount <= ${maxPrice}`
-          : '';
+  // Handle price filtering using Meilisearch field name: 'variants.price'
+  if (minPrice !== null && minPrice !== '' && maxPrice !== null && maxPrice !== '') {
+    parts.push(`variants.price >= ${minPrice} AND variants.price <= ${maxPrice}`);
+  } else if (minPrice !== null && minPrice !== '') {
+    parts.push(`variants.price >= ${minPrice}`);
+  } else if (maxPrice !== null && maxPrice !== '') {
+    parts.push(`variants.price <= ${maxPrice}`);
+  }
 
-  return facet + priceFilter + rating;
+  return parts.join(' AND ');
 };
+
