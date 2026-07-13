@@ -4,7 +4,7 @@ import { HttpTypes } from '@medusajs/types';
 import { revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { sdk } from '../config';
+import { sdk, MEDUSA_BACKEND_URL } from '../config';
 import {
   getAuthHeaders,
   getCacheOptions,
@@ -246,7 +246,7 @@ export const updateCustomerAddress = async (formData: FormData): Promise<any> =>
 
 export const updateCustomerPassword = async (password: string, token: string): Promise<any> => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/auth/customer/emailpass/update`,
+    `${MEDUSA_BACKEND_URL}/auth/customer/emailpass/update`,
     {
       method: 'POST',
       headers: {

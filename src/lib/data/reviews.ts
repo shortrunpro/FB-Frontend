@@ -3,7 +3,7 @@
 import { HttpTypes } from '@medusajs/types';
 import { revalidatePath } from 'next/cache';
 
-import { fetchQuery } from '../config';
+import { fetchQuery, MEDUSA_BACKEND_URL } from '../config';
 import { getAuthHeaders } from './cookies';
 
 export type Review = {
@@ -45,7 +45,7 @@ const createReview = async (review: any) => {
     'x-publishable-api-key': process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string
   };
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/reviews`, {
+  const response = await fetch(`${MEDUSA_BACKEND_URL}/store/reviews`, {
     headers,
     method: 'POST',
     body: JSON.stringify(review)

@@ -2,7 +2,7 @@
 
 import { HttpTypes } from '@medusajs/types';
 
-import { sdk } from '../config';
+import { sdk, MEDUSA_BACKEND_URL } from '../config';
 import medusaError from '../helpers/medusa-error';
 import { getAuthHeaders, getCacheOptions } from './cookies';
 
@@ -52,7 +52,7 @@ export const createReturnRequest = async (data: any) => {
   };
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/return-request`,
+    `${MEDUSA_BACKEND_URL}/store/return-request`,
     {
       method: 'POST',
       headers,

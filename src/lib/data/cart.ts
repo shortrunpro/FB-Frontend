@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation';
 import medusaError from '@/lib/helpers/medusa-error';
 import { parseVariantIdsFromError } from '@/lib/helpers/parse-variant-error';
 
-import { fetchQuery, sdk } from '../config';
+import { fetchQuery, sdk, MEDUSA_BACKEND_URL } from '../config';
 import {
   getAuthHeaders,
   getCacheOptions,
@@ -116,7 +116,7 @@ export async function addToCartBulk(lineItems: HttpTypes.StoreAddCartLineItem[])
     headers['x-publishable-api-key'] = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY;
   }
   await fetch(
-    `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${cart.id}/line-items/bulk`,
+    `${MEDUSA_BACKEND_URL}/store/carts/${cart.id}/line-items/bulk`,
     {
       method: 'POST',
       headers,
@@ -331,7 +331,7 @@ export async function removeShippingMethod(shippingMethodId: string) {
   };
 
   return fetch(
-    `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${cartId}/shipping-methods`,
+    `${MEDUSA_BACKEND_URL}/store/carts/${cartId}/shipping-methods`,
     {
       method: 'DELETE',
       body: JSON.stringify({ shipping_method_ids: [shippingMethodId] }),
@@ -357,7 +357,7 @@ export async function deletePromotionCode(promoId: string) {
     'x-publishable-api-key': process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY as string
   };
 
-  return fetch(`${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${cartId}/promotions`, {
+  return fetch(`${MEDUSA_BACKEND_URL}/store/carts/${cartId}/promotions`, {
     method: 'DELETE',
     body: JSON.stringify({ promo_codes: [promoId] }),
     headers
