@@ -24,18 +24,7 @@ export const HomeProductSection = async ({
   return (
     <section className="w-full py-8">
       <h2 className="heading-lg mb-6 font-bold uppercase tracking-tight text-brand">{heading}</h2>
-      <div className="hidden lg:block">
-        <HomeProductsCarousel
-          products={response.products}
-          slidesPerView={4}
-        />
-      </div>
-      <div className="lg:hidden">
-        <HomeProductsCarousel
-          products={response.products}
-          slidesPerView={1}
-        />
-      </div>
+      <HomeProductsCarousel products={response.products} />
     </section>
   );
 };
