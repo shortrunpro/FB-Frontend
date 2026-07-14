@@ -8,6 +8,35 @@ export const MEDUSA_BACKEND_URL =
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 export const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME;
 export const BRAND_PHONE_NUMBER = process.env.NEXT_PUBLIC_PHONE_NUMBER;
+
+export const IS_STAGING =
+  process.env.NEXT_PUBLIC_IS_STAGING === 'true' ||
+  process.env.NEXT_PUBLIC_BASE_URL?.includes('staging') ||
+  false;
+
+export const ROBOTS_METADATA = IS_STAGING
+  ? {
+      index: false,
+      follow: false,
+      googleBot: {
+        index: false,
+        follow: false,
+      }
+    }
+  : {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large' as const,
+        'max-video-preview': -1,
+        'max-snippet': -1
+      }
+    };
+
+export const ROBOTS_SEO_STRING = IS_STAGING ? 'noindex, nofollow' : 'index, follow';
+
 export const sdk = new Medusa({
   baseUrl: MEDUSA_BACKEND_URL,
   debug: process.env.NODE_ENV === 'development',

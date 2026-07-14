@@ -5,7 +5,7 @@ import Script from 'next/script';
 
 import { Breadcrumbs } from '@/components/atoms';
 import { ProductListingSkeleton } from '@/components/organisms/ProductListingSkeleton/ProductListingSkeleton';
-import { BASE_URL, SITE_NAME } from '@/lib/config';
+import { BASE_URL, SITE_NAME, ROBOTS_METADATA } from '@/lib/config';
 import { listCategories } from '@/lib/data/categories';
 import { CategoryList } from '@/modules/categories/templates';
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${BASE_URL}/categories`
   },
-  robots: { index: true, follow: true },
+  robots: ROBOTS_METADATA,
   openGraph: {
     title: `"All Categories" | ${SITE_NAME || 'Storefront'}`,
     description: `Browse all categories on ${SITE_NAME || 'our store'}`,

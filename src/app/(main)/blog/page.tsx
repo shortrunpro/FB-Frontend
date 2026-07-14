@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 
 import type { Metadata } from 'next';
 
-import { BASE_URL, SITE_NAME } from '@/lib/config';
+import { BASE_URL, SITE_NAME, ROBOTS_METADATA } from '@/lib/config';
 import { BlogsList } from '@/modules/blog/templates';
 import { Breadcrumbs } from '@/modules/common/components';
 
@@ -13,17 +13,7 @@ export const metadata: Metadata = {
   title: `Blog`,
   description:
     'Follow the Federal Brace blog for information on our products, updates in the industry, and more!',
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-image-preview': 'large',
-      'max-video-preview': -1,
-      'max-snippet': -1
-    }
-  },
+  robots: ROBOTS_METADATA,
   alternates: {
     canonical: `${BASE_URL}/blog`
   },

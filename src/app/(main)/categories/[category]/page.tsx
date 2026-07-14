@@ -8,7 +8,7 @@ import Script from 'next/script';
 import { Breadcrumbs } from '@/components/atoms';
 import { ProductListingSkeleton } from '@/components/organisms/ProductListingSkeleton/ProductListingSkeleton';
 import { AlgoliaProductsListing, ProductListing } from '@/components/sections';
-import { BASE_URL, SITE_NAME } from '@/lib/config';
+import { BASE_URL, SITE_NAME, ROBOTS_METADATA } from '@/lib/config';
 import { getCategoryByHandle } from '@/lib/data/categories';
 import { listProducts } from '@/lib/data/products';
 import isBot from '@/lib/helpers/isBot';
@@ -37,7 +37,7 @@ export async function generateMetadata({
     alternates: {
       canonical
     },
-    robots: { index: true, follow: true },
+    robots: ROBOTS_METADATA,
     openGraph: {
       title: `${title} | ${SITE_NAME || 'Storefront'}`,
       description,

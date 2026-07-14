@@ -1,24 +1,14 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 
-import { BASE_URL, SITE_NAME } from '@/lib/config';
+import { BASE_URL, SITE_NAME, ROBOTS_METADATA } from '@/lib/config';
 import { Homepage } from '@/modules/home/templates';
 
 export const metadata: Metadata = {
   title: 'Support Brackets for Counters, Shelves & Mounting',
   description:
     'Shop our American-made support brackets, combining unwavering quality with style. Perfect for floating shelves, countertops, benches & mounting in your home or commercial space.',
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-image-preview': 'large',
-      'max-video-preview': -1,
-      'max-snippet': -1
-    }
-  },
+  robots: ROBOTS_METADATA,
   alternates: {
     canonical: `${BASE_URL}`
   },

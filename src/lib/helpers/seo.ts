@@ -2,7 +2,7 @@ import { HttpTypes } from '@medusajs/types';
 import { Metadata } from 'next';
 import { headers } from 'next/headers';
 
-import { BASE_URL, SITE_NAME } from '@/lib/config';
+import { BASE_URL, SITE_NAME, ROBOTS_SEO_STRING } from '@/lib/config';
 import { ResourceCategory } from '@/types/resources';
 
 export const generateProductMetadata = async (
@@ -15,7 +15,7 @@ export const generateProductMetadata = async (
   return {
     title: product?.title,
     description: `${product?.title} - ${process.env.NEXT_PUBLIC_SITE_NAME}`,
-    robots: 'index, follow',
+    robots: ROBOTS_SEO_STRING,
     metadataBase: new URL(`${protocol}://${host}/products/${product?.handle}`),
 
     openGraph: {
@@ -48,7 +48,7 @@ export const generateCategoryMetadata = async (category: HttpTypes.StoreProductC
   const protocol = headersList.get('x-forwarded-proto') || 'https';
 
   return {
-    robots: 'index, follow',
+    robots: ROBOTS_SEO_STRING,
     metadataBase: new URL(`${protocol}://${host}/categories/${category.handle}`),
     title: `${category.name} Category`,
     description: `${category.name} Category - ${process.env.NEXT_PUBLIC_SITE_NAME}`,
@@ -84,7 +84,7 @@ export const generateCategoryMetadata = async (category: HttpTypes.StoreProductC
 
 export const generateResourceCategoryMetadata = (resource_category: ResourceCategory) => {
   return {
-    robots: 'index, follow',
+    robots: ROBOTS_SEO_STRING,
     metadataBase: new URL(`${BASE_URL}/content/category/${resource_category.handle}`),
     title: resource_category.metadata?.meta_title ?? resource_category.title,
     description: resource_category.metadata?.meta_description,

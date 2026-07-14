@@ -9,6 +9,7 @@ import { ProductListingSkeleton } from '@/components/organisms/ProductListingSke
 import { AlgoliaProductsListing, ProductListing } from '@/components/sections';
 import { listProducts } from '@/lib/data/products';
 import isBot from '@/lib/helpers/isBot';
+import { ROBOTS_METADATA } from '@/lib/config';
 
 // TODO validate usecase
 export const revalidate = 60;
@@ -29,7 +30,7 @@ export async function generateMetadata({
     alternates: {
       canonical
     },
-    robots: { index: true, follow: true },
+    robots: ROBOTS_METADATA,
     openGraph: {
       title: `${title} | ${process.env.NEXT_PUBLIC_SITE_NAME || 'Storefront'}`,
       description,
