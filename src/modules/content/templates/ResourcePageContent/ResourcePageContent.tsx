@@ -1,24 +1,22 @@
-import { fetchResourceByHandle } from '@/lib/data/resources';
 import { Breadcrumbs, ContentParser } from '@/modules/common/components';
+import { Resource } from '@/types/resources';
 
-const ResourcePageContent = async ({ handle }: { handle: string }) => {
-  const { data, ok } = await fetchResourceByHandle({ handle });
-  console.log(data);
+const ResourcePageContent = async ({ resource }: { resource: Resource }) => {
   return (
     <section className="w-full">
       <Breadcrumbs
         items={[
           {
-            label: data.resource_category?.title,
-            path: `/content/category/${data.resource_category?.handle}`
+            label: resource.resource_category?.title,
+            path: `/content/category/${resource.resource_category?.handle}`
           },
-          { label: data.title, path: `/content/${data.handle}` }
+          { label: resource.title, path: `/content/${resource.handle}` }
         ]}
       />
-      <h1 className="heading-md">{data.title}</h1>
-      {/* <h2 className="heading-xs">{data.subtitle}</h2> */}
+      <h1 className="heading-md">{resource.title}</h1>
+      {/* <h2 className="heading-xs">{resource.subtitle}</h2> */}
       <div className="mx-auto max-w-[1000px]">
-        <ContentParser content={data.content} />
+        <ContentParser content={resource.content} />
       </div>
     </section>
   );

@@ -2,11 +2,28 @@ import { Suspense } from 'react';
 
 import type { Metadata } from 'next';
 
-import { fetchResourceCategoryByHandle } from '@/lib/data/resources';
+import { queryResources } from '@/lib/data/resources';
 import { generateResourceCategoryMetadata } from '@/lib/helpers/seo';
 import { Spinner } from '@/modules/common/components';
 import { ResourceCategoryPageContent } from '@/modules/content/templates';
+import { StoreFetchResourceCategories, StoreGetResourceCategoryResponse } from '@/types/resources';
 
+// Next.js will invalidate the cache when a
+// request comes in, at most once every 60 seconds
+export const revalidate = 3600;
+export async function generateStaticParams() {
+  const posts = (await queryResources({
+    url: '/category',
+    query: { limit: 999, fields: 'handle' },
+    next: { tags: ['resource-handles'], revalidate: 3600 }
+  })) as StoreFetchResourceCategories;
+  if (!posts.resource_categories || !posts.ok) {
+    return [];
+  }
+  return posts.resource_categories.map(post => ({
+    handle: post.handle
+  }));
+}
 export async function generateMetadata({
   params
 }: {
@@ -14,7 +31,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { handle } = await params;
   //   TODO validate fallback logic in case unseen error is thrown
-  const { data, ok } = await fetchResourceCategoryByHandle({ handle });
+  const { data, ok } = (await queryResources({
+    url: `/category/${handle}`,
+    next: { tags: [`resource-category-${handle}`], revalidate: 3600 }
+  })) as StoreGetResourceCategoryResponse;
   return generateResourceCategoryMetadata(data);
 }
 export default async function ResourceCategoryPage({
