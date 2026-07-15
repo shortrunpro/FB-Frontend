@@ -1,9 +1,9 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { Minus, Plus } from '@medusajs/icons';
-import { StoreProduct } from '@medusajs/types';
+import { StoreProduct, StoreProductVariant } from '@medusajs/types';
 import {
   createDataTableColumnHelper,
   DataTable,
@@ -12,15 +12,19 @@ import {
   useDataTable,
   type DataTablePaginationState
 } from '@medusajs/ui';
-import { useParams, usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { Button, Chip, Input } from '@/components/atoms';
 import { useCartContext } from '@/modules/cart/provider/context';
 
+import ProductVariantModal from '../ProductVariantModal/ProductVariantModal';
+
 export const ProductVariants = ({ product }: { product: StoreProduct }) => {
-  const params = useParams();
+  const params = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
+  const [variant, setVariant] = useState<StoreProductVariant | null>(null);
+  const activeSku = params.get('sku');
   const { handleBulkAddToCart, isAddingItem } = useCartContext();
   const PAGE_SIZE = 10;
   const variants = useMemo(() => {
@@ -172,6 +176,10 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
   const handleSelectedFinish = (e: any) => {
     setSelectedFinish(e.target.value);
   };
+  useEffect(() => {
+    const selectedVariant = shownProducts.find(v => v.sku === activeSku);
+    selectedVariant && setVariant(selectedVariant);
+  }, [activeSku]);
   return (
     <div
       className="my-4 space-y-2"
@@ -206,6 +214,7 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
       >
         ADD TO CART
       </Button>
+      {activeSku && variant && <ProductVariantModal variant={variant} />}
     </div>
   );
 };
