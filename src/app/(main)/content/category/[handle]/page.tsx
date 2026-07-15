@@ -12,17 +12,22 @@ import { StoreFetchResourceCategories, StoreGetResourceCategoryResponse } from '
 // request comes in, at most once every 60 seconds
 export const revalidate = 3600;
 export async function generateStaticParams() {
-  const posts = (await queryResources({
-    url: '/category',
-    query: { limit: 999, fields: 'handle' },
-    next: { tags: ['resource-handles'], revalidate: 3600 }
-  })) as StoreFetchResourceCategories;
-  if (!posts.resource_categories || !posts.ok) {
+  try {
+    const posts = (await queryResources({
+      url: '/category',
+      query: { limit: 999, fields: 'handle' },
+      next: { tags: ['resource-handles'], revalidate: 3600 }
+    })) as StoreFetchResourceCategories;
+    if (!posts.resource_categories || !posts.ok) {
+      return [];
+    }
+    return posts.resource_categories.map(post => ({
+      handle: post.handle
+    }));
+  } catch (error) {
+    console.error("Failed to generate static params for resource categories:", error);
     return [];
   }
-  return posts.resource_categories.map(post => ({
-    handle: post.handle
-  }));
 }
 export async function generateMetadata({
   params

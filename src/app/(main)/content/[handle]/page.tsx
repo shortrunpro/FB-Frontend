@@ -8,16 +8,21 @@ import { StoreFetchResourceResponse, StoreGetResourcesResponse } from '@/types/r
 // request comes in, at most once every 60 seconds
 export const revalidate = 3600;
 export async function generateStaticParams() {
-  const posts = (await queryResources({
-    query: { limit: 999, fields: 'handle' },
-    next: { tags: ['resource-handles'], revalidate: 3600 }
-  })) as StoreGetResourcesResponse;
-  if (!posts) {
+  try {
+    const posts = (await queryResources({
+      query: { limit: 999, fields: 'handle' },
+      next: { tags: ['resource-handles'], revalidate: 3600 }
+    })) as StoreGetResourcesResponse;
+    if (!posts) {
+      return [];
+    }
+    return posts.resources.map(post => ({
+      handle: post.handle
+    }));
+  } catch (error) {
+    console.error("Failed to generate static params for resources:", error);
     return [];
   }
-  return posts.resources.map(post => ({
-    handle: post.handle
-  }));
 }
 export default async function ResourcePage({ params }: { params: Promise<{ handle: string }> }) {
   const { handle } = await params;

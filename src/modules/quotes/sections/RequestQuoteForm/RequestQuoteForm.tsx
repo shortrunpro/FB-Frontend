@@ -38,7 +38,20 @@ const RequestQuoteForm = () => {
   };
   const onSubmit = async (formData: RequestQuoteSchema) => {
     setLoading(true);
-    const { ok, error } = await newQuote({ formData });
+    const payload = new FormData();
+    Object.keys(formData).forEach(key => {
+      if (key === 'files' && formData.files?.length) {
+        Array.from(formData.files).map((file: File) => {
+          payload.append('files', file);
+        });
+      } else {
+        const val = formData[key as keyof RequestQuoteSchema];
+        if (val !== null && val !== undefined) {
+          payload.append(key, String(val));
+        }
+      }
+    });
+    const { ok, error } = await newQuote(payload);
     if (ok) {
       reset();
       setLoading(false);
