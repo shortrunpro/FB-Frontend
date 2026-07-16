@@ -1,9 +1,10 @@
-import { ProductBulletPoints } from '@/components/organisms';
 import { getProductPrice } from '@/lib/helpers/get-product-price';
 import { ProductFiles, ProductVariants } from '@/modules/products/components';
 import { ProductWithFiles } from '@/types/product';
 
-export const ProductDetailsHeader = ({ product }: { product: ProductWithFiles }) => {
+import { ProductBulletPoints } from '../ProductBulletPoints/ProductBulletPoints';
+
+export const ProductDetails = async ({ product }: { product: ProductWithFiles }) => {
   const { cheapestVariant, cheapestPrice } = getProductPrice({
     product
   });
