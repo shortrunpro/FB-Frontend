@@ -10,6 +10,7 @@ export const sdk = new Medusa({
   debug: process.env.NODE_ENV === 'development',
   publishableKey: process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
 });
+export const BRAND_LOGO = '/federal-brace-logo.jpg';
 
 type FetchQueryOptions = Omit<RequestInit, 'headers' | 'body'> & {
   headers?: Record<string, string | null | { tags: string[] }>;

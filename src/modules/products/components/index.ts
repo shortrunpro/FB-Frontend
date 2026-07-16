@@ -5,8 +5,10 @@ import { ProductGallery } from './ProductGallery/ProductGallery';
 import { ProductPageDetails } from './ProductPageDetails/ProductPageDetails';
 import ProductVariantModal from './ProductVariantModal/ProductVariantModal';
 import { ProductVariants } from './ProductVariants/ProductVariants';
+import Thumbnail from './Thumbnail/Thumbnail';
 
 export {
+  Thumbnail,
   ProductVariants,
   ProductVariantModal,
   ProductDetailsShipping,

@@ -6,6 +6,7 @@ import ErrorMessage from './ErrorMessage';
 import { FacebookLink } from './FacebookLink';
 import { FileUpload } from './FileUpload/FileUpload';
 import { Input } from './Input/Input';
+import InteractiveLink from './InteractiveLink/InteractiveLink';
 import { LinkedinLink } from './LinkedinLink';
 import { Modal } from './Modal/Modal';
 import { PhoneLink } from './PhoneLink';
@@ -16,6 +17,7 @@ import { TwitterLink } from './TwitterLink';
 import { YoutubeLink } from './YoutubeLink';
 
 export {
+  InteractiveLink,
   Modal,
   ContentParser,
   Breadcrumbs,
