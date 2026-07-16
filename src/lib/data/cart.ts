@@ -133,20 +133,12 @@ export async function addToCartBulk(lineItems: HttpTypes.StoreAddCartLineItem[])
       revalidateTag(cartCacheTag);
     });
 }
-export async function addToCart({
-  variantId,
-  quantity,
-  countryCode
-}: {
-  variantId: string;
-  quantity: number;
-  countryCode: string;
-}) {
+export async function addToCart({ variantId, quantity }: { variantId: string; quantity: number }) {
   if (!variantId) {
     throw new Error('Missing variant ID when adding to cart');
   }
 
-  const cart = await getOrSetCart(countryCode);
+  const cart = await getOrSetCart('us');
 
   if (!cart) {
     throw new Error('Error retrieving or creating cart');

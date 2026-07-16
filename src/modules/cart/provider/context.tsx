@@ -12,11 +12,7 @@ type BulkAddParams = {
 interface CartContextInterface {
   cart: Cart | StoreCart | null;
   onAddToCart: (item: StoreCartLineItemOptimisticUpdate, currency_code: string) => void;
-  addToCart: (params: {
-    variantId: string;
-    quantity: number;
-    countryCode: string;
-  }) => Promise<void>;
+  addToCart: (params: { variantId: string; quantity: number }) => Promise<void>;
   handleBulkAddToCart: (variantQuantities: BulkAddParams) => Promise<void>;
   removeCartItem: (lineId: string) => Promise<void>;
   updateCartItem: (lineId: string, quantity: number) => Promise<void>;

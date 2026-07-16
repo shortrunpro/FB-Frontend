@@ -1,3 +1,4 @@
+import { AddToCartButton } from './AddToCartButton/AddToCartButton';
 import { Breadcrumbs } from './Breadcrumbs/Breadcrumbs';
 import { Button } from './Button';
 import ContentParser from './ContentParser/ContentParser';
@@ -17,6 +18,7 @@ import { TwitterLink } from './TwitterLink';
 import { YoutubeLink } from './YoutubeLink';
 
 export {
+  AddToCartButton,
   InteractiveLink,
   Modal,
   ContentParser,

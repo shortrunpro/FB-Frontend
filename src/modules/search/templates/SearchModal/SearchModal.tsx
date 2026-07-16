@@ -12,7 +12,7 @@ import { SearchBox, SearchHit, SearchHits } from '../../components';
 
 export default function SearchModal() {
   const configureProps: ConfigureProps = {
-    hitsPerPage: 8
+    hitsPerPage: 12
   } as ConfigureProps;
   const router = useRouter();
   const searchRef = useRef(null);
@@ -58,7 +58,7 @@ export default function SearchModal() {
 
   return (
     <div
-      className="relative z-[75]"
+      className="relative z-[50]"
       data-testid="search-container"
     >
       <div className="fixed inset-0 h-screen w-screen bg-white bg-opacity-75 opacity-100 backdrop-blur-md" />
@@ -66,7 +66,7 @@ export default function SearchModal() {
         className="fixed inset-0 sm:p-0"
         ref={searchRef}
       >
-        <div className="flex h-fit max-h-full w-full transform flex-col items-center justify-start bg-brand_grey p-5 text-left align-middle shadow-none transition-all">
+        <div className="container-columns flex h-fit max-h-full w-full transform flex-col items-center justify-start bg-transparent p-5 text-left align-middle shadow-none transition-all">
           <InstantSearch
             indexName={SEARCH_INDEX_NAME}
             searchClient={searchClient}

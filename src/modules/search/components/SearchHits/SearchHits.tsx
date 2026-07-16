@@ -3,6 +3,9 @@ import React from 'react';
 import { clx } from '@medusajs/ui';
 import { useHits, UseHitsProps, useSearchBox } from 'react-instantsearch';
 
+import { ProductVariantCard } from '@/modules/products/components';
+import { VariantsSearchResponse } from '@/types/variants';
+
 import ShowAll from '../ShowAll/ShowAll';
 
 type HitsProps<THit> = React.ComponentProps<'div'> &
@@ -12,7 +15,7 @@ type HitsProps<THit> = React.ComponentProps<'div'> &
 
 const SearchHits = ({ hitComponent: Hit, className, ...props }: HitsProps<any>) => {
   const { query } = useSearchBox();
-  const { items, results } = useHits(props);
+  const { items } = useHits(props);
   return (
     <div
       className={clx(
@@ -26,7 +29,7 @@ const SearchHits = ({ hitComponent: Hit, className, ...props }: HitsProps<any>) 
     >
       <ShowAll />
       <div
-        className="800p:grid-cols-3 mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4"
+        className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
         data-testid="search-results"
       >
         {items.map((hit, index) => (
@@ -36,7 +39,7 @@ const SearchHits = ({ hitComponent: Hit, className, ...props }: HitsProps<any>) 
               'hidden sm:block': index > 2
             })}
           >
-            <Hit hit={hit as any} />
+            <ProductVariantCard variant={hit as unknown as VariantsSearchResponse} />
           </li>
         ))}
       </div>

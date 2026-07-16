@@ -3,11 +3,13 @@ import { ProductDetailsShipping } from './ProductDetailsShipping/ProductDetailsS
 import { ProductFiles } from './ProductFiles/ProductFiles';
 import { ProductGallery } from './ProductGallery/ProductGallery';
 import { ProductPageDetails } from './ProductPageDetails/ProductPageDetails';
+import ProductVariantCard from './ProductVariantCard/ProductVariantCard';
 import ProductVariantModal from './ProductVariantModal/ProductVariantModal';
 import { ProductVariants } from './ProductVariants/ProductVariants';
 import Thumbnail from './Thumbnail/Thumbnail';
 
 export {
+  ProductVariantCard,
   Thumbnail,
   ProductVariants,
   ProductVariantModal,
