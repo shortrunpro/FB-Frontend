@@ -14,7 +14,7 @@ export const NavbarSearch = ({ className }: Props) => {
       <Link
         prefetch={false}
         href="/search"
-        className="btn flex w-full gap-x-1 rounded-md"
+        className="btn flex w-full gap-x-1 rounded-md bg-white text-brand"
         data-testid="searchbar-link"
       >
         <MagnifyingGlass /> Search
