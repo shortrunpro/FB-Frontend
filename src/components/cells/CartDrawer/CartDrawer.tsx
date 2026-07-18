@@ -53,7 +53,7 @@ export const CartDrawer = () => {
 
   return (
     <>
-      {isOpen && <div className="fixed inset-[-2rem] z-10 p-0 backdrop-blur-sm" />}
+      {isOpen && <div className="fixed inset-[-2rem] z-[99] p-0 backdrop-blur-sm" />}
       <Drawer
         open={isOpen}
         onOpenChange={setIsOpen}

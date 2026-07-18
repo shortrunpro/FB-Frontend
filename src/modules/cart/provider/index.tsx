@@ -116,23 +116,14 @@ export function CartProvider({ cart, children }: CartProviderProps) {
     }
   };
 
-  const addToCart = async ({
-    variantId,
-    quantity,
-    countryCode
-  }: {
-    variantId: string;
-    quantity: number;
-    countryCode: string;
-  }) => {
+  const addToCart = async ({ variantId, quantity }: { variantId: string; quantity: number }) => {
     setIsAddingItem(true);
     setIsUpdating(true);
 
     try {
       await apiAddToCart({
         variantId,
-        quantity,
-        countryCode
+        quantity
       });
       await refreshCart();
     } catch (error) {

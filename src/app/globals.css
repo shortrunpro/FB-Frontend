@@ -205,3 +205,13 @@ h1.tiptap-heading {
 h2.tiptap-heading {
   @apply text-[24px] font-medium leading-[32px] tracking-normal text-brand max-md:text-[20px] max-md:leading-[28px];
 }
+.ais-Hits {
+  @apply absolute right-0 z-50 w-1/2;
+}
+.ais-Hits .ais-Hits-list {
+  @apply ml-0 mr-2 mt-0 grid grid-cols-3 bg-white;
+}
+
+.ais-Hits .ais-Hits-list .ais-Hits-item {
+  @apply m-0 w-full border-none p-0;
+}

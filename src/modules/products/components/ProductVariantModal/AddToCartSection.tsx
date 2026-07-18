@@ -17,8 +17,7 @@ export const AddToCartSection = ({ variantId }: { variantId: string }) => {
     }
     await addToCart({
       variantId,
-      quantity: Number(quantity),
-      countryCode: 'us'
+      quantity: Number(quantity)
     }).finally(() => setSubmitting(false));
   };
   return (

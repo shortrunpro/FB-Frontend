@@ -10,7 +10,6 @@ import { ProductVariantModalTabs } from '../ProductVariantModalTabs/ProductVaria
 import { AddToCartSection } from './AddToCartSection';
 
 const ProductVariantModal = ({ variant }: { variant: StoreProductVariant }) => {
-  console.log(variant);
   const pathname = usePathname();
   const router = useRouter();
   const handleClose = () => {
