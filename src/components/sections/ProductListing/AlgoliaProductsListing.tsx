@@ -18,14 +18,20 @@ import {
 import { ProductListingSkeleton } from '@/components/organisms/ProductListingSkeleton/ProductListingSkeleton';
 import { FacetModel } from '@/components/organisms/ProductSidebar/AlgoliaProductSidebar';
 import { PRODUCT_LIMIT } from '@/const';
-import { searchProducts } from '@/lib/data/products';
 import { getFacedFilters } from '@/lib/helpers/get-faced-filters';
+import { SEARCH_INDEX_NAME, searchClient } from '@/lib/data/search';
 
-export const AlgoliaProductsListing = ({ category_name }: { category_name?: string }) => {
+export const AlgoliaProductsListing = ({
+  category_name,
+  initialQuery
+}: {
+  category_name?: string;
+  initialQuery?: string;
+}) => {
   const searchParams = useSearchParams();
 
   const facetFilters: string = getFacedFilters(searchParams);
-  const query: string = searchParams.get('query') || '';
+  const query: string = initialQuery ?? searchParams.get('query') ?? '';
   const page: number = +(searchParams.get('page') || 1);
 
   return (
@@ -62,17 +68,28 @@ const ProductsListing = ({
     async function fetchProducts() {
       try {
         setIsLoading(true);
-        const result = await searchProducts({
-          query: query || undefined,
-          page: page - 1,
-          hitsPerPage: PRODUCT_LIMIT,
-          filter
-        });
+        const { results } = await (searchClient as any).search([
+          {
+            indexName: SEARCH_INDEX_NAME,
+            params: {
+              query,
+              page: page - 1,
+              hitsPerPage: PRODUCT_LIMIT,
+              filter: filter || undefined,
+              facets: ['*'],
+            },
+          },
+        ]);
+        const result = results[0];
+
+        if (!result) {
+          throw new Error('Unable to search products');
+        }
 
         setProducts(result.hits);
-        setFacets(result.facetDistribution);
-        setCount(result.estimatedTotalHits);
-        setPages(Math.ceil(result.estimatedTotalHits / 20));
+        setFacets(result.facetDistribution || {});
+        setCount(result.nbHits);
+        setPages(result.nbPages);
       } catch (error) {
         setProducts([]);
         setFacets({});

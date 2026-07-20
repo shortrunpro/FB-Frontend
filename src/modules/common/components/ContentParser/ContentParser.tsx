@@ -101,7 +101,10 @@ const CustomImage = Image.extend({
         default: null,
         parseHTML: element => element.getAttribute('width'),
         renderHTML: attrs => {
-          return { width: attrs.width.replace('%', '') };
+          if (!attrs.width) {
+            return {};
+          }
+          return { width: String(attrs.width).replace('%', '') };
         }
       },
 
@@ -128,9 +131,15 @@ const CustomImage = Image.extend({
   draggable: true,
   selectable: true
 });
-const ContentParser = ({ content }: { content: Record<string, unknown> }) => {
-  const html = generateHTML(content, [
-    StarterKit.configure({
+const ContentParser = ({ content }: { content: Record<string, unknown> | string | null | undefined }) => {
+  let html = '';
+
+  if (typeof content === 'string') {
+    html = content;
+  } else if (content) {
+    try {
+    html = generateHTML(content, [
+      StarterKit.configure({
       heading: {
         HTMLAttributes: {
           class: 'tiptap-heading'
@@ -162,7 +171,6 @@ const ContentParser = ({ content }: { content: Record<string, unknown> }) => {
       inline: true,
       allowBase64: true
     }),
-    ,
     TextStyle.configure({
       HTMLAttributes: {
         class: 'editor-text-style'
@@ -180,8 +188,12 @@ const ContentParser = ({ content }: { content: Record<string, unknown> }) => {
         class: 'bg-[#ffff00] text-inherit'
       }
     }),
-    Typography
-  ]);
+      Typography
+      ]);
+    } catch (error) {
+      console.error('Unable to render resource content:', error);
+    }
+  }
   return (
     <div
       className="content py-4"

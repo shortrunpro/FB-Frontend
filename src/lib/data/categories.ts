@@ -57,7 +57,7 @@ export const getCategoryByHandle = async (categoryHandle: string): Promise<Categ
     .fetch<HttpTypes.StoreProductCategoryListResponse>(`/store/product-categories`, {
       query: {
         fields:
-          '*category_children,*category_children.product_category_image,*product_category_image',
+          'id,handle,name,description,parent_category_id,parent_category.id,parent_category.handle,parent_category.name,*category_children,*category_children.product_category_image,*product_category_image',
         handle: categoryHandle
       }
       // cache: 'force-cache',

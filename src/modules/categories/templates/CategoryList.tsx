@@ -11,7 +11,7 @@ const CategoryList = ({ categories }: { categories: Promise<ListCategoriesRespon
 
   return (
     <div className="grid grid-cols-6 gap-x-2 gap-y-4">
-      {allCategories.parentCategories.map(category => (
+      {allCategories.categories.map(category => (
         <CategoryCard
           key={category.id}
           category={category}

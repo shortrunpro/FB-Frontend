@@ -26,7 +26,16 @@ export async function generateStaticParams() {
 }
 export default async function ResourcePage({ params }: { params: Promise<{ handle: string }> }) {
   const { handle } = await params;
-  const { data, ok } = (await queryResources({ url: `/${handle}` })) as StoreFetchResourceResponse;
+  let resource: StoreFetchResourceResponse;
+
+  try {
+    resource = (await queryResources({ url: `/${handle}` })) as StoreFetchResourceResponse;
+  } catch (error) {
+    console.error(`Failed to load resource "${handle}":`, error);
+    notFound();
+  }
+
+  const { data, ok } = resource!;
   if (!data || !ok) {
     notFound();
   }

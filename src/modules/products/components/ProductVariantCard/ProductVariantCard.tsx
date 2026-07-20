@@ -54,7 +54,7 @@ export default function ProductVariantCard({ variant }: { variant: VariantsSearc
           className="heading-sm"
           data-testid="variant-card-price"
         >
-          ${variant?.calculated_price.toFixed(2)}
+          {variant?.calculated_price !== undefined && variant?.calculated_price !== null ? `$${variant.calculated_price.toFixed(2)}` : 'N/A'}
         </span>
         <div className="flex items-center justify-center gap-x-2 text-sm">
           {/* <div className="flex flex-col justify-center"></div> */}

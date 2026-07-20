@@ -75,8 +75,8 @@ export const listProducts = async ({
       query: {
         country_code: 'us',
         region_id: region?.id,
-        // category_id,
-        // collection_id,
+        category_id,
+        collection_id,
         limit,
         offset,
         fields:
@@ -187,6 +187,7 @@ export const searchProducts = async (params: {
   maxValuesPerFacet?: number;
   customer_id?: string;
   customer_group_id?: string[];
+  indexName?: string;
 }): Promise<{
   hits: HttpTypes.StoreProduct[];
   estimatedTotalHits: number;
@@ -225,12 +226,12 @@ export const searchProducts = async (params: {
     .catch(err => {
       console.error(err, 'ERROR IN SEARCH PRODUCTS');
       return {
-        products: [],
-        nbHits: 0,
+        hits: [],
+        estimatedTotalHits: 0,
         page: params.page || 0,
         nbPages: 0,
         hitsPerPage: params.hitsPerPage || 12,
-        facets: {},
+        facetDistribution: {},
         processingTimeMS: 0
       };
     });
