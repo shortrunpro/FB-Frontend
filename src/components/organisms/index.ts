@@ -3,7 +3,6 @@ import { BlogCard } from './BlogCard/BlogCard';
 import { BrandCard } from './BrandCard/BrandCard';
 import { GalleryCarousel } from './GalleryCarousel/GalleryCarousel';
 import { ProductBulletPoints } from './ProductBulletPoints/ProductBulletPoints';
-import { ProductCard } from './ProductCard/ProductCard';
 import { ProductDetails } from './ProductDetails/ProductDetails';
 import { ProductFiles } from './ProductFiles/ProductFiles';
 import { ProductGallery } from './ProductGallery/ProductGallery';
@@ -19,7 +18,6 @@ import { ReviewsWritten } from './Reviews/ReviewsWritten';
 export {
   ProductBulletPoints,
   ProductFiles,
-  ProductCard,
   BrandCard,
   BlogCard,
   ProductListingHeader,

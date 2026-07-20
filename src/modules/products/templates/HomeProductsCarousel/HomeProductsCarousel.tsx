@@ -16,7 +16,7 @@ import 'swiper/css/scrollbar';
 // @ts-ignore
 import 'swiper/css/mousewheel';
 
-import { ProductCard } from '@/components/organisms';
+import { ProductCard } from '@/modules/products/components';
 import { Product } from '@/types/product';
 
 type ScreenSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '';
