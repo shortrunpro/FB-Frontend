@@ -79,10 +79,11 @@ export const listProducts = async ({
         // collection_id,
         limit,
         offset,
-        fields:
-          '+variants.inventory_quantity,*variants.calculated_price,*variants,+files.id,+files.product_id,+files.type,+files.url',
+        fields: `*variants.calculated_price,*variants,+files.id,+files.product_id,+files.type,+files.url,*related_products.products,*related_products.products.variants.prices,+addons.variants.id,+addons.variants.sku,+addons.variants.thumbnail,+addons.variants.title,+addons.variants.product.handle,+addons.variants.product.categories.name,+addons.variants.product.categories.handle,+addons.variants.prices.amount`,
         ...queryParams
       },
+      // @ts-ignore
+
       headers
       // next: useCached ? { revalidate: 60 } : undefined,
       // cache: useCached ? 'force-cache' : 'no-cache'

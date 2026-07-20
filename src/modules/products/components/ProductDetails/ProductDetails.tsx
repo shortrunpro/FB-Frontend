@@ -1,5 +1,5 @@
 import { getProductPrice } from '@/lib/helpers/get-product-price';
-import { ProductFiles, ProductVariants } from '@/modules/products/components';
+import { ProductAddons, ProductFiles, ProductVariants } from '@/modules/products/components';
 import { ProductWithFiles } from '@/types/product';
 
 import { ProductBulletPoints } from '../ProductBulletPoints/ProductBulletPoints';
@@ -31,6 +31,8 @@ export const ProductDetails = async ({ product }: { product: ProductWithFiles })
       <div className="flex flex-col gap-y-8">
         <ProductBulletPoints />
         <ProductFiles files={product.files} />
+        {/* @ts-ignore */}
+        {product?.addons && <ProductAddons addons={product?.addons} />}
       </div>
     </div>
   );
