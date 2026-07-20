@@ -62,7 +62,7 @@ const ProductsListing = ({
   const [pages, setPages] = useState(1);
   filter = filter.length && category_name ? `(${filter})` : filter;
   filter += category_name
-    ? `${filter.length ? ' AND ' : ''}categories.name="${category_name}"`
+    ? `${filter.length ? ' AND ' : ''}product.categories.name="${category_name}"`
     : '';
   useEffect(() => {
     async function fetchProducts() {

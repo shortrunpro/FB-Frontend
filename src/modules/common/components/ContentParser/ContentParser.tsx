@@ -1,3 +1,5 @@
+'use client';
+
 import { Mark, mergeAttributes, Node } from '@tiptap/core';
 import Color from '@tiptap/extension-color';
 import Highlight from '@tiptap/extension-highlight';

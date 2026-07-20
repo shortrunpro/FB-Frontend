@@ -51,9 +51,12 @@ const RequestQuoteForm = () => {
         }
       }
     });
-    const { ok, error } = await newQuote(payload);
-    if (ok) {
-      reset();
+    try {
+      const { ok } = await newQuote(payload);
+      if (ok) {
+        reset();
+      }
+    } finally {
       setLoading(false);
     }
   };
