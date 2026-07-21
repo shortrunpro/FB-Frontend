@@ -56,7 +56,7 @@ const RequestQuoteForm = () => {
           label="First Name *"
           {...register('first_name')}
           data-testid="first_name-input"
-          error={errors}
+          errors={errors}
         />
         <Input
           className="input-block border-grey-2 input rounded border"
@@ -64,7 +64,7 @@ const RequestQuoteForm = () => {
           label="Last Name *"
           {...register('last_name')}
           data-testid="last_name-input"
-          error={errors}
+          errors={errors}
         />
         <Input
           className="input-block border-grey-2 input rounded border"
@@ -73,7 +73,7 @@ const RequestQuoteForm = () => {
           title="Enter a valid email address."
           {...register('email')}
           data-testid="email-input"
-          error={errors}
+          errors={errors}
         />
         <Input
           className="input-block border-grey-2 input rounded border"
@@ -81,7 +81,7 @@ const RequestQuoteForm = () => {
           label="Phone *"
           {...register('phone')}
           data-testid="phone-input"
-          error={errors}
+          errors={errors}
         />
         <Input
           className="input-block border-grey-2 input rounded border"
@@ -89,7 +89,7 @@ const RequestQuoteForm = () => {
           label="Company"
           {...register('company')}
           data-testid="company-input"
-          error={errors}
+          errors={errors}
         />
         <Input
           className="input-block border-grey-2 input rounded border"
@@ -98,7 +98,7 @@ const RequestQuoteForm = () => {
           min={1}
           {...register('quantity')}
           data-testid="quantity-input"
-          error={errors}
+          errors={errors}
         />
         <div className="col-span-2 flex flex-col gap-y-4 sm:col-span-1">
           <Input
@@ -107,7 +107,7 @@ const RequestQuoteForm = () => {
             label="Material *"
             {...register('material')}
             data-testid="material-input"
-            error={errors}
+            errors={errors}
           />
 
           <div className="h-50">

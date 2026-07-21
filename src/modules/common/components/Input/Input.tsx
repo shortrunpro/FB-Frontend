@@ -4,16 +4,18 @@ import { useEffect, useState } from 'react';
 
 import { ErrorMessage } from '@hookform/error-message';
 import { EyeMini, EyeSlashMini } from '@medusajs/icons';
+import { get } from 'react-hook-form';
 
 import { CloseIcon } from '@/icons';
 import { cn } from '@/lib/utils';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  name?: string;
+  name: string;
   icon?: React.ReactNode;
   clearable?: boolean;
-  error?: Record<string, unknown>;
+  errors?: Record<string, unknown>;
+  touched?: Record<string, unknown>;
   changeValue?: (value: string) => void;
   onIconClick?: () => void;
   iconAriaLabel?: string;
@@ -26,7 +28,8 @@ export function Input({
   icon,
   clearable,
   className,
-  error,
+  errors,
+  touched,
   changeValue,
   onIconClick,
   iconAriaLabel,
@@ -56,7 +59,7 @@ export function Input({
   const clearHandler = () => {
     if (changeValue) changeValue('');
   };
-
+  const hasError = get(errors, name);
   return (
     <div className="flex flex-col">
       <label className="label-md">{label}</label>
@@ -83,13 +86,14 @@ export function Input({
 
         <input
           className={cn(
-            'w-full rounded-sm border bg-component-secondary px-[16px] py-[12px] focus:border-primary focus:outline-none focus:ring-0',
-            error && 'border-negative focus:border-negative',
+            'w-full rounded-sm border bg-component-secondary px-[16px] py-1 focus:border-primary focus:outline-none focus:ring-0',
+            hasError && 'border-negative focus:border-negative',
             props.disabled && 'cursor-not-allowed bg-disabled',
             paddingY,
             className
           )}
           name={name}
+          aria-invalid={hasError}
           value={props.value}
           onChange={e => changeHandler(e.target.value)}
           {...props}
@@ -116,9 +120,9 @@ export function Input({
           </button>
         )}
       </div>
-      {error && name && error?.name === name && (
+      {hasError && (
         <ErrorMessage
-          errors={error}
+          errors={errors}
           name={name}
           render={({ message }) => {
             return (
