@@ -1,10 +1,10 @@
 import { getProductPrice } from '@/lib/helpers/get-product-price';
-import { ProductFiles, ProductVariants } from '@/modules/products/components';
-import { ProductWithFiles } from '@/types/product';
+import { ProductAddons, ProductFiles, ProductVariants } from '@/modules/products/components';
+import { CustomProduct } from '@/types/product';
 
 import { ProductBulletPoints } from '../ProductBulletPoints/ProductBulletPoints';
 
-export const ProductDetails = async ({ product }: { product: ProductWithFiles }) => {
+export const ProductDetails = async ({ product }: { product: CustomProduct }) => {
   const { cheapestVariant, cheapestPrice } = getProductPrice({
     product
   });
@@ -31,6 +31,8 @@ export const ProductDetails = async ({ product }: { product: ProductWithFiles })
       <div className="flex flex-col gap-y-8">
         <ProductBulletPoints />
         <ProductFiles files={product.files} />
+        {/* @ts-ignore */}
+        {product?.product_addons && <ProductAddons addons={product?.product_addons} />}
       </div>
     </div>
   );

@@ -3,7 +3,7 @@
 import { HttpTypes } from '@medusajs/types';
 
 import { sortProducts } from '@/lib/helpers/sort-products';
-import { ProductWithFiles, SortOptions } from '@/types/product';
+import { CustomProduct, ProductWithFiles, SortOptions } from '@/types/product';
 
 import { sdk } from '../config';
 import { getAuthHeaders } from './cookies';
@@ -30,7 +30,7 @@ export const listProducts = async ({
   forceCache?: boolean;
 }): Promise<{
   response: {
-    products: ProductWithFiles[];
+    products: CustomProduct[];
     count: number;
   };
   nextPage: number | null;
@@ -68,7 +68,7 @@ export const listProducts = async ({
 
   return sdk.client
     .fetch<{
-      products: ProductWithFiles[];
+      products: CustomProduct[];
       count: number;
     }>(`/store/products`, {
       method: 'GET',
@@ -79,10 +79,11 @@ export const listProducts = async ({
         collection_id,
         limit,
         offset,
-        fields:
-          '+variants.inventory_quantity,*variants.calculated_price,*variants,+files.id,+files.product_id,+files.type,+files.url',
+        fields: `*variants.calculated_price,*variants,+files.id,+files.product_id,+files.type,+files.url,+related_product.product.handle,+related_product.products.title,+related_product.products.thumbnail,+related_product.products.handle,+related_product.products.variants.prices.amount,+product_addons.variants.id,+product_addons.variants.sku,+product_addons.variants.thumbnail,+product_addons.variants.title,+product_addons.variants.product.handle,+product_addons.variants.product.categories.name,+product_addons.variants.product.categories.handle,+product_addons.variants.prices.amount`,
         ...queryParams
       },
+      // @ts-ignore
+
       headers
       // next: useCached ? { revalidate: 60 } : undefined,
       // cache: useCached ? 'force-cache' : 'no-cache'

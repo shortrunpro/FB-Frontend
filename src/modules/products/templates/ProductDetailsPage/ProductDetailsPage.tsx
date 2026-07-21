@@ -2,10 +2,9 @@ import { listProducts } from '@/lib/data/products';
 
 import {
   ProductDetails,
-  ProductDetailsShipping,
-  ProductFiles,
   ProductGallery,
-  ProductPageDetails
+  ProductPageDetails,
+  ProductRelatedProducts
 } from '../../components';
 
 export const ProductDetailsPage = async ({
@@ -21,11 +20,10 @@ export const ProductDetailsPage = async ({
     forceCache: true
   }).then(({ response }) => response.products[0]);
   if (!prod) return null;
-
   return (
     <>
       <div
-        className="flex h-screen flex-col justify-center md:flex-row"
+        className="flex h-auto flex-col justify-center md:flex-row"
         data-testid="product-details-page"
       >
         <div
@@ -43,7 +41,7 @@ export const ProductDetailsPage = async ({
       </div>
       <div className="my-8">
         <ProductPageDetails details={prod} />
-        <ProductDetailsShipping />
+        {prod?.related_product && <ProductRelatedProducts products={prod?.related_product} />}
         {/* <HomeProductSection
           heading="More from this seller"
           products={prod.seller?.products}
