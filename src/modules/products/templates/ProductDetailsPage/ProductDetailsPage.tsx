@@ -1,6 +1,11 @@
 import { listProducts } from '@/lib/data/products';
 
-import { ProductDetails, ProductGallery, ProductPageDetails } from '../../components';
+import {
+  ProductDetails,
+  ProductGallery,
+  ProductPageDetails,
+  ProductRelatedProducts
+} from '../../components';
 
 export const ProductDetailsPage = async ({
   handle,
@@ -36,7 +41,7 @@ export const ProductDetailsPage = async ({
       </div>
       <div className="my-8">
         <ProductPageDetails details={prod} />
-
+        {prod?.related_product && <ProductRelatedProducts products={prod?.related_product} />}
         {/* <HomeProductSection
           heading="More from this seller"
           products={prod.seller?.products}

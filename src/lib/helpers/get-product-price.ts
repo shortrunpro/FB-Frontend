@@ -66,7 +66,7 @@ export function getProductPrice({
   product,
   variantId
 }: {
-  product: HttpTypes.StoreProduct;
+  product: HttpTypes.StoreProduct | any;
   variantId?: string;
 }) {
   if (!product || !product.id) {
@@ -97,7 +97,20 @@ export function getProductPrice({
 
     return getPricesForVariant(variant);
   };
+  const cheapestPriceAlt = () => {
+    if (!product || !product.variants?.length) {
+      return null;
+    }
 
+    const prices = product.variants
+      .filter((f: any) => !!f?.prices)
+      .map((m: any) => m?.prices[0]?.amount);
+    if (!prices.length) {
+      return null;
+    }
+    return prices.sort((a: number, b: number) => a - b)[0];
+    //
+  };
   const variantPrice = () => {
     if (!product || !variantId) {
       return null;
@@ -118,6 +131,7 @@ export function getProductPrice({
     product,
     cheapestPrice: cheapestPrice(),
     variantPrice: variantPrice(),
-    cheapestVariant: cheapestVariant()
+    cheapestVariant: cheapestVariant(),
+    cheapestPriceAlt: cheapestPriceAlt()
   };
 }

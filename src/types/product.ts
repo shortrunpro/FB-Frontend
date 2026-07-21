@@ -85,3 +85,34 @@ export type ProductBulletPoint = {
 export interface ProductWithFiles extends HttpTypes.StoreProduct {
   files?: ProductFile[];
 }
+export interface CustomProduct extends HttpTypes.StoreProduct {
+  files?: ProductFile[];
+  addons?: ProductAddon;
+  related_product?: RelatedProduct;
+}
+export interface ProductAddon {
+  id: string;
+  product_id: string;
+  variant_ids: string[];
+  variants: HttpTypes.StoreProductVariant[];
+}
+interface RelatedProductVariantPrices {
+  amount: number;
+  id: string;
+}
+interface RelatedProductVariant {
+  id: string;
+  prices: RelatedProductVariantPrices[];
+}
+export interface RelatedProductProduct {
+  title: string;
+  thumbnail?: string;
+  handle: string;
+  id: string;
+  variants: RelatedProductVariant[];
+}
+export interface RelatedProduct {
+  related_product_id: string[];
+  id: string;
+  products: RelatedProductProduct[];
+}

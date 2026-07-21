@@ -179,7 +179,7 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
   useEffect(() => {
     const selectedVariant = shownProducts.find(v => v.sku === activeSku);
     selectedVariant && setVariant(selectedVariant);
-  }, [activeSku]);
+  }, [activeSku, shownProducts]);
   return (
     <div
       className="my-4 space-y-2"

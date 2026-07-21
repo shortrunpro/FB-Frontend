@@ -7,20 +7,21 @@ import Link from 'next/link';
 import { Button } from '@/components/atoms';
 import { getProductPrice } from '@/lib/helpers/get-product-price';
 import { cn } from '@/lib/utils';
-import { Product } from '@/types/product';
+import { CustomProduct, Product, RelatedProductProduct } from '@/types/product';
 
 export const ProductCard = ({
   product,
   className
 }: {
-  product: HttpTypes.StoreProduct | Product;
+  product: CustomProduct | RelatedProductProduct;
   className?: string;
 }) => {
   if (!product) {
     return null;
   }
-
-  const { cheapestPrice } = getProductPrice({ product: product as HttpTypes.StoreProduct });
+  const { cheapestPrice, cheapestPriceAlt } = getProductPrice({
+    product: product as CustomProduct
+  });
   const productName = String(product.title || 'Product');
 
   return (
@@ -93,7 +94,7 @@ export const ProductCard = ({
         >
           <div className="w-full">
             <h3
-              className="heading-sm truncate"
+              className="heading-sm w-full text-center font-bold"
               data-testid="product-card-title"
             >
               {product.title}
@@ -103,10 +104,11 @@ export const ProductCard = ({
               data-testid="product-card-price"
             >
               <p
-                className="font-medium"
+                className="w-full text-center"
                 data-testid="product-card-current-price"
               >
-                {cheapestPrice?.calculated_price}
+                From {cheapestPrice?.calculated_price}
+                {cheapestPriceAlt && `$${cheapestPriceAlt.toFixed(2)}`}
               </p>
               {cheapestPrice?.calculated_price !== cheapestPrice?.original_price && (
                 <p
