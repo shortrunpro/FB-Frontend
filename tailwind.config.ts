@@ -154,12 +154,12 @@ export default {
         },
         'fade-out-down': {
           '0%': { opacity: '1', transform: 'translateY(0)' },
-          '100%': { opacity: '0', transform: 'translateY(10px)' }
+          '100%': { opacity: '0', transform: 'translateY(20px)' }
         }
       },
       animation: {
         'fade-in-up': 'fade-in-up 0.75s ease-in-out forwards',
-        'fade-out': 'fade-out-down 1s ease-out forwards'
+        'fade-down-out': 'fade-out-down 0.75s ease-in-out forwards'
       }
     }
   },

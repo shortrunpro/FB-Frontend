@@ -146,7 +146,7 @@ button:disabled svg path {
 }
 
 .container-columns {
-  @apply lg:px-10 xl:px-28 2xl:px-40;
+  @apply mx-auto max-w-[1600px] px-2 lg:px-10 xl:px-28 2xl:px-40;
 }
 
 .no-arrows-number-input::-webkit-inner-spin-button,

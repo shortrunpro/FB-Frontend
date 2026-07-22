@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 
 export default function RequestQuote() {
   return (
-    <main className="container flex flex-grow">
+    <main className="container-columns my-8 flex flex-grow">
       <RequestQuotePage />
     </main>
   );

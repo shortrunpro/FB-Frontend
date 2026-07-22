@@ -14,12 +14,14 @@ import { PhoneLink } from './PhoneLink/PhoneLink';
 import { PromoCode } from './PromoCode';
 import { Spinner } from './Spinner';
 import { StoreHours } from './StoreHours/StoreHours';
+import { SuccessBanner } from './SuccessBanner/SuccessBanner';
 import { Textarea } from './Textarea/Textarea';
 import { TextLink } from './TextLink/TextLink';
 import { TwitterLink } from './TwitterLink';
 import { YoutubeLink } from './YoutubeLink';
 
 export {
+  SuccessBanner,
   StoreHours,
   TextLink,
   AddToCartButton,

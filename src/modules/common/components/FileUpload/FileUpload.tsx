@@ -2,9 +2,11 @@
 
 import { ChangeEvent, DragEvent, useRef, useState } from 'react';
 
+import { ErrorMessage } from '@hookform/error-message';
 import { ArrowDownTray } from '@medusajs/icons';
 import { clx, Text } from '@medusajs/ui';
 import Link from 'next/link';
+import { get } from 'react-hook-form';
 
 export interface FileType {
   id: string;
@@ -18,31 +20,34 @@ export interface RejectedFile {
 }
 
 export interface FileUploadProps {
+  name: string;
+  errors?: Record<string, unknown>;
   label: string;
   multiple?: boolean;
   hint?: string;
-  hasError?: boolean;
   formats: string[];
   maxFileSize?: number; // in bytes, defaults to 1MB. Set to Infinity to disable.
   onUploaded: (files: FileType[], rejectedFiles?: RejectedFile[]) => void;
 }
 
-const DEFAULT_MAX_FILE_SIZE = 1024 * 1024; // 1MB fallback
+const DEFAULT_MAX_FILE_SIZE = 1024 * 2048; // 2MB fallback
 
 export const FileUpload = ({
+  name,
+  errors,
   label,
   hint,
   multiple = true,
-  hasError,
   formats,
   maxFileSize = DEFAULT_MAX_FILE_SIZE,
   onUploaded
 }: FileUploadProps) => {
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
   const [files, setFiles] = useState<FileType[]>();
+  const [rejected, setRejected] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const dropZoneRef = useRef<HTMLButtonElement>(null);
-
+  const hasError = get(errors, name);
   const handleOpenFileSelector = () => {
     inputRef.current?.click();
   };
@@ -78,13 +83,14 @@ export const FileUpload = ({
     const validFiles: FileType[] = [];
     const rejectedFiles: RejectedFile[] = [];
     const normalizedMaxFileSize = Math.min(maxFileSize, Infinity);
-
+    // Reset rejected value to false before checking uploaded files
+    setRejected(false);
     fileList.forEach(file => {
       if (file.size > normalizedMaxFileSize) {
         rejectedFiles.push({ file, reason: 'size' });
+        setRejected(true);
         return;
       }
-
       const id = Math.random().toString(36).substring(7);
       const previewUrl = URL.createObjectURL(file);
       validFiles.push({
@@ -155,6 +161,7 @@ export const FileUpload = ({
       <div className="flex flex-col gap-y-2">
         {files &&
           files.length > 0 &&
+          !rejected &&
           files.map(file => (
             <Link
               href={file.url}
@@ -167,6 +174,19 @@ export const FileUpload = ({
             </Link>
           ))}
       </div>
+      {hasError && (
+        <ErrorMessage
+          errors={errors}
+          name={name}
+          render={({ message }) => {
+            return (
+              <div className="text-xsmall-regular pl-2 pt-1 text-rose-500">
+                <span>{message}</span>
+              </div>
+            );
+          }}
+        />
+      )}
     </div>
   );
 };
