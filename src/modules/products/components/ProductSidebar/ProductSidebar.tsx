@@ -4,10 +4,11 @@ import { useState } from 'react';
 
 import { Button } from '@/components/atoms';
 import { ColorFilter, ConditionFilter, PriceFilter, SizeFilter } from '@/components/cells';
-import { ProductListingActiveFilters } from '@/components/organisms';
 import useFilters from '@/hooks/useFilters';
 import { CloseIcon } from '@/icons';
 import { cn } from '@/lib/utils';
+
+import { ProductListingActiveFilters } from '../ProductListingActiveFilters/ProductListingActiveFilters';
 
 export const ProductSidebar = () => {
   const [filterModal, setFilterModal] = useState(false);

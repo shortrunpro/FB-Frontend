@@ -13,15 +13,8 @@ import { ParcelAccordion } from './ParcelAccordion/ParcelAccordion';
 import { ParentCategoryLinks } from './ParentCategoryLinks/ParentCategoryLinks';
 import { PrimeCategoryNavbar } from './PrimeCategoryNavbar/PrimeCategoryNavbar';
 import { ProductCarouselIndicator } from './ProductCarouselIndicator/ProductCarouselIndicator';
-import ProductListingLoadingView from './ProductListingLoadingView/ProductListingLoadingView';
-import ProductListingNoResultsView from './ProductListingNoResultsView/ProductListingNoResultsView';
-import ProductListingProductsView from './ProductListingProductsView/ProductListingProductsView';
 import { ProductPageAccordion } from './ProductPageAccordion/ProductPageAccordion';
-import { ProductPostedDate } from './ProductPostedDate/ProductPostedDate';
-import { ProductReportButton } from './ProductReportButton/ProductReportButton';
 import { ProductTags } from './ProductTags/ProductTags';
-import { ProductVariants } from './ProductVariants/ProductVariants';
-import { ProdutMeasurementRow } from './ProdutMeasurementRow/ProdutMeasurementRow';
 import { ProfileDetails } from './ProfileDetails/ProfileDetails';
 import { RegisterForm } from './RegisterForm/RegisterForm';
 import { ReportListingForm } from './ReportListingForm/ReportListingForm';
@@ -41,15 +34,11 @@ export {
   GalleryCarouselItem,
   ProductPageAccordion,
   ProductTags,
-  ProdutMeasurementRow,
   ProductCarouselIndicator,
   Modal,
   ReportListingForm,
   TabsList,
   TabsContent,
-  ProductPostedDate,
-  ProductReportButton,
-  ProductVariants,
   HeaderCategoryNavbar,
   DeleteCartItemButton,
   Dropdown,
@@ -60,8 +49,5 @@ export {
   ParcelAccordion,
   AddressForm,
   ReviewForm,
-  ProfileDetails,
-  ProductListingLoadingView,
-  ProductListingNoResultsView,
-  ProductListingProductsView
+  ProfileDetails
 };

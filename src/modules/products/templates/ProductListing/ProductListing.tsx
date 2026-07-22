@@ -1,12 +1,13 @@
+import { PRODUCT_LIMIT } from '@/const';
+import { listProductsWithSort } from '@/lib/data/products';
+
 import {
   ProductListingActiveFilters,
   ProductListingHeader,
   ProductSidebar,
   ProductsList,
   ProductsPagination
-} from '@/components/organisms';
-import { PRODUCT_LIMIT } from '@/const';
-import { listProductsWithSort } from '@/lib/data/products';
+} from '../../components';
 
 export const ProductListing = async ({
   category_id,

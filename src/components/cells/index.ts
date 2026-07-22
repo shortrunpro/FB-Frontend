@@ -16,12 +16,6 @@ import { Pagination } from './Pagination/Pagination';
 import { PriceFilter } from './PriceFilter/PriceFilter';
 import { ProductAdditionalAttributes } from './ProductAdditionalAttributes/ProductAdditionalAttributes';
 import { ProductCarousel } from './ProductCarousel/ProductCarousel';
-import { ProductDetailsFooter } from './ProductDetailsFooter/ProductDetailsFooter';
-import { ProductDetailsHeader } from './ProductDetailsHeader/ProductDetailsHeader';
-import { ProductDetailsMeasurements } from './ProductDetailsMeasurements/ProductDetailsMeasurements';
-import { ProductDetailsShipping } from './ProductDetailsShipping/ProductDetailsShipping';
-import { ProductFilter } from './ProductFilter/ProductFilter';
-import { ProductPageDetails } from './ProductPageDetails/ProductPageDetails';
 import { SizeFilter } from './SizeFilter/SizeFilter';
 import StateSelect from './StateSelect';
 
@@ -30,18 +24,12 @@ export {
   CartDrawer,
   Carousel,
   Pagination,
-  ProductFilter,
   BrandFilter,
   PriceFilter,
   SizeFilter,
   ConditionFilter,
   ColorFilter,
   ActiveFilterElement,
-  ProductDetailsHeader,
-  ProductPageDetails,
-  ProductDetailsMeasurements,
-  ProductDetailsShipping,
-  ProductDetailsFooter,
   ProductCarousel,
   CartItemsFooter,
   CartItemsProducts,
