@@ -1,8 +1,11 @@
 /**
- * Allows all letters ' - and spaces
+ * @description Regex string allowing all letters ' - and spaces
  */
 export const validName = /^[a-zA-Z\s'-]+$/;
-
+/**
+ * @description Regex string allowing all letters, numbers, spaces, and '-./,
+ */
+export const validBaseInput = /^[a-zA-Z0-9\s'-\.//,]+$/;
 export const validAddress = /^[#".0-9a-zA-Z\s,\-\']+/;
 
 /**

@@ -10,7 +10,12 @@ export function Footer() {
         <a className="link-hover link">Home</a>
         <a className="link-hover link">Products</a>
         <a className="link-hover link">About Us</a>
-        <a className="link-hover link">Contact Us</a>
+        <a
+          className="link-hover link"
+          href="/contact-us"
+        >
+          Contact Us
+        </a>
         <a className="link-hover link">Blog</a>
         <a className="link-hover link">Company Awards</a>
         <a className="link-hover link">Distributors / Partners</a>

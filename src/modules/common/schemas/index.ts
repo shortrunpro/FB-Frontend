@@ -1,7 +1,40 @@
 import { z } from 'zod';
 
-import { validAddress, validCity, validName, validPhone } from '@/lib/helpers/regex';
+import {
+  validAddress,
+  validBaseInput,
+  validCity,
+  validName,
+  validPhone
+} from '@/lib/helpers/regex';
 
+interface BaseTextFieldProps {
+  nonemptyMessage?: 'Required field' | string;
+  maxCharacterMessage?: 'Max characters allowed is 30' | string;
+  maxCharacters?: 30 | number;
+  regexMessage?: 'Input contains invalid characters' | string;
+}
+/**
+ * @description Basic required text field with regex to disallow harmful special characters
+ * @param {Object} params Error messages and max characters for zod string
+ * @param {string=} [params.nonemptyMessage={Required Field}] Error message for empty fields
+ * @param {string=} [params.maxCharacterMessage="Max Characters allowed is 30"] Error message for exceeding max characters
+ * @param {number=} [params.maxCharacters=30] Max characters for field
+ * @param {string=} [params.regexMessage="Input contains invalid characters"] Error message for failed regex test
+ * @returns z.ZodString
+ */
+export const BaseTextField = ({
+  nonemptyMessage = 'Required field',
+  maxCharacters = 30,
+  maxCharacterMessage = 'Max characters allowed is 30',
+  regexMessage = 'Input contains invalid characters'
+}: BaseTextFieldProps) => {
+  return z
+    .string()
+    .nonempty({ message: nonemptyMessage })
+    .max(maxCharacters, maxCharacterMessage)
+    .regex(validBaseInput, regexMessage);
+};
 export const FirstName = z
   .string()
   .nonempty({ message: 'First name is required' })
