@@ -86,26 +86,31 @@ function ColorFilter({
     >
       <ul className="max-h-80 overflow-auto p-4">
         {items &&
-          Object.entries(items).map(([label, count]) => (
-            <li
-              key={label}
-              className="mb-4 flex items-center justify-between"
-            >
-              <FilterCheckboxOption
-                checked={isFilterActive(label)}
-                disabled={Boolean(!count)}
-                onCheck={selectHandler}
-                label={label}
-              />
-              <div
-                style={{ backgroundColor: label.toLowerCase() }}
-                className={cn(
-                  'h-5 w-5 rounded-xs border border-primary',
-                  Boolean(!label) && 'opacity-30'
-                )}
-              />
-            </li>
-          ))}
+          Object.entries(items).map(([label, count]) => {
+            let bgLabel = label.toLowerCase().replace(/[^A-Za-z0-9]/g, '-');
+            let bg = `filter-${bgLabel}`;
+
+            return (
+              <li
+                key={label}
+                className="mb-4 flex items-center justify-between"
+              >
+                <FilterCheckboxOption
+                  checked={isFilterActive(label)}
+                  disabled={Boolean(!count)}
+                  onCheck={selectHandler}
+                  label={label}
+                />
+                <div
+                  // style={{ backgroundColor: label.toLowerCase() }}
+                  className={cn(
+                    `h-5 w-5 rounded-xs border border-primary ${bg}`,
+                    Boolean(!label) && 'opacity-30'
+                  )}
+                />
+              </li>
+            );
+          })}
       </ul>
     </Accordion>
   );
