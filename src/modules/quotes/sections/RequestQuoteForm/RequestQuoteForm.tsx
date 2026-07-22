@@ -38,7 +38,6 @@ const RequestQuoteForm = () => {
       files: null
     }
   });
-  const file = watch('files');
   const handleFile = (files: FileType[], rejectedFiles?: RejectedFile[]) => {
     if (rejectedFiles?.length) {
       return rejectedFiles.forEach(f => {
@@ -64,7 +63,6 @@ const RequestQuoteForm = () => {
   };
 
   useEffect(() => {
-    console.log(file);
     if (success) {
       setIsSubmitted(true);
       setLoading(false);
@@ -76,18 +74,22 @@ const RequestQuoteForm = () => {
         <div
           className={`flex animate-fade-in-up flex-col gap-y-2 ${isSubmitted && 'translate-y-0 opacity-100'}`}
         >
-          <SuccessBanner message="Awesome! Your RFQ has been received by our Estimation HQ and will be reviewed" />
+          <SuccessBanner
+            message={`Awesome! Your RFQ has been received by our Estimation HQ and will be reviewed`}
+          />
           <div className="flex flex-col gap-y-6">
             <p>
-              If there is any information or clarification we need, so that we will know exactly
+              {`If there is any information or clarification we need, so that we will know exactly
               what you want, we will contact you. If everything is good to go, we will get started
-              pricing out your requirement.
+              pricing out your requirement.`}
             </p>
             <p>
+              {`
               We should be back to you within the next 24 to 48 hours with a quote. So exciting! Let
               us know if there is anything we can help you with during the process.
+              `}
             </p>
-            <p>Your Customer Service Team at Federal brace</p>
+            <p>{`Your Customer Service Team at Federal brace`}</p>
           </div>
         </div>
       ) : (

@@ -42,25 +42,25 @@ const RequestQuoteContent = () => {
           data-testid="rfq-content-guidlines-list"
         >
           <li>
-            When determining Order Quantity please also consider whether a prototype run is desired
-            for approval purposes.
+            {`When determining Order Quantity please also consider whether a prototype run is desired
+            for approval purposes.`}
           </li>
           <li>
-            If part(s) will be reordered please provide estimated annual usage along with production
-            run quantity.
+            {`If part(s) will be reordered please provide estimated annual usage along with production
+            run quantity.`}
           </li>
           <li>
-            Provide part usage description in "Product Description" field along with any other
-            important information related to the part.
+            {`Provide part usage description in "Product Description" field along with any other
+            important information related to the part.`}
           </li>
           <li>
-            Drawing file formats accepted include: JPEG, PDF, IGS, DXF, DOC,TIF, PNG. PDF is
-            preferred format for estimation.
+            {`Drawing file formats accepted include: JPEG, PDF, IGS, DXF, DOC,TIF, PNG. PDF is
+            preferred format for estimation.`}
           </li>
-          <li className="list-item">
-            In order to expedite your price quote please ensure that any drawing submitted includes
+          <li>
+            {`In order to expedite your price quote please ensure that any drawing submitted includes 
             all dimensional information on the part. Material thickness should also be noted in the
-            "Material", "Product in Detail" fields or on the submitted drawings.
+            "Material", "Product in Detail" fields or on the submitted drawings.`}
           </li>
         </ul>
       </div>
@@ -73,22 +73,16 @@ const RequestQuoteContent = () => {
           className="flex list-disc flex-col gap-y-4 pl-9"
           data-testid="rfq-content-tips-list"
         >
-          <li>
-            If you are unsure of your material selection, it will help if you provide a detailed
+          <li>{`If you are unsure of your material selection, it will help if you provide a detailed
             description of the part use. Check out our resources on materials for details about the
-            different characteristics of materials manufactured.
-          </li>
-          <li>
-            Include as much information as available. Our estimation team can process your quote
+            different characteristics of materials manufactured.`}</li>
+          <li>{`Include as much information as available. Our estimation team can process your quote
             expeditiously without unnecessary delay if all necessary information on the part is
-            submitted.
-          </li>
-          <li>
-            Lead times may vary based on process requirements and cyclical production schedules. Our
+            submitted.`}</li>
+          <li>{`Lead times may vary based on process requirements and cyclical production schedules. Our
             website, quoting forms and other business materials may specify a lead time. However,
             the most accurate available timing for production runs will be specified by our
-            production staff when your job is entered onto the production floor.
-          </li>
+            production staff when your job is entered onto the production floor.`}</li>
         </ul>
       </div>
     </div>
