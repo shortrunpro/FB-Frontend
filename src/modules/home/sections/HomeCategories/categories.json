@@ -118,14 +118,14 @@
   },
   {
     "id": 10,
-    "name": "Tactical Shelves",
-    "handle": "/products/floating-tactical-concealment-shelf",
+    "name": "Shower Bench Brackets",
+    "handle": "shower-bench-brackets",
 
     "product_category_image": [
       {
-        "file_id": "wall-shelves-category-img.webp",
+        "file_id": "shower-bench-brackets.webp",
         "type": "thumbnail",
-        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/popular-categories/TACTICAL%20-%20750px.webp"
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/popular-categories/SHOWER%20BENCH%20BRACKETS%20-%20750px.webp"
       }
     ]
   },
