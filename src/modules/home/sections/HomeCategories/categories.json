@@ -8,7 +8,7 @@
       {
         "file_id": "countertop-supports-category-img.webp",
         "type": "thumbnail",
-        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/countertop-supports-category-img.webp"
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/popular-categories/COUNTER%20-%20750px.webp"
       }
     ]
   },
@@ -21,20 +21,20 @@
       {
         "file_id": "floating-vanity-brackets-category-img.webp",
         "type": "thumbnail",
-        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/floating-vanity-brackets-category-img.webp"
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/popular-categories/VANITY%20-%20750px.webp"
       }
     ]
   },
   {
     "id": 3,
-    "name": "Bench Brackets",
-    "handle": "bench-brackets",
+    "name": "Floating Shelf Brackets",
+    "handle": "floating-shelf-brackets",
 
     "product_category_image": [
       {
-        "file_id": "bench-brackets-category-img.webp",
+        "file_id": "floating-shelf-brackets-category-img.webp",
         "type": "thumbnail",
-        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/bench-brackets-category-img.webp"
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/popular-categories/FLOATING%20SHELF%20BRACKETS%20-%20750px.webp"
       }
     ]
   },
@@ -47,20 +47,20 @@
       {
         "file_id": "floating-shelves-category-img.webp",
         "type": "thumbnail",
-        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/floating-shelves-category-img.webp"
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/popular-categories/FLOATING%20SHELVES%20-%20750px.webp"
       }
     ]
   },
   {
     "id": 5,
-    "name": "Wood Corbels",
-    "handle": "wood-corbels",
+    "name": "Bench Brackets",
+    "handle": "bench-brackets",
 
     "product_category_image": [
       {
-        "file_id": "wood-corbels-category-img.webp",
+        "file_id": "bench-brackets-category-img.webp",
         "type": "thumbnail",
-        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/wood-corbels-category-img.webp"
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/popular-categories/BENCH%20-%20750px.webp"
       }
     ]
   },
@@ -73,20 +73,20 @@
       {
         "file_id": "mantel-brackets-category-img.webp",
         "type": "thumbnail",
-        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/mantel-brackets-category-img.webp"
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/popular-categories/MANTEL%20BRACKETS%20-%20750px.webp"
       }
     ]
   },
   {
     "id": 7,
-    "name": "Teak Products",
-    "handle": "",
+    "name": "Desk Supports",
+    "handle": "floating-desk-brackets",
 
     "product_category_image": [
       {
         "file_id": "teak-shower-mats-category-img.webp",
         "type": "thumbnail",
-        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/teak-shower-mats-category-img.webp"
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/popular-categories/DESK%20-%20750px.webp"
       }
     ]
   },
@@ -99,33 +99,33 @@
       {
         "file_id": "shelf-brackets-category-img.webp",
         "type": "thumbnail",
-        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/shelf-brackets-category-img.webp"
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/popular-categories/SHELF%20BRACKETS%20-%20750px.webp"
       }
     ]
   },
   {
     "id": 9,
-    "name": "Floating Shelf Brackets",
-    "handle": "floating-shelf-brackets",
+    "name": "Magnetic Corbels",
+    "handle": "magnetic-click-corbels",
 
     "product_category_image": [
       {
-        "file_id": "floating-shelf-brackets-category-img.webp",
+        "file_id": "magnetic-corbels.webp",
         "type": "thumbnail",
-        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/floating-shelf-brackets-category-img.webp"
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/popular-categories/MAGNETIC%20CORBELS%20-%20750px.webp"
       }
     ]
   },
   {
     "id": 10,
-    "name": "Wall Shelves",
-    "handle": "wall-shelves",
+    "name": "Tactical Shelves",
+    "handle": "/products/floating-tactical-concealment-shelf",
 
     "product_category_image": [
       {
         "file_id": "wall-shelves-category-img.webp",
         "type": "thumbnail",
-        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/wall-shelves-category-img.webp"
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/popular-categories/TACTICAL%20-%20750px.webp"
       }
     ]
   },
@@ -138,7 +138,7 @@
       {
         "file_id": "cube-cabinets-category-img.webp",
         "type": "thumbnail",
-        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/cube-cabinets-category-img.webp"
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/popular-categories/CUBE%20CABINETS%20-%20750px.webp"
       }
     ]
   },
@@ -151,7 +151,7 @@
       {
         "file_id": "clearance-category-img.webp",
         "type": "thumbnail",
-        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/clearance-category-img.webp"
+        "url": "https://pub-ad684fbc57174773982dd597e7e48ec4.r2.dev/popular-categories/CLEARANCE%20-%20750.webp"
       }
     ]
   }
