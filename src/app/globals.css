@@ -44,8 +44,14 @@
 .heading-lg {
   @apply text-[32px] font-medium leading-[40px] tracking-normal max-md:text-[24px] max-md:leading-[32px];
 }
+.heading-lg-bold {
+  @apply text-[32px] font-bold leading-[40px] tracking-normal max-md:text-[24px] max-md:leading-[32px];
+}
 .heading-xl {
   @apply text-[40px] font-medium leading-[48px] tracking-normal max-md:text-[32px] max-md:leading-[40px];
+}
+.heading-xl-bold {
+  @apply text-[40px] font-bold leading-[48px] tracking-normal max-md:text-[32px] max-md:leading-[40px];
 }
 .heading-2xl {
   @apply text-[44px] leading-[48px] tracking-normal max-md:text-[36px] max-md:leading-[44px];
@@ -146,7 +152,7 @@ button:disabled svg path {
 }
 
 .container-columns {
-  @apply lg:px-10 xl:px-28 2xl:px-40;
+  @apply mx-auto max-w-[1600px] px-2 lg:px-10 xl:px-28 2xl:px-40;
 }
 
 .no-arrows-number-input::-webkit-inner-spin-button,

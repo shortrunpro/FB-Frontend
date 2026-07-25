@@ -2,7 +2,7 @@ import { Divider } from '@medusajs/ui';
 
 export const TopSection = () => {
   return (
-    <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-y-4 py-6 leading-tight lg:flex">
+    <div className="mx-auto hidden max-w-[1400px] grid-cols-2 gap-y-4 py-6 leading-tight lg:flex">
       <div className="flex flex-col gap-y-3 px-4">
         <h4 className="font-semibold text-brand">Kitchen Brackets</h4>
         <span className="text-xs">

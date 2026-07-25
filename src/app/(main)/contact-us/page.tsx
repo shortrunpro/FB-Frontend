@@ -1,16 +1,16 @@
 import type { Metadata } from 'next';
 
 import { BASE_URL, SITE_NAME } from '@/lib/config';
-import { RequestQuotePage } from '@/modules/quotes/templates';
+import { ContactUsPage } from '@/modules/contact-us/templates';
 
 export const metadata: Metadata = {
-  title: `Request a Custom Quote | ${SITE_NAME}`,
+  title: `Contact Us | ${SITE_NAME}`,
   alternates: {
-    canonical: `${BASE_URL}/request-quote`
+    canonical: `${BASE_URL}/contact-us`
   },
   openGraph: {
-    title: `Request a Custom Quote | ${SITE_NAME}`,
-    url: `${BASE_URL}/request-quote`,
+    title: `Contact Us | ${SITE_NAME}`,
+    url: `${BASE_URL}/contact-us`,
     siteName: SITE_NAME,
     type: 'website',
     images: [
@@ -24,15 +24,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `Request a Custom Quote | ${SITE_NAME}`,
+    title: `Contact Us | ${SITE_NAME}`,
     images: [`${BASE_URL}/federal-brace-logo.jpg`]
   }
 };
 
-export default function RequestQuote() {
+export default function ContactUs() {
   return (
-    <main className="container-columns my-8 flex flex-grow">
-      <RequestQuotePage />
+    <main className="container-columns my-6 flex flex-grow justify-center px-4 lg:my-12">
+      <ContactUsPage />
     </main>
   );
 }
