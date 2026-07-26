@@ -18,7 +18,7 @@ const ShowAll = () => {
               <Text className="mb-0">
                 Showing the first {results.hitsPerPage} of {results.nbHits} results
               </Text>
-              <InteractiveLink href={`/results/${results?.query}`}>View all</InteractiveLink>
+              <InteractiveLink href={`/search/results/${results?.query}`}>View all</InteractiveLink>
             </>
           )}
         </>
