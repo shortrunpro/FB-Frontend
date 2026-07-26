@@ -16,6 +16,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { Button, Chip, Input } from '@/components/atoms';
 import { useCartContext } from '@/modules/cart/provider/context';
+import { InteractiveLink } from '@/modules/common/components';
 
 import ProductVariantModal from '../ProductVariantModal/ProductVariantModal';
 
@@ -93,7 +94,15 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
   const columnHelper = createDataTableColumnHelper<(typeof variants)[0]>();
   const columns = [
     columnHelper.accessor('sku', {
-      header: 'Product SKU'
+      header: 'Product SKU',
+      id: 'sku',
+      cell: ({ getValue }) => {
+        const value = getValue();
+        const v = shownProducts.find(f => f.sku === value);
+        return (
+          v && v.sku && <InteractiveLink href={`${pathname}?sku=${v.sku}`}>{value}</InteractiveLink>
+        );
+      }
     }),
     columnHelper.accessor('finish', {
       header: 'Finish',
@@ -160,10 +169,10 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
       state: sorting,
       onSortingChange: setSorting
     },
-    onRowClick(event, row) {
-      const v = shownProducts.find(f => f.id === row.id);
-      v?.sku && router.push(`${pathname}?sku=${v.sku}`);
-    },
+    // onRowClick(event, row) {
+    //   const v = shownProducts.find(f => f.id === row.id);
+    //   v?.sku && router.push(`${pathname}?sku=${v.sku}`);
+    // },
     isLoading: false
   });
   const handleAddToCart = async () => {

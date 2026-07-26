@@ -44,7 +44,7 @@ export function CategoryCard({
         )}
       </div>
       <div className="w-full bg-brand_grey px-2 py-2">
-        <h3 className="label-lg text-center text-brand">{category.name}</h3>
+        <h3 className="text-center text-[.85rem] font-bold text-brand">{category.name}</h3>
       </div>
     </Link>
   );

@@ -1,9 +1,9 @@
-import { Button } from '@/modules/common/components';
+import Link from 'next/link';
 
 export const ImageOverlay = () => {
   return (
     <div className="flex min-h-[450px] w-full flex-col justify-center gap-y-8 py-4 lg:bg-[url(/home-paragraph-section/Floating-shelf-Kitchen-Image-darkened.jpg)] lg:bg-cover lg:text-white">
-      <h4 className="text-4xl font-bold">Heavy-Duty, American-Made Support Brackets</h4>
+      <h4 className="heading-lg-bold px-4">Heavy-Duty, American-Made Support Brackets</h4>
       <div className="mx-auto flex flex-col gap-y-4 px-4 leading-tight lg:w-1/2">
         <p className="">
           {`Federal Brace manufactures a full line of support products for various residential,
@@ -18,10 +18,13 @@ export const ImageOverlay = () => {
           have a full line of support solutions to meet the needs of your project.`}
         </p>
       </div>
-      <div>
-        <Button className="rounded-full bg-white px-6 py-4 font-semibold text-brand hover:bg-brand hover:text-white">
+      <div className="flex justify-center">
+        <Link
+          href={'/products'}
+          className="flex w-[13.75rem] items-center gap-x-2 rounded-full bg-white p-3 text-center font-bold text-brand hover:bg-brand hover:text-white"
+        >
           SHOP ALL HARDWARE
-        </Button>
+        </Link>
       </div>
     </div>
   );

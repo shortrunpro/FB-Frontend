@@ -27,7 +27,7 @@ export default async function ProductPage({
 }) {
   const { handle, locale } = await params;
   return (
-    <main className="container">
+    <main className="container flex flex-col gap-y-12">
       <ProductDetailsPage
         handle={handle}
         locale={locale}

@@ -2,6 +2,7 @@
 
 import { ArrowRight, StarSolid } from '@medusajs/icons';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -12,8 +13,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 // @ts-ignore
 import 'swiper/css/pagination';
-
-import { Button } from '@/modules/common/components';
 
 export const HomeImageCarousel = () => {
   return (
@@ -36,14 +35,17 @@ export const HomeImageCarousel = () => {
               <span>Support Brackets</span>
             </h2>
             <p className="heading-sm lg:text-sm/10">100% USA-MADE EVERYTIME</p>
-            <div>
-              <Button className="hidden items-center gap-x-2 rounded-full font-bold hover:bg-brand lg:flex">
+            <div className="flex w-full justify-center lg:justify-normal">
+              <Link
+                href={'/products'}
+                className="flex items-center gap-x-2 rounded-full bg-action p-3 font-bold text-white hover:bg-brand"
+              >
                 SHOP NOW{' '}
                 <ArrowRight
                   color="#ffffff"
                   className="rounded-badge border-2 border-solid border-[#49576E] bg-brand"
                 />
-              </Button>
+              </Link>
             </div>
           </div>
         </div>
