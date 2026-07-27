@@ -2,12 +2,11 @@
 
 import { useState } from 'react';
 
-import { User } from '@medusajs/icons';
+import Link from 'next/link';
+import { FaRegUser } from 'react-icons/fa';
 
-import { Badge, Divider, LogoutButton, NavigationItem } from '@/components/atoms';
+import { Divider, LogoutButton, NavigationItem } from '@/components/atoms';
 import { Dropdown } from '@/components/molecules';
-import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
-import { ProfileIcon } from '@/icons';
 
 export const UserDropdown = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const [open, setOpen] = useState(false);
@@ -19,34 +18,36 @@ export const UserDropdown = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
       onMouseLeave={() => setOpen(false)}
       onFocus={() => setOpen(true)}
     >
-      <LocalizedClientLink
+      <Link
         href={isLoggedIn ? '/user' : '/login'}
         className="relative"
         aria-label="Go to user profile"
       >
-        <User />
-      </LocalizedClientLink>
-      <Dropdown show={open}>
-        {isLoggedIn ? (
-          <div className="p-1">
-            <div className="lg:w-[200px]">
-              <h3 className="heading-xs border-b p-4 uppercase">Your account</h3>
+        <FaRegUser size={'1.25rem'} />
+      </Link>
+      <div className="hidden lg:block">
+        <Dropdown show={open}>
+          {isLoggedIn ? (
+            <div className="p-1">
+              <div className="lg:w-[200px]">
+                <h3 className="heading-xs border-b p-4 uppercase">Your account</h3>
+              </div>
+              <NavigationItem href="/user/orders">Orders</NavigationItem>
+              <NavigationItem href="/user/returns">Returns</NavigationItem>
+              <NavigationItem href="/user/addresses">Addresses</NavigationItem>
+              <NavigationItem href="/user/reviews">Reviews</NavigationItem>
+              <Divider />
+              <NavigationItem href="/user/settings">Settings</NavigationItem>
+              <LogoutButton />
             </div>
-            <NavigationItem href="/user/orders">Orders</NavigationItem>
-            <NavigationItem href="/user/returns">Returns</NavigationItem>
-            <NavigationItem href="/user/addresses">Addresses</NavigationItem>
-            <NavigationItem href="/user/reviews">Reviews</NavigationItem>
-            <Divider />
-            <NavigationItem href="/user/settings">Settings</NavigationItem>
-            <LogoutButton />
-          </div>
-        ) : (
-          <div className="p-1">
-            <NavigationItem href="/login">Login</NavigationItem>
-            <NavigationItem href="/register">Register</NavigationItem>
-          </div>
-        )}
-      </Dropdown>
+          ) : (
+            <div className="p-1">
+              <NavigationItem href="/login">Login</NavigationItem>
+              <NavigationItem href="/register">Register</NavigationItem>
+            </div>
+          )}
+        </Dropdown>
+      </div>
     </div>
   );
 };

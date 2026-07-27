@@ -1,7 +1,6 @@
 import { ActiveFilterElement } from './ActiveFilterElement/ActiveFilterElement';
 import { BrandFilter } from './BrandFilter/BrandFilter';
 import { CustomCarousel as Carousel } from './Carousel/Carousel';
-import { CartDrawer } from './CartDrawer/CartDrawer';
 import { CartDropdown } from './CartDropdown/CartDropdown';
 import { CartItemsFooter } from './CartItemsFooter/CartItemsFooter';
 import { CartItemsProducts } from './CartItemsProducts/CartItemsProducts';
@@ -21,7 +20,6 @@ import StateSelect from './StateSelect';
 
 export {
   StateSelect,
-  CartDrawer,
   Carousel,
   Pagination,
   BrandFilter,

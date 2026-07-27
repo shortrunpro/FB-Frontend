@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 
 import { LockClosedSolidMini, ShoppingCart } from '@medusajs/icons';
 import { Drawer, Text } from '@medusajs/ui';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { Button } from '@/components/atoms';
-import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
 import { usePrevious } from '@/hooks/usePrevious';
 import { filterValidCartItems } from '@/lib/helpers/filter-valid-cart-items';
 import { getItemCount } from '@/lib/helpers/get-item-count';
@@ -59,9 +59,9 @@ export const CartDrawer = () => {
         onOpenChange={setIsOpen}
       >
         <Drawer.Trigger asChild>
-          <button className="transition-fg txt-compact-small-plus relative inline-flex w-fit items-center justify-center gap-x-1.5 overflow-hidden rounded-full px-3 py-1.5 outline-none hover:bg-neutral-100">
+          <button className="transition-fg txt-compact-small-plus relative inline-flex w-fit items-center justify-center gap-x-1.5 overflow-hidden rounded-full px-3 py-1.5 text-black outline-none hover:bg-neutral-100 lg:text-white">
             <ShoppingCart />
-            <span className="small:inline-block text-sm">
+            <span className="text-sm sm:inline-block lg:hidden xl:inline-block">
               {cart && items && cart?.items && cart.items.length > 0
                 ? convertToLocale({
                     amount: subtotal,
@@ -74,7 +74,7 @@ export const CartDrawer = () => {
             </div>
           </button>
         </Drawer.Trigger>
-        <Drawer.Content className="inset-y-0 z-50 m-0 w-1/3 rounded-none bg-white p-0 sm:right-0">
+        <Drawer.Content className="inset-y-0 z-50 m-0 w-fit max-w-full rounded-none bg-white p-0 sm:right-0">
           <Drawer.Header className="flex self-center">
             <Drawer.Title>
               {totalItems > 0 ? `You have ${totalItems} items in your cart` : 'Your cart is empty'}
@@ -100,7 +100,7 @@ export const CartDrawer = () => {
               </div>
 
               <div className="flex w-full gap-x-6">
-                <LocalizedClientLink
+                <Link
                   href="/cart"
                   className="w-full"
                 >
@@ -110,8 +110,8 @@ export const CartDrawer = () => {
                   >
                     View Cart
                   </Button>
-                </LocalizedClientLink>
-                <LocalizedClientLink
+                </Link>
+                <Link
                   href={'/checkout'}
                   className="w-full"
                 >
@@ -122,7 +122,7 @@ export const CartDrawer = () => {
                     <LockClosedSolidMini />
                     Secure Checkout
                   </Button>
-                </LocalizedClientLink>
+                </Link>
               </div>
             </div>
           </div>

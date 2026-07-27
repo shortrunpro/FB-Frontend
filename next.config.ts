@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // output: "standalone",
+  devIndicators: false,
   trailingSlash: false,
   reactStrictMode: true,
   logging: {
