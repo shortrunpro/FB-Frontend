@@ -1,38 +1,39 @@
-"use client"
+'use client';
 
-import { Button } from "@/components/atoms"
-import { Card } from "@/components/atoms/Card/Card"
-import { InfoIcon } from "@/icons"
-import { Divider, Heading } from "@medusajs/ui"
-import { useState } from "react"
-import { Modal } from "../Modal/Modal"
+import { useState } from 'react';
+
 // import { ProfilePasswordForm } from "../ProfilePasswordForm/ProfilePasswordForm"
-import { HttpTypes } from "@medusajs/types"
-import { sendResetPasswordEmail } from "@/lib/data/customer"
+import { HttpTypes } from '@medusajs/types';
+import { Divider, Heading } from '@medusajs/ui';
 
-export const ProfilePassword = ({
-  user,
-}: {
-  user: HttpTypes.StoreCustomer
-}) => {
-  const [showForm, setShowForm] = useState(false)
+import { Button } from '@/components/atoms';
+import { Card } from '@/components/atoms/Card/Card';
+import { InfoIcon } from '@/icons';
+import { sendResetPasswordEmail } from '@/lib/data/customer';
+import { Modal } from '@/modules/common/components';
+
+export const ProfilePassword = ({ user }: { user: HttpTypes.StoreCustomer }) => {
+  const [showForm, setShowForm] = useState(false);
 
   const handleSendResetPasswordEmail = async () => {
-    const res = await sendResetPasswordEmail(user.email)
+    const res = await sendResetPasswordEmail(user.email);
     if (res.success) {
-      setShowForm(false)
+      setShowForm(false);
     }
-  }
+  };
 
   return (
     <>
-      <Card className="bg-secondary p-4 flex justify-between items-center mt-8">
-        <Heading level="h2" className="heading-sm uppercase">
+      <Card className="mt-8 flex items-center justify-between bg-secondary p-4">
+        <Heading
+          level="h2"
+          className="heading-sm uppercase"
+        >
           Password
         </Heading>
         <Button
           variant="tonal"
-          className="uppercase flex items-center gap-2 font-semibold"
+          className="flex items-center gap-2 font-semibold uppercase"
           onClick={() => setShowForm(true)}
         >
           Change password
@@ -45,17 +46,23 @@ export const ProfilePassword = ({
         </div>
         <Divider />
         <div className="p-4">
-          <p className="label-md text-secondary flex items-center gap-4">
-            <InfoIcon size={18} className="text-secondary" />
+          <p className="label-md flex items-center gap-4 text-secondary">
+            <InfoIcon
+              size={18}
+              className="text-secondary"
+            />
             Always remember to choose a unique password to protect your account.
           </p>
         </div>
       </Card>
       {showForm && (
-        <Modal heading="Change password" onClose={() => setShowForm(false)}>
-          <div className="flex p-4 justify-center">
+        <Modal
+          heading="Change password"
+          onClose={() => setShowForm(false)}
+        >
+          <div className="flex justify-center p-4">
             <Button
-              className="uppercase py-3 px-6 !font-semibold"
+              className="px-6 py-3 !font-semibold uppercase"
               onClick={handleSendResetPasswordEmail}
             >
               Send reset password email
@@ -65,5 +72,5 @@ export const ProfilePassword = ({
         </Modal>
       )}
     </>
-  )
-}
+  );
+};
