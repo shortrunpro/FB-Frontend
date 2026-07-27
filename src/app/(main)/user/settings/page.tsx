@@ -1,6 +1,7 @@
-import { ProfileDetails, UserNavigation } from '@/components/molecules';
+import { ProfileDetails } from '@/components/molecules';
 import { ProfilePassword } from '@/components/molecules/ProfileDetails/ProfilePassword';
 import { retrieveCustomer } from '@/lib/data/customer';
+import { UserNavigation } from '@/modules/users/components';
 import { LoginForm } from '@/modules/users/forms';
 
 export default async function ReviewsPage() {

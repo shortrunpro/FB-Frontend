@@ -1,8 +1,8 @@
 import { format } from 'date-fns';
+import Link from 'next/link';
 
-import { Button } from '@/components/atoms';
-import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
 import { convertToLocale } from '@/lib/helpers/money';
+import { Button } from '@/modules/common/components';
 
 import { ParcelAccordionItems } from './ParcelAccordionItems';
 
@@ -32,7 +32,7 @@ export const ParcelAccordion = ({
           className="heading-sm truncate"
           data-testid="order-display-id"
         >
-          ORDER SET {orderDisplayId}
+          ORDER {orderDisplayId}
         </h2>
         <h2
           className="label-md"
@@ -52,19 +52,19 @@ export const ParcelAccordion = ({
             className="text-primary lg:block xl:inline-block"
             data-testid={`order-${orderId}-price`}
           >
-            {convertToLocale({ amount: total, currency_code })}
+            {convertToLocale({ amount: total, currency_code: 'usd' })}
           </span>
         </h2>
       </div>
       <div className="col-span-1 flex items-center justify-end gap-4">
-        <LocalizedClientLink href={`/user/orders/${orderId}`}>
+        <Link href={`/user/orders/${orderId}`}>
           <Button
             variant="tonal"
             data-testid="order-view-button"
           >
             <span className="label-md text-primary">VIEW ORDER</span>
           </Button>
-        </LocalizedClientLink>
+        </Link>
       </div>
     </div>
     <div className="mb-4">

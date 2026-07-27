@@ -7,11 +7,11 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FieldError, FieldValues, FormProvider, useForm, useFormContext } from 'react-hook-form';
 
-import { Button } from '@/components/atoms';
 import { Alert } from '@/components/atoms/Alert/Alert';
 import { LabeledInput } from '@/components/cells';
 import { login, transferCart } from '@/lib/data/customer';
 import { toast } from '@/lib/helpers/toast';
+import { Button } from '@/modules/common/components';
 
 import { LoginFormData, loginFormSchema } from './schema';
 
@@ -137,7 +137,7 @@ const Form = () => {
             </Link>
 
             <Button
-              className="mt-8 w-full uppercase"
+              className="mt-8 w-full bg-brand uppercase"
               disabled={isSubmitting}
               data-testid="login-submit-button"
             >

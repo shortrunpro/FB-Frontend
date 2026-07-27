@@ -34,7 +34,8 @@ export const retrieveOrder = async (id: string) => {
     .fetch<HttpTypes.StoreOrderResponse>(`/store/orders/${id}`, {
       method: 'GET',
       query: {
-        fields: '*payment_collections.payments,*items,*items.metadata,*items.variant,*items.product'
+        fields:
+          '*payment_collections.payments,*items,*items.metadata,*items.variant,*items.product,id,display_id,custom_display_id,created_at,total,subtotal,shipping_total'
       },
       headers,
       next,
@@ -119,7 +120,7 @@ export const listOrders = async (
         offset,
         order: '-created_at',
         fields:
-          '*items,+items.metadata,*items.variant,*items.product,shipping_total,total,created_at',
+          '*items,+items.metadata,*items.variant,*items.product,shipping_total,total,created_at,display_id,id,custom_display_id',
         ...filters
       },
       headers,

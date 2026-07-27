@@ -20,7 +20,6 @@ import { ReviewForm } from './ReviewForm/ReviewForm';
 import { SelectField } from './SelectField/SelectField';
 import { TabsContent } from './TabsContent/TabsContent';
 import { TabsList } from './TabsList/TabsList';
-import { UserNavigation } from './UserNavigation/UserNavigation';
 
 export {
   PrimeCategoryNavbar,
@@ -41,7 +40,6 @@ export {
   DeleteCartItemButton,
   Dropdown,
   CartDropdownItem,
-  UserNavigation,
   ParcelAccordion,
   AddressForm,
   ReviewForm,
