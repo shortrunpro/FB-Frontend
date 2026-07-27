@@ -33,9 +33,7 @@ export const UserDropdown = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
                 <h3 className="heading-xs border-b p-4 uppercase">Your account</h3>
               </div>
               <NavigationItem href="/user/orders">Orders</NavigationItem>
-              <NavigationItem href="/user/returns">Returns</NavigationItem>
               <NavigationItem href="/user/addresses">Addresses</NavigationItem>
-              <NavigationItem href="/user/reviews">Reviews</NavigationItem>
               <Divider />
               <NavigationItem href="/user/settings">Settings</NavigationItem>
               <LogoutButton />
