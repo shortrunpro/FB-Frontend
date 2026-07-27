@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { UserDropdown } from '@/components/cells/UserDropdown/UserDropdown';
 import { CartDrawer } from '@/modules/cart/components';
+import { UserDropdown } from '@/modules/users/components';
 
 import { NavbarSearch } from '../NavbarSearch/NavbarSearch';
 

@@ -1,8 +1,8 @@
 import { StoreCustomer } from '@medusajs/types';
 import { Divider } from '@medusajs/ui';
 
-import { UserDropdown } from '@/components/cells/UserDropdown/UserDropdown';
 import { CartDrawer } from '@/modules/cart/components';
+import { UserDropdown } from '@/modules/users/components';
 
 import { NavbarSearch } from '../NavbarSearch/NavbarSearch';
 

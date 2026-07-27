@@ -1,9 +1,10 @@
 import { isEmpty } from 'lodash';
 
-import { LoginForm, ParcelAccordion, UserNavigation } from '@/components/molecules';
+import { ParcelAccordion, UserNavigation } from '@/components/molecules';
 import { OrdersPagination } from '@/components/sections';
 import { retrieveCustomer } from '@/lib/data/customer';
 import { listOrders } from '@/lib/data/orders';
+import { LoginForm } from '@/modules/users/forms';
 
 const LIMIT = 10;
 

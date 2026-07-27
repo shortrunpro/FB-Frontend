@@ -7,7 +7,6 @@ import { Dropdown } from './Dropdown/Dropdown';
 import { FilterCheckboxOption } from './FilterCheckboxOption/FilterCheckboxOption';
 import { GalleryCarouselItem } from './GalleryCarouselItem/GalleryCarouselItem';
 import { HeaderCategoryNavbar } from './HeaderCategoryNavbar/HeaderCategoryNavbar';
-import { LoginForm } from './LoginForm/LoginForm';
 import { Modal } from './Modal/Modal';
 import { ParcelAccordion } from './ParcelAccordion/ParcelAccordion';
 import { ParentCategoryLinks } from './ParentCategoryLinks/ParentCategoryLinks';
@@ -16,7 +15,6 @@ import { ProductCarouselIndicator } from './ProductCarouselIndicator/ProductCaro
 import { ProductPageAccordion } from './ProductPageAccordion/ProductPageAccordion';
 import { ProductTags } from './ProductTags/ProductTags';
 import { ProfileDetails } from './ProfileDetails/ProfileDetails';
-import { RegisterForm } from './RegisterForm/RegisterForm';
 import { ReportListingForm } from './ReportListingForm/ReportListingForm';
 import { ReviewForm } from './ReviewForm/ReviewForm';
 import { SelectField } from './SelectField/SelectField';
@@ -43,8 +41,6 @@ export {
   DeleteCartItemButton,
   Dropdown,
   CartDropdownItem,
-  LoginForm,
-  RegisterForm,
   UserNavigation,
   ParcelAccordion,
   AddressForm,
