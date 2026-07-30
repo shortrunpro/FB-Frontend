@@ -1,14 +1,14 @@
-import { LoginForm } from "@/components/molecules"
-import { retrieveCustomer } from "@/lib/data/customer"
-import { redirect } from "next/navigation"
+import { redirect } from 'next/navigation';
+
+import { retrieveCustomer } from '@/lib/data/customer';
+import { LoginForm } from '@/modules/users/forms';
 
 export default async function LoginPage() {
-  const user = await retrieveCustomer()
+  const user = await retrieveCustomer();
 
   if (user) {
-    redirect("/user")
+    redirect('/user');
   }
 
-  return <LoginForm />
+  return <LoginForm />;
 }
-

@@ -221,3 +221,94 @@ h2.tiptap-heading {
 .ais-Hits .ais-Hits-list .ais-Hits-item {
   @apply m-0 w-full border-none p-0;
 }
+
+.filter-aluminum {
+  @apply bg-[#1565C0];
+}
+.filter-arctic-groovz {
+  @apply bg-[#E5E6E8];
+}
+.filter-black {
+  @apply bg-[#111111];
+}
+.filter-black-marbled {
+  @apply bg-[#3A3A3A];
+}
+.filter-blue {
+  @apply bg-[#1565C0];
+}
+.filter-clear {
+  @apply bg-[#F5F5F5];
+}
+.filter-coffee {
+  @apply bg-[#6F4E37];
+}
+.filter-elm {
+  @apply bg-[#C89A63];
+}
+.filter-galvanized {
+  @apply bg-[#A5A9AD];
+}
+.filter-glass {
+  @apply bg-[#DCEEF8];
+}
+.filter-gold {
+  @apply bg-[#C8A74E];
+}
+.filter-grey {
+  @apply bg-[#8A8D91];
+}
+.filter-hickory {
+  @apply bg-[#A1744A];
+}
+.filter-maple {
+  @apply bg-[#E6C89A];
+}
+.filter-oil-rubbed-bronze {
+  @apply bg-[#4B382C];
+}
+.filter-paint-grade {
+  @apply bg-[#D6D6D6];
+}
+.filter-pine {
+  @apply bg-[#E7C97C];
+}
+.filter-red {
+  @apply bg-[#C62828];
+}
+.filter-silver {
+  @apply bg-[#BFC2C6];
+}
+.filter-stainless-steel {
+  @apply bg-[#B8BDC3];
+}
+.filter-steel {
+  @apply bg-[#70777E];
+}
+.filter-steel-mist {
+  @apply bg-[#9EA7AD];
+}
+.filter-sycamore {
+  @apply bg-[#D6B88A];
+}
+.filter-teak {
+  @apply bg-[#A86B3A];
+}
+.filter-teak-stainless-steel {
+  @apply bg-[#B08A62];
+}
+.filter-victorian-grey {
+  @apply bg-[#8C8E8F];
+}
+.filter-walnut {
+  @apply bg-[#5B3A24];
+}
+.filter-white {
+  @apply bg-[#F8F8F8];
+}
+.filter-white-marbled {
+  @apply bg-[#F2F2F2];
+}
+.filter-zinc {
+  @apply bg-[#B5BCC2];
+}

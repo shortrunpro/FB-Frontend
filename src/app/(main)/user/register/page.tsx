@@ -1,13 +1,14 @@
-import { RegisterForm } from "@/components/molecules"
-import { retrieveCustomer } from "@/lib/data/customer"
-import { redirect } from "next/navigation"
+import { redirect } from 'next/navigation';
+
+import { retrieveCustomer } from '@/lib/data/customer';
+import { RegisterForm } from '@/modules/users/forms';
 
 export default async function Page() {
-  const user = await retrieveCustomer()
+  const user = await retrieveCustomer();
 
   if (user) {
-    redirect("/user")
+    redirect('/user');
   }
 
-  return <RegisterForm />
+  return <RegisterForm />;
 }

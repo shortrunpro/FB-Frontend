@@ -1,7 +1,6 @@
 import { ActiveFilterElement } from './ActiveFilterElement/ActiveFilterElement';
 import { BrandFilter } from './BrandFilter/BrandFilter';
 import { CustomCarousel as Carousel } from './Carousel/Carousel';
-import { CartDrawer } from './CartDrawer/CartDrawer';
 import { CartDropdown } from './CartDropdown/CartDropdown';
 import { CartItemsFooter } from './CartItemsFooter/CartItemsFooter';
 import { CartItemsProducts } from './CartItemsProducts/CartItemsProducts';
@@ -16,32 +15,19 @@ import { Pagination } from './Pagination/Pagination';
 import { PriceFilter } from './PriceFilter/PriceFilter';
 import { ProductAdditionalAttributes } from './ProductAdditionalAttributes/ProductAdditionalAttributes';
 import { ProductCarousel } from './ProductCarousel/ProductCarousel';
-import { ProductDetailsFooter } from './ProductDetailsFooter/ProductDetailsFooter';
-import { ProductDetailsHeader } from './ProductDetailsHeader/ProductDetailsHeader';
-import { ProductDetailsMeasurements } from './ProductDetailsMeasurements/ProductDetailsMeasurements';
-import { ProductDetailsShipping } from './ProductDetailsShipping/ProductDetailsShipping';
-import { ProductFilter } from './ProductFilter/ProductFilter';
-import { ProductPageDetails } from './ProductPageDetails/ProductPageDetails';
 import { SizeFilter } from './SizeFilter/SizeFilter';
 import StateSelect from './StateSelect';
 
 export {
   StateSelect,
-  CartDrawer,
   Carousel,
   Pagination,
-  ProductFilter,
   BrandFilter,
   PriceFilter,
   SizeFilter,
   ConditionFilter,
   ColorFilter,
   ActiveFilterElement,
-  ProductDetailsHeader,
-  ProductPageDetails,
-  ProductDetailsMeasurements,
-  ProductDetailsShipping,
-  ProductDetailsFooter,
   ProductCarousel,
   CartItemsFooter,
   CartItemsProducts,

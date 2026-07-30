@@ -1,63 +1,60 @@
-import NotFound from "@/app/not-found"
-import { Breadcrumbs } from "@/components/atoms"
-import { ProductListingSkeleton } from "@/components/organisms/ProductListingSkeleton/ProductListingSkeleton"
-import { AlgoliaProductsListing, ProductListing } from "@/components/sections"
-import { getCollectionByHandle } from "@/lib/data/collections"
-import { getRegion } from "@/lib/data/regions"
-import isBot from "@/lib/helpers/isBot"
-import { headers } from "next/headers"
-import { Suspense } from "react"
+// TODO Remove page entirely?
 
-export const dynamic = 'force-dynamic';
+// import NotFound from "@/app/not-found"
+// import { Breadcrumbs } from "@/components/atoms"
 
-const ALGOLIA_ID = process.env.NEXT_PUBLIC_ALGOLIA_ID
-const ALGOLIA_SEARCH_KEY = process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY
+// import { ProductListingSkeleton } from '@/modules/products/components';
+// import { FacetedProductsListing, ProductListing } from '@/modules/products/templates';
+// import { getCollectionByHandle } from "@/lib/data/collections"
+// import { getRegion } from "@/lib/data/regions"
+// import isBot from "@/lib/helpers/isBot"
+// import { Suspense } from "react"
 
-const AlgoliaProductsListingAny = AlgoliaProductsListing as any
+// const ALGOLIA_ID = process.env.NEXT_PUBLIC_ALGOLIA_ID
+// const ALGOLIA_SEARCH_KEY = process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY
 
-const SingleCollectionsPage = async ({
-  params,
-}: {
-  params: Promise<{ handle: string; locale: string }>
-}) => {
-  const { handle, locale } = await params
+// const SingleCollectionsPage = async ({
+//   params,
+// }: {
+//   params: Promise<{ handle: string; locale: string }>
+// }) => {
+//   const { handle, locale } = await params
 
-  const ua = (await headers()).get('user-agent') || ''
-  const bot = isBot(ua)
-  const collection = await getCollectionByHandle(handle)
+//   const bot = isBot(navigator.userAgent)
+//   const collection = await getCollectionByHandle(handle)
 
-  if (!collection) return <NotFound />
+//   if (!collection) return <NotFound />
 
-  const currency_code = (await getRegion(locale))?.currency_code || "usd"
+//   const currency_code = (await getRegion(locale))?.currency_code || "usd"
 
-  const breadcrumbsItems = [
-    {
-      path: collection.handle,
-      label: collection.title,
-    },
-  ]
+//   const breadcrumbsItems = [
+//     {
+//       path: collection.handle,
+//       label: collection.title,
+//     },
+//   ]
 
-  return (
-    <main className="container">
-      <div className="hidden md:block mb-2">
-        <Breadcrumbs items={breadcrumbsItems} />
-      </div>
+//   return (
+//     <main className="container">
+//       <div className="hidden md:block mb-2">
+//         <Breadcrumbs items={breadcrumbsItems} />
+//       </div>
 
-      <h1 className="heading-xl uppercase">{collection.title}</h1>
+//       <h1 className="heading-xl uppercase">{collection.title}</h1>
 
-      <Suspense fallback={<div data-testid="collection-page-loading"><ProductListingSkeleton /></div>}>
-        {bot || !ALGOLIA_ID || !ALGOLIA_SEARCH_KEY ? (
-          <ProductListing collection_id={collection.id} showSidebar />
-        ) : (
-          <AlgoliaProductsListingAny
-            collection_id={collection.id}
-            locale={locale}
-            currency_code={currency_code}
-          />
-        )}
-      </Suspense>
-    </main>
-  )
-}
+//       <Suspense fallback={<div data-testid="collection-page-loading"><ProductListingSkeleton /></div>}>
+//         {bot || !ALGOLIA_ID || !ALGOLIA_SEARCH_KEY ? (
+//           <ProductListing collection_id={collection.id} showSidebar />
+//         ) : (
+//           <FacetedProductsListing
+//             collection_id={collection.id}
+//             locale={locale}
+//             currency_code={currency_code}
+//           />
+//         )}
+//       </Suspense>
+//     </main>
+//   )
+// }
 
-export default SingleCollectionsPage
+// export default SingleCollectionsPage

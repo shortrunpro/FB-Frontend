@@ -6,13 +6,13 @@ import { notFound } from 'next/navigation';
 import Script from 'next/script';
 
 import { Breadcrumbs } from '@/components/atoms';
-import { ProductListingSkeleton } from '@/components/organisms/ProductListingSkeleton/ProductListingSkeleton';
-import { AlgoliaProductsListing, ProductListing } from '@/components/sections';
 import { BASE_URL, SITE_NAME, ROBOTS_METADATA } from '@/lib/config';
 import { getCategoryByHandle } from '@/lib/data/categories';
 import { listProducts } from '@/lib/data/products';
 import isBot from '@/lib/helpers/isBot';
 import { CategoryCard } from '@/modules/categories/components';
+import { ProductListingSkeleton } from '@/modules/products/components';
+import { FacetedProductsListing, ProductListing } from '@/modules/products/templates';
 
 export const revalidate = 60;
 
@@ -74,11 +74,11 @@ async function Category({
     },
     ...(category.parent_category?.handle && category.parent_category?.name
       ? [
-          {
-            path: `/categories/${category.parent_category?.handle}`,
-            label: category.parent_category.name
-          }
-        ]
+        {
+          path: `/categories/${category.parent_category?.handle}`,
+          label: category.parent_category.name
+        }
+      ]
       : []),
     {
       path: `/categories/${categoryHandle}`,
@@ -168,7 +168,7 @@ async function Category({
             locale={'us'}
           />
         ) : (
-          <AlgoliaProductsListing category_name={category.name} />
+          <FacetedProductsListing category_name={category.name} />
         )}
       </Suspense>
     </main>

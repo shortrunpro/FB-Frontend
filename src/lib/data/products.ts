@@ -180,6 +180,7 @@ export const listProductsWithSort = async ({
 };
 
 export const searchProducts = async (params: {
+  indexName?: 'products' | 'product_variants';
   query?: string;
   page?: number;
   hitsPerPage?: number;

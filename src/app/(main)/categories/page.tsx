@@ -4,10 +4,10 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 
 import { Breadcrumbs } from '@/components/atoms';
-import { ProductListingSkeleton } from '@/components/organisms/ProductListingSkeleton/ProductListingSkeleton';
 import { BASE_URL, SITE_NAME, ROBOTS_METADATA } from '@/lib/config';
 import { listCategories } from '@/lib/data/categories';
 import { CategoryList } from '@/modules/categories/templates';
+import { ProductListingSkeleton } from '@/modules/products/components';
 
 export const metadata: Metadata = {
   title: 'All Categories',

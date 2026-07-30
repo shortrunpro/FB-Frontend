@@ -5,10 +5,10 @@ import { headers } from 'next/headers';
 import Script from 'next/script';
 
 import { Breadcrumbs } from '@/components/atoms';
-import { ProductListingSkeleton } from '@/components/organisms/ProductListingSkeleton/ProductListingSkeleton';
-import { AlgoliaProductsListing, ProductListing } from '@/components/sections';
 import { listProducts } from '@/lib/data/products';
 import isBot from '@/lib/helpers/isBot';
+import { ProductListingSkeleton } from '@/modules/products/components';
+import { FacetedProductsListing, ProductListing } from '@/modules/products/templates';
 import { ROBOTS_METADATA } from '@/lib/config';
 
 // TODO validate usecase
@@ -121,7 +121,7 @@ async function AllProducts({ params }: { params: Promise<{ locale: string }> }) 
             locale={'us'}
           />
         ) : (
-          <AlgoliaProductsListing />
+          <FacetedProductsListing />
         )}
       </Suspense>
     </main>
