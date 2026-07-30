@@ -16,6 +16,7 @@ import {
   ProductListingSkeleton,
   ProductsPagination
 } from '@/modules/products/components';
+import { SEARCH_INDEX_NAME, searchClient } from '@/lib/data/search';
 
 import { FacetModel } from '../../components/ProductSidebar/FacetedProductSidebar';
 
