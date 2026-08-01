@@ -115,6 +115,10 @@
     "link": "/categories/wood-corbels",
     "children": [
       {
+        "title": "Magnetic Click Corbels",
+        "link": "/categories/magnetic-click-corbels"
+      },
+      {
         "title": "Wood Corbels With Mount System",
         "link": "/categories/wood-corbels-with-mount-system"
       },
@@ -125,10 +129,6 @@
       {
         "title": "Wood Corbels With Rib Mounts",
         "link": "/categories/wood-corbels-with-rib-mounts"
-      },
-      {
-        "title": "Magnetic Click Corbels",
-        "link": "/categories/magnetic-click-corbels"
       }
     ]
   },
