@@ -67,7 +67,7 @@
   },
   {
     "title": "Mantel",
-    "link": "/categories/mantels",
+    "link": "/categories/mantel",
     "children": [
       {
         "title": "Mantel Brackets",
@@ -134,7 +134,7 @@
   },
   {
     "title": "ADA",
-    "link": "#",
+    "link": null,
     "children": [
       {
         "title": "Magnetic ADA Modesty Panel Attachment Kit",
@@ -168,7 +168,7 @@
   },
   {
     "title": "Collections",
-    "link": "#",
+    "link": "/categories/collections",
     "children": [
       {
         "title": "Desk Brackets",
