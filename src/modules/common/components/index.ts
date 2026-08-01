@@ -7,10 +7,12 @@ import ErrorMessage from './ErrorMessage';
 import { FacebookLink } from './FacebookLink';
 import { FileUpload } from './FileUpload/FileUpload';
 import { Input } from './Input/Input';
+import { InstagramLink } from './InstagramLink/InstagramLink';
 import InteractiveLink from './InteractiveLink/InteractiveLink';
 import { LinkedinLink } from './LinkedinLink';
 import { Modal } from './Modal/Modal';
 import { PhoneLink } from './PhoneLink/PhoneLink';
+import { PinterestLink } from './PinterestLink/PinterestLink';
 import { PromoCode } from './PromoCode';
 import { Spinner } from './Spinner';
 import { StoreHours } from './StoreHours/StoreHours';
@@ -21,6 +23,8 @@ import { TwitterLink } from './TwitterLink';
 import { YoutubeLink } from './YoutubeLink';
 
 export {
+  InstagramLink,
+  PinterestLink,
   SuccessBanner,
   StoreHours,
   TextLink,
