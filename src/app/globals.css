@@ -22,6 +22,15 @@
 .label-sm {
   @apply text-[12px] font-normal leading-[20px] tracking-normal;
 }
+.label-sm-medium {
+  @apply text-[12px] font-medium leading-[20px] tracking-normal;
+}
+.label-sm-semibold {
+  @apply text-[12px] font-semibold leading-[20px] tracking-normal;
+}
+.label-sm-bold {
+  @apply text-[12px] font-bold leading-[20px] tracking-normal;
+}
 .label-md {
   @apply text-[14px] font-normal leading-[22px] tracking-normal;
 }
