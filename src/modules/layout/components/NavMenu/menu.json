@@ -4,6 +4,10 @@
     "link": "/categories/countertop-supports",
     "children": [
       {
+        "title": "Hidden Countertop Supports",
+        "link": "/categories/hidden-countertop-supports"
+      },
+      {
         "title": "Low Profile Countertop Support Brackets",
         "link": "/categories/low-profile-countertop-support-brackets"
       },
@@ -18,10 +22,6 @@
       {
         "title": "Bar Top Support Brackets",
         "link": "/categories/bar-top-support-brackets"
-      },
-      {
-        "title": "Hidden Countertop Supports",
-        "link": "/categories/hidden-countertop-supports"
       }
     ]
   },
