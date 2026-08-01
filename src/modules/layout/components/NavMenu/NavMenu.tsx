@@ -27,6 +27,11 @@ interface MenuItemProps {
   };
 }
 const MenuItem = ({ item }: MenuItemProps) => {
+  const closeDropdown = () => {
+    if (typeof window !== 'undefined' && document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  };
   return (
     <div className="dropdown dropdown-end dropdown-bottom dropdown-hover">
       {item.link ? (
@@ -49,14 +54,12 @@ const MenuItem = ({ item }: MenuItemProps) => {
       )}
 
       {item.children.length > 0 && (
-        <ul
-          tabIndex={-1}
-          className="z-1 menu dropdown-content w-52 rounded-box bg-brand_grey p-2 shadow-sm"
-        >
+        <ul className="z-1 menu dropdown-content w-52 rounded-box bg-brand_grey p-2 shadow-sm">
           {item.children.map((child: any) => {
             return (
               <li key={child.title}>
                 <Link
+                  onClick={closeDropdown}
                   href={child.link}
                   className="px-2"
                 >
