@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { LockClosedSolidMini, ShoppingCart } from '@medusajs/icons';
 import { Drawer, Text } from '@medusajs/ui';
@@ -9,7 +9,6 @@ import { usePathname } from 'next/navigation';
 
 import { Button } from '@/components/atoms';
 import { usePrevious } from '@/hooks/usePrevious';
-import { filterValidCartItems } from '@/lib/helpers/filter-valid-cart-items';
 import { getItemCount } from '@/lib/helpers/get-item-count';
 import { convertToLocale } from '@/lib/helpers/money';
 import { useCartContext } from '@/modules/cart/provider/context';
@@ -17,23 +16,13 @@ import { useCartContext } from '@/modules/cart/provider/context';
 import { CartItemsProducts } from '../CartItemsProducts/CartItemsProducts';
 
 export const CartDrawer = () => {
-  const { cart } = useCartContext();
-  const [isOpen, setIsOpen] = useState(false);
-  const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
+  const { cart, open, toggleOpenState } = useCartContext();
+  const pathname = usePathname();
   const previousItemCount = usePrevious(getItemCount(cart));
   const cartItemsCount = (cart && getItemCount(cart)) || 0;
-  const pathname = usePathname();
-
-  // Filter out items with invalid data (missing prices/variants)
-  const validItems = filterValidCartItems(cart?.items);
-
-  const total = cart?.total || 0;
-
-  const delivery = cart?.shipping_subtotal || 0;
-
-  const tax = cart?.tax_total || 0;
-
+  const handleCloseDrawer = () => {
+    toggleOpenState(false);
+  };
   const items = cart?.item_subtotal || 0;
   const subtotal = cart?.subtotal || 0;
   const totalItems =
@@ -41,22 +30,37 @@ export const CartDrawer = () => {
       return acc + item.quantity;
     }, 0) || 0;
 
+  /**
+   * Synchronizes the cart drawer visibility based on cart state and navigation path.
+   *
+   * @description
+   * 1 - Automatically closes the drawer if the user is currently on the checkout or cart page
+   * 2 - Automatically opens the drawer if condition 1 is false and the cart item quantity has changed
+   *
+   * @listens cartItemCount - evaluates current item count in the cart
+   * @listens previousItemCount - placeholder value used to identify changes in cart item quantity
+   * @listens pathname - Evaluates current route to prevent opening the drawer on cart or checkout page
+   */
   useEffect(() => {
-    if (
-      previousItemCount !== undefined &&
-      cartItemsCount > previousItemCount &&
-      pathname.split('/')[2] !== 'cart'
-    ) {
-      open();
+    if (pathname === '/cart' || pathname === '/checkout') {
+      return toggleOpenState(false);
+    }
+    if (previousItemCount !== undefined && cartItemsCount > previousItemCount) {
+      return toggleOpenState(true);
     }
   }, [cartItemsCount, previousItemCount, pathname]);
 
+  /**
+   * Disabled the drawer from opening at all if on the cart or checkout page
+   */
   return (
     <>
-      {isOpen && <div className="fixed inset-[-2rem] z-[99] p-0 backdrop-blur-sm" />}
+      {open && pathname !== '/cart' && pathname !== '/checkout' && (
+        <div className="fixed inset-[-2rem] z-[99] p-0 backdrop-blur-sm" />
+      )}
       <Drawer
-        open={isOpen}
-        onOpenChange={setIsOpen}
+        open={open && pathname !== '/cart' && pathname !== '/checkout'}
+        onOpenChange={toggleOpenState}
       >
         <Drawer.Trigger asChild>
           <button className="transition-fg txt-compact-small-plus relative inline-flex w-fit items-center justify-center gap-x-1.5 overflow-hidden rounded-full px-3 py-1.5 text-black outline-none hover:bg-neutral-100 lg:text-white">
@@ -74,7 +78,7 @@ export const CartDrawer = () => {
             </div>
           </button>
         </Drawer.Trigger>
-        <Drawer.Content className="inset-y-0 z-50 m-0 w-fit max-w-full rounded-none bg-white p-0 sm:right-0">
+        <Drawer.Content className="inset-y-0 z-50 m-0 w-fit max-w-full rounded-none bg-white p-0 data-[state=closed]:animate-fade-down-out data-[state=open]:animate-fade-in-up sm:right-0">
           <Drawer.Header className="flex self-center">
             <Drawer.Title>
               {totalItems > 0 ? `You have ${totalItems} items in your cart` : 'Your cart is empty'}
@@ -85,6 +89,7 @@ export const CartDrawer = () => {
               <CartItemsProducts
                 products={cart.items}
                 currency_code="usd"
+                closeDrawer={handleCloseDrawer}
               />
             )}
 
@@ -103,6 +108,7 @@ export const CartDrawer = () => {
                 <Link
                   href="/cart"
                   className="w-full"
+                  onClick={handleCloseDrawer}
                 >
                   <Button
                     className="w-full bg-brand"
@@ -114,6 +120,7 @@ export const CartDrawer = () => {
                 <Link
                   href={'/checkout'}
                   className="w-full"
+                  onClick={handleCloseDrawer}
                 >
                   <Button
                     className="flex w-full items-center justify-center gap-x-2 bg-yellow-500"

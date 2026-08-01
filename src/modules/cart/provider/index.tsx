@@ -3,6 +3,7 @@
 import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 
 import { StoreCart } from '@medusajs/types';
+import { useToggleState } from '@medusajs/ui';
 
 import {
   addToCartBulk,
@@ -21,6 +22,8 @@ interface CartProviderProps extends PropsWithChildren {
 
 export function CartProvider({ cart, children }: CartProviderProps) {
   const [cartState, setCartState] = useState(cart);
+  const { state: open, toggle: toggleOpen } = useToggleState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [isAddingItem, setIsAddingItem] = useState(false);
   const [isUpdatingItem, setIsUpdatingItem] = useState(false);
@@ -198,6 +201,12 @@ export function CartProvider({ cart, children }: CartProviderProps) {
       { item_subtotal: 0, total: 0, tax_total: 0 }
     );
   }
+  function handleOpenState(state: boolean) {
+    return setIsOpen(state);
+  }
+  const toggleOpenState = () => {
+    return toggleOpen();
+  };
 
   return (
     <CartContext.Provider
@@ -209,10 +218,12 @@ export function CartProvider({ cart, children }: CartProviderProps) {
         removeCartItem,
         updateCartItem,
         refreshCart,
+        toggleOpenState: handleOpenState,
         isUpdating,
         isAddingItem,
         isUpdatingItem,
-        isRemovingItem
+        isRemovingItem,
+        open: isOpen
       }}
     >
       {children}

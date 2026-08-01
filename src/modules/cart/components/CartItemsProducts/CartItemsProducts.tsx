@@ -11,16 +11,26 @@ export const CartItemsProducts = ({
   products,
   currency_code,
   delete_item = true,
-  change_quantity = true
+  change_quantity = true,
+  closeDrawer
 }: {
   products: HttpTypes.StoreCartLineItem[];
   currency_code: string;
   delete_item?: boolean;
   change_quantity?: boolean;
+  closeDrawer?: () => void;
 }) => {
   // Filter out items with invalid data (missing prices/variants)
   const validProducts = filterValidCartItems(products);
-
+  /**
+   * @description
+   * Function passed down by the cart drawer to handle closing the drawer when a product link is clicked
+   */
+  const handleClose = () => {
+    if (closeDrawer) {
+      closeDrawer();
+    }
+  };
   return (
     <div>
       {validProducts.map(product => {
@@ -37,7 +47,10 @@ export const CartItemsProducts = ({
             data-testid={`cart-item-${product.id}`}
             className="flex gap-2 rounded-sm border p-1"
           >
-            <Link href={`/products/${product.product_handle}`}>
+            <Link
+              href={`/products/${product.product_handle}`}
+              onClick={handleClose}
+            >
               <div
                 className="flex h-[132px] w-[100px] items-center justify-center"
                 data-testid="cart-item-image"
@@ -64,7 +77,10 @@ export const CartItemsProducts = ({
 
             <div className="w-full p-2">
               <div className="flex justify-between lg:mb-4">
-                <Link href={`/products/${product.product_handle}`}>
+                <Link
+                  href={`/products/${product.product_handle}`}
+                  onClick={handleClose}
+                >
                   <div className="mb-4 lg:mb-0">
                     <h3
                       className="heading-xs truncate uppercase"

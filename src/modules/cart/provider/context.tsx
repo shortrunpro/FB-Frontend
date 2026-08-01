@@ -17,6 +17,8 @@ interface CartContextInterface {
   removeCartItem: (lineId: string) => Promise<void>;
   updateCartItem: (lineId: string, quantity: number) => Promise<void>;
   refreshCart: () => Promise<Cart | StoreCart | null>;
+  toggleOpenState: (state: boolean) => void;
+  open: boolean;
   isUpdating: boolean;
   isAddingItem: boolean;
   isUpdatingItem: boolean;
