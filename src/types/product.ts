@@ -116,3 +116,7 @@ export interface RelatedProduct {
   id: string;
   products: RelatedProductProduct[];
 }
+
+export interface BulkAddToCartParams {
+  [key: string]: number;
+}

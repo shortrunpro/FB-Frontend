@@ -12,21 +12,20 @@ import {
   useDataTable,
   type DataTablePaginationState
 } from '@medusajs/ui';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
-import { Button, Chip, Input } from '@/components/atoms';
+import { Chip, Input } from '@/components/atoms';
 import { useCartContext } from '@/modules/cart/provider/context';
-import { InteractiveLink } from '@/modules/common/components';
+import { AddToCartButton, InteractiveLink } from '@/modules/common/components';
 
 import ProductVariantModal from '../ProductVariantModal/ProductVariantModal';
 
 export const ProductVariants = ({ product }: { product: StoreProduct }) => {
   const params = useSearchParams();
   const pathname = usePathname();
-  const router = useRouter();
   const [variant, setVariant] = useState<StoreProductVariant | null>(null);
   const activeSku = params.get('sku');
-  const { handleBulkAddToCart, isAddingItem } = useCartContext();
+  const { isAddingItem, isUpdating } = useCartContext();
   const PAGE_SIZE = 10;
   const variants = useMemo(() => {
     return product?.variants
@@ -169,19 +168,13 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
       state: sorting,
       onSortingChange: setSorting
     },
-    // onRowClick(event, row) {
-    //   const v = shownProducts.find(f => f.id === row.id);
-    //   v?.sku && router.push(`${pathname}?sku=${v.sku}`);
-    // },
     isLoading: false
   });
-  const handleAddToCart = async () => {
-    try {
-      await handleBulkAddToCart(cartQuantity).then(() => setCartQuantity(initialState));
-    } catch (err) {
-      console.error('oops something went wrong', err);
+  useEffect(() => {
+    if (isAddingItem || isUpdating) {
+      setCartQuantity(initialState);
     }
-  };
+  }, [isAddingItem, isUpdating]);
   const handleSelectedFinish = (e: any) => {
     setSelectedFinish(e.target.value);
   };
@@ -214,15 +207,10 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
         <DataTable.Table />
         <DataTable.Pagination />
       </DataTable>
-      <Button
-        onClick={handleAddToCart}
-        loading={isAddingItem}
-        className="mb-4 flex w-full justify-center bg-yellow-500 font-extrabold uppercase text-brand"
-        size="small"
-        data-testid="product-add-to-cart-button"
-      >
-        ADD TO CART
-      </Button>
+      <AddToCartButton
+        items={cartQuantity}
+        icon={false}
+      />
       {activeSku && variant && <ProductVariantModal variant={variant} />}
     </div>
   );

@@ -13,6 +13,7 @@ import {
   retrieveCart
 } from '@/lib/data/cart';
 import { Cart, StoreCartLineItemOptimisticUpdate } from '@/types/cart';
+import { BulkAddToCartParams } from '@/types/product';
 
 import { CartContext } from './context';
 
@@ -139,10 +140,7 @@ export function CartProvider({ cart, children }: CartProviderProps) {
     }
   };
 
-  type BulkAddParams = {
-    [key: string]: number;
-  };
-  const handleBulkAddToCart = async (variantQuantities: BulkAddParams) => {
+  const handleBulkAddToCart = async (variantQuantities: BulkAddToCartParams) => {
     setIsAddingItem(true);
     setIsUpdating(true);
 
