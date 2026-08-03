@@ -8,7 +8,7 @@ import medusaError from '@/lib/helpers/medusa-error';
 import { useCartContext } from '@/modules/cart/provider/context';
 import { BulkAddToCartParams } from '@/types/product';
 
-import { Button } from '../Button';
+import { Button } from '../Button/Button';
 
 interface AddToCartButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variantId?: string;
@@ -51,7 +51,7 @@ export function AddToCartButton({ variantId, quantity, icon = true, items }: Add
         onClick={handleAddToCart}
         loading={isLoading}
         disabled={isLoading && (isAddingItem || isUpdating || error ? true : false)}
-        className="flex w-full justify-center bg-yellow-500 font-extrabold uppercase text-white transition-all duration-300 ease-in-out hover:bg-yellow-400"
+        className="flex w-full justify-center bg-yellow-500 font-extrabold uppercase text-white hover:bg-yellow-600"
         data-testid="add-to-cart-button"
         id={variantId}
         aria-label="Add to Cart"

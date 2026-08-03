@@ -7,11 +7,11 @@ import { Drawer, Text } from '@medusajs/ui';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { Button } from '@/components/atoms';
 import { usePrevious } from '@/hooks/usePrevious';
 import { getItemCount } from '@/lib/helpers/get-item-count';
 import { convertToLocale } from '@/lib/helpers/money';
 import { useCartContext } from '@/modules/cart/provider/context';
+import { Button } from '@/modules/common/components';
 
 import { CartItemsProducts } from '../CartItemsProducts/CartItemsProducts';
 
@@ -111,7 +111,7 @@ export const CartDrawer = () => {
                   onClick={handleCloseDrawer}
                 >
                   <Button
-                    className="w-full bg-brand"
+                    className="w-full bg-brand hover:bg-[#374356]"
                     size="large"
                   >
                     View Cart
@@ -123,7 +123,7 @@ export const CartDrawer = () => {
                   onClick={handleCloseDrawer}
                 >
                   <Button
-                    className="flex w-full items-center justify-center gap-x-2 bg-yellow-500"
+                    className="flex w-full items-center justify-center gap-x-2 bg-yellow-500 hover:bg-yellow-600"
                     size="large"
                   >
                     <LockClosedSolidMini />
