@@ -32,17 +32,20 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
   const params = useSearchParams();
   const activeSku = params.get('sku');
   const pathname = usePathname();
-  const variants = product?.variants
-    ? product?.variants.map(variant => {
-        let finish = variant.options?.find(option => option.option?.title === 'finish');
-        let size = variant.options?.find(option => option.option?.title === 'size');
-        return {
-          ...variant,
-          finish: finish?.value,
-          size: size?.value
-        };
-      })
-    : [];
+  const variants = useMemo(() => {
+    return product?.variants
+      ? product?.variants.map(variant => {
+          let finish = variant.options?.find(option => option.option?.title === 'finish');
+          let size = variant.options?.find(option => option.option?.title === 'size');
+          return {
+            ...variant,
+            finish: finish?.value,
+            size: size?.value
+          };
+        })
+      : [];
+  }, [product]);
+
   const finishes = product?.options?.find(
     option => option.title === 'finish'
   ) as StoreProductOption;
@@ -96,14 +99,14 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
         }
       });
     });
-  }, [filtering]);
+  }, [filtering, sortedProducts]);
 
   const shownProducts = useMemo(() => {
     return filteredProducts.slice(
       pagination.pageIndex * pagination.pageSize,
       (pagination.pageIndex + 1) * pagination.pageSize
     );
-  }, [pagination, sortedProducts, filteredProducts]);
+  }, [pagination, filteredProducts]);
   const [selectedFinish, setSelectedFinish] = useState<string>();
 
   const handleQuantityChange = useCallback((id: string, newValue: number) => {
@@ -188,7 +191,7 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
     if (isAddingItem || isUpdating) {
       setCartQuantity(initialState);
     }
-  }, [isAddingItem, isUpdating]);
+  }, [isAddingItem, isUpdating, initialState]);
   const handleSelectedFinish = (value: string) => {
     if (filtering?.finish === value) {
       setFiltering({});
