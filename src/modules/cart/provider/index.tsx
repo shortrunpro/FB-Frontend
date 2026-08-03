@@ -146,7 +146,7 @@ export function CartProvider({ cart, children }: CartProviderProps) {
 
     try {
       const lineItems = Object.keys(variantQuantities)
-        .map(key => ({ variant_id: key, quantity: variantQuantities[key] }))
+        .map(key => ({ variant_id: key, quantity: Number(variantQuantities[key]) }))
         .filter(item => item.quantity > 0)
         .flat();
       if (!lineItems.length) {

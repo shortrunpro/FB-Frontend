@@ -1,6 +1,6 @@
 import { AddToCartButton } from './AddToCartButton/AddToCartButton';
 import { Breadcrumbs } from './Breadcrumbs/Breadcrumbs';
-import { Button } from './Button';
+import { Button } from './Button/Button';
 import ContentParser from './ContentParser/ContentParser';
 import CountrySelect from './CountrySelect/CountrySelect';
 import { EmailLink } from './EmailLink/EmailLink';

@@ -1,24 +1,23 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { Minus, Plus } from '@medusajs/icons';
 import { StoreProduct, StoreProductVariant } from '@medusajs/types';
 import {
   createDataTableColumnHelper,
   DataTable,
   DataTableSortingState,
-  IconButton,
   useDataTable,
   type DataTablePaginationState
 } from '@medusajs/ui';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-import { Chip, Input } from '@/components/atoms';
+import { Chip } from '@/components/atoms';
 import { useCartContext } from '@/modules/cart/provider/context';
 import { AddToCartButton, InteractiveLink } from '@/modules/common/components';
 
 import ProductVariantModal from '../ProductVariantModal/ProductVariantModal';
+import { QuantityInput } from './QuantityInput';
 
 export const ProductVariants = ({ product }: { product: StoreProduct }) => {
   const params = useSearchParams();
@@ -50,7 +49,7 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
   };
   const initialState: InitialValue = variants.reduce((obj, item) => {
     // @ts-ignore
-    obj[item.id] = 0;
+    obj[item.id] = '';
     return obj;
   }, {});
   const [cartQuantity, setCartQuantity] = useState<InitialValue>(initialState);
@@ -80,79 +79,66 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
       (pagination.pageIndex + 1) * pagination.pageSize
     );
   }, [pagination, sortedProducts]);
-
-  const plusHandler = (id: string) => {
-    setCartQuantity({ ...cartQuantity, [id]: (cartQuantity[id] += 1) });
-  };
-  const minusHandler = (id: string) => {
-    if (cartQuantity[id] > 0) {
-      setCartQuantity({ ...cartQuantity, [id]: cartQuantity[id] - 1 });
-    }
-  };
+  const handleQuantityChange = useCallback((id: string, newValue: number) => {
+    setCartQuantity(prev => ({
+      ...prev,
+      [id]: newValue
+    }));
+  }, []);
   const finishes = product.options?.find(option => option.title === 'finish');
   const columnHelper = createDataTableColumnHelper<(typeof variants)[0]>();
-  const columns = [
-    columnHelper.accessor('sku', {
-      header: 'Product SKU',
-      id: 'sku',
-      cell: ({ getValue }) => {
-        const value = getValue();
-        const v = shownProducts.find(f => f.sku === value);
-        return (
-          v && v.sku && <InteractiveLink href={`${pathname}?sku=${v.sku}`}>{value}</InteractiveLink>
-        );
-      }
-    }),
-    columnHelper.accessor('finish', {
-      header: 'Finish',
+  const columns = useMemo(
+    () => [
+      columnHelper.accessor('sku', {
+        header: 'Product SKU',
+        id: 'sku',
+        cell: ({ getValue }) => {
+          const value = getValue();
+          const v = shownProducts.find(f => f.sku === value);
+          return (
+            v &&
+            v.sku && <InteractiveLink href={`${pathname}?sku=${v.sku}`}>{value}</InteractiveLink>
+          );
+        }
+      }),
+      columnHelper.accessor('finish', {
+        header: 'Finish',
 
-      enableSorting: true,
-      sortLabel: 'Finish',
-      // If omitted the default value will be "A-Z"
-      sortAscLabel: 'A-Z',
-      // If omitted the default value will be "Z-A"
-      sortDescLabel: 'Z-A'
-    }),
-    columnHelper.accessor('size', {
-      header: 'Size'
-      // enableSorting: true
-    }),
-    columnHelper.accessor('calculated_price.calculated_amount', {
-      header: 'Price',
-      cell: ({ getValue }) => {
-        const amount = getValue();
-        return `$${amount?.toFixed(2)}`;
-      }
-    }),
-    columnHelper.accessor('id', {
-      header: 'Quantity',
-      id: 'quantity',
-      cell: ({ getValue }) => {
-        const value = getValue();
-        return (
-          <div className="flex items-center">
-            <IconButton
-              onClick={() => minusHandler(value)}
-              value={value}
-            >
-              <Minus />
-            </IconButton>
-            <div className="w-1/3">
-              <Input
-                className="py-2 text-center"
-                id={value}
-                value={cartQuantity[value]}
-              />
-            </div>
+        enableSorting: true,
+        sortLabel: 'Finish',
+        // If omitted the default value will be "A-Z"
+        sortAscLabel: 'A-Z',
+        // If omitted the default value will be "Z-A"
+        sortDescLabel: 'Z-A'
+      }),
+      columnHelper.accessor('size', {
+        header: 'Size'
+        // enableSorting: true
+      }),
+      columnHelper.accessor('calculated_price.calculated_amount', {
+        header: 'Price',
+        cell: ({ getValue }) => {
+          const amount = getValue();
+          return `$${amount?.toFixed(2)}`;
+        }
+      }),
+      columnHelper.accessor('id', {
+        header: 'Quantity',
+        id: 'quantity',
+        cell: ({ row }) => {
+          return (
+            <QuantityInput
+              id={row.id}
+              initialQuantity={cartQuantity[row.id]}
+              onUpdate={handleQuantityChange}
+            />
+          );
+        }
+      })
+    ],
+    [cartQuantity, handleQuantityChange, columnHelper, pathname, shownProducts]
+  );
 
-            <IconButton onClick={() => plusHandler(value)}>
-              <Plus />
-            </IconButton>
-          </div>
-        );
-      }
-    })
-  ];
   const table = useDataTable({
     columns,
     data: shownProducts,

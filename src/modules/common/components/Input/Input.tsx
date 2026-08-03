@@ -95,7 +95,6 @@ export function Input({
           name={name}
           aria-invalid={hasError}
           value={props.value}
-          onChange={e => changeHandler(e.target.value)}
           {...props}
           type={props.type === 'password' ? inputType : props.type}
           data-testid={dataTestId}

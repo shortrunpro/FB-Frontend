@@ -118,5 +118,5 @@ export interface RelatedProduct {
 }
 
 export interface BulkAddToCartParams {
-  [key: string]: number;
+  [key: string]: number | string;
 }

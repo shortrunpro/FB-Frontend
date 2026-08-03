@@ -5,15 +5,13 @@ import { createContext, useContext } from 'react';
 import { StoreCart } from '@medusajs/types';
 
 import { Cart, StoreCartLineItemOptimisticUpdate } from '@/types/cart';
+import { BulkAddToCartParams } from '@/types/product';
 
-type BulkAddParams = {
-  [key: string]: number;
-};
 interface CartContextInterface {
   cart: Cart | StoreCart | null;
   onAddToCart: (item: StoreCartLineItemOptimisticUpdate, currency_code: string) => void;
   addToCart: (params: { variantId: string; quantity: number }) => Promise<void>;
-  handleBulkAddToCart: (variantQuantities: BulkAddParams) => Promise<void>;
+  handleBulkAddToCart: (variantQuantities: BulkAddToCartParams) => Promise<void>;
   removeCartItem: (lineId: string) => Promise<void>;
   updateCartItem: (lineId: string, quantity: number) => Promise<void>;
   refreshCart: () => Promise<Cart | StoreCart | null>;
