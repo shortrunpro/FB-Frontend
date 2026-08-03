@@ -1,3 +1,5 @@
+'use client';
+
 import { forwardRef, Fragment, useImperativeHandle, useMemo, useRef } from 'react';
 
 import {
