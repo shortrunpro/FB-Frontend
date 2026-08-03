@@ -1,14 +1,15 @@
 'use client';
 
-import { startTransition, useActionState } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 
 import { CheckCircleSolid } from '@medusajs/icons';
 import { HttpTypes } from '@medusajs/types';
 import { Heading, Text, useToggleState } from '@medusajs/ui';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { setAddresses } from '@/lib/data/cart';
 import compareAddresses from '@/lib/helpers/compare-addresses';
+import { useCartContext } from '@/modules/cart/provider/context';
 import { Button, ErrorMessage, Spinner } from '@/modules/common/components';
 
 import ShippingAddressForm from './ShippingAddressForm';
@@ -20,9 +21,10 @@ export const AddressSection = ({
   cart: HttpTypes.StoreCart | null;
   customer: HttpTypes.StoreCustomer | null;
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { isUpdating } = useCartContext();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const pathname = usePathname();
   const isAddress = Boolean(
     cart?.shipping_address &&
     cart?.shipping_address.first_name &&
@@ -45,17 +47,25 @@ export const AddressSection = ({
     success: false,
     message: null
   });
-
-  const handleEdit = () => {
-    router.replace(pathname + '?step=address');
-  };
-  const handleSubmit = (data: FormData) => {
-    startTransition(() => {
-      formAction(data);
-    });
-    router.push(`${pathname}?step=delivery`, { scroll: false });
+  const handleSuccess = () => {
+    router.push(`/checkout?step=delivery`, { scroll: false });
     router.refresh();
+    return;
   };
+  const handleEdit = () => {
+    setIsLoading(false);
+    router.replace('/checkout?step=address');
+  };
+  const handleSubmit = async (data: FormData) => {
+    setIsLoading(true);
+    formAction(data);
+  };
+  useEffect(() => {
+    if (state.success && !isUpdating && isOpen) {
+      router.push(`/checkout?step=delivery`, { scroll: false });
+      router.refresh();
+    }
+  }, [state, isUpdating, isOpen, router]);
   return (
     <div
       className="bg-ui-bg-interactive rounded-sm border p-4"
@@ -90,9 +100,9 @@ export const AddressSection = ({
               cart={cart}
             />
             <Button
-              className={`float-right mt-6 bg-brand text-white hover:bg-brand_grey hover:text-black ${isPending && 'flex min-w-[185px] justify-center'}`}
-              loading={isPending}
-              disabled={isPending}
+              className={`float-right mt-6 bg-brand text-white hover:bg-brand_grey hover:text-black ${(isPending || isUpdating || isLoading) && 'flex min-w-[185px] justify-center'}`}
+              loading={isPending || isUpdating || isLoading}
+              disabled={isPending || isUpdating || isLoading}
               data-testid="submit-address-button"
               variant="tonal"
             >
@@ -115,7 +125,8 @@ export const AddressSection = ({
                       </Text>
                       <Text>
                         {cart.shipping_address.address_1} {cart.shipping_address.address_2},{' '}
-                        {cart.shipping_address.postal_code} {cart.shipping_address.city},{' '}
+                        {cart.shipping_address.postal_code} {cart.shipping_address.city}{' '}
+                        {cart.shipping_address.province?.split('-')[1].toUpperCase()},{' '}
                         {cart.shipping_address.country_code?.toUpperCase()}
                       </Text>
                       <Text>
