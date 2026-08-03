@@ -46,11 +46,6 @@ export const AddressSection = ({
     success: false,
     message: null
   });
-  const handleSuccess = () => {
-    router.push(`/checkout?step=delivery`, { scroll: false });
-    router.refresh();
-    return;
-  };
   const handleEdit = () => {
     setIsLoading(false);
     router.replace('/checkout?step=address');
@@ -115,7 +110,7 @@ export const AddressSection = ({
         ) : (
           <div>
             <div className="text-small-regular">
-              {cart && cart.shipping_address ? (
+              {cart && cart.shipping_address && isAddress ? (
                 <div className="flex items-start gap-x-8">
                   <div className="flex w-full items-start gap-x-1">
                     <div>
