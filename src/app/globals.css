@@ -120,7 +120,7 @@ button:disabled svg path {
 }
 
 .chip-wrapper {
-  @apply label-sm relative inline-flex items-center rounded-sm border px-3 py-1 hover:bg-component-hover;
+  @apply label-sm-medium relative inline-flex items-center rounded-sm border px-3 py-1 shadow hover:bg-component-hover;
 }
 .chip-wrapper svg path {
   @apply fill-secondary;

@@ -2,10 +2,11 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { StoreProduct, StoreProductVariant } from '@medusajs/types';
+import { StoreProduct, StoreProductOption, StoreProductVariant } from '@medusajs/types';
 import {
   createDataTableColumnHelper,
   DataTable,
+  DataTableFilteringState,
   DataTableSortingState,
   useDataTable,
   type DataTablePaginationState
@@ -22,41 +23,38 @@ import {
 
 import ProductVariantModal from '../ProductVariantModal/ProductVariantModal';
 
+interface InitialValue {
+  [key: string]: number;
+}
+const PAGE_SIZE = 10;
 export const ProductVariants = ({ product }: { product: StoreProduct }) => {
-  const params = useSearchParams();
-  const pathname = usePathname();
-  const [variant, setVariant] = useState<StoreProductVariant | null>(null);
-  const activeSku = params.get('sku');
   const { isAddingItem, isUpdating } = useCartContext();
-  const PAGE_SIZE = 10;
-  const variants = useMemo(() => {
-    return product?.variants
-      ? product?.variants.map(variant => {
-          let finish = variant.options?.find(option => option.option?.title === 'finish');
-          let size = variant.options?.find(option => option.option?.title === 'size');
-          return {
-            ...variant,
-            finish: finish?.value,
-            size: size?.value
-          };
-        })
-      : [];
-  }, [product?.variants]);
-
-  const [pagination, setPagination] = useState<DataTablePaginationState>({
-    pageSize: PAGE_SIZE,
-    pageIndex: 0
-  });
-  type InitialValue = {
-    [key: string]: number;
-  };
+  const params = useSearchParams();
+  const activeSku = params.get('sku');
+  const pathname = usePathname();
+  const variants = product?.variants
+    ? product?.variants.map(variant => {
+        let finish = variant.options?.find(option => option.option?.title === 'finish');
+        let size = variant.options?.find(option => option.option?.title === 'size');
+        return {
+          ...variant,
+          finish: finish?.value,
+          size: size?.value
+        };
+      })
+    : [];
+  const finishes = product?.options?.find(
+    option => option.title === 'finish'
+  ) as StoreProductOption;
   const initialState: InitialValue = variants.reduce((obj, item) => {
     // @ts-ignore
     obj[item.id] = '';
     return obj;
   }, {});
   const [cartQuantity, setCartQuantity] = useState<InitialValue>(initialState);
-  const [selectedFinish, setSelectedFinish] = useState<string>();
+  const [variant, setVariant] = useState<StoreProductVariant | null>(null);
+
+  /**      PRODUCT SORTING       **/
   const [sorting, setSorting] = useState<DataTableSortingState | null>(null);
   const sortedProducts = useMemo(() => {
     if (!sorting) {
@@ -76,19 +74,45 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
       return 0;
     });
   }, [sorting, variants]);
+  const [filtering, setFiltering] = useState<DataTableFilteringState>({});
+  /**      TABLE PAGINATION       **/
+  const [pagination, setPagination] = useState<DataTablePaginationState>({
+    pageSize: PAGE_SIZE,
+    pageIndex: 0
+  });
+  const filteredProducts = useMemo(() => {
+    return sortedProducts.filter(product => {
+      return Object.entries(filtering).every(([key, value]) => {
+        if (!value) {
+          return true;
+        }
+        if (typeof value === 'string') {
+          // @ts-ignore
+          return product[key].toString().toLowerCase().includes(value.toString().toLowerCase());
+        }
+        if (Array.isArray(value)) {
+          // @ts-ignore
+          return value.includes(product[key].toLowerCase());
+        }
+      });
+    });
+  }, [filtering]);
+
   const shownProducts = useMemo(() => {
-    return sortedProducts.slice(
+    return filteredProducts.slice(
       pagination.pageIndex * pagination.pageSize,
       (pagination.pageIndex + 1) * pagination.pageSize
     );
-  }, [pagination, sortedProducts]);
+  }, [pagination, sortedProducts, filteredProducts]);
+  const [selectedFinish, setSelectedFinish] = useState<string>();
+
   const handleQuantityChange = useCallback((id: string, newValue: number) => {
     setCartQuantity(prev => ({
       ...prev,
       [id]: newValue
     }));
   }, []);
-  const finishes = product.options?.find(option => option.title === 'finish');
+
   const columnHelper = createDataTableColumnHelper<(typeof variants)[0]>();
   const columns = useMemo(
     () => [
@@ -106,7 +130,6 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
       }),
       columnHelper.accessor('finish', {
         header: 'Finish',
-
         enableSorting: true,
         sortLabel: 'Finish',
         // If omitted the default value will be "A-Z"
@@ -148,7 +171,7 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
     columns,
     data: shownProducts,
     getRowId: variant => variant.id,
-    rowCount: variants.length,
+    rowCount: filtering?.finish ? filteredProducts.length : variants.length,
     pagination: {
       // Pass the pagination state and updater to the table instance
       state: pagination,
@@ -166,8 +189,16 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
       setCartQuantity(initialState);
     }
   }, [isAddingItem, isUpdating]);
-  const handleSelectedFinish = (e: any) => {
-    setSelectedFinish(e.target.value);
+  const handleSelectedFinish = (value: string) => {
+    if (filtering?.finish === value) {
+      setFiltering({});
+      setSelectedFinish('');
+    } else {
+      setFiltering({ finish: value });
+      setSelectedFinish(value);
+    }
+
+    setPagination(prev => ({ ...prev, pageIndex: 0 }));
   };
   useEffect(() => {
     const selectedVariant = shownProducts.find(v => v.sku === activeSku);
@@ -181,14 +212,15 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
       <DataTable instance={table}>
         <DataTable.Toolbar className="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
           <div data-testid={`product-variant-finishes`}>
-            <span className="label-md text-secondary">FINISHES: </span>
+            <span className="label-md-medium">FINISHES: </span>
             <div className="mt-2 flex gap-2">
               {(finishes?.values || []).map(({ id, value }) => (
                 <Chip
+                  className=""
                   key={id}
                   selected={selectedFinish === value}
                   value={value}
-                  onSelect={() => setSelectedFinish(value)}
+                  onSelect={() => handleSelectedFinish(value)}
                   data-testid={`product-variant-chip-finishes-${value?.toLowerCase().replace(/\s+/g, '-')}`}
                 />
               ))}
