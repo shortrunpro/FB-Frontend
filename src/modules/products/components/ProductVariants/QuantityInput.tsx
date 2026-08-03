@@ -11,7 +11,7 @@ import { Button, Input } from '@/modules/common/components';
 
 interface QuantityInputProps {
   id: string;
-  initialQuantity: number;
+  initialQuantity: number | string;
   onUpdate: (id: string, value: number) => void;
 }
 export const QuantityInput = ({ id, initialQuantity, onUpdate }: QuantityInputProps) => {
@@ -22,10 +22,12 @@ export const QuantityInput = ({ id, initialQuantity, onUpdate }: QuantityInputPr
     setLocalValue(isNaN(val) ? 0 : val);
   };
   const plusHandler = () => {
+    setLocalValue(Number(localValue) + 1);
     onUpdate(id, Number(localValue) + 1);
   };
   const minusHandler = () => {
     if (localValue > 0) {
+      setLocalValue(Number(localValue) - 1);
       onUpdate(id, Number(localValue) - 1);
     }
   };
@@ -44,10 +46,10 @@ export const QuantityInput = ({ id, initialQuantity, onUpdate }: QuantityInputPr
       >
         <FiMinusCircle size={'1.25rem'} />
       </Button>
-      <div className="w-1/3">
+      <div className="">
         <Input
           placeholder="0"
-          className="py-2 text-center"
+          className="px-2 py-2 text-center"
           id={id}
           value={localValue}
           maxLength={5}

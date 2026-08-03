@@ -127,11 +127,13 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
         id: 'quantity',
         cell: ({ row }) => {
           return (
-            <QuantityInput
-              id={row.id}
-              initialQuantity={cartQuantity[row.id]}
-              onUpdate={handleQuantityChange}
-            />
+            <div className="w-2/3">
+              <QuantityInput
+                id={row.id}
+                initialQuantity={cartQuantity[row.id]}
+                onUpdate={handleQuantityChange}
+              />
+            </div>
           );
         }
       })
