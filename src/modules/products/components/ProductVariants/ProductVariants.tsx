@@ -176,12 +176,10 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
     getRowId: variant => variant.id,
     rowCount: filtering?.finish ? filteredProducts.length : variants.length,
     pagination: {
-      // Pass the pagination state and updater to the table instance
       state: pagination,
       onPaginationChange: setPagination
     },
     sorting: {
-      // Pass the pagination state and updater to the table instance
       state: sorting,
       onSortingChange: setSorting
     },
