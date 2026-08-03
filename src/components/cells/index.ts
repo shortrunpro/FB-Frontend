@@ -16,10 +16,8 @@ import { PriceFilter } from './PriceFilter/PriceFilter';
 import { ProductAdditionalAttributes } from './ProductAdditionalAttributes/ProductAdditionalAttributes';
 import { ProductCarousel } from './ProductCarousel/ProductCarousel';
 import { SizeFilter } from './SizeFilter/SizeFilter';
-import StateSelect from './StateSelect';
 
 export {
-  StateSelect,
   Carousel,
   Pagination,
   BrandFilter,
