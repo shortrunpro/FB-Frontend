@@ -34,8 +34,7 @@ export const AddressSection = ({
     cart?.shipping_address.postal_code &&
     cart?.shipping_address.country_code
   );
-  const isOpen =
-    searchParams.get('step') === 'address' || (!searchParams.get('step') && !isAddress);
+  const isOpen = searchParams.get('step') === 'address' || !searchParams.get('step');
 
   const { state: sameAsBilling, toggle: toggleSameAsBilling } = useToggleState(
     cart?.shipping_address && cart?.billing_address
@@ -61,7 +60,7 @@ export const AddressSection = ({
     formAction(data);
   };
   useEffect(() => {
-    if (state.success && !isUpdating && isOpen) {
+    if (isLoading && state.success && !isUpdating && isOpen) {
       router.push(`/checkout?step=delivery`, { scroll: false });
       router.refresh();
     }
