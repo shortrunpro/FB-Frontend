@@ -1,5 +1,3 @@
-// import { Input } from "@/components/atoms/Input/Input"
-// TODO Verify input change does not effect anything
 import React, { useState } from 'react';
 
 import { HttpTypes } from '@medusajs/types';

@@ -2,397 +2,397 @@
   "states": [
     {
       "id": 1,
-      "iso_code": "AL",
+      "iso_code": "us-al",
       "name": "Alabama",
       "country": "us"
     },
     {
       "id": 2,
-      "iso_code": "AK",
+      "iso_code": "us-ak",
       "name": "Alaska",
       "country": "us"
     },
     {
       "id": 3,
-      "iso_code": "AZ",
+      "iso_code": "us-az",
       "name": "Arizona",
       "country": "us"
     },
     {
       "id": 4,
-      "iso_code": "AR",
+      "iso_code": "us-ar",
       "name": "Arkansas",
       "country": "us"
     },
     {
       "id": 5,
-      "iso_code": "CA",
+      "iso_code": "us-ca",
       "name": "California",
       "country": "us"
     },
     {
       "id": 6,
-      "iso_code": "CO",
+      "iso_code": "us-co",
       "name": "Colorado",
       "country": "us"
     },
     {
       "id": 7,
-      "iso_code": "CT",
+      "iso_code": "us-ct",
       "name": "Connecticut",
       "country": "us"
     },
     {
       "id": 8,
-      "iso_code": "DE",
+      "iso_code": "us-de",
       "name": "Delaware",
       "country": "us"
     },
     {
       "id": 9,
-      "iso_code": "FL",
+      "iso_code": "us-fl",
       "name": "Florida",
       "country": "us"
     },
     {
       "id": 10,
-      "iso_code": "GA",
+      "iso_code": "us-ga",
       "name": "Georgia",
       "country": "us"
     },
     {
       "id": 11,
-      "iso_code": "HI",
+      "iso_code": "us-hi",
       "name": "Hawaii",
       "country": "us"
     },
     {
       "id": 12,
-      "iso_code": "ID",
+      "iso_code": "us-id",
       "name": "Idaho",
       "country": "us"
     },
     {
       "id": 13,
-      "iso_code": "IL",
+      "iso_code": "us-il",
       "name": "Illinois",
       "country": "us"
     },
     {
       "id": 14,
-      "iso_code": "IN",
+      "iso_code": "us-in",
       "name": "Indiana",
       "country": "us"
     },
     {
       "id": 15,
-      "iso_code": "IA",
+      "iso_code": "us-ia",
       "name": "Iowa",
       "country": "us"
     },
     {
       "id": 16,
-      "iso_code": "KS",
+      "iso_code": "us-ks",
       "name": "Kansas",
       "country": "us"
     },
     {
       "id": 17,
-      "iso_code": "KY",
+      "iso_code": "us-ky",
       "name": "Kentucky",
       "country": "us"
     },
     {
       "id": 18,
-      "iso_code": "LA",
+      "iso_code": "us-la",
       "name": "Louisiana",
       "country": "us"
     },
     {
       "id": 19,
-      "iso_code": "ME",
+      "iso_code": "us-me",
       "name": "Maine",
       "country": "us"
     },
     {
       "id": 20,
-      "iso_code": "MD",
+      "iso_code": "us-md",
       "name": "Maryland",
       "country": "us"
     },
     {
       "id": 21,
-      "iso_code": "MA",
+      "iso_code": "us-ma",
       "name": "Massachusetts",
       "country": "us"
     },
     {
       "id": 22,
-      "iso_code": "MI",
+      "iso_code": "us-mi",
       "name": "Michigan",
       "country": "us"
     },
     {
       "id": 23,
-      "iso_code": "MN",
+      "iso_code": "us-mn",
       "name": "Minnesota",
       "country": "us"
     },
     {
       "id": 24,
-      "iso_code": "MS",
+      "iso_code": "us-ms",
       "name": "Mississippi",
       "country": "us"
     },
     {
       "id": 25,
-      "iso_code": "MO",
+      "iso_code": "us-mo",
       "name": "Missouri",
       "country": "us"
     },
     {
       "id": 26,
-      "iso_code": "MT",
+      "iso_code": "us-mt",
       "name": "Montana",
       "country": "us"
     },
     {
       "id": 27,
-      "iso_code": "NE",
+      "iso_code": "us-ne",
       "name": "Nebraska",
       "country": "us"
     },
     {
       "id": 28,
-      "iso_code": "NV",
+      "iso_code": "us-nv",
       "name": "Nevada",
       "country": "us"
     },
     {
       "id": 29,
-      "iso_code": "NH",
+      "iso_code": "us-nh",
       "name": "New Hampshire",
       "country": "us"
     },
     {
       "id": 30,
-      "iso_code": "NJ",
+      "iso_code": "us-mnj",
       "name": "New Jersey",
       "country": "us"
     },
     {
       "id": 31,
-      "iso_code": "NM",
+      "iso_code": "us-nm",
       "name": "New Mexico",
       "country": "us"
     },
     {
       "id": 32,
-      "iso_code": "NY",
+      "iso_code": "us-ny",
       "name": "New York",
       "country": "us"
     },
     {
       "id": 33,
-      "iso_code": "NC",
+      "iso_code": "us-nc",
       "name": "North Carolina",
       "country": "us"
     },
     {
       "id": 34,
-      "iso_code": "ND",
+      "iso_code": "us-nd",
       "name": "North Dakota",
       "country": "us"
     },
     {
       "id": 35,
-      "iso_code": "OH",
+      "iso_code": "us-oh",
       "name": "Ohio",
       "country": "us"
     },
     {
       "id": 36,
-      "iso_code": "OK",
+      "iso_code": "us-ok",
       "name": "Oklahoma",
       "country": "us"
     },
     {
       "id": 37,
-      "iso_code": "OR",
+      "iso_code": "us-or",
       "name": "Oregon",
       "country": "us"
     },
     {
       "id": 38,
-      "iso_code": "PA",
+      "iso_code": "us-pa",
       "name": "Pennsylvania",
       "country": "us"
     },
     {
       "id": 39,
-      "iso_code": "RI",
+      "iso_code": "us-ri",
       "name": "Rhode Island",
       "country": "us"
     },
     {
       "id": 40,
-      "iso_code": "SC",
+      "iso_code": "us-sc",
       "name": "South Carolina",
       "country": "us"
     },
     {
       "id": 41,
-      "iso_code": "SD",
+      "iso_code": "us-sd",
       "name": "South Dakota",
       "country": "us"
     },
     {
       "id": 42,
-      "iso_code": "TN",
+      "iso_code": "us-tn",
       "name": "Tennessee",
       "country": "us"
     },
     {
       "id": 43,
-      "iso_code": "TX",
+      "iso_code": "us-tx",
       "name": "Texas",
       "country": "us"
     },
     {
       "id": 44,
-      "iso_code": "UT",
+      "iso_code": "us-ut",
       "name": "Utah",
       "country": "us"
     },
     {
       "id": 45,
-      "iso_code": "VT",
+      "iso_code": "us-vt",
       "name": "Vermont",
       "country": "us"
     },
     {
       "id": 46,
-      "iso_code": "VA",
+      "iso_code": "us-va",
       "name": "Virginia",
       "country": "us"
     },
     {
       "id": 47,
-      "iso_code": "WA",
+      "iso_code": "us-wa",
       "name": "Washington",
       "country": "us"
     },
     {
       "id": 48,
-      "iso_code": "WV",
+      "iso_code": "us-wv",
       "name": "West Virginia",
       "country": "us"
     },
     {
       "id": 49,
-      "iso_code": "WI",
+      "iso_code": "us-wi",
       "name": "Wisconsin",
       "country": "us"
     },
     {
       "id": 50,
-      "iso_code": "WY",
+      "iso_code": "us-wy",
       "name": "Wyoming",
       "country": "us"
     },
     {
       "id": 51,
-      "iso_code": "PR",
+      "iso_code": "us-pr",
       "name": "Puerto Rico",
       "country": "us"
     },
     {
       "id": 53,
-      "iso_code": "DC",
+      "iso_code": "us-dc",
       "name": "District of Columbia",
       "country": "us"
     },
     {
       "id": 86,
-      "iso_code": "ON",
+      "iso_code": "ca-on",
       "name": "Ontario",
       "country": "ca"
     },
     {
       "id": 87,
-      "iso_code": "QC",
+      "iso_code": "ca-qc",
       "name": "Quebec",
       "country": "ca"
     },
     {
       "id": 88,
-      "iso_code": "BC",
+      "iso_code": "ca-bc",
       "name": "British Columbia",
       "country": "ca"
     },
     {
       "id": 89,
-      "iso_code": "AB",
+      "iso_code": "ca-ab",
       "name": "Alberta",
       "country": "ca"
     },
     {
       "id": 90,
-      "iso_code": "MB",
+      "iso_code": "ca-mb",
       "name": "Manitoba",
       "country": "ca"
     },
     {
       "id": 91,
-      "iso_code": "SK",
+      "iso_code": "ca-sk",
       "name": "Saskatchewan",
       "country": "ca"
     },
     {
       "id": 92,
-      "iso_code": "NS",
+      "iso_code": "ca-ns",
       "name": "Nova Scotia",
       "country": "ca"
     },
     {
       "id": 93,
-      "iso_code": "NB",
+      "iso_code": "ca-nb",
       "name": "New Brunswick",
       "country": "ca"
     },
     {
       "id": 94,
-      "iso_code": "NL",
+      "iso_code": "ca-nl",
       "name": "Newfoundland and Labrador",
       "country": "ca"
     },
     {
       "id": 95,
-      "iso_code": "PE",
+      "iso_code": "ca-pe",
       "name": "Prince Edward Island",
       "country": "ca"
     },
     {
       "id": 96,
-      "iso_code": "NT",
+      "iso_code": "ca-nt",
       "name": "Northwest Territories",
       "country": "ca"
     },
     {
       "id": 97,
-      "iso_code": "YT",
+      "iso_code": "ca-yt",
       "name": "Yukon",
       "country": "ca"
     },
     {
       "id": 98,
-      "iso_code": "NU",
+      "iso_code": "ca-nu",
       "name": "Nunavut",
       "country": "ca"
     },
     {
       "id": 353,
-      "iso_code": "NF",
+      "iso_code": "ca-nf",
       "name": "Newfoundland",
       "country": "ca"
     }

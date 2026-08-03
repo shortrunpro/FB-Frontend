@@ -5,8 +5,6 @@ import { Container } from '@medusajs/ui';
 import { mapKeys } from 'lodash';
 import { usePathname } from 'next/navigation';
 
-// import { Input } from '@/components/atoms';
-// TODO Verify input change does not effect anything
 import AddressSelect from '@/components/cells/AddressSelect/AddressSelect';
 import { CountrySelect, Input, StateSelect } from '@/modules/common/components';
 
