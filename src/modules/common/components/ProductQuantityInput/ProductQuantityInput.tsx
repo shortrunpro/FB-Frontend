@@ -36,8 +36,10 @@ export const ProductQuantityInput = ({
     }
   };
   const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value;
-    onUpdate(id, Number(val));
+    const val = parseInt(e.target.value, 10);
+    if (!isNaN(val) && val !== initialQuantity) {
+      onUpdate(id, Number(val));
+    }
   };
   return (
     <div className="flex items-center gap-x-2">

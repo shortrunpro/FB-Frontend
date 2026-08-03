@@ -1,8 +1,8 @@
 import { HttpTypes } from '@medusajs/types';
 
-import { CartItemsFooter, CartItemsProducts } from '@/components/cells';
 import { Cart } from '@/types/cart';
 
+import { CartItemsProducts } from '../CartItemsProducts/CartItemsProducts';
 import { EmptyCart } from './EmptyCart';
 
 export const CartItems = ({ cart }: { cart: HttpTypes.StoreCart | Cart | null }) => {
@@ -18,10 +18,6 @@ export const CartItems = ({ cart }: { cart: HttpTypes.StoreCart | Cart | null })
       <CartItemsProducts
         products={cart.items || []}
         currency_code={cart.currency_code}
-      />
-      <CartItemsFooter
-        currency_code={cart.currency_code}
-        price={cart.shipping_subtotal}
       />
     </div>
   );

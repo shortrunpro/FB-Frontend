@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 
 import { Metadata } from 'next';
 
-import { Cart } from '@/components/sections';
+import { Cart } from '@/modules/cart/templates';
 
 // TODO Add appropriate metadata
 export const metadata: Metadata = {

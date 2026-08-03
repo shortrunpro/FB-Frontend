@@ -1,14 +1,14 @@
 'use client';
 
 import { LockClosedSolidMini } from '@medusajs/icons';
+import Link from 'next/link';
 
-import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
 import { CartEmpty, CartItems, CartSummary } from '@/modules/cart/components';
 import { useCartContext } from '@/modules/cart/provider/context';
-import { Button } from '@/modules/common/components';
+import { Button, Spinner } from '@/modules/common/components';
 
 export const Cart = () => {
-  const { cart } = useCartContext();
+  const { cart, isUpdating } = useCartContext();
 
   if (!cart || !cart.items?.length) {
     return <CartEmpty />;
@@ -16,6 +16,12 @@ export const Cart = () => {
 
   return (
     <>
+      <div
+        data-updating={isUpdating}
+        className={`inset-0 z-50 flex items-center justify-center bg-slate-900/25 data-[updating=true]:fixed data-[updating=false]:hidden data-[updating=false]:animate-fade-down-out data-[updating=true]:animate-fade-in-up`}
+      >
+        <Spinner className="z-[99] h-16 w-16" />
+      </div>
       <div className="w-2/3">
         <CartItems cart={cart} />
       </div>
@@ -29,15 +35,16 @@ export const Cart = () => {
             tax={cart?.tax_total || 0}
             discount_total={cart?.discount_total || 0}
           />
-          <LocalizedClientLink href="/checkout?step=address">
+          <Link href="/checkout?step=address">
             <Button
-              className="flex w-full items-center justify-center gap-x-2 bg-brand hover:bg-brand_grey hover:text-black"
+              className="flex w-full items-center justify-center gap-x-2 bg-brand hover:bg-[#374356]"
               size="large"
+              disabled={isUpdating}
             >
               <LockClosedSolidMini />
               Secure Checkout
             </Button>
-          </LocalizedClientLink>
+          </Link>
         </div>
       </div>
     </>

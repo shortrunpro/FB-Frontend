@@ -11,12 +11,12 @@ import { usePrevious } from '@/hooks/usePrevious';
 import { getItemCount } from '@/lib/helpers/get-item-count';
 import { convertToLocale } from '@/lib/helpers/money';
 import { useCartContext } from '@/modules/cart/provider/context';
-import { Button } from '@/modules/common/components';
+import { Button, Spinner } from '@/modules/common/components';
 
 import { CartItemsProducts } from '../CartItemsProducts/CartItemsProducts';
 
 export const CartDrawer = () => {
-  const { cart, open, toggleOpenState } = useCartContext();
+  const { cart, open, toggleOpenState, isUpdating } = useCartContext();
   const pathname = usePathname();
   const previousItemCount = usePrevious(getItemCount(cart));
   const cartItemsCount = (cart && getItemCount(cart)) || 0;
@@ -79,6 +79,14 @@ export const CartDrawer = () => {
           </button>
         </Drawer.Trigger>
         <Drawer.Content className="inset-y-0 z-50 m-0 w-fit max-w-full rounded-none bg-white p-0 data-[state=closed]:animate-fade-down-out data-[state=open]:animate-fade-in-up sm:right-0">
+          {/* {!isUpdating && ( */}
+          <div
+            data-updating={isUpdating}
+            className={`inset-0 z-50 flex items-center justify-center bg-slate-900/25 data-[updating=true]:fixed data-[updating=false]:hidden data-[updating=false]:animate-fade-down-out data-[updating=true]:animate-fade-in-up`}
+          >
+            <Spinner className="z-[99] h-16 w-16" />
+          </div>
+
           <Drawer.Header className="flex self-center">
             <Drawer.Title>
               {totalItems > 0 ? `You have ${totalItems} items in your cart` : 'Your cart is empty'}
@@ -113,6 +121,7 @@ export const CartDrawer = () => {
                   <Button
                     className="w-full bg-brand hover:bg-[#374356]"
                     size="large"
+                    disabled={isUpdating}
                   >
                     View Cart
                   </Button>
@@ -125,6 +134,7 @@ export const CartDrawer = () => {
                   <Button
                     className="flex w-full items-center justify-center gap-x-2 bg-yellow-500 hover:bg-yellow-600"
                     size="large"
+                    disabled={isUpdating}
                   >
                     <LockClosedSolidMini />
                     Secure Checkout

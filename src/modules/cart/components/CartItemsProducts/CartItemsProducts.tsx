@@ -3,9 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { DeleteCartItemButton } from '@/components/molecules';
-import { UpdateCartItemButton } from '@/components/molecules/UpdateCartItemButton/UpdateCartItemButton';
 import { filterValidCartItems } from '@/lib/helpers/filter-valid-cart-items';
 import { convertToLocale } from '@/lib/helpers/money';
+
+import { UpdateCartItemButton } from '../UpdateCartItemButton/UpdateCartItemButton';
 
 export const CartItemsProducts = ({
   products,
@@ -45,7 +46,7 @@ export const CartItemsProducts = ({
           <div
             key={product.id}
             data-testid={`cart-item-${product.id}`}
-            className="flex gap-2 rounded-sm border p-1"
+            className="flex gap-4 rounded-sm border p-1"
           >
             <Link
               href={`/products/${product.product_handle}`}
@@ -76,19 +77,21 @@ export const CartItemsProducts = ({
             </Link>
 
             <div className="w-full p-2">
-              <div className="flex justify-between lg:mb-4">
+              <div className="flex justify-between gap-x-4 lg:mb-2">
                 <Link
                   href={`/products/${product.product_handle}`}
                   onClick={handleClose}
                 >
                   <div className="mb-4 lg:mb-0">
                     <h3
-                      className="heading-xs truncate uppercase"
+                      className="label-lg truncate font-medium uppercase"
                       data-testid="cart-item-title"
                     >
                       {product.product_title}
                     </h3>
-                    <p>SKU: {sku}</p>
+                    <p className="label-md">
+                      SKU: <span className="label-md-medium">{sku}</span>
+                    </p>
                   </div>
                 </Link>
                 {delete_item && (
@@ -102,12 +105,17 @@ export const CartItemsProducts = ({
                   className="label-md text-secondary"
                   data-testid="cart-item-details"
                 >
-                  {options?.map(({ option, id, value }) => (
-                    <p key={id}>
-                      {option?.title}: <span className="text-primary">{value}</span>
-                    </p>
-                  ))}
-                  {change_quantity ? (
+                  <div className="">
+                    {options?.map(({ option, id, value }) => (
+                      <p
+                        key={id}
+                        className="flex gap-x-2"
+                      >
+                        {option?.title}: <span className="label-md-medium">{value}</span>
+                      </p>
+                    ))}
+                  </div>
+                  {change_quantity && product.variant_id ? (
                     <UpdateCartItemButton
                       quantity={product.quantity}
                       lineItemId={product.id}
