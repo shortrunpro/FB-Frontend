@@ -324,3 +324,12 @@ h2.tiptap-heading {
 .filter-zinc {
   @apply bg-[#B5BCC2];
 }
+.fill-ui-fg-subtle {
+  @apply fill-[rgba(161,161,170,1)] opacity-100;
+}
+.fill-ui-fg-muted {
+  @apply fill-[rgba(113,113,122,1)] opacity-100;
+}
+svg:has(.fill-ui-fg-muted) {
+  @apply opacity-100;
+}

@@ -40,7 +40,8 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
           return {
             ...variant,
             finish: finish?.value,
-            size: size?.value
+            size: size?.value,
+            price: variant.calculated_price?.calculated_amount
           };
         })
       : [];
@@ -63,11 +64,18 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
     if (!sorting) {
       return variants;
     }
-    return variants.sort((a, b) => {
+    return variants.slice().sort((a, b) => {
+      const aVal =
+        sorting.id === 'size'
+          ? Number(a[sorting.id]?.split('x')[0].trim())
+          : // @ts-ignore
+            a[sorting.id];
       // @ts-ignore
-      const aVal = a[sorting.id];
-      // @ts-ignore
-      const bVal = b[sorting.id];
+      const bVal =
+        sorting.id === 'size'
+          ? Number(b[sorting.id]?.split('x')[0].trim())
+          : // @ts-ignore
+            b[sorting.id];
       if (aVal < bVal) {
         return sorting.desc ? 1 : -1;
       }
@@ -133,19 +141,15 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
       }),
       columnHelper.accessor('finish', {
         header: 'Finish',
-        enableSorting: true,
-        sortLabel: 'Finish',
-        // If omitted the default value will be "A-Z"
-        sortAscLabel: 'A-Z',
-        // If omitted the default value will be "Z-A"
-        sortDescLabel: 'Z-A'
+        enableSorting: true
       }),
       columnHelper.accessor('size', {
-        header: 'Size'
-        // enableSorting: true
+        header: 'Size',
+        enableSorting: true
       }),
-      columnHelper.accessor('calculated_price.calculated_amount', {
+      columnHelper.accessor('price', {
         header: 'Price',
+        enableSorting: true,
         cell: ({ getValue }) => {
           const amount = getValue();
           return `$${amount?.toFixed(2)}`;
@@ -207,11 +211,14 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
   }, [activeSku, shownProducts]);
   return (
     <div
-      className="my-4 space-y-2"
+      className="rou my-4 space-y-2"
       data-testid="product-variants"
     >
-      <DataTable instance={table}>
-        <DataTable.Toolbar className="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
+      <DataTable
+        instance={table}
+        className="gap-y-8"
+      >
+        <div className="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
           <div data-testid={`product-variant-finishes`}>
             <span className="label-md-medium">FINISHES: </span>
             <div className="mt-2 flex gap-2">
@@ -227,9 +234,11 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
               ))}
             </div>
           </div>
-        </DataTable.Toolbar>
-        <DataTable.Table />
-        <DataTable.Pagination />
+        </div>
+        <div data-testid="variants-datatable">
+          <DataTable.Table />
+          <DataTable.Pagination />
+        </div>
       </DataTable>
       <AddToCartButton
         items={cartQuantity}
