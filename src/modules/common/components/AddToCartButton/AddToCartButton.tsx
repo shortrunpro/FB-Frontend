@@ -18,11 +18,18 @@ interface AddToCartButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElem
   icon?: boolean;
 }
 
-export function AddToCartButton({ variantId, quantity, icon = true, items }: AddToCartButtonProps) {
+export function AddToCartButton({
+  variantId,
+  quantity,
+  icon = true,
+  items,
+  disabled
+}: AddToCartButtonProps) {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { handleBulkAddToCart, addToCart, isAddingItem, isUpdating } = useCartContext();
   const handleAddToCart = async () => {
+    setError(null);
     setIsLoading(true);
     if (!items && (!variantId || !quantity || quantity < 1)) {
       setError('Missing necessary data for add to cart functionality');
@@ -50,7 +57,7 @@ export function AddToCartButton({ variantId, quantity, icon = true, items }: Add
       <Button
         onClick={handleAddToCart}
         loading={isLoading}
-        disabled={isLoading && (isAddingItem || isUpdating || error ? true : false)}
+        disabled={(isLoading && (isAddingItem || isUpdating || error ? true : false)) || disabled}
         className="flex w-full justify-center bg-yellow-500 font-extrabold uppercase text-white hover:bg-yellow-600"
         data-testid="add-to-cart-button"
         id={variantId}
