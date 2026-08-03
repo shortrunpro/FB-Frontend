@@ -59,7 +59,10 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
   const [variant, setVariant] = useState<StoreProductVariant | null>(null);
 
   /**      PRODUCT SORTING       **/
-  const [sorting, setSorting] = useState<DataTableSortingState | null>(null);
+  const [sorting, setSorting] = useState<DataTableSortingState | null>({
+    id: 'size',
+    desc: false
+  });
   const sortedProducts = useMemo(() => {
     if (!sorting) {
       return variants;
