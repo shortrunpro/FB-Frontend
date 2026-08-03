@@ -15,19 +15,7 @@ export const ProductBulletPoints = ({
     <ul className="label-sm-medium text-brand">
       <li className="flex items-center gap-x-2 py-1">
         <UsaFlag />
-        <span className="">Proudly Made in the USA - Option 1</span>
-      </li>
-      <li className="flex items-center gap-x-2 py-1">
-        <FaFlagUsa className="text-base text-black" />
-        <span className="">Proudly Made in the USA - Option 2</span>
-      </li>
-      <li className="flex items-center gap-x-2 py-1">
-        <LiaFlagUsaSolid className="text-base text-black" />
-        <span className="">Proudly Made in the USA - Option 3</span>
-      </li>
-      <li className="flex items-center gap-x-2 py-1">
-        <FaRegFlag className="text-base text-black" />
-        <span className="">Proudly Made in the USA - Original</span>
+        <span className="">Proudly Made in the USA</span>
       </li>
       <li className="flex items-center gap-x-2 py-1">
         <MdOutlineDiscount className="text-base text-black" />
