@@ -1,31 +1,38 @@
-import { useState } from 'react';
+'use client';
 
-import { AddToCartButton, Button, Input } from '@/modules/common/components';
+import { useCallback, useState } from 'react';
 
+import { AddToCartButton } from '@/modules/common/components';
+
+import { QuantityInput } from '../ProductVariants/QuantityInput';
+
+interface InitialValue {
+  [key: string]: number | string;
+}
 export const AddToCartSection = ({ variantId }: { variantId: string }) => {
-  const [quantity, setQuantity] = useState<number | string>(1);
-  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setQuantity(value);
-  };
+  const [quantity, setQuantity] = useState<InitialValue>({
+    [variantId]: 1
+  });
+  const handleQuantityChange = useCallback((id: string, newValue: number) => {
+    setQuantity(prev => ({
+      ...prev,
+      [id]: newValue
+    }));
+  }, []);
   return (
     <div className="flex w-full items-end gap-x-6">
       <div className="w-2/12 px-2">
-        <Input
-          label="Quantity"
-          className="p-2 text-center"
-          name="quantity"
-          value={quantity}
-          min={1}
-          maxLength={3}
-          onChange={handleQuantityChange}
+        <QuantityInput
+          id={variantId}
+          initialQuantity={quantity[variantId]}
+          onUpdate={handleQuantityChange}
         />
       </div>
       <div className="w-11/12">
         <AddToCartButton
-          variantId={variantId}
-          quantity={Number(quantity)}
+          items={quantity}
           icon={false}
+          disabled={!quantity || Number(quantity[variantId]) < 1}
         />
       </div>
     </div>
