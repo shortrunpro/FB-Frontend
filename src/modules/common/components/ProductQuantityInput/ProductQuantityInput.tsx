@@ -9,12 +9,16 @@ import { FiMinusCircle, FiPlusCircle } from 'react-icons/fi';
 import { useCartContext } from '@/modules/cart/provider/context';
 import { Button, Input } from '@/modules/common/components';
 
-interface QuantityInputProps {
+interface ProductQuantityInputProps {
   id: string;
   initialQuantity: number | string;
   onUpdate: (id: string, value: number) => void;
 }
-export const QuantityInput = ({ id, initialQuantity, onUpdate }: QuantityInputProps) => {
+export const ProductQuantityInput = ({
+  id,
+  initialQuantity,
+  onUpdate
+}: ProductQuantityInputProps) => {
   const { isUpdating } = useCartContext();
   const [localValue, setLocalValue] = useState<any>(initialQuantity);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

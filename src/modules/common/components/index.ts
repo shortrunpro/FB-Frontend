@@ -14,6 +14,7 @@ import { LinkedinLink } from './LinkedinLink';
 import { Modal } from './Modal/Modal';
 import { PhoneLink } from './PhoneLink/PhoneLink';
 import { PinterestLink } from './PinterestLink/PinterestLink';
+import { ProductQuantityInput } from './ProductQuantityInput/ProductQuantityInput';
 import { PromoCode } from './PromoCode';
 import { Spinner } from './Spinner';
 import StateSelect from './StateSelect/StateSelect';
@@ -25,6 +26,7 @@ import { TwitterLink } from './TwitterLink';
 import { YoutubeLink } from './YoutubeLink';
 
 export {
+  ProductQuantityInput,
   StateSelect,
   CountrySelect,
   InstagramLink,

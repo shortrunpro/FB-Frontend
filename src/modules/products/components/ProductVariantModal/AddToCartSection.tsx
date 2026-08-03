@@ -2,9 +2,7 @@
 
 import { useCallback, useState } from 'react';
 
-import { AddToCartButton } from '@/modules/common/components';
-
-import { QuantityInput } from '../ProductVariants/QuantityInput';
+import { AddToCartButton, ProductQuantityInput } from '@/modules/common/components';
 
 interface InitialValue {
   [key: string]: number | string;
@@ -22,7 +20,7 @@ export const AddToCartSection = ({ variantId }: { variantId: string }) => {
   return (
     <div className="flex w-full items-end gap-x-6">
       <div className="w-2/12 px-2">
-        <QuantityInput
+        <ProductQuantityInput
           id={variantId}
           initialQuantity={quantity[variantId]}
           onUpdate={handleQuantityChange}

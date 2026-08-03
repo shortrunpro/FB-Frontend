@@ -14,10 +14,13 @@ import { usePathname, useSearchParams } from 'next/navigation';
 
 import { Chip } from '@/components/atoms';
 import { useCartContext } from '@/modules/cart/provider/context';
-import { AddToCartButton, InteractiveLink } from '@/modules/common/components';
+import {
+  AddToCartButton,
+  InteractiveLink,
+  ProductQuantityInput
+} from '@/modules/common/components';
 
 import ProductVariantModal from '../ProductVariantModal/ProductVariantModal';
-import { QuantityInput } from './QuantityInput';
 
 export const ProductVariants = ({ product }: { product: StoreProduct }) => {
   const params = useSearchParams();
@@ -128,7 +131,7 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
         cell: ({ row }) => {
           return (
             <div className="w-2/3">
-              <QuantityInput
+              <ProductQuantityInput
                 id={row.id}
                 initialQuantity={cartQuantity[row.id]}
                 onUpdate={handleQuantityChange}
