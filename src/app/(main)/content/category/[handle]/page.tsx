@@ -14,8 +14,8 @@ export const revalidate = 3600;
 export async function generateStaticParams() {
   const posts = (await queryResources({
     url: '/category',
-    query: { limit: 999, fields: 'handle' },
-    next: { tags: ['resource-handles'], revalidate: 3600 }
+    query: { limit: 999, fields: 'handle,updated_at' },
+    next: { tags: ['resource-handles'], revalidate: 86400 }
   })) as StoreFetchResourceCategories;
   if (!posts.resource_categories || !posts.ok) {
     return [];

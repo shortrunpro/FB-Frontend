@@ -9,8 +9,8 @@ import { StoreFetchResourceResponse, StoreGetResourcesResponse } from '@/types/r
 export const revalidate = 3600;
 export async function generateStaticParams() {
   const posts = (await queryResources({
-    query: { limit: 999, fields: 'handle' },
-    next: { tags: ['resource-handles'], revalidate: 3600 }
+    query: { limit: 999, fields: 'handle,updated_at' },
+    next: { tags: ['resource-handles'], revalidate: 86400 }
   })) as StoreGetResourcesResponse;
   if (!posts) {
     return [];

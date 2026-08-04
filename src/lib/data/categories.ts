@@ -6,7 +6,21 @@ import { CategoryListObject, ListCategoriesResponse } from '@/types/categories';
 interface CategoriesProps {
   query?: Record<string, unknown>;
 }
-
+export const listCategoriesSitemap = async () => {
+  return sdk.client
+    .fetch<{
+      product_categories: CategoryListObject[];
+    }>('/store/product-categories', {
+      query: {
+        limit: 999,
+        fields: 'handle,product_category_image.url,updated_at'
+      },
+      cache: 'force-cache',
+      // Revalidates once every 24 hours
+      next: { revalidate: 86400 }
+    })
+    .then(({ product_categories }) => product_categories);
+};
 export const listCategories = async ({
   query
 }: Partial<CategoriesProps> = {}): Promise<ListCategoriesResponse> => {

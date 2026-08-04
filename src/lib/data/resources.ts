@@ -22,7 +22,7 @@ export const queryResources = async ({
   url?: string;
   query?: Record<string, any>;
   next?: NextFetchRequestConfig;
-}) => {
+}): Promise<StoreGetResourcesResponse | any> => {
   return sdk.client.fetch(`/store/resources${url}`, {
     query,
     cache: 'force-cache',

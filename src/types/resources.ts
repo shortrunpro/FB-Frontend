@@ -6,6 +6,7 @@ export interface StoreGetResource {
     title: string;
   } | null;
   title: string;
+  updated_at?: string;
 }
 export interface StoreGetResourcesResponse {
   resources: StoreGetResource[];
@@ -44,6 +45,7 @@ export interface StoreFetchResourceCategories {
     id: string;
     title: string;
     handle: string;
+    updated_at?: string;
     metadata: {
       meta_title?: string;
       meta_description?: string;

@@ -13,6 +13,7 @@ export interface BlogListItem {
   main_image: string;
   subtitle: string;
   title: string;
+  updated_at?: string;
 }
 export interface BlogList {
   blogs: BlogListItem[];
