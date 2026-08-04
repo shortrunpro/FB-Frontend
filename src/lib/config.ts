@@ -2,8 +2,8 @@ import Medusa from '@medusajs/js-sdk';
 
 // Defaults to standard port for Medusa server
 const MEDUSA_BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL ?? '';
-export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-export const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME;
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL as string;
+export const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME as string;
 export const BRAND_PHONE_NUMBER = process.env.NEXT_PUBLIC_PHONE_NUMBER;
 export const sdk = new Medusa({
   baseUrl: MEDUSA_BACKEND_URL,
