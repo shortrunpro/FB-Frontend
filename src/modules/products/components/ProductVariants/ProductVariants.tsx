@@ -248,7 +248,12 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
         items={cartQuantity}
         icon={false}
       />
-      {activeSku && variant && <ProductVariantModal variant={variant} />}
+      {activeSku && variant && (
+        <ProductVariantModal
+          variant={variant}
+          product={product}
+        />
+      )}
     </div>
   );
 };

@@ -56,6 +56,7 @@
     "react-icons": "^5.7.0",
     "react-instantsearch": "^7.39.0",
     "react-instantsearch-core": "^7.39.0",
+    "schema-dts": "^2.0.0",
     "swiper": "^12.1.3",
     "tailwind-merge": "^2.6.0",
     "talkjs": "^0.37.0",
