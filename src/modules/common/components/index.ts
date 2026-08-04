@@ -22,10 +22,12 @@ import { StoreHours } from './StoreHours/StoreHours';
 import { SuccessBanner } from './SuccessBanner/SuccessBanner';
 import { Textarea } from './Textarea/Textarea';
 import { TextLink } from './TextLink/TextLink';
+import { TikTokLink } from './TikTokLink/TikTokLink';
 import { TwitterLink } from './TwitterLink';
 import { YoutubeLink } from './YoutubeLink';
 
 export {
+  TikTokLink,
   ProductQuantityInput,
   StateSelect,
   CountrySelect,
