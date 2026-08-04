@@ -18,20 +18,28 @@ export const AddToCartSection = ({ variantId }: { variantId: string }) => {
     }));
   }, []);
   return (
-    <div className="flex w-full items-end gap-x-6">
-      <div className="w-2/12 px-2">
-        <ProductQuantityInput
-          id={variantId}
-          initialQuantity={quantity[variantId]}
-          onUpdate={handleQuantityChange}
-        />
-      </div>
-      <div className="w-11/12">
-        <AddToCartButton
-          items={quantity}
-          icon={false}
-          disabled={!quantity || Number(quantity[variantId]) < 1}
-        />
+    <div className="flex w-full flex-col gap-y-6">
+      <span
+        id="product_price"
+        className="label-xl text-brand"
+      >
+        $999.99
+      </span>
+      <div className="flex w-full items-end gap-x-6">
+        <div className="w-2/12 px-2">
+          <ProductQuantityInput
+            id={variantId}
+            initialQuantity={quantity[variantId]}
+            onUpdate={handleQuantityChange}
+          />
+        </div>
+        <div className="w-11/12">
+          <AddToCartButton
+            items={quantity}
+            icon={false}
+            disabled={!quantity || Number(quantity[variantId]) < 1}
+          />
+        </div>
       </div>
     </div>
   );
