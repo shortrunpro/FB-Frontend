@@ -5,12 +5,12 @@ import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import Script from 'next/script';
 
-import { Breadcrumbs } from '@/components/atoms';
 import { BASE_URL, SITE_NAME } from '@/lib/config';
 import { getCategoryByHandle } from '@/lib/data/categories';
 import { listProducts } from '@/lib/data/products';
 import isBot from '@/lib/helpers/isBot';
 import { CategoryCard } from '@/modules/categories/components';
+import { Breadcrumbs } from '@/modules/common/components';
 import { ProductListingSkeleton } from '@/modules/products/components';
 import { FacetedProductsListing, ProductListing } from '@/modules/products/templates';
 
@@ -68,10 +68,6 @@ async function Category({
   const bot = isBot(ua);
 
   const breadcrumbsItems = [
-    {
-      path: '/categories',
-      label: 'Categories'
-    },
     ...(category.parent_category?.handle && category.parent_category?.name
       ? [
           {
@@ -152,7 +148,7 @@ async function Category({
           </div>
         }
       >
-        {category?.category_children?.length > 0 ? (
+        {category?.category_children.length > 0 && (
           <div className="grid grid-cols-6 gap-x-2 gap-y-4">
             {category.category_children.map(cat => (
               <CategoryCard
@@ -161,15 +157,18 @@ async function Category({
               />
             ))}
           </div>
-        ) : bot || !ALGOLIA_ID || !ALGOLIA_SEARCH_KEY ? (
-          <ProductListing
-            category_id={category.id}
-            showSidebar
-            locale={'us'}
-          />
-        ) : (
-          <FacetedProductsListing category_name={category.name} />
         )}
+        {category?.products &&
+          category?.products.length > 0 &&
+          (bot || !ALGOLIA_ID || !ALGOLIA_SEARCH_KEY ? (
+            <ProductListing
+              category_id={category.id}
+              showSidebar
+              locale={'us'}
+            />
+          ) : (
+            <FacetedProductsListing category_name={category.name} />
+          ))}
       </Suspense>
     </main>
   );
