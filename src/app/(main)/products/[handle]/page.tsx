@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import Script from 'next/script';
 
 import { listProducts } from '@/lib/data/products';
@@ -13,13 +14,17 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { handle, locale } = await params;
 
-  const prod = await listProducts({
+  const {
+    response: { products, count }
+  } = await listProducts({
     countryCode: locale,
     queryParams: { handle: [handle], limit: 1 },
     forceCache: true
-  }).then(({ response }) => response.products[0]);
-
-  return generateProductMetadata(prod);
+  });
+  if (count == 0) {
+    return {};
+  }
+  return generateProductMetadata(products[0]);
 }
 
 export default async function ProductPage({
@@ -29,7 +34,7 @@ export default async function ProductPage({
 }) {
   const { handle, locale } = await params;
   const {
-    response: { products: jsonLdProducts }
+    response: { products: jsonLdProducts, count }
   } = await listProducts({
     countryCode: 'us',
     queryParams: {
@@ -39,6 +44,9 @@ export default async function ProductPage({
         'id,title,handle,description,images.url,variants.sku,variants.thumbnail,variants.title,variants.options.value,variants.options.option.title,variants.calculated_price.calculated_amount'
     }
   });
+  if (count == 0) {
+    return notFound();
+  }
   const jsonLd = generateProductMerchantSchema(jsonLdProducts[0]);
   return (
     <main className="container flex flex-col gap-y-12">
