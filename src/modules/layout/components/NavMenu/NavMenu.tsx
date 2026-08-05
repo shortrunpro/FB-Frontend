@@ -39,7 +39,7 @@ const MenuItem = ({ item }: MenuItemProps) => {
           href={item.link}
 
           role="button"
-          className="btn btn-ghost px-1 font-bold uppercase text-brand decoration-brand decoration-2 underline-offset-8 focus-within:underline hover:bg-transparent hover:underline focus:underline focus-visible:underline xl:px-2"
+          className="btn btn-ghost px-1 font-bold uppercase text-brand hover:bg-transparent hover:text-[#718fbe] xl:px-2"
         >
           {item.title}
         </Link>
@@ -47,14 +47,14 @@ const MenuItem = ({ item }: MenuItemProps) => {
         <div
           // tabIndex={0}
           role="button"
-          className="btn btn-ghost px-1 font-bold uppercase text-brand decoration-brand decoration-2 underline-offset-8 hover:bg-transparent hover:underline"
+          className="btn btn-ghost px-1 font-bold uppercase text-brand hover:bg-transparent hover:text-[#718fbe]"
         >
           {item.title}
         </div>
       )}
 
       {item.children.length > 0 && (
-        <ul className="z-1 menu dropdown-content w-52 rounded-box bg-brand_grey p-2 shadow-sm">
+        <ul className="z-1 menu dropdown-content w-52 rounded-box bg-brand_grey px-2 py-0 shadow-sm">
           {item.children.map((child: any) => {
             return (
               <li key={child.title}>

@@ -4,8 +4,6 @@ import Link from 'next/link';
 import { MobileNavbar } from '../MobileNavbar/MobileNavbar';
 import { NavMenu } from '../NavMenu/NavMenu';
 
-// min-[1100px]:max-w-[237px] min-[1150px]:max-w-[252.8px] xl:max-w-[252.8] min-[1300px]:max-w-[252.8] min-[1400px]:max-w-[284.4px]
-
 export const Navbar = () => {
   return (
     <div className="w-full bg-white py-4">
