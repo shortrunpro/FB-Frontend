@@ -59,12 +59,23 @@ export const HomeImageCarousel = () => {
             {images.map(image => {
               return (
                 <SwiperSlide key={image.src}>
-                  <Image
-                    src={image.src}
-                    width={image.width}
-                    height={image.height}
-                    alt={image.alt}
-                  />
+                  {image.link ? (
+                    <Link href={image.link}>
+                      <Image
+                        src={image.src}
+                        width={image.width}
+                        height={image.height}
+                        alt={image.alt}
+                      />
+                    </Link>
+                  ) : (
+                    <Image
+                      src={image.src}
+                      width={image.width}
+                      height={image.height}
+                      alt={image.alt}
+                    />
+                  )}
                 </SwiperSlide>
               );
             })}

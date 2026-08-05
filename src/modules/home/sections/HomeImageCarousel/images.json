@@ -1,26 +1,30 @@
 [
   {
-    "src": "/home-slider-new/65-Aspect-Ratio-Web-Banner-Slider-Braila-1.jpg",
+    "src": "/home-slider/Thin Floating Shelf Bracket - Web Banner 2026.jpg",
     "width": 780,
     "height": 640,
-    "alt": "Web Banner Slider Braila"
+    "alt": "Thin Floating Shelf Bracket Web Banner",
+    "link": "/products/thin-floating-shelf-support-bracket?sku=FB-10851"
   },
   {
-    "src": "/home-slider-new/65-Aspect-Ratio-Web-Banner-Slider-Tradeshow-2.jpg",
+    "src": "/home-slider/ADA Modesty Panel Kit - Web Banner 2026.jpg",
     "width": 780,
     "height": 640,
-    "alt": "Web Banner Slider Tradeshow"
+    "alt": "ADA Modesty Panel Kit Web Banner",
+    "link": "/products/magnetic-ada-modesty-panel-attachment-kit?sku=FB-10827"
   },
   {
-    "src": "/home-slider-new/65-Aspect-Ratio-Web-Banner-Slider-ADA-Magnetic-3.jpg",
+    "src": "/home-slider/Tactical Concelament Mantel - Web Banner 2026.jpg",
     "width": 780,
     "height": 640,
-    "alt": "Web Banner Slider ADA Magnetic"
+    "alt": "Tactical Concelament Mantel Web Banner",
+    "link": "/products/concealment-fireplace-mantel?sku=FB-10914"
   },
   {
-    "src": "/home-slider-new/65-Aspect-Ratio-Web-Banner-Slider-Capitol-Desk-Bracket-4.jpg",
+    "src": "/home-slider/IWF Announcement - Web Banner 2026.jpg",
     "width": 780,
     "height": 640,
-    "alt": "Web Banner Slider Capitol Desk Bracket"
+    "alt": "IWF Announcement Web Banner",
+    "link": null
   }
 ]
