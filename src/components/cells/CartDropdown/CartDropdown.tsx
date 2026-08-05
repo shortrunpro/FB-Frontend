@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 
 import { ShoppingCart } from '@medusajs/icons';
 import { HttpTypes } from '@medusajs/types';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { Badge, Button } from '@/components/atoms';
 import { CartDropdownItem, Dropdown } from '@/components/molecules';
-import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
 import { usePrevious } from '@/hooks/usePrevious';
 import { filterValidCartItems } from '@/lib/helpers/filter-valid-cart-items';
 import { convertToLocale } from '@/lib/helpers/money';
@@ -75,7 +75,7 @@ export const CartDropdown = () => {
       onMouseOver={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <LocalizedClientLink
+      <Link
         href="/cart"
         className="relative"
         aria-label="Go to cart"
@@ -84,7 +84,7 @@ export const CartDropdown = () => {
         {Boolean(cartItemsCount) && (
           <Badge className="absolute -right-2 -top-2 h-4 w-4 p-0">{cartItemsCount}</Badge>
         )}
-      </LocalizedClientLink>
+      </Link>
       <Dropdown show={open}>
         <div className="shadow-lg lg:w-[460px]">
           <h3 className="heading-md border-b p-4 uppercase">Shopping cart</h3>
@@ -113,18 +113,18 @@ export const CartDropdown = () => {
                   <div className="flex items-center justify-between text-secondary">
                     Total <p className="label-xl text-primary">{total}</p>
                   </div>
-                  <LocalizedClientLink href="/cart">
+                  <Link href="/cart">
                     <Button className="mt-4 w-full py-3">Go to cart</Button>
-                  </LocalizedClientLink>
+                  </Link>
                 </div>
               </div>
             ) : (
               <div className="px-8">
                 <h4 className="heading-md text-center uppercase">Your shopping cart is empty</h4>
                 <p className="py-4 text-center text-lg">Are you looging for inspiration?</p>
-                <LocalizedClientLink href="/categories">
+                <Link href="/categories">
                   <Button className="w-full py-3">Explore Home Page</Button>
-                </LocalizedClientLink>
+                </Link>
               </div>
             )}
           </div>

@@ -1,30 +1,32 @@
-"use client"
-import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
-import { cn } from "@/lib/utils"
-import { HttpTypes } from "@medusajs/types"
-import { useParams } from "next/navigation"
+'use client';
+
+import { HttpTypes } from '@medusajs/types';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+
+import { cn } from '@/lib/utils';
 
 export const HeadingCategories = ({
-  categories,
+  categories
 }: {
-  categories: HttpTypes.StoreProductCategory[]
+  categories: HttpTypes.StoreProductCategory[];
 }) => {
-  const { category } = useParams()
+  const { category } = useParams();
 
   return (
-    <nav className="hidden lg:flex space-x-2 items-center flex-col md:flex-row">
+    <nav className="hidden flex-col items-center space-x-2 md:flex-row lg:flex">
       {categories?.map(({ id, handle, name }) => (
-        <LocalizedClientLink
+        <Link
           key={id}
           href={`/categories/${handle}`}
           className={cn(
-            "label-md uppercase px-2 mb-4 md:mb-0",
-            handle === category && "border-b border-primary"
+            'label-md mb-4 px-2 uppercase md:mb-0',
+            handle === category && 'border-b border-primary'
           )}
         >
           {name}
-        </LocalizedClientLink>
+        </Link>
       ))}
     </nav>
-  )
-}
+  );
+};

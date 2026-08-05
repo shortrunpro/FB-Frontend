@@ -3,10 +3,9 @@ import { Fragment } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Divider } from '@/components/atoms';
-import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
 import { convertToLocale } from '@/lib/helpers/money';
 import { cn } from '@/lib/utils';
+import { Divider } from '@/modules/common/components';
 
 export const OrderProductListItem = ({
   item,

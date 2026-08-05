@@ -4,12 +4,12 @@ import React, { useEffect, useState } from 'react';
 
 import { useSearchParams } from 'next/navigation';
 
-import { Button, Input } from '@/components/atoms';
 import { Accordion, FilterCheckboxOption, Modal } from '@/components/molecules';
 import useFilters from '@/hooks/useFilters';
 import useGetAllSearchParams from '@/hooks/useGetAllSearchParams';
 import useUpdateSearchParams from '@/hooks/useUpdateSearchParams';
 import { cn } from '@/lib/utils';
+import { Button, Input } from '@/modules/common/components';
 
 import { ProductListingActiveFilters } from '../ProductListingActiveFilters/ProductListingActiveFilters';
 
@@ -161,6 +161,7 @@ function PriceFilter({ defaultOpen = false }: { defaultOpen?: boolean }) {
               }, 500);
             }}
             type="number"
+            name="min-price"
             className="no-arrows-number-input"
           />
           <input
@@ -182,6 +183,7 @@ function PriceFilter({ defaultOpen = false }: { defaultOpen?: boolean }) {
             }}
             value={max}
             type="number"
+            name="max-prices"
             className="no-arrows-number-input"
           />
           <input

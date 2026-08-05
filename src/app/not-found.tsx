@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
-import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
 import { ArrowUpIcon } from '@/icons';
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function NotFound() {
       <p className="text-small-regular text-ui-fg-base">
         The page you tried to access does not exist.
       </p>
-      <LocalizedClientLink
+      <Link
         className="group flex items-center gap-x-1"
         href="/"
       >
@@ -24,7 +24,7 @@ export default function NotFound() {
           className="duration-150 ease-in-out group-hover:rotate-45"
           color="var(--fg-interactive)"
         />
-      </LocalizedClientLink>
+      </Link>
     </div>
   );
 }

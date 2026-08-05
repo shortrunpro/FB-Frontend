@@ -78,7 +78,7 @@ export const CartDrawer = () => {
             </div>
           </button>
         </Drawer.Trigger>
-        <Drawer.Content className="inset-y-0 z-50 m-0 w-fit max-w-full rounded-none bg-white p-0 data-[state=closed]:animate-fade-down-out data-[state=open]:animate-fade-in-up sm:right-0">
+        <Drawer.Content className="inset-y-0 z-50 m-0 max-w-screen-sm rounded-none bg-white p-0 data-[state=closed]:animate-fade-down-out data-[state=open]:animate-fade-in-up sm:right-0">
           {/* {!isUpdating && ( */}
           <div
             data-updating={isUpdating}
@@ -112,7 +112,7 @@ export const CartDrawer = () => {
                 </Text>
               </div>
 
-              <div className="flex w-full gap-x-6">
+              <div className="flex w-full gap-x-2.5">
                 <Link
                   href="/cart"
                   className="w-full"
@@ -132,7 +132,7 @@ export const CartDrawer = () => {
                   onClick={handleCloseDrawer}
                 >
                   <Button
-                    className="flex w-full items-center justify-center gap-x-2 bg-yellow-500 hover:bg-yellow-600"
+                    className="flex w-full items-center justify-center gap-x-1 bg-yellow-500 px-0 hover:bg-yellow-600"
                     size="large"
                     disabled={isUpdating}
                   >

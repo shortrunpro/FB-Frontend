@@ -11,7 +11,6 @@ import { LabeledInput } from '@/components/cells';
 import { PasswordValidator } from '@/components/cells/PasswordValidator/PasswordValidator';
 import { signup } from '@/lib/data/customer';
 import { toast } from '@/lib/helpers/toast';
-// import { Button } from "@/components/atoms"
 import { Button } from '@/modules/common/components';
 
 import { RegisterFormData, registerFormSchema } from './schema';

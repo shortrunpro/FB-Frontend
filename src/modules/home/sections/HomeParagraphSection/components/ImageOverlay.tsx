@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { Button } from '@/modules/common/components';
+
 export const ImageOverlay = () => {
   return (
     <div className="flex min-h-[450px] w-full flex-col justify-center gap-y-8 py-4 lg:bg-[url(/home-paragraph-section/Floating-shelf-Kitchen-Image-darkened.jpg)] lg:bg-cover lg:text-white">
@@ -21,9 +23,11 @@ export const ImageOverlay = () => {
       <div className="flex justify-center">
         <Link
           href={'/products'}
-          className="flex w-[13.75rem] items-center gap-x-2 rounded-full bg-white p-3 text-center font-bold text-brand hover:bg-brand hover:text-white"
+          className="flex w-[13.75rem] items-center gap-x-2"
         >
-          SHOP ALL HARDWARE
+          <Button className="bg-white p-3 text-center font-bold text-brand hover:bg-brand hover:text-white">
+            SHOP ALL HARDWARE
+          </Button>
         </Link>
       </div>
     </div>

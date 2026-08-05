@@ -1,8 +1,8 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
-import { Button } from '@/components/atoms';
-import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
 import { CollapseIcon } from '@/icons';
+import { Button } from '@/modules/common/components';
 
 export default async function RootLayout({
   children
@@ -14,7 +14,7 @@ export default async function RootLayout({
       <header>
         <div className="relative w-full px-4 py-4 lg:px-8">
           <div className="absolute top-3">
-            <LocalizedClientLink href="/cart">
+            <Link href="/cart">
               <Button
                 variant="tonal"
                 className="flex items-center gap-2"
@@ -22,10 +22,10 @@ export default async function RootLayout({
                 <CollapseIcon className="rotate-90" />
                 <span className="hidden lg:block">Back to cart</span>
               </Button>
-            </LocalizedClientLink>
+            </Link>
           </div>
           <div className="flex w-full items-center justify-center pl-4 lg:pl-0">
-            <LocalizedClientLink
+            <Link
               href="/"
               className="text-2xl font-bold"
             >
@@ -36,7 +36,7 @@ export default async function RootLayout({
                 alt="Logo"
                 priority
               />
-            </LocalizedClientLink>
+            </Link>
           </div>
         </div>
       </header>

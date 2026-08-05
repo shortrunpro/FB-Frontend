@@ -1,8 +1,8 @@
 import { HttpTypes } from '@medusajs/types';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { DeleteCartItemButton } from '@/components/molecules';
-import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
 import { UpdateCartItemButton } from '@/components/molecules/UpdateCartItemButton/UpdateCartItemButton';
 import { filterValidCartItems } from '@/lib/helpers/filter-valid-cart-items';
 import { convertToLocale } from '@/lib/helpers/money';
@@ -37,7 +37,7 @@ export const CartItemsProducts = ({
             data-testid={`cart-item-${product.id}`}
             className="flex gap-2 rounded-sm border p-1"
           >
-            <LocalizedClientLink href={`/products/${product.product_handle}`}>
+            <Link href={`/products/${product.product_handle}`}>
               <div
                 className="flex h-[132px] w-[100px] items-center justify-center"
                 data-testid="cart-item-image"
@@ -60,11 +60,11 @@ export const CartItemsProducts = ({
                   />
                 )}
               </div>
-            </LocalizedClientLink>
+            </Link>
 
             <div className="w-full p-2">
               <div className="flex justify-between lg:mb-4">
-                <LocalizedClientLink href={`/products/${product.product_handle}`}>
+                <Link href={`/products/${product.product_handle}`}>
                   <div className="mb-4 lg:mb-0">
                     <h3
                       className="heading-xs truncate uppercase"
@@ -74,7 +74,7 @@ export const CartItemsProducts = ({
                     </h3>
                     <p>SKU: {sku}</p>
                   </div>
-                </LocalizedClientLink>
+                </Link>
                 {delete_item && (
                   <div className="lg:flex">
                     <DeleteCartItemButton id={product.id} />

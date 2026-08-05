@@ -1,12 +1,11 @@
 'use client';
 
-import { HttpTypes } from '@medusajs/types';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Button } from '@/components/atoms';
 import { getProductPrice } from '@/lib/helpers/get-product-price';
 import { cn } from '@/lib/utils';
+import { Button } from '@/modules/common/components';
 import { CustomProduct, Product, RelatedProductProduct } from '@/types/product';
 
 export const ProductCard = ({

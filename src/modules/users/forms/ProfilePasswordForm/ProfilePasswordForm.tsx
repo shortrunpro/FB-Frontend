@@ -14,10 +14,10 @@ import {
   UseFormReturn
 } from 'react-hook-form';
 
-import { Button, Card } from '@/components/atoms';
 import { LabeledInput } from '@/components/cells';
 import { PasswordValidator } from '@/components/cells/PasswordValidator/PasswordValidator';
 import { updateCustomerPassword } from '@/lib/data/customer';
+import { Button, Card } from '@/modules/common/components';
 
 import { ProfilePasswordFormData, profilePasswordSchema } from './schema';
 

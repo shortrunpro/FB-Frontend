@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { Button } from '@/modules/common/components';
+
 import images from './images.json';
 // @ts-ignore
 import 'swiper/css';
@@ -38,13 +40,15 @@ export const HomeImageCarousel = () => {
             <div className="flex w-full justify-center lg:justify-normal">
               <Link
                 href={'/products'}
-                className="flex items-center gap-x-2 rounded-full bg-action p-3 font-bold text-white hover:bg-brand"
+                className=""
               >
-                SHOP NOW{' '}
-                <ArrowRight
-                  color="#ffffff"
-                  className="rounded-badge border-2 border-solid border-[#49576E] bg-brand"
-                />
+                <Button className="flex items-center gap-x-3 p-3 font-bold">
+                  SHOP NOW{' '}
+                  <ArrowRight
+                    color="#ffffff"
+                    className="rounded-badge border-2 border-solid border-[#49576E] bg-brand"
+                  />
+                </Button>
               </Link>
             </div>
           </div>

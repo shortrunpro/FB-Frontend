@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/atoms';
 import { StepProgressBar } from '@/components/cells/StepProgressBar/StepProgressBar';
-import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
 import { ArrowLeftIcon } from '@/icons';
 import { createReturnRequest } from '@/lib/data/orders';
 import { UserNavigation } from '@/modules/users/components';
@@ -84,7 +84,7 @@ export const OrderReturnSection = ({
       <UserNavigation />
       <div className="mb-8 md:col-span-3 md:mb-0">
         {tab === 0 ? (
-          <LocalizedClientLink href={`/user/orders/${order.order_set.id}`}>
+          <Link href={`/user/orders/${order.order_set.id}`}>
             <Button
               variant="tonal"
               className="label-md flex items-center gap-2 uppercase text-action-on-secondary"
@@ -92,7 +92,7 @@ export const OrderReturnSection = ({
               <ArrowLeftIcon className="size-4" />
               Order details
             </Button>
-          </LocalizedClientLink>
+          </Link>
         ) : (
           <Button
             variant="tonal"

@@ -1,30 +1,34 @@
-"use client"
-import { HttpTypes } from "@medusajs/types"
-import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
-import { cn } from "@/lib/utils"
-import { useParams } from "next/navigation"
-import { CollapseIcon } from "@/icons"
-import { useMemo } from "react"
+'use client';
+
+import { useMemo } from 'react';
+
+import { HttpTypes } from '@medusajs/types';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+
+import { CollapseIcon } from '@/icons';
 import {
-  getActiveParentHandle,
-  findParentCategoryHandle,
   filterCategoriesByParent,
-} from "@/lib/helpers/category-utils"
-import { useCategoryDropdown } from "./hooks/useCategoryDropdown"
-import { CategoryDropdownMenu } from "./components/CategoryDropdownMenu"
+  findParentCategoryHandle,
+  getActiveParentHandle
+} from '@/lib/helpers/category-utils';
+import { cn } from '@/lib/utils';
+
+import { CategoryDropdownMenu } from './components/CategoryDropdownMenu';
+import { useCategoryDropdown } from './hooks/useCategoryDropdown';
 
 interface CategoryNavbarProps {
-  categories: HttpTypes.StoreProductCategory[]
-  parentCategories?: HttpTypes.StoreProductCategory[]
-  onClose?: (state: boolean) => void
+  categories: HttpTypes.StoreProductCategory[];
+  parentCategories?: HttpTypes.StoreProductCategory[];
+  onClose?: (state: boolean) => void;
 }
 
 export const CategoryNavbar = ({
   categories,
   parentCategories = [],
-  onClose,
+  onClose
 }: CategoryNavbarProps) => {
-  const { category } = useParams<{ category?: string }>()
+  const { category } = useParams<{ category?: string }>();
 
   const {
     hoveredCategoryId,
@@ -32,82 +36,76 @@ export const CategoryNavbar = ({
     shouldRenderDropdown,
     openDropdown,
     setHoveredCategoryId,
-    closeDropdown,
-  } = useCategoryDropdown()
+    closeDropdown
+  } = useCategoryDropdown();
 
   const activeParentHandle = useMemo(
     () => getActiveParentHandle(category, categories, parentCategories),
     [category, parentCategories, categories]
-  )
+  );
 
   const parentCategoryHandle = useMemo(
     () => findParentCategoryHandle(category, categories),
     [category, categories]
-  )
+  );
 
   const filteredCategories = useMemo(
-    () =>
-      filterCategoriesByParent(
-        activeParentHandle,
-        categories,
-        parentCategories
-      ),
+    () => filterCategoriesByParent(activeParentHandle, categories, parentCategories),
     [activeParentHandle, parentCategories, categories]
-  )
+  );
 
   const hoveredCategory = useMemo(
-    () => filteredCategories.find((cat) => cat.id === hoveredCategoryId),
+    () => filteredCategories.find(cat => cat.id === hoveredCategoryId),
     [filteredCategories, hoveredCategoryId]
-  )
+  );
 
   const handleClose = () => {
-    onClose?.(false)
-    closeDropdown()
-  }
+    onClose?.(false);
+    closeDropdown();
+  };
 
   const handleCategoryMouseEnter = (categoryId: string) => {
-    const cat = filteredCategories.find((c) => c.id === categoryId)
+    const cat = filteredCategories.find(c => c.id === categoryId);
     if (cat?.category_children && cat.category_children.length > 0) {
-      openDropdown(categoryId)
+      openDropdown(categoryId);
     }
-  }
+  };
 
   const handleCategoryMouseLeave = () => {
-    setHoveredCategoryId(null)
-  }
+    setHoveredCategoryId(null);
+  };
 
   const handleDropdownMouseEnter = () => {
     if (hoveredCategoryId) {
-      setHoveredCategoryId(hoveredCategoryId)
+      setHoveredCategoryId(hoveredCategoryId);
     }
-  }
+  };
 
   const handleDropdownMouseLeave = () => {
-    setHoveredCategoryId(null)
-  }
+    setHoveredCategoryId(null);
+  };
   return (
     <>
       <nav
-        className="flex md:items-center flex-col md:flex-row md:overflow-x-auto md:scrollbar-hide md:max-w-full gap-2"
+        className="flex flex-col gap-2 md:max-w-full md:flex-row md:items-center md:overflow-x-auto md:scrollbar-hide"
         aria-label="Category navigation"
         data-testid="category-navbar"
       >
-        <LocalizedClientLink
+        <Link
           href="/categories"
           onClick={handleClose}
           className={cn(
-            "label-md uppercase px-2 my-1 md:my-0 flex items-center justify-between md:flex-shrink-0 text-primary"
+            'label-md my-1 flex items-center justify-between px-2 uppercase text-primary md:my-0 md:flex-shrink-0'
           )}
           data-testid="category-link-all-products"
         >
           All Products
-        </LocalizedClientLink>
+        </Link>
 
         {filteredCategories.map(({ id, handle, name, category_children }) => {
-          const categoryUrl = `/categories/${handle}`
-          const isActive =
-            handle === category || handle === parentCategoryHandle
-          const hasChildren = category_children && category_children.length > 0
+          const categoryUrl = `/categories/${handle}`;
+          const isActive = handle === category || handle === parentCategoryHandle;
+          const hasChildren = category_children && category_children.length > 0;
 
           return (
             <div
@@ -116,22 +114,25 @@ export const CategoryNavbar = ({
               onMouseEnter={() => handleCategoryMouseEnter(id)}
               onMouseLeave={handleCategoryMouseLeave}
             >
-              <LocalizedClientLink
+              <Link
                 href={categoryUrl}
                 onClick={handleClose}
                 className={cn(
-                  "label-md uppercase px-2 py-1 my-3 md:my-0 flex items-center justify-between md:whitespace-nowrap text-primary relative z-10",
-                  isActive && "md:border-b md:border-primary"
+                  'label-md relative z-10 my-3 flex items-center justify-between px-2 py-1 uppercase text-primary md:my-0 md:whitespace-nowrap',
+                  isActive && 'md:border-b md:border-primary'
                 )}
                 data-testid={`category-link-${handle}`}
               >
                 {name}
                 {hasChildren && (
-                  <CollapseIcon size={18} className="-rotate-90 md:hidden" />
+                  <CollapseIcon
+                    size={18}
+                    className="-rotate-90 md:hidden"
+                  />
                 )}
-              </LocalizedClientLink>
+              </Link>
             </div>
-          )
+          );
         })}
       </nav>
 
@@ -145,5 +146,5 @@ export const CategoryNavbar = ({
         />
       )}
     </>
-  )
-}
+  );
+};

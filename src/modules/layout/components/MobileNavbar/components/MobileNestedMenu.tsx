@@ -102,7 +102,7 @@ export const MobileNestedMenu = ({ onClose }: MobileCategoryNavbarProps) => {
           return (
             <div key={id} className="relative">
               <div className="flex items-center justify-between">
-                <LocalizedClientLink
+                <Link
                   href={categoryUrl}
                   onClick={handleClose}
                   className={cn(
@@ -111,7 +111,7 @@ export const MobileNestedMenu = ({ onClose }: MobileCategoryNavbarProps) => {
                   )}
                 >
                   {name}
-                </LocalizedClientLink>
+                </Link>
                 
                 {hasChildren && (
                   <button

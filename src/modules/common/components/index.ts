@@ -1,8 +1,11 @@
 import { AddToCartButton } from './AddToCartButton/AddToCartButton';
+import { Badge } from './Badge/Badge';
 import { Breadcrumbs } from './Breadcrumbs/Breadcrumbs';
 import { Button } from './Button/Button';
+import { Card } from './Card/Card';
 import ContentParser from './ContentParser/ContentParser';
 import CountrySelect from './CountrySelect/CountrySelect';
+import { Divider } from './Divider/Divider';
 import { EmailLink } from './EmailLink/EmailLink';
 import ErrorMessage from './ErrorMessage';
 import { FacebookLink } from './FacebookLink';
@@ -11,7 +14,9 @@ import { Input } from './Input/Input';
 import { InstagramLink } from './InstagramLink/InstagramLink';
 import InteractiveLink from './InteractiveLink/InteractiveLink';
 import { LinkedinLink } from './LinkedinLink';
+import { LogoutButton } from './LogoutButton/LogoutButton';
 import { Modal } from './Modal/Modal';
+import { NavigationItem } from './NavigationItem/NavigationItem';
 import { PhoneLink } from './PhoneLink/PhoneLink';
 import { PinterestLink } from './PinterestLink/PinterestLink';
 import { ProductQuantityInput } from './ProductQuantityInput/ProductQuantityInput';
@@ -27,6 +32,11 @@ import { TwitterLink } from './TwitterLink';
 import { YoutubeLink } from './YoutubeLink';
 
 export {
+  Badge,
+  Divider,
+  LogoutButton,
+  NavigationItem,
+  Card,
   TikTokLink,
   ProductQuantityInput,
   StateSelect,

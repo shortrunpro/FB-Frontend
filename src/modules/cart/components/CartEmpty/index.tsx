@@ -1,5 +1,6 @@
-import { Button } from '@/components/atoms';
-import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
+import Link from 'next/link';
+
+import { Button } from '@/modules/common/components';
 
 export function CartEmpty() {
   return (
@@ -12,12 +13,12 @@ export function CartEmpty() {
         <p className="mt-2 text-center text-lg text-secondary">
           Your shopping cart is currently empty
         </p>
-        <LocalizedClientLink
+        <Link
           href="/categories"
           className="mt-6"
         >
           <Button className="flex w-full items-center justify-center py-3">Explore</Button>
-        </LocalizedClientLink>
+        </Link>
       </div>
     </div>
   );

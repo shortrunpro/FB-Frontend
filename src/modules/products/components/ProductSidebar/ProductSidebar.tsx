@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 
-import { Button } from '@/components/atoms';
 import { ColorFilter, ConditionFilter, PriceFilter, SizeFilter } from '@/components/cells';
 import useFilters from '@/hooks/useFilters';
 import { CloseIcon } from '@/icons';
 import { cn } from '@/lib/utils';
+import { Button } from '@/modules/common/components';
 
 import { ProductListingActiveFilters } from '../ProductListingActiveFilters/ProductListingActiveFilters';
 

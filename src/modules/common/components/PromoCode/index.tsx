@@ -2,11 +2,11 @@
 
 import { useEffect, useRef, useState, useTransition } from 'react';
 
-import { Button, Card, Input } from '@/components/atoms';
 import { BinIcon, CollapseIcon, DiscountIcon } from '@/icons';
 import { applyPromotions, deletePromotionCode } from '@/lib/data/cart';
 import { toast } from '@/lib/helpers/toast';
 import { cn } from '@/lib/utils';
+import { Button, Card, Input } from '@/modules/common/components';
 
 export const PromoCode = ({ cart, defaultOpen = false }: { cart: any; defaultOpen?: boolean }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -104,6 +104,7 @@ export const PromoCode = ({ cart, defaultOpen = false }: { cart: any; defaultOpe
             <div className="flex w-full items-center gap-3 [&>div]:flex-grow">
               <Input
                 type="text"
+                name="promo-input"
                 value={promoCode}
                 onChange={e => {
                   setPromoCode(e.target.value);
@@ -111,7 +112,7 @@ export const PromoCode = ({ cart, defaultOpen = false }: { cart: any; defaultOpe
                 }}
                 onKeyDown={handleKeyDown}
                 placeholder="Enter code"
-                error={hasError}
+                // errors={hasError}
                 className="h-12 flex-grow"
               />
               <Button

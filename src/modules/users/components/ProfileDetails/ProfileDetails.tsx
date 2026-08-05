@@ -6,8 +6,7 @@ import { PencilSquare } from '@medusajs/icons';
 import { HttpTypes } from '@medusajs/types';
 import { Divider, Heading } from '@medusajs/ui';
 
-import { Button, Card } from '@/components/atoms';
-import { Modal } from '@/modules/common/components';
+import { Button, Card, Modal } from '@/modules/common/components';
 
 import { ProfileDetailsForm } from '../../forms/ProfileDetailsForm/ProfileDetailsForm';
 

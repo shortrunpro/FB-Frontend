@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
-import { Badge, Card, Divider, LogoutButton, NavigationItem } from '@/components/atoms';
+import { Badge, Card, Divider, LogoutButton, NavigationItem } from '@/modules/common/components';
 
 const navigationItems = [
   {
