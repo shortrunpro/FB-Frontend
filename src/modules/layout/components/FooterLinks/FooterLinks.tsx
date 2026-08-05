@@ -15,7 +15,7 @@ export const FooterLinks = () => {
         <AssociationLinks />
         <div>
           <Image
-            src={'/fb-anvil.svg'}
+            src={'/fb-anvil.webp'}
             width={300}
             height={300}
             alt="Federal Brace Anvil"

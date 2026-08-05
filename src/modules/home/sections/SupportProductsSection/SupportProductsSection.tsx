@@ -26,7 +26,7 @@ export const SupportProductsSection = () => {
         </div>
         <div className="relative hidden aspect-[1760/1173] w-full max-w-[325px] lg:block">
           <Image
-            src={'/fb-anvil.svg'}
+            src={'/fb-anvil.webp'}
             alt="Federal Brace Anvil"
             fill={true}
           />
