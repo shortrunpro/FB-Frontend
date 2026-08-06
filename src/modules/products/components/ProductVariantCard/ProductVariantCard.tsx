@@ -12,12 +12,15 @@ import Thumbnail from '../Thumbnail/Thumbnail';
 export default function ProductVariantCard({ variant }: { variant: VariantsSearchResponse }) {
   return (
     <div
-      className="border-grey-8 hover:shadow-base hover:text-hover flex h-full w-full flex-col justify-between gap-y-3 rounded-xl border-4 bg-brand_grey"
+      className="border-grey-8 hover:shadow-base hover:text-hover flex h-full w-full flex-col justify-between gap-y-3 rounded-xl border-4 bg-brand_grey lg:max-w-[350px]"
       data-testid="product-wrapper"
     >
       <Link
         href={`/products/${variant?.handle}`}
         className=" "
+        aria-label={`View ${variant.title}`}
+        title={`View ${variant.title}`}
+        data-testid="product-variant-card-link"
         // TODO GTM event implementation
         // onClick={() =>
         //   selectItem({
