@@ -1,6 +1,5 @@
 'use client';
 
-//
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { StoreProduct, StoreProductOption, StoreProductVariant } from '@medusajs/types';
@@ -15,9 +14,11 @@ import {
 import { usePathname, useSearchParams } from 'next/navigation';
 
 import { Chip } from '@/components/atoms';
+import { getVariantOptions, getVariantPrices } from '@/lib/helpers/get-variant-data';
 import { useCartContext } from '@/modules/cart/provider/context';
 import {
   AddToCartButton,
+  FinishSquare,
   InteractiveLink,
   ProductQuantityInput
 } from '@/modules/common/components';
@@ -48,9 +49,7 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
       : [];
   }, [product]);
 
-  const finishes = product?.options?.find(
-    option => option.title === 'finish'
-  ) as StoreProductOption;
+  const { finishes } = getVariantOptions(product?.variants as any[]);
   const initialState: InitialValue = variants.reduce((obj, item) => {
     // @ts-ignore
     obj[item.id] = '';
@@ -226,12 +225,16 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
           <div data-testid={`product-variant-finishes`}>
             <span className="label-md-medium">FINISHES: </span>
             <div className="mt-2 flex gap-2">
-              {(finishes?.values || []).map(({ id, value }) => (
+              {(finishes || []).map(value => (
                 <Chip
                   className=""
-                  key={id}
+                  key={value}
                   selected={selectedFinish === value}
-                  value={value}
+                  value={
+                    <span className="label-md-medium flex gap-x-2">
+                      <FinishSquare finish={value} /> {value}
+                    </span>
+                  }
                   onSelect={() => handleSelectedFinish(value)}
                   data-testid={`product-variant-chip-finishes-${value?.toLowerCase().replace(/\s+/g, '-')}`}
                 />
