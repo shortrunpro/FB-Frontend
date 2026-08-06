@@ -34,7 +34,7 @@ export default function ProductVariantCard({ variant }: { variant: VariantsSearc
           />
         </Container>
         <div className="flex flex-col gap-y-1 p-2 text-left">
-          <div className="heading-xs font-semibold">
+          <div className="label-md-semibold">
             <span
               className="line-clamp-2"
               data-testid="variant-card-title"
@@ -43,29 +43,30 @@ export default function ProductVariantCard({ variant }: { variant: VariantsSearc
             </span>
           </div>
           <div className={`star_container ${variant?.sku}`}></div>
-          <div className="heading-xs flex flex-col gap-y-1 sm:text-xs">
-            {variant?.sku && <span data-testid="variant-card-sku">SKU: {variant?.sku}</span>}
+          <div className="flex items-center justify-between gap-y-1 sm:text-xs lg:flex-row">
+            {variant?.sku && (
+              <span
+                data-testid="variant-card-sku"
+                className="label-md-medium"
+              >
+                SKU: {variant?.sku}
+              </span>
+            )}
+            <span
+              className="label-lg"
+              data-testid="variant-card-price"
+            >
+              ${variant?.calculated_price.toFixed(2)}
+            </span>
           </div>
         </div>
       </Link>
       <div className="flex items-center justify-between p-2">
-        {/* TODO Slashed pricing for clearance */}
-        <span
-          className="heading-sm"
-          data-testid="variant-card-price"
-        >
-          ${variant?.calculated_price.toFixed(2)}
-        </span>
-        <div className="flex items-center justify-center gap-x-2 text-sm">
-          {/* <div className="flex flex-col justify-center"></div> */}
-          <div className="flex flex-col justify-center">
-            <AddToCartButton
-              variantId={variant.id}
-              quantity={1}
-              className="mb-0"
-            />
-          </div>
-        </div>
+        <AddToCartButton
+          variantId={variant.id}
+          quantity={1}
+          className="mb-0"
+        />
       </div>
     </div>
   );
