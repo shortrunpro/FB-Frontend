@@ -11,7 +11,7 @@ export const ProductAddons = ({ addons }: { addons: ProductAddon }) => {
         {addons.variants.map((v: any) => (
           <div
             key={`addon-${v.id}`}
-            className="flex"
+            className="flex max-w-[350px] lg:max-w-[300px]"
           >
             <ProductVariantCard
               variant={

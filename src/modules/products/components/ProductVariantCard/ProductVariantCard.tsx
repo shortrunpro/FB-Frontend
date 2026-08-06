@@ -12,7 +12,7 @@ import Thumbnail from '../Thumbnail/Thumbnail';
 export default function ProductVariantCard({ variant }: { variant: VariantsSearchResponse }) {
   return (
     <div
-      className="border-grey-8 hover:shadow-base hover:text-hover flex h-full flex-col justify-between gap-y-3 rounded-xl border-4 bg-brand_grey"
+      className="border-grey-8 hover:shadow-base hover:text-hover flex h-full w-full flex-col justify-between gap-y-3 rounded-xl border-4 bg-brand_grey"
       data-testid="product-wrapper"
     >
       <Link
