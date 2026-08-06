@@ -3,6 +3,8 @@ import { Badge } from './Badge/Badge';
 import { Breadcrumbs } from './Breadcrumbs/Breadcrumbs';
 import { Button } from './Button/Button';
 import { Card } from './Card/Card';
+import EmblaCarousel from './Carousel/Carousel';
+import Carousel from './Carousel/Carousel';
 import ContentParser from './ContentParser/ContentParser';
 import CountrySelect from './CountrySelect/CountrySelect';
 import { Divider } from './Divider/Divider';
@@ -10,6 +12,7 @@ import { EmailLink } from './EmailLink/EmailLink';
 import ErrorMessage from './ErrorMessage';
 import { FacebookLink } from './FacebookLink';
 import { FileUpload } from './FileUpload/FileUpload';
+import { FinishSquare } from './FinishSquare/FinishSquare';
 import { Input } from './Input/Input';
 import { InstagramLink } from './InstagramLink/InstagramLink';
 import InteractiveLink from './InteractiveLink/InteractiveLink';
@@ -32,6 +35,8 @@ import { TwitterLink } from './TwitterLink';
 import { YoutubeLink } from './YoutubeLink';
 
 export {
+  FinishSquare,
+  Carousel,
   Badge,
   Divider,
   LogoutButton,

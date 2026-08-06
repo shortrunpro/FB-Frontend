@@ -47,7 +47,10 @@ const ProductVariantModal = ({ variant, product }: ProductVariantModalProps) => 
           </div>
           <div className="flex flex-col gap-y-4 px-4">
             <ProductVariantModalTabs variant={variant} />
-            <AddToCartSection variantId={variant.id} />{' '}
+            <AddToCartSection
+              variantId={variant.id}
+              price={variant?.calculated_price?.calculated_amount as number}
+            />{' '}
           </div>
         </div>
       </Modal>

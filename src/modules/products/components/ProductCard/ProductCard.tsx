@@ -1,12 +1,15 @@
 'use client';
 
+import { Container } from '@medusajs/ui';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { getProductPrice } from '@/lib/helpers/get-product-price';
+import { getVariantOptions, getVariantPrices } from '@/lib/helpers/get-variant-data';
 import { cn } from '@/lib/utils';
-import { Button } from '@/modules/common/components';
+import { Button, FinishSquare } from '@/modules/common/components';
 import { CustomProduct, Product, RelatedProductProduct } from '@/types/product';
+
+import Thumbnail from '../Thumbnail/Thumbnail';
 
 export const ProductCard = ({
   product,
@@ -18,105 +21,94 @@ export const ProductCard = ({
   if (!product) {
     return null;
   }
-  const { cheapestPrice, cheapestPriceAlt } = getProductPrice({
-    product: product as CustomProduct
-  });
+  const { highestPrice, cheapestPrice } = getVariantPrices(product.variants as any[]);
+  const { sizes, finishes } = getVariantOptions(product.variants as any[]);
   const productName = String(product.title || 'Product');
-
   return (
     <div
-      className={cn(
-        'group relative flex w-full min-w-[250px] flex-col justify-between rounded-sm border p-1',
-        className
-      )}
+      className="border-grey-8 flex h-full w-full flex-col gap-y-3 rounded-xl border-4 bg-brand_grey transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl lg:max-w-[400px]"
       data-testid="product-card"
       data-product-handle={product.handle}
     >
-      <div
-        className="relative aspect-square h-full w-full bg-primary"
-        data-testid="product-card-image-container"
+      <Link
+        href={`/products/${product.handle}`}
+        aria-label={`View ${productName}`}
+        title={`View ${productName}`}
+        data-testid="product-card-link"
       >
-        <Link
-          href={`/products/${product.handle}`}
-          aria-label={`View ${productName}`}
-          title={`View ${productName}`}
-          data-testid="product-card-link"
-        >
-          <div className="align-center flex h-full w-full justify-center overflow-hidden rounded-sm">
-            {product.thumbnail ? (
-              <Image
-                priority
-                fetchPriority="high"
-                src={decodeURIComponent(product.thumbnail)}
-                alt={`${productName} image`}
-                width={100}
-                height={100}
-                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                className="aspect-square h-full w-full rounded-xs object-cover object-center transition-all duration-300 lg:group-hover:-mt-14"
-                data-testid="product-card-image"
-              />
-            ) : (
-              <Image
-                priority
-                fetchPriority="high"
-                src="/images/placeholder.svg"
-                alt={`${productName} image placeholder`}
-                width={100}
-                height={100}
-                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                data-testid="product-card-placeholder-image"
-              />
-            )}
-          </div>
-        </Link>
-        <Link
-          href={`/products/${product.handle}`}
-          aria-label={`See more about ${productName}`}
-          title={`See more about ${productName}`}
-        >
-          <Button
-            className="absolute bottom-1 z-10 hidden h-auto w-full rounded-sm bg-action uppercase text-action-on-primary lg:h-[48px] lg:group-hover:block"
-            data-testid="product-card-see-more-button"
-          >
-            See More
-          </Button>
-        </Link>
-      </div>
+        <Container className="relative aspect-square bg-white shadow-none">
+          {product.thumbnail ? (
+            <Thumbnail
+              thumbnail={product.thumbnail}
+              size="square"
+              data-testid="product-card-image"
+            />
+          ) : (
+            <Image
+              priority
+              fetchPriority="high"
+              src="/images/placeholder.svg"
+              alt={`${productName} image placeholder`}
+              width={100}
+              height={100}
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+              data-testid="product-card-placeholder-image"
+            />
+          )}
+        </Container>
+      </Link>
       <Link
         href={`/products/${product.handle}`}
         aria-label={`Go to ${productName} page`}
         title={`Go to ${productName} page`}
+        className="h-full"
       >
         <div
-          className="flex justify-between p-4"
+          className="flex h-full justify-between p-4"
           data-testid="product-card-info"
         >
-          <div className="w-full">
+          <div className="flex w-full flex-col justify-between">
             <h3
               className="heading-sm w-full text-center font-bold"
               data-testid="product-card-title"
             >
               {product.title}
             </h3>
-            <div
-              className="mt-2 flex items-center gap-2"
-              data-testid="product-card-price"
-            >
-              <p
-                className="w-full text-center"
-                data-testid="product-card-current-price"
+            <div className="flex flex-col gap-y-2">
+              <div
+                className="my-4 flex justify-between"
+                data-testid="size-finish-container"
               >
-                From {cheapestPrice?.calculated_price}
-                {cheapestPriceAlt && `$${cheapestPriceAlt.toFixed(2)}`}
-              </p>
-              {cheapestPrice?.calculated_price !== cheapestPrice?.original_price && (
-                <p
-                  className="text-sm text-gray-500 line-through"
-                  data-testid="product-card-original-price"
+                <span className="label-lg-medium">
+                  {sizes.length} Size{sizes.length > 1 && 's'}
+                </span>
+                <div
+                  className="label-md-semibold flex gap-x-2"
+                  data-testid="product-finish-options"
                 >
-                  {cheapestPrice?.original_price}
+                  {finishes.length &&
+                    finishes.map(f => (
+                      <FinishSquare
+                        key={f}
+                        finish={f}
+                      />
+                    ))}
+                </div>
+              </div>
+
+              <div
+                className="mt-2 flex items-center gap-2"
+                data-testid="product-card-price"
+              >
+                <p
+                  className="label-lg w-full text-center"
+                  data-testid="product-card-current-price"
+                >
+                  {cheapestPrice === highestPrice
+                    ? `$${cheapestPrice?.toFixed(2)}`
+                    : `$${cheapestPrice?.toFixed(2)} - $${highestPrice?.toFixed(2)}`}
                 </p>
-              )}
+              </div>
             </div>
           </div>
         </div>

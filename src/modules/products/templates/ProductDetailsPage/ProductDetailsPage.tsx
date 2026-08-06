@@ -42,12 +42,6 @@ export const ProductDetailsPage = async ({
       <div className="my-8">
         <ProductPageDetails details={prod} />
         {prod?.related_product && <ProductRelatedProducts products={prod?.related_product} />}
-        {/* <HomeProductSection
-          heading="More from this seller"
-          products={prod.seller?.products}
-          // seller_handle={prod.seller?.handle}
-          locale={locale}
-        /> */}
       </div>
     </>
   );
