@@ -7,7 +7,7 @@ import { AddToCartButton, ProductQuantityInput } from '@/modules/common/componen
 interface InitialValue {
   [key: string]: number | string;
 }
-export const AddToCartSection = ({ variantId }: { variantId: string }) => {
+export const AddToCartSection = ({ variantId, price }: { variantId: string; price: number }) => {
   const [quantity, setQuantity] = useState<InitialValue>({
     [variantId]: 1
   });
@@ -23,7 +23,7 @@ export const AddToCartSection = ({ variantId }: { variantId: string }) => {
         id="product_price"
         className="label-xl text-brand"
       >
-        $999.99
+        ${price}
       </span>
       <div className="flex w-full items-end gap-x-6">
         <div className="w-2/12 px-2">

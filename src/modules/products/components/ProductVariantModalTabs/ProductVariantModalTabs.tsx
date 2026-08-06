@@ -31,7 +31,7 @@ export const ProductVariantModalTabs = ({ variant }: { variant: StoreProductVari
               <Table.Body className="flex flex-col">
                 <Table.Row className="bg-white px-6 odd:bg-gray-100 [&_td:last-child]:w-[1%] [&_td:last-child]:whitespace-nowrap">
                   <Table.Cell>SKU</Table.Cell>
-                  <Table.Cell>wrongsku</Table.Cell>
+                  <Table.Cell>{variant?.sku}</Table.Cell>
                 </Table.Row>
                 <Table.Row className="bg-white px-6 odd:bg-gray-100 [&_td:last-child]:w-[1%] [&_td:last-child]:whitespace-nowrap">
                   <Table.Cell>Finish</Table.Cell>
