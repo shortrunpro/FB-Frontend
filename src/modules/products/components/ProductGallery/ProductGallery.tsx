@@ -2,6 +2,8 @@ import { HttpTypes } from '@medusajs/types';
 
 import { GalleryCarousel } from '@/components/organisms';
 
+import ProductCarousel from '../ProductCarousel/ProductCarousel';
+
 export const ProductGallery = ({ images }: { images: HttpTypes.StoreProduct['images'] }) => {
   if (!images || images.length === 0) return null;
 
@@ -10,7 +12,7 @@ export const ProductGallery = ({ images }: { images: HttpTypes.StoreProduct['ima
       className="px-5"
       data-testid="product-gallery"
     >
-      <GalleryCarousel images={images} />
+      <ProductCarousel slides={images} />
     </div>
   );
 };

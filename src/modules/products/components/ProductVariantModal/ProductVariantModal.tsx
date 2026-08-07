@@ -35,7 +35,7 @@ const ProductVariantModal = ({ variant, product }: ProductVariantModalProps) => 
         heading={`${variant.title as string}`}
         onClose={handleClose}
       >
-        <div className="grid h-full grid-cols-2">
+        <div className="flex h-full flex-col lg:grid lg:grid-cols-2">
           <div className="relative aspect-square h-auto max-w-[500px]">
             <Image
               src={variant?.thumbnail ?? '/federal-brace-logo.jpg'}

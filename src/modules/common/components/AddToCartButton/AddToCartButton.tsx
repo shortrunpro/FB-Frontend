@@ -16,6 +16,7 @@ interface AddToCartButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElem
   items?: BulkAddToCartParams;
   loading?: boolean;
   icon?: boolean;
+  variant?: 'base' | 'icon-only';
 }
 
 export function AddToCartButton({
@@ -23,7 +24,8 @@ export function AddToCartButton({
   quantity,
   icon = true,
   items,
-  disabled
+  disabled,
+  variant = 'base'
 }: AddToCartButtonProps) {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -58,12 +60,13 @@ export function AddToCartButton({
         onClick={handleAddToCart}
         loading={isLoading}
         disabled={(isLoading && (isAddingItem || isUpdating || error ? true : false)) || disabled}
-        className="flex w-full justify-center bg-yellow-500 font-bold uppercase text-white hover:bg-yellow-600"
+        className="flex w-full items-center justify-center gap-x-2 bg-yellow-500 font-bold uppercase text-white hover:bg-yellow-600"
         data-testid="add-to-cart-button"
         id={variantId}
         aria-label="Add to Cart"
       >
-        <span className="flex items-center gap-x-2">Add to Cart {icon && <ShoppingCart />}</span>
+        {variant === 'base' && `Add to Cart `}
+        {(icon || variant === 'icon-only') && <ShoppingCart />}
       </Button>
     </>
   );

@@ -2,12 +2,14 @@
 
 import { useCallback, useState } from 'react';
 
+import { useScreenSize } from '@/hooks/useScreenSize';
 import { AddToCartButton, ProductQuantityInput } from '@/modules/common/components';
 
 interface InitialValue {
   [key: string]: number | string;
 }
 export const AddToCartSection = ({ variantId, price }: { variantId: string; price: number }) => {
+  const screen = useScreenSize();
   const [quantity, setQuantity] = useState<InitialValue>({
     [variantId]: 1
   });
@@ -37,6 +39,7 @@ export const AddToCartSection = ({ variantId, price }: { variantId: string; pric
           <AddToCartButton
             items={quantity}
             icon={false}
+            variant={screen === 'sm' ? 'icon-only' : 'base'}
             disabled={!quantity || Number(quantity[variantId]) < 1}
           />
         </div>

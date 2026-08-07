@@ -131,7 +131,7 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
   const columns = useMemo(
     () => [
       columnHelper.accessor('sku', {
-        header: 'Product SKU',
+        header: 'SKU',
         id: 'sku',
         cell: ({ getValue }) => {
           const value = getValue();

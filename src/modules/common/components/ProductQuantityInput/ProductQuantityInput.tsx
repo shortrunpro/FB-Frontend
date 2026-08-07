@@ -55,7 +55,7 @@ export const ProductQuantityInput = ({
       <div className="">
         <Input
           placeholder="0"
-          className="px-2 py-2 text-center"
+          className="w-full px-2 py-2 text-center"
           id={id}
           value={localValue}
           maxLength={5}

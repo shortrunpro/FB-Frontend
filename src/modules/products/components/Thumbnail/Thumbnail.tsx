@@ -28,7 +28,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
   return (
     <Container
       className={clx(
-        'rounded-large group-hover:shadow-elevation-card-hover relative w-full overflow-hidden bg-transparent p-4 shadow-none transition-shadow duration-150 ease-in-out',
+        'rounded-large group-hover:shadow-elevation-card-hover relative w-auto overflow-hidden bg-transparent p-4 shadow-none transition-shadow duration-150 ease-in-out',
         className,
         {
           'aspect-[11/14]': isFeatured,
@@ -55,7 +55,9 @@ const ImageOrPlaceholder = ({ image, size }: Pick<ThumbnailProps, 'size'> & { im
     <Image
       src={image}
       alt="Thumbnail"
-      className="absolute object-fill object-center"
+      objectFit="contain"
+      className="absolute"
+      objectPosition="center"
       draggable={false}
       quality={50}
       sizes="(max-width: 576px) 280px, (max-width: 768px) 360px, (max-width: 992px) 480px, 800px"
