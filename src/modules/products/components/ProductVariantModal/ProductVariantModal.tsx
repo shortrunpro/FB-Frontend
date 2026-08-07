@@ -42,7 +42,8 @@ const ProductVariantModal = ({ variant, product }: ProductVariantModalProps) => 
               alt={`${variant.sku} Thumbnail`}
               fill
               sizes="(min-width: 808px) 50vw, 100vw"
-              className="w-fill h-auto object-cover"
+              className="w-fill h-auto"
+              objectFit="contain"
             />
           </div>
           <div className="flex flex-col gap-y-4 px-4">
