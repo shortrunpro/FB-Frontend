@@ -20,7 +20,7 @@ export const ProductPageDetails = ({ details }: { details: any }) => {
   }
   return (
     <div className="px-8">
-      <div className="px-8 py-4">
+      {/* <div className="px-8 py-4">
         <ul className="flex gap-x-2 text-brand">
           <li className="rounded-md bg-brand px-2 text-white">Overview</li>
           <li className="rounded-md px-2 hover:cursor-pointer hover:bg-brand hover:text-white">
@@ -42,7 +42,7 @@ export const ProductPageDetails = ({ details }: { details: any }) => {
             Related Products
           </li>
         </ul>
-      </div>
+      </div> */}
       <h3 className="text-3xl">{details?.title}</h3>
       <div className="flex w-full justify-center py-4">
         <div className="flex w-1/3 flex-col justify-center gap-y-4">
