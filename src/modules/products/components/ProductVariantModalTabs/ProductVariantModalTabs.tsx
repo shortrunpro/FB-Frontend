@@ -41,19 +41,19 @@ export const ProductVariantModalTabs = ({ variant }: { variant: StoreProductVari
 
                 <Table.Row className="bg-white px-4 odd:bg-gray-100 [&_td:last-child]:w-[1%] [&_td:last-child]:whitespace-nowrap">
                   <Table.Cell>Length</Table.Cell>
-                  <Table.Cell>{`${variant?.length ? (variant?.length / 100).toFixed(2) : 0}"`}</Table.Cell>
+                  <Table.Cell>{variant?.length}</Table.Cell>
                 </Table.Row>
                 <Table.Row className="bg-white px-4 odd:bg-gray-100 [&_td:last-child]:w-[1%] [&_td:last-child]:whitespace-nowrap">
                   <Table.Cell>Width</Table.Cell>
-                  <Table.Cell>{`${variant?.width ? (variant?.width / 100).toFixed(2) : 0}"`}</Table.Cell>
+                  <Table.Cell>{variant?.width}</Table.Cell>
                 </Table.Row>
                 <Table.Row className="bg-white px-4 odd:bg-gray-100 [&_td:last-child]:w-[1%] [&_td:last-child]:whitespace-nowrap">
                   <Table.Cell>Height</Table.Cell>
-                  <Table.Cell>{`${variant?.height ? (variant?.height / 100).toFixed(2) : 0}"`}</Table.Cell>
+                  <Table.Cell>{variant?.height}</Table.Cell>
                 </Table.Row>
                 <Table.Row className="bg-white px-4 odd:bg-gray-100 [&_td:last-child]:w-[1%] [&_td:last-child]:whitespace-nowrap">
                   <Table.Cell>Weight</Table.Cell>
-                  <Table.Cell>{`${variant?.weight ? (variant?.weight / 100).toFixed(2) : 0} lbs`}</Table.Cell>
+                  <Table.Cell>{variant?.weight}</Table.Cell>
                 </Table.Row>
               </Table.Body>
             </Table>
