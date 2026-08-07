@@ -41,15 +41,24 @@ export const ProductVariantModalTabs = ({ variant }: { variant: StoreProductVari
 
                 <Table.Row className="bg-white px-4 odd:bg-gray-100 [&_td:last-child]:w-[1%] [&_td:last-child]:whitespace-nowrap">
                   <Table.Cell>Length</Table.Cell>
-                  <Table.Cell>{variant?.length && variant?.length.toFixed(2)}"</Table.Cell>
+                  <Table.Cell>
+                    {variant?.length && variant?.length.toFixed(2)}
+                    {'"'}
+                  </Table.Cell>
                 </Table.Row>
                 <Table.Row className="bg-white px-4 odd:bg-gray-100 [&_td:last-child]:w-[1%] [&_td:last-child]:whitespace-nowrap">
                   <Table.Cell>Width</Table.Cell>
-                  <Table.Cell>{variant?.width && variant?.width.toFixed(2)}"</Table.Cell>
+                  <Table.Cell>
+                    {variant?.width && variant?.width.toFixed(2)}
+                    {'"'}
+                  </Table.Cell>
                 </Table.Row>
                 <Table.Row className="bg-white px-4 odd:bg-gray-100 [&_td:last-child]:w-[1%] [&_td:last-child]:whitespace-nowrap">
                   <Table.Cell>Height</Table.Cell>
-                  <Table.Cell>{variant?.height && variant?.height.toFixed(2)}"</Table.Cell>
+                  <Table.Cell>
+                    {variant?.height && variant?.height.toFixed(2)}
+                    {'"'}
+                  </Table.Cell>
                 </Table.Row>
                 <Table.Row className="bg-white px-4 odd:bg-gray-100 [&_td:last-child]:w-[1%] [&_td:last-child]:whitespace-nowrap">
                   <Table.Cell>Weight</Table.Cell>
