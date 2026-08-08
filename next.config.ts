@@ -12,41 +12,24 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'medusa-public-images.s3.eu-west-1.amazonaws.com'
-      },
-      {
-        protocol: 'https',
-        hostname: 'mercur-connect.s3.eu-central-1.amazonaws.com'
-      },
-      {
-        protocol: 'https',
-        hostname: 'api.mercurjs.com'
-      },
-      {
         protocol: 'http',
         hostname: 'localhost'
       },
       {
         protocol: 'https',
-        hostname: 'api-sandbox.mercurjs.com',
-        pathname: '/static/**'
+        hostname: '*.federalbrace.com'
       },
       {
         protocol: 'https',
-        hostname: 'i.imgur.com'
+        hostname: 'federalbrace.com'
       },
       {
         protocol: 'https',
-        hostname: 's3.eu-central-1.amazonaws.com'
+        hostname: 'pub-ad684fbc57174773982dd597e7e48ec4.r2.dev'
       },
       {
         protocol: 'https',
-        hostname: 'mercur-testing.up.railway.app'
-      },
-      {
-        protocol: 'https',
-        hostname: '**'
+        hostname: 'federal-brace.vercel.app'
       }
     ]
   },
