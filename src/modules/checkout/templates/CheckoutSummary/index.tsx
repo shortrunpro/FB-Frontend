@@ -23,7 +23,7 @@ const CheckoutSummary = ({ cart }: { cart: any }) => {
         <PromoCode cart={cart} />
       </div>
 
-      <div className="mb-6 w-full rounded-sm border p-4">
+      <div className="mb-6 max-h-[200px] w-full rounded-sm border p-4">
         <CartSummary
           item_total={cart?.item_subtotal || 0}
           shipping_total={cart?.shipping_subtotal || 0}
@@ -34,12 +34,12 @@ const CheckoutSummary = ({ cart }: { cart: any }) => {
         />
       </div>
 
-      {previousStepsCompleted && (
+      {/* {previousStepsCompleted && (
         <PaymentButton
           cart={cart}
           data-testid="submit-order-button"
         />
-      )}
+      )} */}
     </div>
   );
 };
