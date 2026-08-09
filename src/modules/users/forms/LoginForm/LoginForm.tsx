@@ -14,6 +14,7 @@ import { toast } from '@/lib/helpers/toast';
 import { Button } from '@/modules/common/components';
 
 import { LoginFormData, loginFormSchema } from './schema';
+import { UpgradeAnnouncement } from './UpgradeAnnouncement';
 
 export const LoginForm = () => {
   const methods = useForm<LoginFormData>({
@@ -83,6 +84,7 @@ const Form = () => {
       data-testid="login-page"
     >
       <div className="mx-auto mt-6 w-full max-w-xl space-y-4">
+        <UpgradeAnnouncement />
         {authMessage && (
           <Alert
             title={authMessage}
