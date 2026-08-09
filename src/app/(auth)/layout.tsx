@@ -10,7 +10,7 @@ export default async function AuthLayout({
   return (
     <>
       <Header />
-      {children}
+      <div className="flex-grow">{children}</div>
       <Footer />
     </>
   );

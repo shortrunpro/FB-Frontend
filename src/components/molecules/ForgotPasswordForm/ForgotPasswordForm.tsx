@@ -7,10 +7,10 @@ import { FetchError } from '@medusajs/js-sdk';
 import Link from 'next/link';
 import { FieldError, FormProvider, useForm, useFormContext } from 'react-hook-form';
 
-import { Button } from '@/components/atoms';
 import { LabeledInput } from '@/components/cells';
 import { sendResetPasswordEmail } from '@/lib/data/customer';
 import { toast } from '@/lib/helpers/toast';
+import { Button } from '@/modules/common/components';
 
 import { ForgotPasswordFormData, forgotPasswordSchema } from './schema';
 
@@ -79,7 +79,7 @@ const Form = () => {
 
         <div className="mt-8 space-y-4">
           <Button
-            className="w-full uppercase"
+            className="w-full bg-brand uppercase hover:bg-[#374356]"
             disabled={isSubmitting}
             data-testid="forgot-password-submit-button"
           >

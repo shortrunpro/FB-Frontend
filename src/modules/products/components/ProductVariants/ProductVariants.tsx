@@ -212,6 +212,7 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
     const selectedVariant = shownProducts.find(v => v.sku === activeSku);
     selectedVariant && setVariant(selectedVariant);
   }, [activeSku, shownProducts]);
+
   return (
     <div
       className="rou my-4 space-y-2"
@@ -248,6 +249,7 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
         </div>
       </DataTable>
       <AddToCartButton
+        product={product}
         items={cartQuantity}
         icon={false}
       />
