@@ -91,6 +91,11 @@ const AuthnetForm = ({ apiLoginID, clientKey, cart }: PaymentSectionProps) => {
     <Spinner />
   ) : (
     <div className="my-4">
+      {environment === 'SANDBOX' && (
+        <span className="label-lg mb-8">
+          Container is in Sandbox mode for testing purposes only
+        </span>
+      )}
       <Text className="txt-medium-plus text-ui-fg-base mb-1">Enter your card details:</Text>
       <form
         onSubmit={handleSubmit}
