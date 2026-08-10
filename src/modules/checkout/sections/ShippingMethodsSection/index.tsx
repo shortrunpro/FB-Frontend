@@ -45,8 +45,7 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
       setIsLoadingPrices(true);
       const res = await setShippingMethod({
         cartId: cart.id,
-        shippingMethodId: ''
-        // id
+        shippingMethodId: id
       });
       if (!res.ok) {
         return setError(res.error?.message);
