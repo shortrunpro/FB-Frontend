@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 
 import { Text } from '@medusajs/ui';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useAcceptJs } from 'react-acceptjs';
+import { AuthNetEnvironment, useAcceptJs } from 'react-acceptjs';
 
 import { initiatePaymentSession } from '@/lib/data/cart';
 import { formatCardNumber, formatCVV, formatExpiry } from '@/lib/helpers/payment-utils';
@@ -17,7 +17,10 @@ const AuthnetForm = ({ apiLoginID, clientKey, cart }: PaymentSectionProps) => {
     apiLoginID,
     clientKey
   };
-  const { dispatchData, loading, error } = useAcceptJs({ environment: 'PRODUCTION', authData });
+  // Environment logic for authnet, checks env variable for declared environment with fallback to production
+  const environment: AuthNetEnvironment =
+    (process.env.NEXT_PUBLIC_AUTHNET_ENVIRONMENT as AuthNetEnvironment | null) ?? 'PRODUCTION';
+  const { dispatchData, loading, error } = useAcceptJs({ environment, authData });
   const [isLoading, setIsLoading] = useState(false);
   const [card, setCard] = useState<BasicCardInfo>({
     cardNumber: '',
