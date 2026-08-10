@@ -4,12 +4,13 @@ import { useEffect, useState, useTransition, type FC } from 'react';
 
 import { Radio, RadioGroup } from '@headlessui/react';
 import { CheckCircleSolid } from '@medusajs/icons';
+import { StoreCartShippingMethod } from '@medusajs/types';
 import { Heading, Text } from '@medusajs/ui';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { setShippingMethod } from '@/lib/data/cart';
+import { removeShippingMethod, setShippingMethod } from '@/lib/data/cart';
 import { convertToLocale } from '@/lib/helpers/money';
-import { ShippingMethodsSectionProps } from '@/modules/checkout/types';
+import { ShippingMethods, ShippingMethodsSectionProps } from '@/modules/checkout/types';
 import { Button, ErrorMessage } from '@/modules/common/components';
 
 const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
@@ -17,13 +18,15 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
   availableShippingMethods
 }) => {
   const [isLoadingPrices, setIsLoadingPrices] = useState(false);
+  const [shippingMethods, setShippingMethods] = useState<ShippingMethods[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isPendingDeleteRow, startTransitionDeleteRow] = useTransition();
-  const [selectedMethod, setSelectedMethod] = useState(cart?.shipping_methods?.[0]);
+  const [selectedMethod, setSelectedMethod] = useState<StoreCartShippingMethod | undefined>(
+    cart?.shipping_methods?.[0]
+  );
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-
   const isOpen = searchParams.get('step') === 'delivery';
 
   const handleSubmit = () => {
@@ -42,7 +45,8 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
       setIsLoadingPrices(true);
       const res = await setShippingMethod({
         cartId: cart.id,
-        shippingMethodId: id
+        shippingMethodId: ''
+        // id
       });
       if (!res.ok) {
         return setError(res.error?.message);
@@ -59,16 +63,34 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
       setIsLoadingPrices(false);
     }
   };
-
+  const handleRemoveShipping = async (id: string) => {
+    return await removeShippingMethod(id);
+  };
   useEffect(() => {
+    setShippingMethods(null);
     setError(null);
     setIsLoadingPrices(false);
+    if (isOpen && availableShippingMethods) {
+      const validateShipping = availableShippingMethods?.filter(f => f.calculated_amount > 0);
+      if (validateShipping?.length > 0) {
+        setShippingMethods(validateShipping);
+      } else {
+        setError(
+          'Something went wrong, please make sure your address was entered correctly and try again'
+        );
+        setSelectedMethod(undefined);
+        if (cart?.shipping_methods && cart?.shipping_methods.length) {
+          handleRemoveShipping(cart?.shipping_methods?.[0].id);
+        }
+      }
+    }
   }, [isOpen]);
 
   const handleEdit = () => {
     router.replace(pathname + '?step=delivery');
   };
   const isEditEnabled = !isOpen && !!cart?.shipping_methods?.length;
+
   return (
     <div className="bg-ui-bg-interactive rounded-sm border p-4">
       <div className="mb-6 flex flex-row items-center justify-between">
@@ -76,7 +98,9 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
           level="h2"
           className="text-3xl-regular flex flex-row items-baseline gap-x-2"
         >
-          {!isOpen && (cart.shipping_methods?.length ?? 0) > 0 && <CheckCircleSolid />}
+          {!isOpen && selectedMethod && (cart.shipping_methods?.length ?? 0) > 0 && (
+            <CheckCircleSolid />
+          )}
           Delivery
         </Heading>
         {isEditEnabled && (
@@ -100,49 +124,55 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
                     level="h3"
                     className="mb-2"
                   ></Heading>
-                  <RadioGroup
-                    // by="name"
-                    value={selectedMethod?.shipping_option_id ?? null}
-                    onChange={value => handleSetShippingMethod(value)}
-                    aria-label="Shipping Options"
-                    className="space-y-2"
-                  >
-                    {availableShippingMethods?.map(method => (
-                      <Radio
-                        key={method.id}
-                        value={method.id}
-                        className="focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white group relative flex cursor-pointer rounded-lg bg-white/5 px-5 py-4 text-black shadow-md transition hover:bg-gray-400 aria-checked:cursor-default aria-checked:bg-brand aria-checked:text-white"
-                      >
-                        <div className="flex w-full items-center justify-between">
-                          <div className="text-sm/6">
-                            <p className="font-semibold">{method.service}</p>
-                            <div className="flex gap-2">
-                              <div>${method.calculated_amount.toFixed(2)}</div>
+                  {error && (
+                    <div className="flex w-full justify-center">
+                      <ErrorMessage
+                        error={error}
+                        data-testid="delivery-option-error-message"
+                      />
+                    </div>
+                  )}
+                  {shippingMethods && shippingMethods.length > 0 && (
+                    <RadioGroup
+                      // by="name"
+                      value={selectedMethod?.shipping_option_id ?? null}
+                      onChange={value => handleSetShippingMethod(value)}
+                      aria-label="Shipping Options"
+                      className="space-y-2"
+                    >
+                      {shippingMethods?.map(method => (
+                        <Radio
+                          key={method.id}
+                          value={method.id}
+                          className="focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white group relative flex cursor-pointer rounded-lg bg-white/5 px-5 py-4 text-black shadow-md transition hover:bg-gray-400 aria-checked:cursor-default aria-checked:bg-brand aria-checked:text-white"
+                        >
+                          <div className="flex w-full items-center justify-between">
+                            <div className="text-sm/6">
+                              <p className="font-semibold">{method.service}</p>
+                              <div className="flex gap-2">
+                                <div>${method.calculated_amount.toFixed(2)}</div>
+                              </div>
                             </div>
+                            <CheckCircleSolid
+                              width={20}
+                              height={20}
+                              className="hidden group-aria-checked:flex"
+                            />
                           </div>
-                          <CheckCircleSolid
-                            width={20}
-                            height={20}
-                            className="hidden group-aria-checked:flex"
-                          />
-                        </div>
-                      </Radio>
-                    ))}
-                  </RadioGroup>
+                        </Radio>
+                      ))}
+                    </RadioGroup>
+                  )}
                 </div>
               </div>
             </div>
           </div>
           <div className="flex justify-end">
-            <ErrorMessage
-              error={error}
-              data-testid="delivery-option-error-message"
-            />
             <Button
               className={`bg-brand text-white hover:bg-brand_grey hover:text-black ${isLoadingPrices && 'flex min-w-[192px] justify-center'}`}
               onClick={handleSubmit}
               variant="tonal"
-              disabled={!cart.shipping_methods?.[0] || isPendingDeleteRow}
+              disabled={!cart.shipping_methods?.[0] || isPendingDeleteRow || !selectedMethod}
               loading={isLoadingPrices}
             >
               Continue to payment
@@ -152,7 +182,7 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
       ) : (
         <div>
           <div className="text-small-regular">
-            {cart && (cart.shipping_methods?.length ?? 0) > 0 && (
+            {selectedMethod && cart && (cart.shipping_methods?.length ?? 0) > 0 && (
               <div className="flex flex-col">
                 {cart.shipping_methods?.map(method => (
                   <div
