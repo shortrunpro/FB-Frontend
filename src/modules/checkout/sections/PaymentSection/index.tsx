@@ -10,7 +10,9 @@ import { paymentInfoMap } from '@/lib/constants';
 import { initiatePaymentSession } from '@/lib/data/cart';
 import { Button, ErrorMessage } from '@/modules/common/components';
 
+import { cart } from '../../../../data/cartMock';
 import { PaymentSectionProps } from '../../types';
+import PaymentButton from '../PaymentButton';
 import AuthnetForm from './AuthnetForm';
 import PaymentContainer from './PaymentContainer';
 
@@ -87,50 +89,57 @@ const PaymentSection = ({ cart, clientKey, apiLoginID }: PaymentSectionProps) =>
   }, [isOpen]);
 
   const isEditEnabled = !isOpen && !!cart?.payment_collection?.payment_sessions?.length;
+  const previousStepsCompleted =
+    cart.shipping_address &&
+    cart?.shipping_methods &&
+    cart?.shipping_methods.length > 0 &&
+    cart?.payment_collection;
 
   return (
-    <div
-      className="bg-ui-bg-interactive rounded-sm border p-4"
-      data-testid="checkout-step-payment"
-    >
-      <div className="mb-6 flex flex-row items-center justify-between">
-        <Heading
-          level="h2"
-          className="text-3xl-regular flex flex-row items-center gap-x-2"
-        >
-          {!isOpen && paymentReady && <CheckCircleSolid />}
-          Payment
-        </Heading>
-        {isEditEnabled && (
-          <Text>
-            <Button
-              data-testid="checkout-payment-edit-button"
-              onClick={handleEdit}
-              variant="tonal"
-            >
-              Edit
-            </Button>
-          </Text>
-        )}
-      </div>
-      <div>
-        <div className={isOpen ? 'block' : 'hidden'}>
-          <AuthnetForm
-            cart={cart}
-            apiLoginID={apiLoginID}
-            clientKey={clientKey}
-          />
-
-          <ErrorMessage
-            error={error}
-            data-testid="payment-method-error-message"
-          />
+    <>
+      <div
+        className="bg-ui-bg-interactive rounded-sm border p-4"
+        data-testid="checkout-step-payment"
+      >
+        <div className="mb-6 flex flex-row items-center justify-between">
+          <Heading
+            level="h2"
+            className="text-3xl-regular flex flex-row items-center gap-x-2"
+          >
+            {!isOpen && paymentReady && <CheckCircleSolid />}
+            Payment
+          </Heading>
+          {isEditEnabled && (
+            <Text>
+              <Button
+                data-testid="checkout-payment-edit-button"
+                onClick={handleEdit}
+                variant="tonal"
+              >
+                Edit
+              </Button>
+            </Text>
+          )}
         </div>
+        <div>
+          <div className={isOpen ? 'block' : 'hidden'}>
+            <AuthnetForm
+              cart={cart}
+              apiLoginID={apiLoginID}
+              clientKey={clientKey}
+            />
 
-        <div className={isOpen ? 'hidden' : 'block'}>
-          {cart && paymentReady && activeSession ? (
-            <div className="flex w-full items-start gap-x-1">
-              <div className="flex w-1/3 flex-col">
+            <ErrorMessage
+              error={error}
+              data-testid="payment-method-error-message"
+            />
+          </div>
+
+          <div className={isOpen ? 'hidden' : 'block'}>
+            {cart && paymentReady && activeSession ? (
+              <div className="flex w-full items-start gap-x-1">
+                {/* <span>For security reasons card information </span> */}
+                {/* <div className="flex w-1/3 flex-col">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">Payment method</Text>
                 <Text
                   className="txt-medium text-ui-fg-subtle"
@@ -153,12 +162,19 @@ const PaymentSection = ({ cart, clientKey, apiLoginID }: PaymentSectionProps) =>
                   </Container>
                   <Text>{cardBrand ? cardBrand : 'Another step will appear'}</Text>
                 </div>
+              </div> */}
               </div>
-            </div>
-          ) : null}
+            ) : null}
+          </div>
         </div>
       </div>
-    </div>
+      {!isOpen && previousStepsCompleted && (
+        <PaymentButton
+          cart={cart}
+          data-testid="submit-order-button"
+        />
+      )}
+    </>
   );
 };
 

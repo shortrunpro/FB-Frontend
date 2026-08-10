@@ -66,6 +66,7 @@ export default function ProductVariantCard({ variant }: { variant: VariantsSearc
       </Link>
       <div className="flex items-center justify-between p-2">
         <AddToCartButton
+          product_variant={variant}
           variantId={variant.id}
           quantity={1}
           className="mb-0"

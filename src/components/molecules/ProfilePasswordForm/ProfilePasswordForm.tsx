@@ -139,7 +139,9 @@ const Form = ({
         error={(confirmPasswordError || errors.confirmPassword) as FieldError}
         {...register('confirmPassword')}
       />
-      <Button className="my-4 w-full uppercase">Set new password</Button>
+      <Button className="my-4 w-full bg-brand uppercase hover:bg-[#374356]">
+        Set new password
+      </Button>
     </form>
   );
 };

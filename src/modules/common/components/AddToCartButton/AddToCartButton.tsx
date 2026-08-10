@@ -3,14 +3,19 @@
 import { useEffect, useState } from 'react';
 
 import { ShoppingCart } from '@medusajs/icons';
+import { StoreProduct, StoreProductVariant } from '@medusajs/types';
 
+import { useEcommerceTracking } from '@/hooks/useEcommerceTracking';
 import medusaError from '@/lib/helpers/medusa-error';
 import { useCartContext } from '@/modules/cart/provider/context';
 import { BulkAddToCartParams } from '@/types/product';
+import { VariantsSearchResponse } from '@/types/variants';
 
 import { Button } from '../Button/Button';
 
 interface AddToCartButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  product?: StoreProduct;
+  product_variant?: StoreProductVariant | VariantsSearchResponse;
   variantId?: string;
   quantity?: number;
   items?: BulkAddToCartParams;
@@ -20,6 +25,8 @@ interface AddToCartButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElem
 }
 
 export function AddToCartButton({
+  product_variant,
+  product,
   variantId,
   quantity,
   icon = true,
@@ -27,6 +34,7 @@ export function AddToCartButton({
   disabled,
   variant = 'base'
 }: AddToCartButtonProps) {
+  const { trackAddToCart } = useEcommerceTracking();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { handleBulkAddToCart, addToCart, isAddingItem, isUpdating } = useCartContext();
@@ -38,10 +46,39 @@ export function AddToCartButton({
       return setIsLoading(false);
     }
     if (items) {
-      return await handleBulkAddToCart(items).catch(medusaError);
+      return await handleBulkAddToCart(items)
+        .then(() => {
+          Object.keys(items)
+            .map(key => ({ variant_id: key, quantity: Number(items[key]) }))
+            .filter(item => item.quantity > 0)
+            .flat()
+            .forEach(i => {
+              let find = product?.variants?.find(f => f.id === i.variant_id);
+              trackAddToCart({
+                item_id: find?.sku as string,
+                item_name: find?.title as string,
+                quantity: i.quantity as number,
+                price: find?.calculated_price?.calculated_amount as number
+              });
+            });
+        })
+        .catch(medusaError);
     }
     if (variantId && quantity && quantity > 0) {
-      return await addToCart({ variantId, quantity }).catch(medusaError);
+      return await addToCart({ variantId, quantity })
+        .then(() => {
+          if (product_variant) {
+            trackAddToCart({
+              item_id: product_variant?.sku as string,
+              item_name: product_variant?.title as string,
+              price: product_variant?.calculated_price
+                ? parseFloat((product_variant?.calculated_price as number).toFixed(2))
+                : 0,
+              quantity: quantity
+            });
+          }
+        })
+        .catch(medusaError);
     }
   };
   useEffect(() => {

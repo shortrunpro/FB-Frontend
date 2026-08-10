@@ -1,15 +1,18 @@
+import { cn } from '@/lib/utils';
+
 export const Spinner = ({
   'data-testid': dataTestId,
   variant = 'lg',
-  className
+  className = ''
 }: {
   'data-testid'?: string;
   variant?: 'xs' | 'sm' | 'md' | 'lg';
   className?: string;
 }) => {
+  const loadingClass = `loading-${variant}`;
   return (
     <div
-      className={`loading loading-spinner loading-lg ${className ?? ''}`}
+      className={cn('loading loading-spinner', className, loadingClass)}
       data-testid={dataTestId ?? 'spinner'}
     />
   );

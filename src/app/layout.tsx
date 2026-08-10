@@ -1,3 +1,4 @@
+import { GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 
@@ -30,7 +31,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const cart = await retrieveCart();
-
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
   return (
     <html
       lang={'en'}
@@ -54,6 +55,7 @@ export default async function RootLayout({
         <Providers cart={cart}>{children}</Providers>
         <Toaster position="top-right" />
       </body>
+      {gtmId && <GoogleTagManager gtmId={gtmId} />}
     </html>
   );
 }

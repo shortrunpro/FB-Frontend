@@ -1,10 +1,13 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import { StoreProduct, StoreProductVariant } from '@medusajs/types';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import Script from 'next/script';
 
+import { useEcommerceTracking } from '@/hooks/useEcommerceTracking';
 import { generateVariantMerchantSchema } from '@/lib/helpers/merchant-data';
 import { Modal } from '@/modules/common/components';
 
@@ -16,12 +19,21 @@ interface ProductVariantModalProps {
   product: StoreProduct;
 }
 const ProductVariantModal = ({ variant, product }: ProductVariantModalProps) => {
+  const { trackViewItem } = useEcommerceTracking();
   const pathname = usePathname();
   const router = useRouter();
   const handleClose = () => {
     router.push(pathname);
   };
   const markup = generateVariantMerchantSchema({ variant, product });
+  useEffect(() => {
+    trackViewItem({
+      item_id: variant.sku as string,
+      item_name: variant.sku as string,
+      price: variant?.calculated_price?.calculated_amount as number,
+      quantity: 1
+    });
+  }, []);
   return (
     <>
       <Script

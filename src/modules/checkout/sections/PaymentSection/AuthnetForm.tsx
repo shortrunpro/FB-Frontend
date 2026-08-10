@@ -17,7 +17,7 @@ const AuthnetForm = ({ apiLoginID, clientKey, cart }: PaymentSectionProps) => {
     apiLoginID,
     clientKey
   };
-  const { dispatchData, loading, error } = useAcceptJs({ authData });
+  const { dispatchData, loading, error } = useAcceptJs({ environment: 'PRODUCTION', authData });
   const [isLoading, setIsLoading] = useState(false);
   const [card, setCard] = useState<BasicCardInfo>({
     cardNumber: '',

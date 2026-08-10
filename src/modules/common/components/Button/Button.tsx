@@ -46,7 +46,7 @@ export function Button({
       data-testid={dataTestId ?? `button-${variant}-${size}`}
       {...props}
     >
-      {loading ? <Spinner /> : children}
+      {loading ? <Spinner variant="sm" /> : children}
     </button>
   );
 }
