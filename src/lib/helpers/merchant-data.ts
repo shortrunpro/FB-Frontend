@@ -45,7 +45,7 @@ interface GenerateProductMerchantSchemaProps {
   product: StoreProduct;
 }
 export const generateProductMerchantSchema = (product: CustomProduct) => {
-  const url = `${BASE_URL}/products/${product.handle}`;
+  const url = `${BASE_URL}/products/${product?.handle}`;
   const productImages =
     product.images && product?.images.length > 0 ? product.images?.map(i => i.url) : [];
   const jsonLd: WithContext<ProductGroup> = {
@@ -64,14 +64,13 @@ export const generateProductMerchantSchema = (product: CustomProduct) => {
       sku: v.sku as string,
       image: [v.thumbnail ?? '', ...productImages],
       name: v.title as string,
-      description: 'Small wool green coat for the winter season',
       color: v.options?.find(f => f.option?.title === 'finish')?.value,
       size: v.options?.find(f => f.option?.title === 'size')?.value,
       offers: {
         '@type': 'Offer',
         url: `${url}?sku=${v.sku}`,
         priceCurrency: 'USD',
-        price: v.calculated_price?.calculated_amount as number,
+        price: v?.calculated_price?.calculated_amount as number,
         itemCondition: 'https://schema.org/NewCondition',
         availability: 'https://schema.org/InStock'
       }
