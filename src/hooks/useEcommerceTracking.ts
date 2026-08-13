@@ -1,4 +1,7 @@
+import { HttpTypes } from '@medusajs/types';
 import { sendGTMEvent } from '@next/third-parties/google';
+
+import { mapOrderToGa4Purchase } from '@/lib/helpers/analytics/map-order-to-purchase';
 
 export interface EcommerceItem {
   item_id: string;
@@ -55,18 +58,34 @@ export const useEcommerceTracking = () => {
     tax = 0,
     shipping = 0
   ) => {
+    sendGTMEvent({ ecommerce: null });
     sendGTMEvent({
       event: 'purchase',
       ecommerce: {
         transaction_id: transactionId,
         currency: 'USD',
         value: totalValue,
-        tax: tax,
-        shipping: shipping,
-        items: items
+        tax,
+        shipping,
+        items
       }
     });
   };
-
-  return { trackViewItem, trackAddToCart, trackBeginCheckout, trackPurchase };
+  const trackPurchaseFromOrder = (order: HttpTypes.StoreOrder) => {
+    const payload = mapOrderToGa4Purchase(order);
+    trackPurchase(
+      payload.transactionId,
+      payload.items,
+      payload.value,
+      payload.tax,
+      payload.shipping
+    );
+  };
+  return {
+    trackViewItem,
+    trackAddToCart,
+    trackBeginCheckout,
+    trackPurchase,
+    trackPurchaseFromOrder
+  };
 };
