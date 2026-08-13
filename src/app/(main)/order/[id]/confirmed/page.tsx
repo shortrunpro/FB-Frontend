@@ -21,8 +21,19 @@ export default async function OrderConfirmedPage(props: Props) {
   }
 
   return (
-    <main className="container flex-grow">
-      <OrderConfirmedSection order={order} />
-    </main>
+    <>
+      <link
+        rel="dns-prefetch"
+        href="https://www.shopperapproved.com"
+      />
+      <link
+        rel="preconnect"
+        href="https://www.shopperapproved.com"
+        crossOrigin="anonymous"
+      />
+      <main className="container flex-grow">
+        <OrderConfirmedSection order={order} />
+      </main>
+    </>
   );
 }
