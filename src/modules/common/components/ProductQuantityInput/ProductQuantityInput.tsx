@@ -42,7 +42,7 @@ export const ProductQuantityInput = ({
     }
   };
   return (
-    <div className="flex items-center gap-x-2">
+    <div className="flex w-full items-center justify-center gap-x-2">
       <Button
         variant="tonal"
         size="small"

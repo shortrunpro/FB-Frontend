@@ -14,16 +14,16 @@ export const ProductVariantModalTabs = ({ variant }: { variant: StoreProductVari
         <Tabs.List className="font-medium text-brand">
           <Tabs.Trigger
             value="specs"
-            className="data-[state=active]:shadow-elevation-card-rest p-2 hover:bg-brand hover:text-white data-[state=active]:bg-brand data-[state=active]:text-white"
+            className="data-[state=active]:shadow-elevation-card-rest rounded-sm border-transparent p-2 hover:bg-brand hover:text-white data-[state=active]:bg-brand data-[state=active]:text-white"
           >
             Specifications
           </Tabs.Trigger>
-          <Tabs.Trigger
+          {/* <Tabs.Trigger
             value="reviews"
-            className="data-[state=active]:shadow-elevation-card-rest p-2 hover:bg-brand hover:text-white data-[state=active]:bg-brand data-[state=active]:text-white"
+            className="data-[state=active]:shadow-elevation-card-rest rounded-sm p-2 hover:bg-brand hover:text-white data-[state=active]:bg-brand data-[state=active]:text-white"
           >
             Reviews
-          </Tabs.Trigger>
+          </Tabs.Trigger> */}
         </Tabs.List>
         <div className="mt-4">
           <Tabs.Content value="specs">
@@ -67,9 +67,9 @@ export const ProductVariantModalTabs = ({ variant }: { variant: StoreProductVari
               </Table.Body>
             </Table>
           </Tabs.Content>
-          <Tabs.Content value="reviews">
+          {/* <Tabs.Content value="reviews">
             <Text size="small">This is the Shipping tab (controlled).</Text>
-          </Tabs.Content>
+          </Tabs.Content> */}
         </div>
       </Tabs>
     </div>
