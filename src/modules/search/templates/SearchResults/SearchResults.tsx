@@ -13,12 +13,13 @@ interface SearchResultsProps {
 }
 
 export const SearchResults = async ({ query, searchParams }: SearchResultsProps) => {
-  const { hits, nbPages, estimatedTotalHits } = await searchProducts({
+  const { hits, estimatedTotalHits } = await searchProducts({
     query: query || undefined,
     page: Number(searchParams.page) - 1,
     hitsPerPage: PRODUCT_LIMIT,
     indexName: 'product_variants'
   });
+  const numberOfPages = Math.ceil(estimatedTotalHits / PRODUCT_LIMIT);
   return (
     <div className="flex flex-col gap-y-4">
       <div className="w-full text-center">
@@ -42,7 +43,7 @@ export const SearchResults = async ({ query, searchParams }: SearchResultsProps)
         ))}
       </div>
       <div>
-        <ProductsPagination pages={nbPages} />
+        <ProductsPagination pages={numberOfPages} />
       </div>
     </div>
   );
