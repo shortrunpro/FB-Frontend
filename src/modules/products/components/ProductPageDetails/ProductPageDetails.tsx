@@ -3,8 +3,8 @@
 import { FilterInterface, Interweave, Node } from 'interweave';
 
 export const ProductPageDetails = ({ details }: { details: any }) => {
-  const description: string = details?.description;
-  const frame = description.slice(description.indexOf('<iframe'));
+  const description: string = details?.description ? details.description : '';
+  const frame = description.length && description.slice(description.indexOf('<iframe'));
   if (!details) return null;
   function transform(node: HTMLElement, children: Node[]): React.ReactNode {
     if (node.tagName === 'IFRAME') {
@@ -46,12 +46,14 @@ export const ProductPageDetails = ({ details }: { details: any }) => {
       <h3 className="text-3xl">{details?.title}</h3>
       <div className="flex w-full justify-center py-4">
         <div className="flex w-1/3 flex-col justify-center gap-y-4">
-          <Interweave
-            transform={transform}
-            // filters={[filter]}
-            allowList={['iframe']}
-            content={frame}
-          />
+          {frame && (
+            <Interweave
+              transform={transform}
+              // filters={[filter]}
+              allowList={['iframe']}
+              content={frame}
+            />
+          )}
         </div>
         <div className="flex w-2/3 justify-center">
           <Interweave

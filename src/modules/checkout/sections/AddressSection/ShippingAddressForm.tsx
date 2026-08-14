@@ -29,7 +29,7 @@ const ShippingAddressForm = ({
     'shipping_address.company': cart?.shipping_address?.company || '',
     'shipping_address.postal_code': cart?.shipping_address?.postal_code || '',
     'shipping_address.city': cart?.shipping_address?.city || '',
-    'shipping_address.country_code': cart?.shipping_address?.country_code || locale,
+    'shipping_address.country_code': cart?.shipping_address?.country_code || 'us',
     'shipping_address.province': cart?.shipping_address?.province || '',
     'shipping_address.phone': cart?.shipping_address?.phone || '',
     email: cart?.email || ''
@@ -56,7 +56,7 @@ const ShippingAddressForm = ({
         'shipping_address.company': address?.company || '',
         'shipping_address.postal_code': address?.postal_code || '',
         'shipping_address.city': address?.city || '',
-        'shipping_address.country_code': address?.country_code || locale,
+        'shipping_address.country_code': address?.country_code || 'us',
         'shipping_address.province': address?.province || '',
         'shipping_address.phone': address?.phone || ''
       }));

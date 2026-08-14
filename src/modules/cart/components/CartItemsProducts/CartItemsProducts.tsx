@@ -76,11 +76,12 @@ export const CartItemsProducts = ({
               </div>
             </Link>
 
-            <div className="w-full p-2">
+            <div className="w-full truncate p-2">
               <div className="flex justify-between gap-x-4 lg:mb-2">
                 <Link
                   href={`/products/${product.product_handle}`}
                   onClick={handleClose}
+                  className="truncate"
                 >
                   <div className="mb-4 lg:mb-0">
                     <h3

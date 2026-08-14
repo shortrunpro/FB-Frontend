@@ -16,6 +16,7 @@ import { FinishSquare } from './FinishSquare/FinishSquare';
 import { Input } from './Input/Input';
 import { InstagramLink } from './InstagramLink/InstagramLink';
 import InteractiveLink from './InteractiveLink/InteractiveLink';
+import { LabeledInput } from './LabeledInput/LabeledInput';
 import { LinkedinLink } from './LinkedinLink';
 import { LogoutButton } from './LogoutButton/LogoutButton';
 import { Modal } from './Modal/Modal';
@@ -31,10 +32,13 @@ import { SuccessBanner } from './SuccessBanner/SuccessBanner';
 import { Textarea } from './Textarea/Textarea';
 import { TextLink } from './TextLink/TextLink';
 import { TikTokLink } from './TikTokLink/TikTokLink';
+import { TurnstileController } from './TurnstileController/TurnstileController';
 import { TwitterLink } from './TwitterLink';
 import { YoutubeLink } from './YoutubeLink';
 
 export {
+  TurnstileController,
+  LabeledInput,
   FinishSquare,
   Carousel,
   Badge,

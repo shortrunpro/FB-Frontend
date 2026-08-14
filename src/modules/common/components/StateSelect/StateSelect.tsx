@@ -9,18 +9,19 @@ import {
   ListboxOptions,
   Transition
 } from '@headlessui/react';
+import { ErrorMessage as Error } from '@hookform/error-message';
 import { ChevronUpDown } from '@medusajs/icons';
 import { clx } from '@medusajs/ui';
 import clsx from 'clsx';
 
 import NativeSelect, { NativeSelectProps } from '@/components/molecules/NativeSelect/NativeSelect';
 
+import ErrorMessage from '../ErrorMessage';
 import states from './states.json';
 
 const StateSelect = forwardRef<HTMLSelectElement, NativeSelectProps | any>(
   ({ errors, country, register, placeholder = 'State/Province', defaultValue, ...props }, ref) => {
     const innerRef = useRef<HTMLSelectElement>(null);
-
     useImperativeHandle<HTMLSelectElement | null, HTMLSelectElement | null>(
       ref,
       () => innerRef.current
@@ -36,8 +37,8 @@ const StateSelect = forwardRef<HTMLSelectElement, NativeSelectProps | any>(
     };
     const data = states.states;
     return (
-      <label className="label-md">
-        <p className="">State/Province</p>
+      <label className="label-md-medium">
+        <p>State/Province*</p>
         <Listbox
           onChange={handleSelect}
           value={props.value}
@@ -45,7 +46,8 @@ const StateSelect = forwardRef<HTMLSelectElement, NativeSelectProps | any>(
           <div className="relative">
             <ListboxButton
               className={clsx(
-                'text-base-regular relative flex h-12 w-full cursor-pointer items-center justify-between rounded-lg border bg-component-secondary px-4 text-left focus:outline-none focus-visible:border-gray-300 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-300'
+                'text-base-regular relative flex h-12 w-full cursor-pointer items-center justify-between rounded-lg border bg-component-secondary px-4 text-left focus:outline-none focus-visible:border-gray-300 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-300',
+                errors?.[props?.name] && 'border-negative focus:border-negative'
               )}
               data-testid="shipping-address-state-select"
             >
@@ -110,20 +112,16 @@ const StateSelect = forwardRef<HTMLSelectElement, NativeSelectProps | any>(
                 );
               })}
           </NativeSelect>
-          {/* {errors?.[name] && (
-          <ErrorMessage
+        </div>
+        {errors?.[props?.name] && (
+          <Error
             errors={errors}
-            name={name}
+            name={props.name}
             render={({ message }) => {
-              return (
-                <div className="pt-1 pl-2 text-rose-500 text-xsmall-regular">
-                  <span>{message}</span>
-                </div>
-              )
+              return <ErrorMessage error={message} />;
             }}
           />
-        )} */}
-        </div>
+        )}
       </label>
     );
   }

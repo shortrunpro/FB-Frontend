@@ -11,7 +11,7 @@ const ErrorMessage = ({
 
   return (
     <div
-      className="text-small-regular pt-2 text-rose-500"
+      className="label-md-medium pl-2 pt-1 text-rose-500"
       data-testid={dataTestid}
     >
       <span>{error}</span>

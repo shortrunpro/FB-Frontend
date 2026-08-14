@@ -1,5 +1,4 @@
 import { Accordion } from './Accordion/Accordion';
-import { AddressForm } from './AddressForm/AddressForm';
 import { CartDropdownItem } from './CartDropdownItem/CartDropdownItem';
 import { CategoryNavbar } from './CategoryNavbar/CategoryNavbar';
 import { DeleteCartItemButton } from './DeleteCartItemButton/DeleteCartItemButton';
@@ -41,7 +40,6 @@ export {
   Dropdown,
   CartDropdownItem,
   ParcelAccordion,
-  AddressForm,
   ReviewForm,
   ProfileDetails
 };

@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 import { Spinner } from '../Spinner';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'filled' | 'tonal' | 'text' | 'destructive';
+  variant?: 'filled' | 'tonal' | 'text' | 'destructive' | 'brand';
   size?: 'small' | 'large';
   loading?: boolean;
   'data-testid'?: string;
@@ -31,7 +31,8 @@ export function Button({
     text: 'bg-primary dark:bg-primary hover:bg-action-secondary-hover active:bg-action-secondary-pressed text-primary',
     destructive: `text-negative-on-primary bg-negative hover:bg-negative-hover active:bg-negative-pressed ${
       loading && 'button-text-filled'
-    }`
+    }`,
+    brand: 'bg-brand hover:bg-[#374356] text-white'
   };
 
   const sizeClasses = {
