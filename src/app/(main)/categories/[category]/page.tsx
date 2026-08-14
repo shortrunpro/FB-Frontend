@@ -149,7 +149,7 @@ async function Category({
         }
       >
         {category?.category_children.length > 0 && (
-          <div className="grid grid-cols-6 gap-x-2 gap-y-4">
+          <div className="flex flex-wrap justify-center gap-x-2 gap-y-4">
             {category.category_children.map(cat => (
               <CategoryCard
                 key={cat.id}
