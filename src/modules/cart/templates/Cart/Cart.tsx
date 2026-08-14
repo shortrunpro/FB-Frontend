@@ -3,17 +3,29 @@
 import { LockClosedSolidMini } from '@medusajs/icons';
 import Link from 'next/link';
 
+import { EcommerceItem, useEcommerceTracking } from '@/hooks/useEcommerceTracking';
 import { CartEmpty, CartItems, CartSummary } from '@/modules/cart/components';
 import { useCartContext } from '@/modules/cart/provider/context';
 import { Button, Spinner } from '@/modules/common/components';
 
 export const Cart = () => {
   const { cart, isUpdating } = useCartContext();
-
+  const { trackBeginCheckout } = useEcommerceTracking();
   if (!cart || !cart.items?.length) {
     return <CartEmpty />;
   }
-
+  const handleBeginCheckout = () => {
+    const items =
+      cart?.items &&
+      (cart?.items.map(m => ({
+        item_id: m.variant_sku,
+        item_name: m.title,
+        price: m.unit_price,
+        quantity: m.quantity,
+        item_category: m?.product?.categories ? m?.product?.categories[0]?.name : null
+      })) as EcommerceItem[]);
+    items && trackBeginCheckout(items, cart?.total);
+  };
   return (
     <>
       <div
@@ -35,7 +47,10 @@ export const Cart = () => {
             tax={cart?.tax_total || 0}
             discount_total={cart?.discount_total || 0}
           />
-          <Link href="/checkout?step=address">
+          <Link
+            href="/checkout?step=address"
+            onClick={handleBeginCheckout}
+          >
             <Button
               className="flex w-full items-center justify-center gap-x-2 bg-yellow-500 hover:bg-yellow-400"
               size="large"

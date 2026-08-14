@@ -7,6 +7,7 @@ import { Drawer, Text } from '@medusajs/ui';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { EcommerceItem, useEcommerceTracking } from '@/hooks/useEcommerceTracking';
 import { usePrevious } from '@/hooks/usePrevious';
 import { getItemCount } from '@/lib/helpers/get-item-count';
 import { convertToLocale } from '@/lib/helpers/money';
@@ -17,6 +18,7 @@ import { CartItemsProducts } from '../CartItemsProducts/CartItemsProducts';
 
 export const CartDrawer = () => {
   const { cart, open, toggleOpenState, isUpdating } = useCartContext();
+  const { trackBeginCheckout } = useEcommerceTracking();
   const pathname = usePathname();
   const previousItemCount = usePrevious(getItemCount(cart));
   const cartItemsCount = (cart && getItemCount(cart)) || 0;
@@ -49,7 +51,19 @@ export const CartDrawer = () => {
       return toggleOpenState(true);
     }
   }, [cartItemsCount, previousItemCount, pathname]);
-
+  const handleBeginCheckout = () => {
+    const items =
+      cart?.items &&
+      (cart?.items.map(m => ({
+        item_id: m.variant_sku,
+        item_name: m.title,
+        price: m.unit_price,
+        quantity: m.quantity,
+        item_category: m?.product?.categories ? m?.product?.categories[0]?.name : null
+      })) as EcommerceItem[]);
+    items && trackBeginCheckout(items, cart?.total);
+    toggleOpenState(false);
+  };
   /**
    * Disabled the drawer from opening at all if on the cart or checkout page
    */
@@ -129,7 +143,7 @@ export const CartDrawer = () => {
                 <Link
                   href={'/checkout'}
                   className="w-full"
-                  onClick={handleCloseDrawer}
+                  onClick={handleBeginCheckout}
                 >
                   <Button
                     className="flex w-full items-center justify-center gap-x-1 bg-yellow-500 px-0 hover:bg-yellow-400"
