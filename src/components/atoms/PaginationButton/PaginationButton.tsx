@@ -1,12 +1,11 @@
 import { cn } from '@/lib/utils';
 
-interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   className?: string;
   isActive?: boolean;
   disabled?: boolean;
-  "data-testid"?: string;
+  'data-testid'?: string;
 }
 
 export const PaginationButton = ({
@@ -14,16 +13,15 @@ export const PaginationButton = ({
   className = '',
   isActive = false,
   disabled = false,
-  "data-testid": dataTestId,
+  'data-testid': dataTestId,
   ...props
 }: ButtonProps) => {
   return (
     <button
       className={cn(
-        'border w-10 h-10 rounded-sm label-md flex items-center justify-center hover:bg-component-hover cursor-pointer',
-        isActive && 'border-primary',
-        disabled &&
-          'border text-disabled bg-primary hover:bg-primary cursor-default',
+        'label-md-medium flex h-10 w-10 cursor-pointer items-center justify-center rounded-sm border hover:bg-component-hover',
+        isActive && 'cursor-default border-primary bg-brand text-white hover:bg-brand',
+        disabled && 'cursor-default border bg-primary text-disabled hover:bg-primary',
         className
       )}
       disabled={disabled}

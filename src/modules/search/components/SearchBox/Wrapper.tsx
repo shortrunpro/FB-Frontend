@@ -40,7 +40,7 @@ const Wrapper = ({ children, placeholder = 'Search products...', ...rest }: Sear
 
   const onSubmit = () => {
     if (value) {
-      router.push(`/results/${value}`);
+      router.push(`/search/results/${value}`);
     }
   };
 

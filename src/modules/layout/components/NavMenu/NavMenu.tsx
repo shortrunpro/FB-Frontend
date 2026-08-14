@@ -37,7 +37,7 @@ const MenuItem = ({ item }: MenuItemProps) => {
       {item.link ? (
         <Link
           href={item.link}
-
+          onClick={closeDropdown}
           role="button"
           className="btn btn-ghost px-1 font-bold uppercase text-brand hover:bg-transparent hover:text-[#718fbe] xl:px-2"
         >
@@ -45,7 +45,6 @@ const MenuItem = ({ item }: MenuItemProps) => {
         </Link>
       ) : (
         <div
-          // tabIndex={0}
           role="button"
           className="btn btn-ghost px-1 font-bold uppercase text-brand hover:bg-transparent hover:text-[#718fbe]"
         >
