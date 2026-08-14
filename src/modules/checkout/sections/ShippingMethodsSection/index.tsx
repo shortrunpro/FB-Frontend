@@ -8,6 +8,7 @@ import { StoreCartShippingMethod } from '@medusajs/types';
 import { Heading, Text } from '@medusajs/ui';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
+import { useEcommerceTracking } from '@/hooks/useEcommerceTracking';
 import { removeShippingMethod, setShippingMethod } from '@/lib/data/cart';
 import { convertToLocale } from '@/lib/helpers/money';
 import { ShippingMethods, ShippingMethodsSectionProps } from '@/modules/checkout/types';
@@ -17,6 +18,7 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
   cart,
   availableShippingMethods
 }) => {
+  const { trackAddShippingInfo, handleMapCartItems } = useEcommerceTracking();
   const [isLoadingPrices, setIsLoadingPrices] = useState(false);
   const [shippingMethods, setShippingMethods] = useState<ShippingMethods[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -31,6 +33,8 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
 
   const handleSubmit = () => {
     setIsLoadingPrices(true);
+    const data = cart?.items && handleMapCartItems(cart.items);
+    data && trackAddShippingInfo(data.items, data.value, selectedMethod?.name as string);
     router.push(pathname + '?step=payment', { scroll: false });
     router.refresh();
   };

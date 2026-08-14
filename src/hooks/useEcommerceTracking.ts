@@ -1,4 +1,4 @@
-import { HttpTypes } from '@medusajs/types';
+import { HttpTypes, StoreCart, StoreCartLineItem } from '@medusajs/types';
 import { sendGTMEvent } from '@next/third-parties/google';
 
 import { mapOrderToGa4Purchase } from '@/lib/helpers/analytics/map-order-to-purchase';
@@ -49,8 +49,34 @@ export const useEcommerceTracking = () => {
       }
     });
   };
-
-  // 4. Purchase (Success Page)
+  // 4. Add Shipping Info
+  const trackAddShippingInfo = (
+    items: EcommerceItem[],
+    totalValue: number,
+    shippingTier: string
+  ) => {
+    sendGTMEvent({
+      event: 'add_shipping_info',
+      ecommerce: {
+        currency: 'USD',
+        value: totalValue,
+        shipping_tier: shippingTier,
+        items: items
+      }
+    });
+  };
+  // 5. Add Payment Info
+  const trackAddPaymentInfo = (items: EcommerceItem[], totalValue: number) => {
+    sendGTMEvent({
+      event: 'add_payment_info',
+      ecommerce: {
+        currency: 'USD',
+        value: totalValue,
+        items: items
+      }
+    });
+  };
+  // 6. Purchase (Success Page)
   const trackPurchase = (
     transactionId: string,
     items: EcommerceItem[],
@@ -81,10 +107,27 @@ export const useEcommerceTracking = () => {
       payload.shipping
     );
   };
+
+  const handleMapCartItems = (
+    items: StoreCartLineItem[]
+  ): { items: EcommerceItem[]; value: number } => {
+    const map = items?.map(m => ({
+      item_id: m.variant_sku as string,
+      item_name: m.title as string,
+      price: m.unit_price as number,
+      quantity: m.quantity as number,
+      item_category: m?.product?.categories ? m?.product?.categories[0]?.name : undefined
+    }));
+    const value = map.reduce((acc, item) => acc + item.quantity * item.price, 0) || 0;
+    return { items: map, value };
+  };
   return {
+    handleMapCartItems,
     trackViewItem,
     trackAddToCart,
     trackBeginCheckout,
+    trackAddShippingInfo,
+    trackAddPaymentInfo,
     trackPurchase,
     trackPurchaseFromOrder
   };
