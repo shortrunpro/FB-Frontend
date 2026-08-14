@@ -44,11 +44,11 @@ export function AddToCartButton({
       f => typeof f === 'number' && f > 0
     );
     if (items && !quantities.length) {
-      setError('Invalid add to cart data provided');
+      setError('Please select a quantity for at least one item');
       return setIsLoading(false);
     }
     if (!items && (!variantId || !quantity || quantity < 1 || quantities.length < 1)) {
-      setError('Missing necessary data for add to cart functionality');
+      setError('Please select a quantity for at least one item');
       return setIsLoading(false);
     }
     setIsLoading(true);
