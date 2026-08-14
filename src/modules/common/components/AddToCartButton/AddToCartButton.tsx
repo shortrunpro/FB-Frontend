@@ -97,7 +97,7 @@ export function AddToCartButton({
         onClick={handleAddToCart}
         loading={isLoading}
         disabled={(isLoading && (isAddingItem || isUpdating || error ? true : false)) || disabled}
-        className="flex w-full items-center justify-center gap-x-2 bg-yellow-500 font-bold uppercase text-white hover:bg-yellow-600"
+        className="flex w-full items-center justify-center gap-x-2 bg-yellow-500 font-bold uppercase text-white hover:bg-yellow-400"
         data-testid="add-to-cart-button"
         id={variantId}
         aria-label="Add to Cart"
