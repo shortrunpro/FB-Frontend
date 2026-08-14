@@ -6829,6 +6829,11 @@ next-intl@^3.26.3:
     negotiator "^1.0.0"
     use-intl "^3.26.5"
 
+next-turnstile@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/next-turnstile/-/next-turnstile-1.0.7.tgz#1b6b7f58c1b31c3ac9a3c8c768c27fcbcd621fba"
+  integrity sha512-hN0fr5fwOiK0o8draaJmcYElDqsiYBd4OOCy+0IKMlJgjpPzxtoyagojPBoHsyw9i3jVoBpusPZcUMuKuKQsNw==
+
 next@15.5.9:
   version "15.5.9"
   resolved "https://registry.yarnpkg.com/next/-/next-15.5.9.tgz#1b80d05865cc27e710fb4dcfc6fd9e726ed12ad4"

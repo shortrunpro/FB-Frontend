@@ -1,9 +1,9 @@
 import { redirect } from 'next/navigation';
 
-import { Addresses } from '@/components/organisms';
 import { retrieveCustomer } from '@/lib/data/customer';
 import { listRegions } from '@/lib/data/regions';
 import { UserNavigation } from '@/modules/users/components';
+import { Addresses } from '@/modules/users/templates';
 
 export default async function Page() {
   const user = await retrieveCustomer();

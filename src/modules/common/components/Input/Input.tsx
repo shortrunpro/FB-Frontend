@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from 'react';
 
-import { ErrorMessage } from '@hookform/error-message';
+import { ErrorMessage as Error } from '@hookform/error-message';
 import { EyeMini, EyeSlashMini } from '@medusajs/icons';
 import { get } from 'react-hook-form';
 
 import { CloseIcon } from '@/icons';
 import { cn } from '@/lib/utils';
+
+import ErrorMessage from '../ErrorMessage';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -120,15 +122,11 @@ export function Input({
         )}
       </div>
       {hasError && (
-        <ErrorMessage
+        <Error
           errors={errors}
           name={name}
           render={({ message }) => {
-            return (
-              <div className="text-xsmall-regular pl-2 pt-1 text-rose-500">
-                <span>{message}</span>
-              </div>
-            );
+            return <ErrorMessage error={message} />;
           }}
         />
       )}

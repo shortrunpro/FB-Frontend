@@ -2,19 +2,25 @@
 
 import { FC, useState } from 'react';
 
+import { ErrorMessage } from '@hookform/error-message';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { HttpTypes } from '@medusajs/types';
-import { FieldError, FieldValues, FormProvider, useForm, useFormContext } from 'react-hook-form';
+import { FieldValues, FormProvider, useForm, useFormContext } from 'react-hook-form';
 
-import { LabeledInput } from '@/components/cells';
 import { addCustomerAddress, updateCustomerAddress } from '@/lib/data/customer';
-import { Button, CountrySelect } from '@/modules/common/components';
+import {
+  Button,
+  CountrySelect,
+  ErrorMessage as Error,
+  LabeledInput,
+  StateSelect,
+  TurnstileController
+} from '@/modules/common/components';
 
 import { AddressFormData, addressSchema } from './schema';
 
 interface Props {
   defaultValues?: AddressFormData;
-
   regions: HttpTypes.StoreRegion[];
   handleClose?: () => void;
 }
@@ -30,6 +36,7 @@ export const emptyDefaultAddressValues = {
   company: '',
   province: '',
   phone: '',
+  turnstileToken: '',
   metadata: {}
 };
 
@@ -45,21 +52,31 @@ export const AddressForm: FC<Props> = ({ defaultValues, ...props }) => {
     </FormProvider>
   );
 };
-
 const Form: FC<Props> = ({ regions, handleClose }) => {
-  const [error, setError] = useState<string>();
+  const [loading, setLoading] = useState(false);
   const {
     handleSubmit,
+    control,
+    setError,
+    clearErrors,
     register,
-    formState: { errors },
-    watch
+    formState: { errors, isSubmitting },
+    watch,
+    setValue
   } = useFormContext();
 
+  const handleCountryChange = (e: any) => {
+    clearErrors('countryCode');
+    setValue('countryCode', e.target.value);
+    setValue('province', '');
+  };
   const region = {
     countries: regions.flatMap(region => region.countries)
   };
 
   const submit = async (data: FieldValues) => {
+    setLoading(true);
+    clearErrors('global');
     const formData = new FormData();
     formData.append('addressId', data.addressId || '');
     formData.append('address_name', data.addressName);
@@ -73,17 +90,15 @@ const Form: FC<Props> = ({ regions, handleClose }) => {
     formData.append('postal_code', data.postalCode);
     formData.append('company', data.company);
     formData.append('phone', data.phone);
-
+    formData.append('turnstileToken', data.turnstileToken);
     const res = data.addressId
       ? await updateCustomerAddress(formData)
       : await addCustomerAddress(formData);
-
     if (!res.success) {
-      setError(res.error);
+      setError('global', { message: res.error });
+      setLoading(false);
       return;
     }
-
-    setError('');
     handleClose && handleClose();
   };
 
@@ -98,96 +113,100 @@ const Form: FC<Props> = ({ regions, handleClose }) => {
             label="Address name"
             placeholder="Type address name"
             className="col-span-2"
-            error={errors.firstName as FieldError}
+            error={errors}
             data-testid="address-form-address-name-input"
             {...register('addressName')}
           />
           <LabeledInput
-            label="First name"
+            label="First name*"
             placeholder="Type first name"
-            error={errors.firstName as FieldError}
+            error={errors}
             data-testid="address-form-first-name-input"
             {...register('firstName')}
           />
           <LabeledInput
-            label="Last name"
+            label="Last name*"
             placeholder="Type last name"
-            error={errors.firstName as FieldError}
+            error={errors}
             data-testid="address-form-last-name-input"
             {...register('lastName')}
           />
           <LabeledInput
             label="Company (optional)"
             placeholder="Type company"
-            error={errors.company as FieldError}
+            error={errors}
             data-testid="address-form-company-input"
             {...register('company')}
           />
           <LabeledInput
-            label="Address"
+            label="Address*"
             placeholder="Type address"
-            error={errors.address as FieldError}
+            error={errors}
             data-testid="address-form-address-input"
             {...register('address')}
           />
           <LabeledInput
-            label="City"
+            label="City*"
             placeholder="Type city"
-            error={errors.city as FieldError}
+            error={errors}
             data-testid="address-form-city-input"
             {...register('city')}
           />
           <LabeledInput
-            label="Postal code"
+            label="Postal code*"
             placeholder="Type postal code"
-            error={errors.postalCode as FieldError}
+            error={errors}
             data-testid="address-form-postal-code-input"
             {...register('postalCode')}
-          />
-          <LabeledInput
-            label="State / Province"
-            placeholder="Type state / province"
-            error={errors.province as FieldError}
-            data-testid="address-form-province-input"
-            {...register('province')}
           />
           <div>
             <CountrySelect
               region={region as HttpTypes.StoreRegion}
               {...register('countryCode')}
               value={watch('countryCode')}
+              defaultValue={''}
+              onChange={handleCountryChange}
               className="h-12"
               data-testid="address-form-country-select"
+              errors={errors}
             />
-            {errors.countryCode && (
-              <p
-                className="label-sm text-negative"
-                data-testid="address-form-country-error"
-              >
-                {(errors.countryCode as FieldError).message}
-              </p>
-            )}
+          </div>
+          <div>
+            <StateSelect
+              country={watch('countryCode')}
+              value={watch('province')}
+              {...register('province')}
+              errors={errors}
+            />
           </div>
 
           <LabeledInput
-            label="Phone"
+            label="Phone*"
             placeholder="Type phone number"
-            error={errors.phone as FieldError}
+            error={errors}
             data-testid="address-form-phone-input"
             {...register('phone')}
           />
         </div>
-        {error && (
-          <p
-            className="label-md text-negative"
-            data-testid="address-form-error"
-          >
-            {error}
-          </p>
+        {errors.global && (
+          <ErrorMessage
+            errors={errors}
+            name={'global'}
+            render={({ message }) => {
+              return <Error error={message} />;
+            }}
+          />
         )}
+        <TurnstileController
+          control={control}
+          errors={errors}
+        />
+
         <Button
-          className="w-full"
+          className="label-lg w-full"
           data-testid="address-form-submit-button"
+          variant="brand"
+          loading={loading}
         >
           Save address
         </Button>

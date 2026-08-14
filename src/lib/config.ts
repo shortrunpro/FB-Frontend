@@ -5,6 +5,10 @@ const MEDUSA_BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL ?? '';
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL as string;
 export const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME as string;
 export const BRAND_PHONE_NUMBER = process.env.NEXT_PUBLIC_PHONE_NUMBER;
+export const TURNSTILE_SITE_KEY =
+  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY! ?? '3x00000000000000000000FF';
+export const TURNSTILE_SECRET =
+  process.env.TURNSTILE_SECRET_KEY! ?? '1x0000000000000000000000000000000AA';
 export const sdk = new Medusa({
   baseUrl: MEDUSA_BACKEND_URL,
   debug: process.env.NODE_ENV === 'development',

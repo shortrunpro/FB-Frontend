@@ -9,20 +9,26 @@ import {
   ListboxOptions,
   Transition
 } from '@headlessui/react';
+import { ErrorMessage as Error } from '@hookform/error-message';
 import { ChevronUpDown } from '@medusajs/icons';
 import { HttpTypes } from '@medusajs/types';
 import { clx } from '@medusajs/ui';
 import clsx from 'clsx';
+import { FieldErrors, FieldValues } from 'react-hook-form';
 
 import NativeSelect, { NativeSelectProps } from '@/components/molecules/NativeSelect/NativeSelect';
+
+import ErrorMessage from '../ErrorMessage';
 
 const CountrySelect = forwardRef<
   HTMLSelectElement,
   NativeSelectProps & {
     region?: HttpTypes.StoreRegion;
   }
->(({ placeholder = 'Country', region, defaultValue, ...props }, ref) => {
+>(({ placeholder = 'Country', region, defaultValue, errors, ...props }, ref) => {
   const innerRef = useRef<HTMLSelectElement>(null);
+  const error = errors as FieldErrors<FieldValues>;
+  const name = props?.name as string;
 
   useImperativeHandle<HTMLSelectElement | null, HTMLSelectElement | null>(
     ref,
@@ -50,8 +56,8 @@ const CountrySelect = forwardRef<
   };
 
   return (
-    <label className="label-md">
-      <p className="">Country</p>
+    <label className="label-md-medium">
+      <p className="">Country*</p>
 
       <Listbox
         onChange={handleSelect}
@@ -61,7 +67,8 @@ const CountrySelect = forwardRef<
         <div className="relative">
           <ListboxButton
             className={clsx(
-              'text-base-regular relative flex h-12 w-full cursor-pointer items-center justify-between rounded-lg border bg-component-secondary px-4 text-left focus:outline-none focus-visible:border-gray-300 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-300'
+              'text-base-regular relative flex h-12 w-full cursor-pointer items-center justify-between rounded-lg border bg-component-secondary px-4 text-left focus:outline-none focus-visible:border-gray-300 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-300',
+              error[name] && 'border-negative focus:border-negative'
             )}
             data-testid="shipping-address-select"
           >
@@ -121,6 +128,15 @@ const CountrySelect = forwardRef<
           ))}
         </NativeSelect>
       </div>
+      {errors && props.name && error[props.name] && (
+        <Error
+          errors={errors}
+          name={props.name}
+          render={({ message }) => {
+            return <ErrorMessage error={message} />;
+          }}
+        />
+      )}
     </label>
   );
 });

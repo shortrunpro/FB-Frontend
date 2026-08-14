@@ -1,10 +1,11 @@
 'use server';
 
 import { HttpTypes } from '@medusajs/types';
+import { validateTurnstileToken } from 'next-turnstile';
 import { revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { sdk } from '../config';
+import { sdk, TURNSTILE_SECRET } from '../config';
 import {
   getAuthHeaders,
   getCacheOptions,
@@ -154,6 +155,18 @@ export async function transferCart() {
 }
 
 export const addCustomerAddress = async (formData: FormData): Promise<any> => {
+  const turnstileToken = formData.get('turnstileToken');
+  if (!turnstileToken || typeof turnstileToken !== 'string') {
+    return { error: 'Missing Turnstile token.' };
+  }
+  // Use the package's built-in validation mechanism
+  const validation = await validateTurnstileToken({
+    token: turnstileToken,
+    secretKey: TURNSTILE_SECRET!
+  });
+  if (!validation.success) {
+    return { success: false, error: 'Recaptcha failure, please refresh the page and try again' };
+  }
   const address = {
     address_name: formData.get('address_name') as string,
     first_name: formData.get('first_name') as string,
@@ -207,6 +220,18 @@ export const updateCustomerAddress = async (formData: FormData): Promise<any> =>
 
   if (!addressId) {
     return { success: false, error: 'Address ID is required' };
+  }
+  const turnstileToken = formData.get('turnstileToken');
+  if (!turnstileToken || typeof turnstileToken !== 'string') {
+    return { error: 'Missing Turnstile token.' };
+  }
+  // Use the package's built-in validation mechanism
+  const validation = await validateTurnstileToken({
+    token: turnstileToken,
+    secretKey: TURNSTILE_SECRET!
+  });
+  if (!validation.success) {
+    return { success: false, error: 'Recaptcha failure, please refresh the page and try again' };
   }
 
   const address = {
