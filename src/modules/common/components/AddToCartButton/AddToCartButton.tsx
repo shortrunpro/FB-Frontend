@@ -40,11 +40,18 @@ export function AddToCartButton({
   const { handleBulkAddToCart, addToCart, isAddingItem, isUpdating } = useCartContext();
   const handleAddToCart = async () => {
     setError(null);
-    setIsLoading(true);
-    if (!items && (!variantId || !quantity || quantity < 1)) {
+    const quantities = Object.values(items as BulkAddToCartParams).filter(
+      f => typeof f === 'number' && f > 0
+    );
+    if (items && !quantities.length) {
+      setError('Invalid add to cart data provided');
+      return setIsLoading(false);
+    }
+    if (!items && (!variantId || !quantity || quantity < 1 || quantities.length < 1)) {
       setError('Missing necessary data for add to cart functionality');
       return setIsLoading(false);
     }
+    setIsLoading(true);
     if (items) {
       return await handleBulkAddToCart(items)
         .then(() => {
