@@ -28,7 +28,7 @@ const OrderTotals: React.FC<CartTotalsProps> = ({ totals }) => {
             data-value={item_total || 0}
             className="label-lg-medium"
           >
-            ${item_total}
+            ${item_total?.toFixed(2)}
           </span>
         </div>
         <div className="flex items-center justify-between">
