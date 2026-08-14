@@ -37,7 +37,7 @@ export const Cart = () => {
           />
           <Link href="/checkout?step=address">
             <Button
-              className="flex w-full items-center justify-center gap-x-2 bg-brand hover:bg-[#374356]"
+              className="flex w-full items-center justify-center gap-x-2 bg-yellow-500 hover:bg-yellow-400"
               size="large"
               disabled={isUpdating}
             >
