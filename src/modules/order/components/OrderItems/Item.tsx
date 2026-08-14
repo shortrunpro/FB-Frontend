@@ -50,7 +50,7 @@ export const Item = ({
             {item?.total !== item?.original_total && (
               <p className="label-md text-secondary line-through">${item?.original_total}</p>
             )}
-            <p className="label-lg-medium">${item?.total}</p>
+            <p className="label-lg-medium">${item?.total?.toFixed(2)}</p>
           </div>
         </div>
       </div>

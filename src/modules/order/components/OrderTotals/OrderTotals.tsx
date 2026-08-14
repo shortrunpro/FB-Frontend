@@ -38,7 +38,7 @@ const OrderTotals: React.FC<CartTotalsProps> = ({ totals }) => {
             data-value={shipping_total || 0}
             className="label-lg-medium"
           >
-            ${shipping_total}
+            ${shipping_total?.toFixed(2)}
           </span>
         </div>
       </div>
@@ -50,7 +50,7 @@ const OrderTotals: React.FC<CartTotalsProps> = ({ totals }) => {
           data-testid="cart-total"
           data-value={total || 0}
         >
-          ${total}
+          ${total?.toFixed(2)}
         </span>
       </div>
     </div>
