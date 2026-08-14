@@ -55,11 +55,8 @@ const ImageOrPlaceholder = ({ image, size }: Pick<ThumbnailProps, 'size'> & { im
     <Image
       src={image}
       alt="Thumbnail"
-      objectFit="contain"
-      className="absolute"
-      objectPosition="center"
+      className="absolute object-contain object-center"
       draggable={false}
-      quality={50}
       sizes="(max-width: 576px) 280px, (max-width: 768px) 360px, (max-width: 992px) 480px, 800px"
       fill
     />

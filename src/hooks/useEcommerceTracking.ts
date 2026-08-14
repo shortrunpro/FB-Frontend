@@ -27,13 +27,13 @@ export const useEcommerceTracking = () => {
   };
 
   // 2. Add To Cart
-  const trackAddToCart = (item: EcommerceItem) => {
+  const trackAddToCart = (items: EcommerceItem[], value: number) => {
     sendGTMEvent({
       event: 'add_to_cart',
       ecommerce: {
         currency: 'USD',
-        value: item.price * item.quantity,
-        items: [item]
+        value,
+        items
       }
     });
   };

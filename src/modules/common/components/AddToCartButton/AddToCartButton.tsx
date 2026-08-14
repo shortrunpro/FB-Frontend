@@ -55,19 +55,22 @@ export function AddToCartButton({
     if (items) {
       return await handleBulkAddToCart(items)
         .then(() => {
-          Object.keys(items)
+          const itemMap = Object.keys(items)
             .map(key => ({ variant_id: key, quantity: Number(items[key]) }))
             .filter(item => item.quantity > 0)
             .flat()
-            .forEach(i => {
+            .map(i => {
               let find = product?.variants?.find(f => f.id === i.variant_id);
-              trackAddToCart({
+              return {
                 item_id: find?.sku as string,
+                item_category: product?.categories ? product.categories[0]?.name : '',
                 item_name: find?.title as string,
                 quantity: i.quantity as number,
                 price: find?.calculated_price?.calculated_amount as number
-              });
+              };
             });
+          const value = itemMap.reduce((acc, item) => acc + item.quantity * item.price, 0) || 0;
+          trackAddToCart(itemMap, value);
         })
         .catch(medusaError);
     }
@@ -75,14 +78,16 @@ export function AddToCartButton({
       return await addToCart({ variantId, quantity })
         .then(() => {
           if (product_variant) {
-            trackAddToCart({
+            const item = {
               item_id: product_variant?.sku as string,
               item_name: product_variant?.title as string,
               price: product_variant?.calculated_price
                 ? parseFloat((product_variant?.calculated_price as number).toFixed(2))
                 : 0,
               quantity: quantity
-            });
+            };
+            const value = item.price * item.quantity;
+            trackAddToCart([item], value);
           }
         })
         .catch(medusaError);

@@ -41,7 +41,7 @@ export default async function ProductPage({
       handle: [handle],
       limit: 1,
       fields:
-        'id,title,handle,description,images.url,variants.sku,variants.thumbnail,variants.title,variants.options.value,variants.options.option.title,variants.calculated_price.calculated_amount'
+        'id,title,handle,description,images.url,categories.name,categories.handle,variants.sku,variants.thumbnail,variants.title,variants.options.value,variants.options.option.title,variants.calculated_price.calculated_amount'
     }
   });
   if (count == 0) {

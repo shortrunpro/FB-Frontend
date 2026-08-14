@@ -79,7 +79,7 @@ export const listProducts = async ({
         // collection_id,
         limit,
         offset,
-        fields: `*variants.calculated_price,*variants,+files.id,+files.product_id,+files.type,+files.url,+related_product.product.handle,+related_product.products.title,+related_product.products.thumbnail,+related_product.products.handle,+related_product.products.variants.prices.amount,+related_product.products.variants.options.value,+related_product.products.variants.options.option.title,+product_addons.variants.id,+product_addons.variants.sku,+product_addons.variants.thumbnail,+product_addons.variants.title,+product_addons.variants.product.handle,+product_addons.variants.product.categories.name,+product_addons.variants.product.categories.handle,+product_addons.variants.prices.amount`,
+        fields: `+categories.name,+categories.handle,*variants.calculated_price,*variants,+files.id,+files.product_id,+files.type,+files.url,+related_product.product.handle,+related_product.products.title,+related_product.products.thumbnail,+related_product.products.handle,+related_product.products.variants.prices.amount,+related_product.products.variants.options.value,+related_product.products.variants.options.option.title,+product_addons.variants.id,+product_addons.variants.sku,+product_addons.variants.thumbnail,+product_addons.variants.title,+product_addons.variants.product.handle,+product_addons.variants.product.categories.name,+product_addons.variants.product.categories.handle,+product_addons.variants.prices.amount`,
         ...queryParams
       },
       // @ts-ignore

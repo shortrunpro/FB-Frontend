@@ -196,7 +196,7 @@ export const ProductVariants = ({ product }: { product: StoreProduct }) => {
     if (isAddingItem || isUpdating) {
       setCartQuantity(initialState);
     }
-  }, [isAddingItem, isUpdating, initialState]);
+  }, [isAddingItem, isUpdating]);
   const handleSelectedFinish = (value: string) => {
     if (filtering?.finish === value) {
       setFiltering({});
