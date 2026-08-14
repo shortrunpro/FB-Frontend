@@ -47,7 +47,7 @@ const StateSelect = forwardRef<HTMLSelectElement, NativeSelectProps | any>(
             <ListboxButton
               className={clsx(
                 'text-base-regular relative flex h-12 w-full cursor-pointer items-center justify-between rounded-lg border bg-component-secondary px-4 text-left focus:outline-none focus-visible:border-gray-300 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-300',
-                errors[props.name] && 'border-negative focus:border-negative'
+                errors?.[props?.name] && 'border-negative focus:border-negative'
               )}
               data-testid="shipping-address-state-select"
             >
@@ -113,7 +113,7 @@ const StateSelect = forwardRef<HTMLSelectElement, NativeSelectProps | any>(
               })}
           </NativeSelect>
         </div>
-        {errors[props.name] && (
+        {errors?.[props?.name] && (
           <Error
             errors={errors}
             name={props.name}
