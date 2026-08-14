@@ -4,6 +4,7 @@ import { Text } from '@medusajs/ui';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { AuthNetEnvironment, useAcceptJs } from 'react-acceptjs';
 
+import { useEcommerceTracking } from '@/hooks/useEcommerceTracking';
 import { initiatePaymentSession } from '@/lib/data/cart';
 import { formatCardNumber, formatCVV, formatExpiry } from '@/lib/helpers/payment-utils';
 import { Button, Spinner } from '@/modules/common/components';
@@ -11,6 +12,7 @@ import { Button, Spinner } from '@/modules/common/components';
 import { BasicCardInfo, PaymentSectionProps } from '../../types';
 
 const AuthnetForm = ({ apiLoginID, clientKey, cart }: PaymentSectionProps) => {
+  const { trackAddPaymentInfo, handleMapCartItems } = useEcommerceTracking();
   const router = useRouter();
   const pathname = usePathname();
   const authData = {
@@ -53,6 +55,8 @@ const AuthnetForm = ({ apiLoginID, clientKey, cart }: PaymentSectionProps) => {
           shipping_address
         }
       });
+      const data = cart.items && handleMapCartItems(cart.items);
+      data && trackAddPaymentInfo(data.items, data.value);
       router.push(pathname + '?step=review', { scroll: false });
       router.refresh();
       // }

@@ -71,6 +71,7 @@ export const useEcommerceTracking = () => {
       event: 'add_payment_info',
       ecommerce: {
         currency: 'USD',
+        payment_type: 'Credit Card',
         value: totalValue,
         items: items
       }
