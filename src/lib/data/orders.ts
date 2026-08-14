@@ -29,13 +29,12 @@ export const retrieveOrder = async (id: string) => {
   const next = {
     ...(await getCacheOptions('orders'))
   };
-
   return sdk.client
     .fetch<HttpTypes.StoreOrderResponse>(`/store/orders/${id}`, {
       method: 'GET',
       query: {
         fields:
-          '*payment_collections.payments,*items,*items.metadata,*items.variant,*items.product,id,display_id,custom_display_id,created_at,total,subtotal,shipping_total,tax_total'
+          'email,+item_total,*shipping_methods,*shipping_address,*payment_collections.payments,*items,*items.metadata,*items.variant,*items.product,id,display_id,custom_display_id,created_at,total,subtotal,shipping_total,tax_total'
       },
       headers,
       next,

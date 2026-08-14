@@ -27,15 +27,15 @@ export const AddToCartSection = ({ variantId, price }: { variantId: string; pric
       >
         ${price}
       </span>
-      <div className="flex w-full items-end gap-x-6">
-        <div className="w-2/12 px-2">
+      <div className="flex w-full flex-col items-end gap-6 md:flex-row">
+        <div className="w-full px-16 md:w-1/2 md:px-0">
           <ProductQuantityInput
             id={variantId}
             initialQuantity={quantity[variantId]}
             onUpdate={handleQuantityChange}
           />
         </div>
-        <div className="w-11/12">
+        <div className="w-full">
           <AddToCartButton
             items={quantity}
             icon={false}

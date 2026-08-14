@@ -2,11 +2,11 @@ import { format } from 'date-fns';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { OrderDetailsSection } from '@/components/sections/OrderDetailsSection/OrderDetailsSection';
 import { ArrowLeftIcon } from '@/icons';
 import { retrieveCustomer } from '@/lib/data/customer';
 import { retrieveOrder } from '@/lib/data/orders';
 import { Button } from '@/modules/common/components';
+import { OrderDetailsSection } from '@/modules/order/templates';
 import { UserNavigation } from '@/modules/users/components';
 
 export default async function UserPage({ params }: { params: Promise<{ id: string }> }) {

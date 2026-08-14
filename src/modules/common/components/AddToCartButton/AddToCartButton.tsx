@@ -40,11 +40,18 @@ export function AddToCartButton({
   const { handleBulkAddToCart, addToCart, isAddingItem, isUpdating } = useCartContext();
   const handleAddToCart = async () => {
     setError(null);
-    setIsLoading(true);
-    if (!items && (!variantId || !quantity || quantity < 1)) {
-      setError('Missing necessary data for add to cart functionality');
+    const quantities = Object.values(items as BulkAddToCartParams).filter(
+      f => typeof f === 'number' && f > 0
+    );
+    if (items && !quantities.length) {
+      setError('Please select a quantity for at least one item');
       return setIsLoading(false);
     }
+    if (!items && (!variantId || !quantity || quantity < 1 || quantities.length < 1)) {
+      setError('Please select a quantity for at least one item');
+      return setIsLoading(false);
+    }
+    setIsLoading(true);
     if (items) {
       return await handleBulkAddToCart(items)
         .then(() => {
@@ -97,7 +104,7 @@ export function AddToCartButton({
         onClick={handleAddToCart}
         loading={isLoading}
         disabled={(isLoading && (isAddingItem || isUpdating || error ? true : false)) || disabled}
-        className="flex w-full items-center justify-center gap-x-2 bg-yellow-500 font-bold uppercase text-white hover:bg-yellow-600"
+        className="flex w-full items-center justify-center gap-x-2 bg-yellow-500 font-bold uppercase text-white hover:bg-yellow-400"
         data-testid="add-to-cart-button"
         id={variantId}
         aria-label="Add to Cart"

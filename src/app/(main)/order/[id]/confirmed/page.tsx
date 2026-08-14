@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { OrderConfirmedSection } from '@/components/sections/OrderConfirmedSection/OrderConfirmedSection';
 import { retrieveOrder } from '@/lib/data/orders';
+import { OrderConfirmedSection } from '@/modules/order/templates';
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -31,7 +31,7 @@ export default async function OrderConfirmedPage(props: Props) {
         href="https://www.shopperapproved.com"
         crossOrigin="anonymous"
       />
-      <main className="container flex-grow">
+      <main className="container min-h-[50vh] flex-grow">
         <OrderConfirmedSection order={order} />
       </main>
     </>

@@ -132,7 +132,7 @@ export const CartDrawer = () => {
                   onClick={handleCloseDrawer}
                 >
                   <Button
-                    className="flex w-full items-center justify-center gap-x-1 bg-yellow-500 px-0 hover:bg-yellow-600"
+                    className="flex w-full items-center justify-center gap-x-1 bg-yellow-500 px-0 hover:bg-yellow-400"
                     size="large"
                     disabled={isUpdating}
                   >
