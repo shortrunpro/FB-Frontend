@@ -604,3 +604,45 @@ svg:has(.fill-ui-fg-muted) {
   span {
   display: flex;
 }
+#SA_review_wrapper .SA__customer_rate {
+  display: none;
+}
+#product_just_stars.aside .SA__review_content.SA__overall {
+  display: flex;
+}
+#product_just_stars.aside .SA__review_widget_item .SA__total_reviews {
+  text-align: center !important;
+  min-width: 70px !important;
+  width: auto !important;
+  padding-left: 10px;
+}
+#product_just_stars.reg.rev-under .SA__review_widget_item .SA__total_reviews {
+  text-align: center !important;
+  width: 120px !important;
+}
+#product_just_stars .SA__review_widget_item .SA__rating {
+  display: flex;
+}
+#product_just_stars.small .SA__review_widget_item .SA__rating svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+#product_just_stars.med .SA__review_widget_item .SA__rating svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+#product_just_stars.reg .SA__review_widget_item .SA__rating svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+#product_just_stars.big .SA__review_widget_item .SA__rating svg {
+  width: 26px !important;
+  height: 26px !important;
+}
+#product_just_stars.big.rev-under .SA__review_widget_item .SA__total_reviews {
+  text-align: center !important;
+  width: 150px !important;
+}
+#product_just_stars .SA__review_widget_item .SA__total_reviews a {
+  font-size: 10px;
+}

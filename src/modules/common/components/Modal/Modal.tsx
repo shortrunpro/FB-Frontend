@@ -22,7 +22,16 @@ export const Modal = ({
       />
       <div className="absolute z-20 my-20 h-full max-h-[80vh] w-full max-w-[80vw] overflow-y-auto rounded-sm bg-primary py-5 shadow-lg">
         <div className="heading-md flex items-center justify-between border-b px-4 pb-5 uppercase">
-          <h3 className="heading-sm">{heading}</h3>
+          <div className="flex flex-col">
+            <h3 className="heading-sm">{heading}</h3>
+            <div
+              id="product_just_stars"
+              className="aside reg"
+              role="region"
+              aria-label="Product rating summary"
+            />
+          </div>
+
           <div
             onClick={onClose}
             className="cursor-pointer"
