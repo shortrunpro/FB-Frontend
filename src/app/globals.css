@@ -595,3 +595,12 @@ svg:has(.fill-ui-fg-muted) {
 .embla__progress__bar {
   @apply absolute bottom-0 top-0 w-full bg-gray-300;
 }
+
+#SA_review_wrapper
+  .SA__review_widget
+  .SA__review_widget_item
+  .SA__review_content
+  .SA__review_bar_label
+  span {
+  display: flex;
+}
