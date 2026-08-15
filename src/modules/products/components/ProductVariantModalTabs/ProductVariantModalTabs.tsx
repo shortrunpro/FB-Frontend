@@ -18,12 +18,12 @@ export const ProductVariantModalTabs = ({ variant }: { variant: StoreProductVari
           >
             Specifications
           </Tabs.Trigger>
-          {/* <Tabs.Trigger
+          <Tabs.Trigger
             value="reviews"
             className="data-[state=active]:shadow-elevation-card-rest rounded-sm p-2 hover:bg-brand hover:text-white data-[state=active]:bg-brand data-[state=active]:text-white"
           >
             Reviews
-          </Tabs.Trigger> */}
+          </Tabs.Trigger>
         </Tabs.List>
         <div className="mt-4">
           <Tabs.Content value="specs">
@@ -67,9 +67,10 @@ export const ProductVariantModalTabs = ({ variant }: { variant: StoreProductVari
               </Table.Body>
             </Table>
           </Tabs.Content>
-          {/* <Tabs.Content value="reviews">
-            <Text size="small">This is the Shipping tab (controlled).</Text>
-          </Tabs.Content> */}
+          <Tabs.Content
+            value="reviews"
+            id="SA_review_wrapper"
+          ></Tabs.Content>
         </div>
       </Tabs>
     </div>

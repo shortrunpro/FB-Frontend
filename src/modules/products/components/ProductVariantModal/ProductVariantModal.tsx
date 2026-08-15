@@ -10,6 +10,7 @@ import Script from 'next/script';
 import { useEcommerceTracking } from '@/hooks/useEcommerceTracking';
 import { generateVariantMerchantSchema } from '@/lib/helpers/merchant-data';
 import { Modal } from '@/modules/common/components';
+import { ShopperApprovedProductReviewWidget } from '@/modules/shopper-approved/components';
 
 import { ProductVariantModalTabs } from '../ProductVariantModalTabs/ProductVariantModalTabs';
 import { AddToCartSection } from './AddToCartSection';
@@ -47,6 +48,7 @@ const ProductVariantModal = ({ variant, product }: ProductVariantModalProps) => 
         heading={`${variant.title as string}`}
         onClose={handleClose}
       >
+        <ShopperApprovedProductReviewWidget sku={variant.sku} />
         <div className="flex h-full flex-col lg:grid lg:grid-cols-2">
           <div className="relative aspect-square h-auto max-w-[500px]">
             <Image
