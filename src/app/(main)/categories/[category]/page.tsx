@@ -60,7 +60,7 @@ async function Category({
 }) {
   const { category: categoryHandle } = await params;
 
-  const category = await getCategoryByHandle(categoryHandle);
+  const category = await getCategoryByHandle(categoryHandle.replace('%2B', '+'));
   if (!category) {
     return notFound();
   }
