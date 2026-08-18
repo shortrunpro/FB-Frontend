@@ -22,6 +22,6 @@ export const listBlogsSitemap = async () => {
     },
     cache: 'force-cache',
     // Revalidates once every 24 hours
-    next: { revalidate: 86400 }
+    next: { tags: ['blog-sitemap'], revalidate: 86400 }
   });
 };
