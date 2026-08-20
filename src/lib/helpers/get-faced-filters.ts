@@ -25,6 +25,9 @@ export const getFacedFilters = (filters: ReadonlyURLSearchParams): string => {
   let rating = '';
 
   for (const [key, value] of filters.entries()) {
+    if (key.includes('utm')) {
+      continue;
+    }
     if (
       key !== 'min_price' &&
       key !== 'max_price' &&
