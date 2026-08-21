@@ -25,7 +25,7 @@ export const AddToCartSection = ({ variantId, price }: { variantId: string; pric
         id="product_price"
         className="label-xl text-brand"
       >
-        ${price}
+        ${price.toFixed(2)}
       </span>
       <div className="flex w-full flex-col items-end gap-6 md:flex-row">
         <div className="w-full px-16 md:w-1/2 md:px-0">
