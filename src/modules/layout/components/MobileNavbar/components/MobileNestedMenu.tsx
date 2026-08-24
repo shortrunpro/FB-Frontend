@@ -78,7 +78,7 @@ export const MobileNestedMenu = ({ onClose }: MobileCategoryNavbarProps) => {
                 </button>
               ) : (
                 <Link
-                  href={item.link}
+                  href={item?.link ?? ''}
                   onClick={handleClose}
                   className={cn(
                     'label-md flex-1 px-4 py-3 uppercase text-primary transition-colors hover:bg-secondary/10',
