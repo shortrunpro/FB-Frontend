@@ -1,30 +1,24 @@
 [
   {
-    "src": "/home-slider/Thin Floating Shelf Bracket - Web Banner 2026.jpg",
+    "src": "https://cdn.federalbrace.com/homepage-slider/65-Aspect-Ratio-Web-Banner-Slider-ADA-Magnetic-090826.webp",
     "width": 780,
     "height": 640,
-    "alt": "Thin Floating Shelf Bracket Web Banner",
-    "link": "/products/thin-floating-shelf-support-bracket?sku=FB-10851"
+    "alt": "The Magnetic ADA Modesty Panel Attachment Kit",
+    "link": "/products/magnetic-ada-modesty-panel-attachment-kit"
   },
   {
-    "src": "/home-slider/ADA Modesty Panel Kit - Web Banner 2026.jpg",
+    "src": "https://cdn.federalbrace.com/homepage-slider/65-Aspect-Ratio-Web-Banner-Slider-Mesa-Flat-090826.webp",
     "width": 780,
     "height": 640,
-    "alt": "ADA Modesty Panel Kit Web Banner",
-    "link": "/products/magnetic-ada-modesty-panel-attachment-kit?sku=FB-10827"
+    "alt": "The Mesa Flat Heavy-Duty Concealed Bracket",
+    "link": "/products/mesa-heavy-duty-concealed-flat-bracket"
   },
+
   {
-    "src": "/home-slider/Tactical Concelament Mantel - Web Banner 2026.jpg",
+    "src": "https://cdn.federalbrace.com/homepage-slider/65-Aspect-Ratio-Web-Banner-Slider-United-090826.webp",
     "width": 780,
     "height": 640,
-    "alt": "Tactical Concelament Mantel Web Banner",
-    "link": "/products/concealment-fireplace-mantel?sku=FB-10914"
-  },
-  {
-    "src": "/home-slider/IWF Announcement - Web Banner 2026.jpg",
-    "width": 780,
-    "height": 640,
-    "alt": "IWF Announcement Web Banner",
-    "link": null
+    "alt": "The United Modular Floating Shelf Bracket System",
+    "link": "/products/united-modular-floating-shelf-hardware"
   }
 ]
