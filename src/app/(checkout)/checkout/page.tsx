@@ -6,7 +6,6 @@ import { notFound } from 'next/navigation';
 import { retrieveCart } from '@/lib/data/cart';
 import { retrieveCustomer } from '@/lib/data/customer';
 import { listCartShippingMethods } from '@/lib/data/fulfillment';
-import { listCartPaymentMethods } from '@/lib/data/payment';
 import { CheckoutForm, CheckoutSummary } from '@/modules/checkout/templates';
 import { Spinner } from '@/modules/common/components';
 
@@ -38,7 +37,7 @@ async function CheckoutPageContent({}) {
   if (!cart) {
     return notFound();
   }
-  const shippingMethods = await listCartShippingMethods(cart.id, false);
+  const shippingMethods = await listCartShippingMethods(cart, false);
   const customer = await retrieveCustomer();
   return (
     <main

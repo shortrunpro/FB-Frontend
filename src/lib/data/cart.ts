@@ -96,6 +96,8 @@ export async function updateCart(data: HttpTypes.StoreUpdateCart) {
   return await sdk.store.cart
     .update(cartId, data, {}, headers)
     .then(async ({ cart }) => {
+      const fullfillmentCacheTag = await getCacheTag('fulfillment');
+      revalidateTag(fullfillmentCacheTag);
       const cartCacheTag = await getCacheTag('carts');
       revalidateTag(cartCacheTag);
     })
@@ -124,6 +126,8 @@ export async function addToCartBulk(lineItems: HttpTypes.StoreAddCartLineItem[])
     }
   )
     .then(async () => {
+      const fullfillmentCacheTag = await getCacheTag('fulfillment');
+      revalidateTag(fullfillmentCacheTag);
       const cartCacheTag = await getCacheTag('carts');
       revalidateTag(cartCacheTag);
     })
@@ -161,6 +165,8 @@ export async function addToCart({ variantId, quantity }: { variantId: string; qu
       )
       .catch(medusaError)
       .finally(async () => {
+        const fullfillmentCacheTag = await getCacheTag('fulfillment');
+        revalidateTag(fullfillmentCacheTag);
         const cartCacheTag = await getCacheTag('carts');
         revalidateTag(cartCacheTag);
       });
@@ -177,11 +183,15 @@ export async function addToCart({ variantId, quantity }: { variantId: string; qu
       )
       // TODO are two revalidations really needed?
       .then(async () => {
+        const fullfillmentCacheTag = await getCacheTag('fulfillment');
+        revalidateTag(fullfillmentCacheTag);
         const cartCacheTag = await getCacheTag('carts');
         revalidateTag(cartCacheTag);
       })
       .catch(medusaError)
       .finally(async () => {
+        const fullfillmentCacheTag = await getCacheTag('fulfillment');
+        revalidateTag(fullfillmentCacheTag);
         const cartCacheTag = await getCacheTag('carts');
         revalidateTag(cartCacheTag);
       });
@@ -204,11 +214,13 @@ export async function updateLineItem({ lineId, quantity }: { lineId: string; qua
     'Content-Type': 'application/json'
   };
 
-  return fetchQuery(`/store/carts/${cartId}/line-items/${lineId}`, {
+  return await fetchQuery(`/store/carts/${cartId}/line-items/${lineId}`, {
     body: { quantity },
     method: 'POST',
     headers
   }).then(async resp => {
+    const fullfillmentCacheTag = await getCacheTag('fulfillment');
+    revalidateTag(fullfillmentCacheTag);
     const cartCacheTag = await getCacheTag('carts');
     revalidateTag(cartCacheTag);
     return resp;
@@ -233,8 +245,10 @@ export async function deleteLineItem(lineId: string) {
   await sdk.store.cart
     .deleteLineItem(cartId, lineId, {}, headers)
     .then(async () => {
+      const fullfillmentCacheTag = await getCacheTag('fulfillment');
+      revalidateTag(fullfillmentCacheTag);
       const cartCacheTag = await getCacheTag('carts');
-      await revalidateTag(cartCacheTag);
+      revalidateTag(cartCacheTag);
     })
     .catch(medusaError);
 }
@@ -331,6 +345,8 @@ export async function removeShippingMethod(shippingMethodId: string) {
     }
   )
     .then(async () => {
+      const fullfillmentCacheTag = await getCacheTag('fulfillment');
+      revalidateTag(fullfillmentCacheTag);
       const cartCacheTag = await getCacheTag('carts');
       revalidateTag(cartCacheTag);
     })
@@ -361,7 +377,6 @@ export async function deletePromotionCode(promoId: string) {
     .catch(medusaError);
 }
 
-// TODO: Pass a POJO instead of a form entity here
 export async function setAddresses(currentState: unknown, formData: FormData) {
   try {
     if (!formData) {
@@ -405,7 +420,8 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
     //     province: formData.get("billing_address.province"),
     //     phone: formData.get("billing_address.phone"),
     //   }
-
+    const fullfillmentCacheTag = await getCacheTag('fulfillment');
+    revalidateTag(fullfillmentCacheTag);
     await updateCart(data);
     await revalidatePath('/cart');
     await revalidatePath('/checkout');

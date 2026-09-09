@@ -2,15 +2,13 @@
 
 import { useCallback, useEffect, useState } from 'react';
 
-import { CheckCircleSolid, CreditCard } from '@medusajs/icons';
-import { Container, Heading, Text } from '@medusajs/ui';
+import { CheckCircleSolid } from '@medusajs/icons';
+import { Heading, Text } from '@medusajs/ui';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { paymentInfoMap } from '@/lib/constants';
 import { initiatePaymentSession } from '@/lib/data/cart';
 import { Button, ErrorMessage } from '@/modules/common/components';
 
-import { cart } from '../../../../data/cartMock';
 import { PaymentSectionProps } from '../../types';
 import PaymentButton from '../PaymentButton';
 import AuthnetForm from './AuthnetForm';
@@ -34,7 +32,7 @@ const PaymentSection = ({ cart, clientKey, apiLoginID }: PaymentSectionProps) =>
   const pathname = usePathname();
 
   const isOpen = searchParams.get('step') === 'payment';
-
+  const isReview = searchParams.get('step') === 'review';
   const setPaymentMethod = async (method: string) => {
     setError(null);
     setSelectedPaymentMethod(method);
@@ -67,7 +65,7 @@ const PaymentSection = ({ cart, clientKey, apiLoginID }: PaymentSectionProps) =>
       const checkActiveSession = activeSession?.provider_id === selectedPaymentMethod;
 
       if (!checkActiveSession) {
-        await initiatePaymentSession(cart, {
+        await initiatePaymentSession(cart as any, {
           provider_id: selectedPaymentMethod
         });
       }
@@ -168,7 +166,7 @@ const PaymentSection = ({ cart, clientKey, apiLoginID }: PaymentSectionProps) =>
           </div>
         </div>
       </div>
-      {!isOpen && previousStepsCompleted && (
+      {isReview && previousStepsCompleted && (
         <PaymentButton
           cart={cart}
           data-testid="submit-order-button"

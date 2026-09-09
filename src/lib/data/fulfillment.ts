@@ -7,7 +7,26 @@ import { StoreCardShippingMethod } from '@/modules/checkout/types';
 
 import { getAuthHeaders, getCacheOptions } from './cookies';
 
-export const listCartShippingMethods = async (cartId: string, is_return: boolean = false) => {
+export const listCartShippingMethods = async (
+  cart: HttpTypes.StoreCart,
+  is_return: boolean = false
+) => {
+  const weight =
+    cart?.items &&
+    cart.items?.reduce((sum, item) => {
+      const weight = Number(item.variant?.weight || 0);
+      const quantity = Number(item.quantity || 1);
+      return sum + weight * quantity;
+    }, 0);
+  if (weight && weight > 150) {
+    return [
+      {
+        id: process.env.NEXT_PUBLIC_FREIGHT_SHIPPING_ID,
+        service: 'Freight',
+        calculated_amount: 0
+      }
+    ];
+  }
   const headers = {
     ...(await getAuthHeaders())
   };
@@ -15,15 +34,14 @@ export const listCartShippingMethods = async (cartId: string, is_return: boolean
   const next = {
     ...(await getCacheOptions('fulfillment'))
   };
-  // TODO Optimize caching flow
   return sdk.client
     .fetch<{ shipping_options: StoreCardShippingMethod[] | null }>(
-      `/store/carts/${cartId}/shipping-options`,
+      `/store/carts/${cart.id}/shipping-options`,
       {
         method: 'GET',
         headers,
         next,
-        cache: 'no-cache'
+        cache: 'force-cache'
       }
     )
     .then(({ shipping_options }) => shipping_options)

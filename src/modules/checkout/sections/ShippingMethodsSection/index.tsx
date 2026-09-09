@@ -11,13 +11,16 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEcommerceTracking } from '@/hooks/useEcommerceTracking';
 import { removeShippingMethod, setShippingMethod } from '@/lib/data/cart';
 import { convertToLocale } from '@/lib/helpers/money';
+import { useCartContext } from '@/modules/cart/provider/context';
 import { ShippingMethods, ShippingMethodsSectionProps } from '@/modules/checkout/types';
-import { Button, ErrorMessage } from '@/modules/common/components';
+import { Button, ErrorMessage, Spinner } from '@/modules/common/components';
 
 const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
   cart,
   availableShippingMethods
 }) => {
+  const { isUpdating, isUpdatingItem } = useCartContext();
+  const [isCartUpdating, setIsCartUpdating] = useState(false);
   const { trackAddShippingInfo, handleMapCartItems } = useEcommerceTracking();
   const [isLoadingPrices, setIsLoadingPrices] = useState(false);
   const [shippingMethods, setShippingMethods] = useState<ShippingMethods[] | null>(null);
@@ -43,54 +46,74 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
     if (!id) {
       return;
     }
-
     try {
       setError(null);
       setIsLoadingPrices(true);
-      const res = await setShippingMethod({
-        cartId: cart.id,
-        shippingMethodId: id
-      });
-      if (!res.ok) {
+      setIsCartUpdating(true);
+      const res =
+        cart &&
+        (await setShippingMethod({
+          cartId: cart.id,
+          shippingMethodId: id
+        }));
+      if (res && !res.ok) {
         return setError(res.error?.message);
       }
-      setSelectedMethod({
-        ...res.data?.cart?.shipping_methods?.[0],
-        name: availableShippingMethods?.find(method => method.id === id)?.service
-      });
+      res &&
+        setSelectedMethod({
+          ...res.data?.cart?.shipping_methods?.[0],
+          name: availableShippingMethods?.find(method => method.id === id)?.service
+        });
     } catch (error: any) {
       setError(
         error?.message?.replace('Error setting up the request: ', '') || 'An error occurred'
       );
     } finally {
       setIsLoadingPrices(false);
+      setIsCartUpdating(false);
     }
   };
   const handleRemoveShipping = async (id: string) => {
     return await removeShippingMethod(id);
   };
   useEffect(() => {
-    setShippingMethods(null);
-    setError(null);
-    setIsLoadingPrices(false);
-    if (isOpen && availableShippingMethods) {
-      const validateShipping = availableShippingMethods?.filter(f => f.calculated_amount > 0);
-      if (validateShipping?.length > 0) {
-        setShippingMethods(validateShipping);
-      } else {
-        setError(
-          'Something went wrong, please make sure your address was entered correctly and try again'
-        );
-        setSelectedMethod(undefined);
-        if (cart?.shipping_methods && cart?.shipping_methods.length) {
-          handleRemoveShipping(cart?.shipping_methods?.[0].id);
+    if (availableShippingMethods) {
+      const freight =
+        availableShippingMethods[0].id === process.env.NEXT_PUBLIC_FREIGHT_SHIPPING_ID;
+      const validShipping =
+        availableShippingMethods.filter(f => f.calculated_amount > 0).length > 0;
+      if (isOpen) {
+        if (!freight && !validShipping) {
+          setError(
+            'Something went wrong, please make sure your address was entered correctly and try again'
+          );
+        } else {
+          setError(null);
         }
       }
+      const find = availableShippingMethods.find(f => f.id === selectedMethod?.shipping_option_id);
+      if (selectedMethod && !find) {
+        const step = searchParams.get('step');
+        setSelectedMethod(undefined);
+        if (!isOpen && (step === 'payment' || step === 'review')) {
+          return handleEdit();
+        }
+      }
+      if (isUpdating) {
+        setIsCartUpdating(true);
+      }
+      if (!isUpdating && isCartUpdating) {
+        const timeout = setTimeout(() => {
+          setIsCartUpdating(false);
+        }, 1000);
+        return () => clearTimeout(timeout);
+      }
     }
-  }, [isOpen]);
-
+  }, [isOpen, isUpdating, availableShippingMethods]);
   const handleEdit = () => {
     router.replace(pathname + '?step=delivery');
+    router.refresh();
+    setIsLoadingPrices(false);
   };
   const isEditEnabled = !isOpen && !!cart?.shipping_methods?.length;
 
@@ -101,7 +124,7 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
           level="h2"
           className="text-3xl-regular flex flex-row items-baseline gap-x-2"
         >
-          {!isOpen && selectedMethod && (cart.shipping_methods?.length ?? 0) > 0 && (
+          {!isOpen && selectedMethod && cart && (cart.shipping_methods?.length ?? 0) > 0 && (
             <CheckCircleSolid />
           )}
           Delivery
@@ -135,37 +158,68 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
                       />
                     </div>
                   )}
-                  {shippingMethods && shippingMethods.length > 0 && (
-                    <RadioGroup
-                      // by="name"
-                      value={selectedMethod?.shipping_option_id ?? null}
-                      onChange={value => handleSetShippingMethod(value)}
-                      aria-label="Shipping Options"
-                      className="space-y-2"
-                    >
-                      {shippingMethods?.map(method => (
-                        <Radio
-                          key={method.id}
-                          value={method.id}
-                          className="focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white group relative flex cursor-pointer rounded-lg bg-white/5 px-5 py-4 text-black shadow-md transition hover:bg-gray-400 aria-checked:cursor-default aria-checked:bg-brand aria-checked:text-white"
+
+                  <div>
+                    {availableShippingMethods && (
+                      <div>
+                        <RadioGroup
+                          value={selectedMethod?.shipping_option_id ?? null}
+                          onChange={value => handleSetShippingMethod(value)}
+                          aria-label="Shipping Options"
+                          className="space-y-2"
                         >
-                          <div className="flex w-full items-center justify-between">
-                            <div className="text-sm/6">
-                              <p className="font-semibold">{method.service}</p>
-                              <div className="flex gap-2">
-                                <div>${method.calculated_amount.toFixed(2)}</div>
+                          {availableShippingMethods[0].id ===
+                            process.env.NEXT_PUBLIC_FREIGHT_SHIPPING_ID && (
+                            <Radio
+                              value={availableShippingMethods[0].id}
+                              disabled={isCartUpdating}
+                              className="focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white group relative flex cursor-pointer rounded-lg bg-white/5 px-5 py-4 text-black shadow-md transition hover:bg-gray-400 aria-checked:cursor-default aria-checked:bg-brand aria-checked:text-white aria-disabled:cursor-default aria-disabled:hover:bg-inherit aria-checked:aria-disabled:hover:bg-brand"
+                            >
+                              <div className="flex w-full items-center justify-between">
+                                <div className="text-sm/6">
+                                  <p className="font-semibold">Freight</p>
+                                  <div className="flex gap-2">
+                                    <div>To Be Determined</div>
+                                  </div>
+                                </div>
+                                <CheckCircleSolid
+                                  width={20}
+                                  height={20}
+                                  className="hidden group-aria-checked:flex"
+                                />
                               </div>
-                            </div>
-                            <CheckCircleSolid
-                              width={20}
-                              height={20}
-                              className="hidden group-aria-checked:flex"
-                            />
-                          </div>
-                        </Radio>
-                      ))}
-                    </RadioGroup>
-                  )}
+                            </Radio>
+                          )}
+                          {availableShippingMethods.filter(f => f.calculated_amount > 0).length >
+                            0 &&
+                            availableShippingMethods
+                              .filter(f => f.calculated_amount > 0)
+                              .map(method => (
+                                <Radio
+                                  key={method.id}
+                                  disabled={isCartUpdating}
+                                  value={method.id}
+                                  className="focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white group relative flex cursor-pointer rounded-lg bg-white/5 px-5 py-4 text-black shadow-md transition hover:bg-gray-400 aria-checked:cursor-default aria-checked:bg-brand aria-checked:text-white aria-disabled:cursor-default aria-disabled:hover:bg-inherit aria-checked:aria-disabled:hover:bg-brand"
+                                >
+                                  <div className="flex w-full items-center justify-between">
+                                    <div className="text-sm/6">
+                                      <p className="font-semibold">{method.service}</p>
+                                      <div className="flex gap-2">
+                                        <div>${method.calculated_amount.toFixed(2)}</div>
+                                      </div>
+                                    </div>
+                                    <CheckCircleSolid
+                                      width={20}
+                                      height={20}
+                                      className="hidden group-aria-checked:flex"
+                                    />
+                                  </div>
+                                </Radio>
+                              ))}
+                        </RadioGroup>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -175,7 +229,12 @@ const ShippingMethodsSection: FC<ShippingMethodsSectionProps> = ({
               className={`bg-brand text-white hover:bg-brand_grey hover:text-black ${isLoadingPrices && 'flex min-w-[192px] justify-center'}`}
               onClick={handleSubmit}
               variant="tonal"
-              disabled={!cart.shipping_methods?.[0] || isPendingDeleteRow || !selectedMethod}
+              disabled={
+                !cart?.shipping_methods?.[0] ||
+                isPendingDeleteRow ||
+                !selectedMethod ||
+                isCartUpdating
+              }
               loading={isLoadingPrices}
             >
               Continue to payment
