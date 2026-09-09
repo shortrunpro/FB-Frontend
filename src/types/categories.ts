@@ -21,6 +21,7 @@ interface ProductCategoryImage {
 }
 export interface CategoryListObject extends StoreProductCategory {
   product_category_image: ProductCategoryImage[];
+  is_active: boolean;
   category_children: CategoryListObject[] | [];
 }
 

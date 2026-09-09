@@ -97,7 +97,7 @@ async function Category({
     url: `${BASE_URL}/products/${p.handle}`,
     name: p.title
   }));
-
+  const children = category?.category_children.filter(f => f.is_active);
   return (
     <main className="container flex-grow">
       <Script
@@ -148,9 +148,9 @@ async function Category({
           </div>
         }
       >
-        {category?.category_children.length > 0 && (
+        {children.length > 0 && (
           <div className="flex flex-wrap justify-center gap-x-2 gap-y-4">
-            {category.category_children.map(cat => (
+            {children.map(cat => (
               <CategoryCard
                 key={cat.id}
                 category={cat}
