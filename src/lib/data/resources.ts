@@ -25,7 +25,7 @@ export const queryResources = async ({
 }): Promise<StoreGetResourcesResponse | any> => {
   return sdk.client.fetch(`/store/resources${url}`, {
     query,
-    cache: 'force-cache',
+    // cache: 'force-cache',
     next
   });
 };

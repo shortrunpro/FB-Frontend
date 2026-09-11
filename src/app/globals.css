@@ -232,6 +232,12 @@ h1.tiptap-heading {
 h2.tiptap-heading {
   @apply text-[24px] font-medium leading-[32px] tracking-normal text-brand max-md:text-[20px] max-md:leading-[28px];
 }
+.tiptap-content p {
+  @apply my-5;
+}
+.tiptap-content hr {
+  @apply my-5;
+}
 .ais-Hits {
   @apply absolute right-0 z-50 w-1/2;
 }

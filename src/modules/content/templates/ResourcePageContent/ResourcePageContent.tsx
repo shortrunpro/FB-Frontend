@@ -13,8 +13,7 @@ const ResourcePageContent = async ({ resource }: { resource: Resource }) => {
           { label: resource.title, path: `/content/${resource.handle}` }
         ]}
       />
-      <h1 className="heading-md">{resource.title}</h1>
-      {/* <h2 className="heading-xs">{resource.subtitle}</h2> */}
+      <h1 className="heading-lg mb-5">{resource.title}</h1>
       <div className="mx-auto max-w-[1000px]">
         <ContentParser content={resource.content} />
       </div>

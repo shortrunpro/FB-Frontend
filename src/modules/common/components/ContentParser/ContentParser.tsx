@@ -1,5 +1,6 @@
 import { Mark, mergeAttributes, Node } from '@tiptap/core';
 import Color from '@tiptap/extension-color';
+import Heading from '@tiptap/extension-heading';
 import Highlight from '@tiptap/extension-highlight';
 import Image from '@tiptap/extension-image';
 import TextAlign from '@tiptap/extension-text-align';
@@ -128,63 +129,86 @@ const CustomImage = Image.extend({
   draggable: true,
   selectable: true
 });
+const ExtendedHeading = Heading.extend({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      class: {
+        default: null,
+        parseHTML: element => element.getAttribute('class'),
+        renderHTML: attributes => ({
+          class: attributes?.class
+        })
+      }
+    };
+  }
+});
 const ContentParser = ({ content }: { content: Record<string, unknown> }) => {
   const html = generateHTML(content, [
     StarterKit.configure({
-      heading: {
-        HTMLAttributes: {
-          class: 'tiptap-heading'
-        }
-      },
-      link: {
-        openOnClick: false,
-        HTMLAttributes: {
-          class: 'text-blue-500 hover:text-blue-700 underline'
-        }
-      },
-      paragraph: {
-        HTMLAttributes: {
-          class: 'py-2'
-        }
-      },
-      orderedList: {
-        HTMLAttributes: {
-          class: 'editor-ordered-list'
-        },
-        itemTypeName: 'listItem'
-        // keepMarks: true,
-        // keepAttributes: true
-      }
-    }) as any,
-    FontSize,
-    Iframe,
-    CustomImage.configure({
-      inline: true,
-      allowBase64: true
+      heading: false
     }),
-    ,
-    TextStyle.configure({
+    ExtendedHeading,
+    Image.configure({
       HTMLAttributes: {
-        class: 'editor-text-style'
+        class: 'rounded-lg max-w-full h-auto my-4' // Optional: adds styling to all parsed images
       }
-    }),
-    Color.configure({
-      types: ['textStyle']
-    }),
-    TextAlign.configure({
-      defaultAlignment: 'left',
-      types: ['heading', 'paragraph', 'image']
-    }),
-    Highlight.configure({
-      HTMLAttributes: {
-        class: 'bg-[#ffff00] text-inherit'
-      }
-    }),
-    Typography
+    })
+    // StarterKit.configure({
+    //   heading: {
+    //     HTMLAttributes: {
+    //       class: 'tiptap-heading'
+    //     }
+    //   },
+    //   link: {
+    //     openOnClick: false,
+    //     HTMLAttributes: {
+    //       class: 'text-blue-500 hover:text-blue-700 underline'
+    //     }
+    //   },
+    //   paragraph: {
+    //     HTMLAttributes: {
+    //       class: 'py-2'
+    //     }
+    //   },
+    //   orderedList: {
+    //     HTMLAttributes: {
+    //       class: 'editor-ordered-list'
+    //     },
+    //     itemTypeName: 'listItem'
+    //     // keepMarks: true,
+    //     // keepAttributes: true
+    //   }
+    // }) as any,
+    // FontSize,
+    // Iframe,
+    // CustomImage.configure({
+    //   inline: true,
+    //   allowBase64: true
+    // }),
+    // ,
+    // TextStyle.configure({
+    //   HTMLAttributes: {
+    //     class: 'editor-text-style'
+    //   }
+    // }),
+    // Color.configure({
+    //   types: ['textStyle']
+    // }),
+    // TextAlign.configure({
+    //   defaultAlignment: 'left',
+    //   types: ['heading', 'paragraph', 'image']
+    // }),
+    // Highlight.configure({
+    //   HTMLAttributes: {
+    //     class: 'bg-[#ffff00] text-inherit'
+    //   }
+    // }),
+    // Typography
   ]);
   return (
     <div
-      className="content py-4"
+      className="tiptap-content py-4"
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
