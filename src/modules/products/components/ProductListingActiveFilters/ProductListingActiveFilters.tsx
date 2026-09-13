@@ -14,6 +14,7 @@ export const ProductListingActiveFilters = () => {
       element[0] !== 'products[page]' &&
       !element[0].includes('_rsc') &&
       !element[0].includes('utm') &&
+      !element[0].includes('gad') &&
       !filteredParams.includes(element[0])
   );
 

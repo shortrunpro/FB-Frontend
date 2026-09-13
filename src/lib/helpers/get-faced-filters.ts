@@ -1,6 +1,14 @@
 import { ReadonlyURLSearchParams } from 'next/navigation';
 
-export const filteredParams = ['fbclid', 'msclkid', 'srsltid', 'nxtPhandle', 'nxtPcategory'];
+export const filteredParams = [
+  'fbclid',
+  'msclkid',
+  'srsltid',
+  'nxtPhandle',
+  'nxtPcategory',
+  'gbraid',
+  'gclid'
+];
 
 const getOption = (label: string) => {
   switch (label) {
@@ -27,7 +35,12 @@ export const getFacedFilters = (filters: ReadonlyURLSearchParams): string => {
   let rating = '';
 
   for (const [key, value] of filters.entries()) {
-    if (key.includes('utm') || key.includes('_rsc') || filteredParams.includes(key)) {
+    if (
+      key.includes('utm') ||
+      key.includes('_rsc') ||
+      key.includes('gad') ||
+      filteredParams.includes(key)
+    ) {
       continue;
     }
     if (
