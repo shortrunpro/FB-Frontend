@@ -1,5 +1,7 @@
 import { ReadonlyURLSearchParams } from 'next/navigation';
 
+export const filteredParams = ['fbclid', 'msclkid', 'srsltid', 'nxtPhandle', 'nxtPcategory'];
+
 const getOption = (label: string) => {
   switch (label) {
     case 'size':
@@ -25,7 +27,7 @@ export const getFacedFilters = (filters: ReadonlyURLSearchParams): string => {
   let rating = '';
 
   for (const [key, value] of filters.entries()) {
-    if (key.includes('utm')) {
+    if (key.includes('utm') || key.includes('_rsc') || filteredParams.includes(key)) {
       continue;
     }
     if (

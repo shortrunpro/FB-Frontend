@@ -2,6 +2,7 @@
 
 import { ActiveFilterElement } from '@/components/cells';
 import useGetAllSearchParams from '@/hooks/useGetAllSearchParams';
+import { filteredParams } from '@/lib/helpers/get-faced-filters';
 
 export const ProductListingActiveFilters = () => {
   const { allSearchParams } = useGetAllSearchParams();
@@ -11,7 +12,9 @@ export const ProductListingActiveFilters = () => {
       element[0] !== 'page' &&
       element[0] !== 'sold' &&
       element[0] !== 'products[page]' &&
-      !element[0].includes('utm')
+      !element[0].includes('_rsc') &&
+      !element[0].includes('utm') &&
+      !filteredParams.includes(element[0])
   );
 
   return (
