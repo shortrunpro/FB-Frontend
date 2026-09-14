@@ -153,6 +153,26 @@ const ContentParser = ({ content }: { content: Record<string, unknown> }) => {
       HTMLAttributes: {
         class: 'rounded-lg max-w-full h-auto my-4' // Optional: adds styling to all parsed images
       }
+    }),
+    TextAlign.extend({
+      addGlobalAttributes() {
+        return [
+          {
+            types: this.options.types,
+            attributes: {
+              class: {
+                default: null,
+                renderHTML(attributes) {
+                  return { class: `${attributes.class}` };
+                }
+              }
+            }
+          }
+        ];
+      }
+    }).configure({
+      defaultAlignment: null,
+      types: ['heading', 'paragraph']
     })
     // StarterKit.configure({
     //   heading: {

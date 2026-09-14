@@ -652,3 +652,11 @@ svg:has(.fill-ui-fg-muted) {
 #product_just_stars .SA__review_widget_item .SA__total_reviews a {
   font-size: 10px;
 }
+
+.tiptap-content {
+  .text-center {
+    img {
+      margin: auto;
+    }
+  }
+}
