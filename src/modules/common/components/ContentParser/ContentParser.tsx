@@ -54,32 +54,6 @@ const FontSize = Mark.create({
     return ['span', mergeAttributes(HTMLAttributes), 0];
   }
 });
-const Iframe = Youtube.extend({
-  addAttributes() {
-    return {
-      src: {
-        default: null,
-        parseHTML: element => element.getAttribute('src'),
-        renderHTML: attrs => ({ src: attrs.src })
-      },
-      class: {
-        default: 'w-full aspect-video',
-        parseHTML: element => element.getAttribute('class'),
-        renderHTML: () => ({ class: 'w-full aspect-video' })
-      }
-    };
-  },
-  parseHTML() {
-    return [
-      {
-        tag: 'iframe'
-      }
-    ];
-  },
-  renderHTML({ HTMLAttributes }) {
-    return ['iframe', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)];
-  }
-});
 const CustomImage = Image.extend({
   addAttributes() {
     return {
@@ -179,6 +153,11 @@ const ContentParser = ({ content }: { content: Record<string, unknown> }) => {
       HTMLAttributes: {
         class: 'w-full aspect-video py-4'
       }
+    }),
+    Highlight.configure({
+      HTMLAttributes: {
+        class: 'bg-[#ffff00] text-inherit'
+      }
     })
     // StarterKit.configure({
     //   heading: {
@@ -225,11 +204,7 @@ const ContentParser = ({ content }: { content: Record<string, unknown> }) => {
     //   defaultAlignment: 'left',
     //   types: ['heading', 'paragraph', 'image']
     // }),
-    // Highlight.configure({
-    //   HTMLAttributes: {
-    //     class: 'bg-[#ffff00] text-inherit'
-    //   }
-    // }),
+
     // Typography
   ]);
   return (
