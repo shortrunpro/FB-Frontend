@@ -158,7 +158,8 @@ const ContentParser = ({ content }: { content: Record<string, unknown> }) => {
       HTMLAttributes: {
         class: 'bg-[#ffff00] text-inherit'
       }
-    })
+    }),
+    FontSize
     // StarterKit.configure({
     //   heading: {
     //     HTMLAttributes: {
