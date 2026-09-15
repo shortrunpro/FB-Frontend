@@ -173,6 +173,12 @@ const ContentParser = ({ content }: { content: Record<string, unknown> }) => {
     }).configure({
       defaultAlignment: null,
       types: ['heading', 'paragraph']
+    }),
+    Youtube.configure({
+      modestBranding: true,
+      HTMLAttributes: {
+        class: 'w-full aspect-video py-4'
+      }
     })
     // StarterKit.configure({
     //   heading: {
