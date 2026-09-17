@@ -22,13 +22,17 @@ export const NavLinks = ({ user }: any) => {
           !item.children ? (
             <Link
               prefetch={false}
+              key={item.link}
               href={item.link}
               className="hover:text-neutral-800"
             >
               {item.title}
             </Link>
           ) : (
-            <div className="dropdown dropdown-bottom dropdown-hover">
+            <div
+              className="dropdown dropdown-bottom dropdown-hover"
+              key={item.link}
+            >
               <Link
                 prefetch={false}
                 href={item.link}
@@ -38,19 +42,17 @@ export const NavLinks = ({ user }: any) => {
                 {item.title}
               </Link>
               <ul className="menu dropdown-content z-50 w-52 rounded-box bg-brand_grey px-2 py-0 text-black shadow-sm">
-                {item.children.map((child: any) => {
-                  return (
-                    <li key={child.title}>
-                      <Link
-                        onClick={closeDropdown}
-                        href={child.link}
-                        className="px-2"
-                      >
-                        {child.title}
-                      </Link>
-                    </li>
-                  );
-                })}
+                {item.children.map((child: any) => (
+                  <li key={child.link}>
+                    <Link
+                      onClick={closeDropdown}
+                      href={child.link}
+                      className="px-2"
+                    >
+                      {child.title}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           )
