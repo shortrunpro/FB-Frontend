@@ -1,6 +1,16 @@
 import { ReadonlyURLSearchParams } from 'next/navigation';
 
-const getOption = (label: string) => {
+export const filteredParams = [
+  'fbclid',
+  'msclkid',
+  'srsltid',
+  'nxtPhandle',
+  'nxtPcategory',
+  'gbraid',
+  'gclid'
+];
+
+const getOption = (label: string | null) => {
   switch (label) {
     case 'size':
       return 'variants.size';
@@ -11,7 +21,7 @@ const getOption = (label: string) => {
     case 'rating':
       return 'average_rating';
     default:
-      return '';
+      return null;
   }
 };
 
@@ -25,7 +35,12 @@ export const getFacedFilters = (filters: ReadonlyURLSearchParams): string => {
   let rating = '';
 
   for (const [key, value] of filters.entries()) {
-    if (key.includes('utm')) {
+    if (
+      key.includes('utm') ||
+      key.includes('_rsc') ||
+      key.includes('gad') ||
+      filteredParams.includes(key)
+    ) {
       continue;
     }
     if (
@@ -41,14 +56,18 @@ export const getFacedFilters = (filters: ReadonlyURLSearchParams): string => {
       let values = '';
       const splittedSize = value.split(',');
       if (splittedSize.length > 1) {
-        splittedSize.map(
-          (value, index) =>
-            (values += `${getOption(key)}="${value}" ${
-              index + 1 < splittedSize.length ? 'OR ' : ''
-            }`)
-        );
+        splittedSize.map((value, index) => {
+          if (!getOption(key)) {
+            return;
+          }
+          return (values += `${getOption(key)}="${value}" ${
+            index + 1 < splittedSize.length ? 'OR ' : ''
+          }`);
+        });
       } else {
-        values += `${getOption(key)}="${splittedSize[0]}"`;
+        if (getOption(key)) {
+          values += `${getOption(key)}="${splittedSize[0]}"`;
+        }
       }
       facet += `${values}`;
     } else {
@@ -66,7 +85,7 @@ export const getFacedFilters = (filters: ReadonlyURLSearchParams): string => {
               (values += `${getOption(key)} >= ${value} ${index + 1 < splited.length ? 'OR ' : ''}`)
           );
         } else {
-          values += `${getOption(key)} >=${splited[0]}`;
+          values += `${getOption(key)} >= ${splited[0]}`;
         }
         rating += ` AND ${values}`;
       }
