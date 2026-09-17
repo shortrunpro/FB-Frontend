@@ -91,7 +91,7 @@ export const getFacedFilters = (filters: ReadonlyURLSearchParams): string => {
       }
     }
   }
-  const conditionalAnd = (value_one: string, value_two) => {
+  const conditionalAnd = (value_one: string, value_two: string) => {
     return value_one.length && value_two.length ? ' AND ' : '';
   };
   const priceFilter =
