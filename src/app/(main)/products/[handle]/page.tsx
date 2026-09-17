@@ -5,6 +5,7 @@ import Script from 'next/script';
 import { listProducts } from '@/lib/data/products';
 import { generateProductMerchantSchema } from '@/lib/helpers/merchant-data';
 import { generateProductMetadata } from '@/lib/helpers/seo';
+import { Breadcrumbs } from '@/modules/common/components';
 import { ProductDetailsPage } from '@/modules/products/templates';
 
 export async function generateMetadata({
@@ -41,13 +42,41 @@ export default async function ProductPage({
       handle: [handle],
       limit: 1,
       fields:
-        'id,title,handle,description,images.url,categories.name,categories.handle,variants.sku,variants.thumbnail,variants.title,variants.options.value,variants.options.option.title,variants.calculated_price.calculated_amount'
+        'id,title,handle,description,images.url,categories.name,categories.handle,categories.parent_category.name,categories.parent_category.handle,variants.sku,variants.thumbnail,variants.title,variants.options.value,variants.options.option.title,variants.calculated_price.calculated_amount'
     }
   });
+
   if (count == 0) {
     return notFound();
   }
   const jsonLd = generateProductMerchantSchema(jsonLdProducts[0]);
+  const product = jsonLdProducts[0];
+  const breadcrumbsItems = [
+    ...(product?.categories?.[0]?.parent_category?.handle &&
+    product?.categories?.[0]?.parent_category?.name
+      ? [
+          {
+            path: `/categories/${product?.categories?.[0].parent_category?.handle}`,
+            label: product?.categories?.[0].parent_category?.name ?? ''
+          },
+          {
+            path: `/categories/${product?.categories?.[0]?.handle}`,
+            label: product?.categories?.[0]?.name ?? ''
+          }
+        ]
+      : product?.categories && product?.categories.length
+        ? [
+            {
+              path: `/categories/${product?.categories?.[0]?.handle}`,
+              label: product?.categories?.[0]?.name ?? ''
+            }
+          ]
+        : []),
+    {
+      path: `/products/${product?.handle}`,
+      label: product?.title
+    }
+  ];
   return (
     <main className="container flex flex-col gap-y-12">
       <Script
@@ -57,6 +86,9 @@ export default async function ProductPage({
           __html: jsonLd
         }}
       />
+      <div className="mb-2 hidden md:block">
+        <Breadcrumbs items={breadcrumbsItems} />
+      </div>
       <ProductDetailsPage
         handle={handle}
         locale={locale}
