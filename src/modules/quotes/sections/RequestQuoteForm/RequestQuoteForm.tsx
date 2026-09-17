@@ -38,7 +38,11 @@ const RequestQuoteForm = () => {
       files: null
     }
   });
-  const handleFile = (files: FileType[], rejectedFiles?: RejectedFile[]) => {
+  const handleFile = (files: FileType[] | null, rejectedFiles?: RejectedFile[]) => {
+    if (!files || !files.length) {
+      setValue('files', null);
+      return;
+    }
     if (rejectedFiles?.length) {
       return rejectedFiles.forEach(f => {
         setError('files', { message: `${f.file.name} was rejected due to ${f.reason}` });
