@@ -91,15 +91,17 @@ export const getFacedFilters = (filters: ReadonlyURLSearchParams): string => {
       }
     }
   }
-
+  const conditionalAnd = (value: string) => {
+    return value.length ? ' AND ' : '';
+  };
   const priceFilter =
     minPrice && maxPrice
-      ? ` AND variants.prices.amount:${minPrice} TO ${maxPrice}`
+      ? `variants.price ${minPrice} TO ${maxPrice}`
       : minPrice
-        ? ` AND variants.prices.amount >= ${minPrice}`
+        ? `variants.price >= ${minPrice}`
         : maxPrice
-          ? ` AND variants.prices.amount <= ${maxPrice}`
+          ? `variants.price <= ${maxPrice}`
           : '';
 
-  return facet + priceFilter + rating;
+  return facet + conditionalAnd(facet) + priceFilter + rating;
 };
