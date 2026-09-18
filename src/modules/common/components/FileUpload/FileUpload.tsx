@@ -3,8 +3,8 @@
 import { ChangeEvent, DragEvent, useRef, useState } from 'react';
 
 import { ErrorMessage } from '@hookform/error-message';
-import { ArrowDownTray } from '@medusajs/icons';
-import { clx, Text } from '@medusajs/ui';
+import { ArrowDownTray, XCircleSolid } from '@medusajs/icons';
+import { clx, IconButton, Text } from '@medusajs/ui';
 import Link from 'next/link';
 import { get } from 'react-hook-form';
 
@@ -27,7 +27,7 @@ export interface FileUploadProps {
   hint?: string;
   formats: string[];
   maxFileSize?: number; // in bytes, defaults to 1MB. Set to Infinity to disable.
-  onUploaded: (files: FileType[], rejectedFiles?: RejectedFile[]) => void;
+  onUploaded: (files: FileType[] | null, rejectedFiles?: RejectedFile[]) => void;
 }
 
 const DEFAULT_MAX_FILE_SIZE = 1024 * 2048; // 2MB fallback
@@ -115,6 +115,15 @@ export const FileUpload = ({
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     handleUploaded(event.target.files);
   };
+  const handleRemoveFile = (e: string) => {
+    const removal = files?.filter(f => f.id !== e);
+    if (!removal || !removal.length) {
+      onUploaded(null);
+    } else {
+      onUploaded(removal);
+    }
+    setFiles(removal);
+  };
 
   return (
     <div>
@@ -163,15 +172,28 @@ export const FileUpload = ({
           files.length > 0 &&
           !rejected &&
           files.map(file => (
-            <Link
-              href={file.url}
+            <div
               key={file.id}
               className="flex items-center gap-x-2"
-              target="_blank"
             >
-              <FileThumbnail />
-              <span className="text-brand underline">{file.file.name}</span>
-            </Link>
+              <IconButton
+                variant="transparent"
+                className="rounded hover:bg-brand_grey"
+                onClick={() => handleRemoveFile(file.id)}
+                value={file.id}
+              >
+                <XCircleSolid />
+              </IconButton>
+              <Link
+                href={file.url}
+
+                className="flex items-center gap-x-2"
+                target="_blank"
+              >
+                <FileThumbnail />
+                <span className="text-brand underline">{file.file.name}</span>
+              </Link>
+            </div>
           ))}
       </div>
       {hasError && (
