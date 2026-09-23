@@ -7,18 +7,19 @@ import { Heading, Text } from '@medusajs/ui';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { initiatePaymentSession } from '@/lib/data/cart';
-import { Button, ErrorMessage } from '@/modules/common/components';
+import { Accordion, Button, ErrorMessage } from '@/modules/common/components';
 
 import { PaymentSectionProps } from '../../types';
 import PaymentButton from '../PaymentButton';
-import AuthnetForm from './AuthnetForm';
-import PaymentContainer from './PaymentContainer';
+import { AuthnetForm, CreditPaymentOption } from './components';
 
 const PaymentSection = ({ cart, clientKey, apiLoginID }: PaymentSectionProps) => {
   const activeSession = cart.payment_collection?.payment_sessions?.find(
     (paymentSession: any) => paymentSession.status === 'pending'
   );
-
+  const creditAllowed = cart?.customer
+    ? !!cart?.customer.groups.find(f => f.name === 'Net 30 Payment Terms')
+    : false;
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [cardBrand, setCardBrand] = useState<string | null>(null);
@@ -121,11 +122,29 @@ const PaymentSection = ({ cart, clientKey, apiLoginID }: PaymentSectionProps) =>
         </div>
         <div>
           <div className={isOpen ? 'block' : 'hidden'}>
-            <AuthnetForm
-              cart={cart}
-              apiLoginID={apiLoginID}
-              clientKey={clientKey}
-            />
+            {creditAllowed ? (
+              <div>
+                <Accordion heading="Net 30 Payment">
+                  <CreditPaymentOption cart={cart} />
+                </Accordion>
+                <Accordion
+                  heading="Use Credit Card"
+                  defaultOpen={false}
+                >
+                  <AuthnetForm
+                    cart={cart}
+                    apiLoginID={apiLoginID}
+                    clientKey={clientKey}
+                  />
+                </Accordion>
+              </div>
+            ) : (
+              <AuthnetForm
+                cart={cart}
+                apiLoginID={apiLoginID}
+                clientKey={clientKey}
+              />
+            )}
 
             <ErrorMessage
               error={error}
@@ -135,33 +154,7 @@ const PaymentSection = ({ cart, clientKey, apiLoginID }: PaymentSectionProps) =>
 
           <div className={isOpen ? 'hidden' : 'block'}>
             {cart && paymentReady && activeSession ? (
-              <div className="flex w-full items-start gap-x-1">
-                {/* <span>For security reasons card information </span> */}
-                {/* <div className="flex w-1/3 flex-col">
-                <Text className="txt-medium-plus text-ui-fg-base mb-1">Payment method</Text>
-                <Text
-                  className="txt-medium text-ui-fg-subtle"
-                  data-testid="payment-method-summary"
-                >
-                  {paymentInfoMap[activeSession?.provider_id]?.title || activeSession?.provider_id}
-                </Text>
-              </div>
-              <div className="flex w-1/3 flex-col">
-                <Text className="txt-medium-plus text-ui-fg-base mb-1">Payment details</Text>
-                <div
-                  className="txt-medium text-ui-fg-subtle flex items-center gap-2"
-                  data-testid="payment-details-summary"
-                >
-                  <Container
-                    className="bg-ui-button-neutral-hover flex h-7 w-fit items-center p-2"
-                    data-testid="payment-details-summary"
-                  >
-                    {paymentInfoMap[selectedPaymentMethod]?.icon || <CreditCard />}
-                  </Container>
-                  <Text>{cardBrand ? cardBrand : 'Another step will appear'}</Text>
-                </div>
-              </div> */}
-              </div>
+              <div className="flex w-full items-start gap-x-1"></div>
             ) : null}
           </div>
         </div>

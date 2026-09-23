@@ -4,12 +4,12 @@ import React, { useEffect, useState } from 'react';
 
 import { useSearchParams } from 'next/navigation';
 
-import { Accordion, FilterCheckboxOption, Modal } from '@/components/molecules';
+import { FilterCheckboxOption, Modal } from '@/components/molecules';
 import useFilters from '@/hooks/useFilters';
 import useGetAllSearchParams from '@/hooks/useGetAllSearchParams';
 import useUpdateSearchParams from '@/hooks/useUpdateSearchParams';
 import { cn } from '@/lib/utils';
-import { Button, Input } from '@/modules/common/components';
+import { Accordion, Button, Input } from '@/modules/common/components';
 
 import { ProductListingActiveFilters } from '../ProductListingActiveFilters/ProductListingActiveFilters';
 

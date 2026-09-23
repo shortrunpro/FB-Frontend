@@ -7,8 +7,20 @@ export type StoreCardPaymentMethod = any & {
     };
   };
 };
+export interface CheckoutCart extends HttpTypes.StoreCart {
+  customer?: {
+    id: string;
+    email: string;
+    groups:
+      | {
+          id: string;
+          name: string;
+        }[]
+      | [];
+  };
+}
 export type PaymentSectionProps = {
-  cart: HttpTypes.StoreCart;
+  cart: CheckoutCart;
   clientKey: string;
   apiLoginID: string;
 };

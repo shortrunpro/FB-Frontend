@@ -1,3 +1,4 @@
+import { Accordion } from './Accordion/Accordion';
 import { AddToCartButton } from './AddToCartButton/AddToCartButton';
 import { Badge } from './Badge/Badge';
 import { Breadcrumbs } from './Breadcrumbs/Breadcrumbs';
@@ -37,6 +38,7 @@ import { TwitterLink } from './TwitterLink';
 import { YoutubeLink } from './YoutubeLink';
 
 export {
+  Accordion,
   TurnstileController,
   LabeledInput,
   FinishSquare,

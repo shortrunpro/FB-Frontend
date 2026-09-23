@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AuthnetForm from './AuthnetForm';
+import AuthnetForm from '../AuthnetForm/AuthnetForm';
 
 type PaymentContainerProps = {
   clientKey: string;

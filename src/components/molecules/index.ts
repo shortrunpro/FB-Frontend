@@ -1,4 +1,3 @@
-import { Accordion } from './Accordion/Accordion';
 import { CartDropdownItem } from './CartDropdownItem/CartDropdownItem';
 import { CategoryNavbar } from './CategoryNavbar/CategoryNavbar';
 import { DeleteCartItemButton } from './DeleteCartItemButton/DeleteCartItemButton';
@@ -25,7 +24,6 @@ export {
   CategoryNavbar,
   ParentCategoryLinks,
   SelectField,
-  Accordion,
   FilterCheckboxOption,
   GalleryCarouselItem,
   ProductPageAccordion,

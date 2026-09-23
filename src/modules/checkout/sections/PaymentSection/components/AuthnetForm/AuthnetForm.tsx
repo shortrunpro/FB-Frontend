@@ -9,7 +9,7 @@ import { initiatePaymentSession } from '@/lib/data/cart';
 import { formatCardNumber, formatCVV, formatExpiry } from '@/lib/helpers/payment-utils';
 import { Button, Spinner } from '@/modules/common/components';
 
-import { BasicCardInfo, PaymentSectionProps } from '../../types';
+import { BasicCardInfo, PaymentSectionProps } from '../../../../types';
 
 const AuthnetForm = ({ apiLoginID, clientKey, cart }: PaymentSectionProps) => {
   const { trackAddPaymentInfo, handleMapCartItems } = useEcommerceTracking();
@@ -47,8 +47,8 @@ const AuthnetForm = ({ apiLoginID, clientKey, cart }: PaymentSectionProps) => {
       await initiatePaymentSession(cart, {
         provider_id: provider,
         data: {
+          use_credit: false,
           dataValue: response?.opaqueData?.dataValue,
-          // @ts-ignore
           customer: cart?.customer,
           email,
           billing_address,
@@ -150,9 +150,9 @@ const AuthnetForm = ({ apiLoginID, clientKey, cart }: PaymentSectionProps) => {
         </div>
         <div className="flex justify-end">
           <Button
-            className={`bg-brand text-white hover:bg-brand_grey hover:text-black ${isLoading && 'flex min-w-[179px] justify-center'}`}
+            className={`${isLoading && 'flex min-w-[179px] justify-center'}`}
             onClick={handleSubmit}
-            variant="tonal"
+            variant="brand"
             loading={loading || isLoading}
             disabled={loading || isLoading}
           >
