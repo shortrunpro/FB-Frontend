@@ -44,7 +44,7 @@ async function CheckoutPageContent({}) {
       className="container min-h-svh"
       data-testid="checkout-page"
     >
-      <div className="grid gap-8 lg:grid-cols-11">
+      <div className="flex flex-col gap-8 lg:grid lg:grid-cols-11">
         <div
           className="lg:col-span-6"
           data-testid="checkout-steps-container"
