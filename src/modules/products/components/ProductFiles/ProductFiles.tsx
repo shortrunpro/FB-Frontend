@@ -4,7 +4,8 @@ import { LuFile, LuFileCog, LuFilePen, LuFileText } from 'react-icons/lu';
 
 import { ProductFile } from '@/types/product';
 
-export const ProductFiles = ({ files }: { files: ProductFile[] | undefined }) => {
+export const ProductFiles = ({ files }: { files: ProductFile[] | ProductFile }) => {
+  const fileArr = typeof files === 'object' ? ([files] as ProductFile[]) : (files as ProductFile[]);
   const fileIcon = (type: string) => {
     switch (type) {
       case 'Spec Sheet':
@@ -39,9 +40,9 @@ export const ProductFiles = ({ files }: { files: ProductFile[] | undefined }) =>
   };
   return (
     <div className="flex gap-x-4">
-      {files &&
-        files.length &&
-        files.map(file => {
+      {fileArr &&
+        fileArr.length &&
+        fileArr.flat().map(file => {
           let icon = fileIcon(file.type);
           return (
             <Link

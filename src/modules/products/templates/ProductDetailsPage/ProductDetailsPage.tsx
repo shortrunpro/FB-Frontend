@@ -1,4 +1,4 @@
-import { listProducts } from '@/lib/data/products';
+import { fetchProductByHandle, listProducts } from '@/lib/data/products';
 
 import {
   ProductDetails,
@@ -7,18 +7,8 @@ import {
   ProductRelatedProducts
 } from '../../components';
 
-export const ProductDetailsPage = async ({
-  handle,
-  locale
-}: {
-  handle: string;
-  locale: string;
-}) => {
-  const prod = await listProducts({
-    countryCode: locale,
-    queryParams: { handle: [handle], limit: 1 },
-    forceCache: true
-  }).then(({ response }) => response.products[0]);
+export const ProductDetailsPage = async ({ handle }: { handle: string }) => {
+  const prod = await fetchProductByHandle({ handle }).then(resp => resp[0]);
   if (!prod) return null;
   return (
     <>
