@@ -9,6 +9,34 @@ import { sdk } from '../config';
 import { getAuthHeaders } from './cookies';
 import { getRegion, retrieveRegion } from './regions';
 
+export const fetchProductByHandle = async ({
+  handle
+}: {
+  handle: string;
+}): Promise<CustomProduct[]> => {
+  const region = await getRegion('us');
+  const headers = {
+    ...(await getAuthHeaders())
+  };
+  return sdk.client
+    .fetch<{ products: CustomProduct[] }>(`/store/products`, {
+      method: 'GET',
+      query: {
+        country_code: 'us',
+        region_id: region?.id,
+        limit: 1,
+        fields: `+categories.name,+categories.handle,*variants.calculated_price,*variants,+files.id,+files.product_id,+files.type,+files.url,+related_product.product.handle,+related_product.products.title,+related_product.products.thumbnail,+related_product.products.handle,+related_product.products.variants.prices.amount,+related_product.products.variants.options.value,+related_product.products.variants.options.option.title,+product_addons.variants.id,+product_addons.variants.sku,+product_addons.variants.thumbnail,+product_addons.variants.title,+product_addons.variants.product.handle,+product_addons.variants.product.categories.name,+product_addons.variants.product.categories.handle,+product_addons.variants.prices.amount`,
+        handle
+      },
+      headers,
+      next: { revalidate: 300, tags: [`${handle}`] },
+      cache: 'force-cache'
+    })
+    .then(({ products }) => products)
+    .catch(() => {
+      return [];
+    });
+};
 export const listProducts = async ({
   pageParam = 1,
   queryParams,
@@ -83,10 +111,9 @@ export const listProducts = async ({
         ...queryParams
       },
       // @ts-ignore
-
-      headers
-      // next: useCached ? { revalidate: 60 } : undefined,
-      // cache: useCached ? 'force-cache' : 'no-cache'
+      headers,
+      next: useCached ? { revalidate: 300 } : undefined,
+      cache: useCached ? 'force-cache' : 'no-cache'
     })
     .then(({ products: productsRaw, count }) => {
       const products = productsRaw;

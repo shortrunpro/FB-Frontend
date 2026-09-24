@@ -30,7 +30,7 @@ export const ProductDetails = async ({ product }: { product: CustomProduct }) =>
       {hasAnyPrice && <ProductVariants product={product} />}
       <div className="flex flex-col gap-y-8">
         <ProductBulletPoints />
-        <ProductFiles files={product?.files} />
+        {product?.files && <ProductFiles files={product?.files} />}
         {/* @ts-ignore */}
         {product?.product_addons && <ProductAddons addons={product?.product_addons} />}
       </div>
