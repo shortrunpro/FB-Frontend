@@ -28,12 +28,8 @@ export async function generateMetadata({
   return generateProductMetadata(products[0]);
 }
 
-export default async function ProductPage({
-  params
-}: {
-  params: Promise<{ handle: string; locale: string }>;
-}) {
-  const { handle, locale } = await params;
+export default async function ProductPage({ params }: { params: Promise<{ handle: string }> }) {
+  const { handle } = await params;
   const {
     response: { products: jsonLdProducts, count }
   } = await listProducts({
@@ -89,10 +85,7 @@ export default async function ProductPage({
       <div className="mb-2 hidden md:block">
         <Breadcrumbs items={breadcrumbsItems} />
       </div>
-      <ProductDetailsPage
-        handle={handle}
-        locale={locale}
-      />
+      <ProductDetailsPage handle={handle} />
     </main>
   );
 }
