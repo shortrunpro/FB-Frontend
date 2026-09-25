@@ -56,8 +56,8 @@ const CountrySelect = forwardRef<
   };
 
   return (
-    <label className="label-md-medium">
-      <p className="">Country*</p>
+    <label className="">
+      <p className="label-md">Country*</p>
 
       <Listbox
         onChange={handleSelect}
@@ -67,7 +67,7 @@ const CountrySelect = forwardRef<
         <div className="relative">
           <ListboxButton
             className={clsx(
-              'text-base-regular relative flex h-12 w-full cursor-pointer items-center justify-between rounded-lg border bg-component-secondary px-4 text-left focus:outline-none focus-visible:border-gray-300 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-300',
+              'text-base-regular relative flex w-full cursor-pointer items-center justify-between rounded-lg border bg-component-secondary px-4 py-1 text-left focus:outline-none focus-visible:border-gray-300 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-300',
               error?.[name] && 'border-negative focus:border-negative'
             )}
             data-testid="shipping-address-select"
@@ -115,7 +115,7 @@ const CountrySelect = forwardRef<
           ref={innerRef}
           placeholder={placeholder}
           defaultValue={defaultValue}
-          className={clsx('hidden h-12 w-full items-center bg-component-secondary')}
+          className={clsx('hidden w-full items-center bg-component-secondary')}
           {...props}
         >
           {countryOptions?.map(({ value, label }, index) => (
