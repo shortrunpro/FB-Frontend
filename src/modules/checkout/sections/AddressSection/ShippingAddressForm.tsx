@@ -109,7 +109,7 @@ const ShippingAddressForm = ({
       )}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Input
-          label="First name"
+          label="First name*"
           name="shipping_address.first_name"
           autoComplete="given-name"
           value={formData['shipping_address.first_name']}
@@ -118,22 +118,13 @@ const ShippingAddressForm = ({
           data-testid="shipping-first-name-input"
         />
         <Input
-          label="Last name"
+          label="Last name*"
           name="shipping_address.last_name"
           autoComplete="family-name"
           value={formData['shipping_address.last_name']}
           onChange={handleChange}
           required
           data-testid="shipping-last-name-input"
-        />
-        <Input
-          label="Address"
-          name="shipping_address.address_1"
-          autoComplete="address-line1"
-          value={formData['shipping_address.address_1']}
-          onChange={handleChange}
-          required
-          data-testid="shipping-address-input"
         />
         <Input
           label="Company"
@@ -144,31 +135,22 @@ const ShippingAddressForm = ({
           data-testid="shipping-company-input"
         />
         <Input
-          label="Postal code"
-          name="shipping_address.postal_code"
-          autoComplete="postal-code"
-          value={formData['shipping_address.postal_code']}
+          label="Address*"
+          name="shipping_address.address_1"
+          autoComplete="address-line1"
+          value={formData['shipping_address.address_1']}
           onChange={handleChange}
           required
-          data-testid="shipping-postal-code-input"
+          data-testid="shipping-address-input"
         />
         <Input
-          label="City"
+          label="City*"
           name="shipping_address.city"
           autoComplete="address-level2"
           value={formData['shipping_address.city']}
           onChange={handleChange}
           required
           data-testid="shipping-city-input"
-        />
-        <CountrySelect
-          name="shipping_address.country_code"
-          autoComplete="country"
-          region={cart?.region}
-          value={formData['shipping_address.country_code']}
-          onChange={handleChange}
-          required
-          data-testid="shipping-country-select"
         />
         <StateSelect
           country={formData['shipping_address.country_code']}
@@ -179,10 +161,28 @@ const ShippingAddressForm = ({
           onChange={handleChange}
           data-testid="shipping-province-select"
         />
+        <Input
+          label="Postal code*"
+          name="shipping_address.postal_code"
+          autoComplete="postal-code"
+          value={formData['shipping_address.postal_code']}
+          onChange={handleChange}
+          required
+          data-testid="shipping-postal-code-input"
+        />
+        <CountrySelect
+          name="shipping_address.country_code"
+          autoComplete="country"
+          region={cart?.region}
+          value={formData['shipping_address.country_code']}
+          onChange={handleChange}
+          required
+          data-testid="shipping-country-select"
+        />
       </div>
       <div className="my-4 grid grid-cols-2 gap-4">
         <Input
-          label="Email"
+          label="Email*"
           name="email"
           type="email"
           title="Enter a valid email address."
@@ -193,7 +193,7 @@ const ShippingAddressForm = ({
           data-testid="shipping-email-input"
         />
         <Input
-          label="Phone"
+          label="Phone*"
           name="shipping_address.phone"
           autoComplete="tel"
           value={formData['shipping_address.phone']}

@@ -37,8 +37,8 @@ const StateSelect = forwardRef<HTMLSelectElement, NativeSelectProps | any>(
     };
     const data = states.states;
     return (
-      <label className="label-md-medium">
-        <p>State/Province*</p>
+      <label className="">
+        <p className="label-md">State/Province*</p>
         <Listbox
           onChange={handleSelect}
           value={props.value}
@@ -46,7 +46,7 @@ const StateSelect = forwardRef<HTMLSelectElement, NativeSelectProps | any>(
           <div className="relative">
             <ListboxButton
               className={clsx(
-                'text-base-regular relative flex h-12 w-full cursor-pointer items-center justify-between rounded-lg border bg-component-secondary px-4 text-left focus:outline-none focus-visible:border-gray-300 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-300',
+                'text-base-regular relative flex w-full cursor-pointer items-center justify-between rounded-lg border bg-component-secondary px-4 py-1 text-left focus:outline-none focus-visible:border-gray-300 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-300',
                 errors?.[props?.name] && 'border-negative focus:border-negative'
               )}
               data-testid="shipping-address-state-select"
